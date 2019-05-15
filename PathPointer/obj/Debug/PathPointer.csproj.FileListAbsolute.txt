@@ -1,0 +1,10 @@
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\bin\Debug\PathPointer.exe.config
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\bin\Debug\PathPointer.exe
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\bin\Debug\PathPointer.pdb
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Properties.Resources.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csproj.GenerateResource.cache
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csproj.CoreCompileInputs.cache
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.exe
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.pdb
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MainMenu.resources
