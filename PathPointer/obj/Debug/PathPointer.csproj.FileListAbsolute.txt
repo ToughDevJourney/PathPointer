@@ -8,3 +8,8 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csproj.CoreC
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.exe
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.pdb
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MainMenu.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Achivements.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Employments.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Goals.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MoreStat.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Settings.resources

@@ -27,9 +27,12 @@ namespace PathPointer
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void EmployButton_Click(object sender, EventArgs e)
         {
+            Employments employments = new Employments();
 
+            employments.Show();
+            this.Hide();
         }
     }
 }

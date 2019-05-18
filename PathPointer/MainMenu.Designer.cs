@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
+            this.EmployButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -37,15 +37,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button2
+            // EmployButton
             // 
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(170, 97);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Ваши занятия";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.EmployButton.Location = new System.Drawing.Point(0, 0);
+            this.EmployButton.Name = "EmployButton";
+            this.EmployButton.Size = new System.Drawing.Size(170, 97);
+            this.EmployButton.TabIndex = 1;
+            this.EmployButton.Text = "Ваши занятия";
+            this.EmployButton.UseVisualStyleBackColor = true;
+            this.EmployButton.Click += new System.EventHandler(this.EmployButton_Click);
             // 
             // button3
             // 
@@ -101,7 +101,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.EmployButton);
             this.Name = "MainMenu";
             this.Text = "Главное меню";
             this.Load += new System.EventHandler(this.MainMenu_Load);
@@ -111,7 +111,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button EmployButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;

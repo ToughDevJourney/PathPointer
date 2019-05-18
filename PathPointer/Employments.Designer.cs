@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.GoalsButton = new System.Windows.Forms.Button();
+            this.RestButton = new System.Windows.Forms.Button();
+            this.FunButton = new System.Windows.Forms.Button();
+            this.BusinessButton = new System.Windows.Forms.Button();
+            this.BackMain = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.ChangeButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.HightButton = new System.Windows.Forms.Button();
+            this.LowButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -51,95 +51,97 @@
             this.dataGridView1.Size = new System.Drawing.Size(273, 389);
             this.dataGridView1.TabIndex = 0;
             // 
-            // button1
+            // GoalsButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 122);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(234, 60);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Цели";
-            this.button1.UseVisualStyleBackColor = true;
+            this.GoalsButton.Location = new System.Drawing.Point(12, 122);
+            this.GoalsButton.Name = "GoalsButton";
+            this.GoalsButton.Size = new System.Drawing.Size(234, 60);
+            this.GoalsButton.TabIndex = 1;
+            this.GoalsButton.Text = "Цели";
+            this.GoalsButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // RestButton
             // 
-            this.button2.Location = new System.Drawing.Point(12, 229);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(234, 60);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Отдых";
-            this.button2.UseVisualStyleBackColor = true;
+            this.RestButton.Location = new System.Drawing.Point(12, 229);
+            this.RestButton.Name = "RestButton";
+            this.RestButton.Size = new System.Drawing.Size(234, 60);
+            this.RestButton.TabIndex = 2;
+            this.RestButton.Text = "Отдых";
+            this.RestButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // FunButton
             // 
-            this.button3.Location = new System.Drawing.Point(12, 341);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(234, 60);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Развлечения";
-            this.button3.UseVisualStyleBackColor = true;
+            this.FunButton.Location = new System.Drawing.Point(12, 341);
+            this.FunButton.Name = "FunButton";
+            this.FunButton.Size = new System.Drawing.Size(234, 60);
+            this.FunButton.TabIndex = 3;
+            this.FunButton.Text = "Развлечения";
+            this.FunButton.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // BusinessButton
             // 
-            this.button4.Location = new System.Drawing.Point(12, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(234, 60);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Неотложные дела";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BusinessButton.Location = new System.Drawing.Point(12, 12);
+            this.BusinessButton.Name = "BusinessButton";
+            this.BusinessButton.Size = new System.Drawing.Size(234, 60);
+            this.BusinessButton.TabIndex = 4;
+            this.BusinessButton.Text = "Неотложные дела";
+            this.BusinessButton.UseVisualStyleBackColor = true;
+            this.BusinessButton.Click += new System.EventHandler(this.BusinessButton_Click);
             // 
-            // button5
+            // BackMain
             // 
-            this.button5.Location = new System.Drawing.Point(563, 343);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(234, 60);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Вернуться";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BackMain.Location = new System.Drawing.Point(563, 343);
+            this.BackMain.Name = "BackMain";
+            this.BackMain.Size = new System.Drawing.Size(234, 60);
+            this.BackMain.TabIndex = 5;
+            this.BackMain.Text = "Вернуться";
+            this.BackMain.UseVisualStyleBackColor = true;
+            this.BackMain.Click += new System.EventHandler(this.BackMain_Click);
             // 
-            // button6
+            // AddButton
             // 
-            this.button6.Location = new System.Drawing.Point(563, 12);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(234, 60);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Добавить";
-            this.button6.UseVisualStyleBackColor = true;
+            this.AddButton.Location = new System.Drawing.Point(563, 12);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(234, 60);
+            this.AddButton.TabIndex = 6;
+            this.AddButton.Text = "Добавить";
+            this.AddButton.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // ChangeButton
             // 
-            this.button7.Location = new System.Drawing.Point(563, 78);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(234, 60);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "Изменить";
-            this.button7.UseVisualStyleBackColor = true;
+            this.ChangeButton.Location = new System.Drawing.Point(563, 78);
+            this.ChangeButton.Name = "ChangeButton";
+            this.ChangeButton.Size = new System.Drawing.Size(234, 60);
+            this.ChangeButton.TabIndex = 7;
+            this.ChangeButton.Text = "Изменить";
+            this.ChangeButton.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // DeleteButton
             // 
-            this.button8.Location = new System.Drawing.Point(563, 144);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(234, 60);
-            this.button8.TabIndex = 8;
-            this.button8.Text = "Удалить";
-            this.button8.UseVisualStyleBackColor = true;
+            this.DeleteButton.Location = new System.Drawing.Point(563, 144);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(234, 60);
+            this.DeleteButton.TabIndex = 8;
+            this.DeleteButton.Text = "Удалить";
+            this.DeleteButton.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // HightButton
             // 
-            this.button9.Location = new System.Drawing.Point(563, 252);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(116, 60);
-            this.button9.TabIndex = 9;
-            this.button9.Text = "Понизить";
-            this.button9.UseVisualStyleBackColor = true;
+            this.HightButton.Location = new System.Drawing.Point(563, 252);
+            this.HightButton.Name = "HightButton";
+            this.HightButton.Size = new System.Drawing.Size(116, 60);
+            this.HightButton.TabIndex = 9;
+            this.HightButton.Text = "Понизить";
+            this.HightButton.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // LowButton
             // 
-            this.button10.Location = new System.Drawing.Point(681, 252);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(116, 60);
-            this.button10.TabIndex = 10;
-            this.button10.Text = "Повысить";
-            this.button10.UseVisualStyleBackColor = true;
+            this.LowButton.Location = new System.Drawing.Point(681, 252);
+            this.LowButton.Name = "LowButton";
+            this.LowButton.Size = new System.Drawing.Size(116, 60);
+            this.LowButton.TabIndex = 10;
+            this.LowButton.Text = "Повысить";
+            this.LowButton.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -156,19 +158,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 415);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LowButton);
+            this.Controls.Add(this.HightButton);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.ChangeButton);
+            this.Controls.Add(this.AddButton);
+            this.Controls.Add(this.BackMain);
+            this.Controls.Add(this.BusinessButton);
+            this.Controls.Add(this.FunButton);
+            this.Controls.Add(this.RestButton);
+            this.Controls.Add(this.GoalsButton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Employments";
             this.Text = "Занятия";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Employments_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -178,16 +181,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button GoalsButton;
+        private System.Windows.Forms.Button RestButton;
+        private System.Windows.Forms.Button FunButton;
+        private System.Windows.Forms.Button BusinessButton;
+        private System.Windows.Forms.Button BackMain;
+        private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button ChangeButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button HightButton;
+        private System.Windows.Forms.Button LowButton;
         private System.Windows.Forms.Label label1;
     }
 }
