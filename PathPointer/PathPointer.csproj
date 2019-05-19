@@ -76,6 +76,7 @@
     <Compile Include="AddSchedule.Designer.cs">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataLists.cs" />
     <Compile Include="Employments.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +101,7 @@
     <Compile Include="MoreStat.Designer.cs">
       <DependentUpon>MoreStat.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">

@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dataGridBusiness = new System.Windows.Forms.DataGridView();
             this.GoalsButton = new System.Windows.Forms.Button();
             this.RestButton = new System.Windows.Forms.Button();
             this.FunButton = new System.Windows.Forms.Button();
@@ -40,16 +41,29 @@
             this.HightButton = new System.Windows.Forms.Button();
             this.LowButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridBusiness
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(270, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(273, 389);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridBusiness.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridBusiness.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridBusiness.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridBusiness.EnableHeadersVisualStyles = false;
+            this.dataGridBusiness.Location = new System.Drawing.Point(270, 12);
+            this.dataGridBusiness.Name = "dataGridBusiness";
+            this.dataGridBusiness.RowHeadersVisible = false;
+            this.dataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridBusiness.Size = new System.Drawing.Size(273, 389);
+            this.dataGridBusiness.TabIndex = 0;
             // 
             // GoalsButton
             // 
@@ -59,6 +73,7 @@
             this.GoalsButton.TabIndex = 1;
             this.GoalsButton.Text = "Цели";
             this.GoalsButton.UseVisualStyleBackColor = true;
+            this.GoalsButton.Click += new System.EventHandler(this.GoalsButton_Click);
             // 
             // RestButton
             // 
@@ -68,6 +83,7 @@
             this.RestButton.TabIndex = 2;
             this.RestButton.Text = "Отдых";
             this.RestButton.UseVisualStyleBackColor = true;
+            this.RestButton.Click += new System.EventHandler(this.RestButton_Click);
             // 
             // FunButton
             // 
@@ -77,6 +93,7 @@
             this.FunButton.TabIndex = 3;
             this.FunButton.Text = "Развлечения";
             this.FunButton.UseVisualStyleBackColor = true;
+            this.FunButton.Click += new System.EventHandler(this.FunButton_Click);
             // 
             // BusinessButton
             // 
@@ -106,6 +123,7 @@
             this.AddButton.TabIndex = 6;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // ChangeButton
             // 
@@ -168,11 +186,12 @@
             this.Controls.Add(this.FunButton);
             this.Controls.Add(this.RestButton);
             this.Controls.Add(this.GoalsButton);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridBusiness);
             this.Name = "Employments";
             this.Text = "Занятия";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Employments_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Employments_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,7 +199,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridBusiness;
         private System.Windows.Forms.Button GoalsButton;
         private System.Windows.Forms.Button RestButton;
         private System.Windows.Forms.Button FunButton;

@@ -1,7 +1,6 @@
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\bin\Debug\PathPointer.exe.config
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\bin\Debug\PathPointer.exe
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\bin\Debug\PathPointer.pdb
-C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Properties.Resources.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csproj.GenerateResource.cache
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csproj.CoreCompileInputs.cache
@@ -13,3 +12,8 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Employments.
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Goals.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MoreStat.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Settings.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddBusy.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddRest.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddGoal.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddSchedule.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache
