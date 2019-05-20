@@ -15,7 +15,7 @@ namespace PathPointer
     {
         int empType = 1;
         DataLists emp = new DataLists();
-           //Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+           //
 
 
         public Employments()
@@ -56,7 +56,9 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-
+            AddGoal goalForm = new AddGoal();
+            goalForm.Show();
+            this.Hide();
         }
 
 

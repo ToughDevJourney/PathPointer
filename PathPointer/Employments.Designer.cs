@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridBusiness = new System.Windows.Forms.DataGridView();
             this.GoalsButton = new System.Windows.Forms.Button();
             this.RestButton = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             // dataGridBusiness
             // 
             this.dataGridBusiness.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridBusiness.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridBusiness.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
@@ -61,6 +63,8 @@
             this.dataGridBusiness.Location = new System.Drawing.Point(270, 12);
             this.dataGridBusiness.Name = "dataGridBusiness";
             this.dataGridBusiness.RowHeadersVisible = false;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridBusiness.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridBusiness.Size = new System.Drawing.Size(273, 389);
             this.dataGridBusiness.TabIndex = 0;
