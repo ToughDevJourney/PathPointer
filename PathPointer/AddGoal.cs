@@ -12,19 +12,27 @@ namespace PathPointer
 {
     public partial class AddGoal : Form
     {
+        DataManagement addGoal = new DataManagement();
+
         public AddGoal()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, EventArgs e)
         {
             Employments empForm = new Employments();
             empForm.Show();
             this.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            DataManagement emp = new DataManagement();
+            emp.WriteEmpFiles(nameText.Text, datePicker.Text, Convert.ToInt32(timeText.Text));
+        }
+
+        private void AddGoal_Load(object sender, EventArgs e)
         {
 
         }

@@ -14,8 +14,8 @@ namespace PathPointer
     public partial class Employments : Form
     {
         int empType = 1;
-        DataLists emp = new DataLists();
-           //
+        public DataManagement emp = new DataManagement();
+        
 
 
         public Employments()
@@ -56,8 +56,22 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            AddGoal goalForm = new AddGoal();
-            goalForm.Show();
+            Form empForm = new AddGoal();
+            switch (empType)
+            {
+                case 0:
+                    empForm = new AddBusy();
+                    break;
+                case 1:
+                    empForm = new AddGoal();
+                    break;
+                case 2:
+                case 3:
+                    empForm = new AddRest();
+                break;
+            }
+
+            empForm.Show();
             this.Hide();
         }
 

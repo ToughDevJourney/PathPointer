@@ -28,44 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.nameText = new System.Windows.Forms.TextBox();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.timeText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // nameText
             // 
-            this.textBox1.Location = new System.Drawing.Point(69, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 20);
-            this.textBox1.TabIndex = 0;
+            this.nameText.Location = new System.Drawing.Point(69, 12);
+            this.nameText.Name = "nameText";
+            this.nameText.Size = new System.Drawing.Size(202, 20);
+            this.nameText.TabIndex = 0;
             // 
-            // button1
+            // AddButton
             // 
-            this.button1.Location = new System.Drawing.Point(6, 138);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 43);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.AddButton.Location = new System.Drawing.Point(6, 138);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(130, 43);
+            this.AddButton.TabIndex = 1;
+            this.AddButton.Text = "Добавить";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // button2
+            // BackButton
             // 
-            this.button2.Location = new System.Drawing.Point(142, 138);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 43);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Вернуться";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.BackButton.Location = new System.Drawing.Point(142, 138);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(129, 43);
+            this.BackButton.TabIndex = 2;
+            this.BackButton.Text = "Вернуться";
+            this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // label1
             // 
@@ -76,48 +75,30 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Название";
             // 
-            // textBox3
+            // timeText
             // 
-            this.textBox3.Location = new System.Drawing.Point(132, 69);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(45, 20);
-            this.textBox3.TabIndex = 6;
+            this.timeText.Location = new System.Drawing.Point(199, 70);
+            this.timeText.Name = "timeText";
+            this.timeText.Size = new System.Drawing.Size(45, 20);
+            this.timeText.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 73);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 13);
+            this.label3.Size = new System.Drawing.Size(182, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Необходимо времени";
+            this.label3.Text = "Необходимо часов на выполнение";
             // 
-            // label4
+            // datePicker
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 108);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Постоянная цель";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(111, 108);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(185, 43);
-            this.dateTimePicker1.MinDate = new System.DateTime(2018, 12, 20, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(75, 20);
-            this.dateTimePicker1.TabIndex = 10;
+            this.datePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datePicker.Location = new System.Drawing.Point(185, 43);
+            this.datePicker.MinDate = new System.DateTime(2018, 12, 20, 0, 0, 0, 0);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.Size = new System.Drawing.Size(74, 20);
+            this.datePicker.TabIndex = 10;
             // 
             // label2
             // 
@@ -128,23 +109,32 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Желаемое ввремя выполнения";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(174, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Оставьте 0 для постоянной цели";
+            // 
             // AddGoal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 193);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.datePicker);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.timeText);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.BackButton);
+            this.Controls.Add(this.AddButton);
+            this.Controls.Add(this.nameText);
             this.Name = "AddGoal";
             this.Text = "Добавить цель";
+            this.Load += new System.EventHandler(this.AddGoal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,15 +142,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox nameText;
+        private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox timeText;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }
