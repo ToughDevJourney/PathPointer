@@ -13,7 +13,7 @@ namespace PathPointer
 {
     public partial class Employments : Form
     {
-        int empType = 1;
+        int empType;
         public DataManagement emp = new DataManagement();
         
 
@@ -66,8 +66,10 @@ namespace PathPointer
                     empForm = new AddGoal();
                     break;
                 case 2:
-                case 3:
                     empForm = new AddRest();
+                    break;
+                case 3:
+                    empForm = new AddFun();
                 break;
             }
 

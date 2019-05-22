@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public partial class AddRest : Form
+    public partial class AddFun : Form
     {
-        public AddRest()
+        public AddFun()
         {
             InitializeComponent();
         }

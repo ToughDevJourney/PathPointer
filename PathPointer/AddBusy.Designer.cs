@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.labelName = new System.Windows.Forms.Label();
+            this.nameText = new System.Windows.Forms.TextBox();
             this.AddScheduleBtn = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.labelSched = new System.Windows.Forms.Label();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Название";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(23, 21);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(57, 13);
+            this.labelName.TabIndex = 5;
+            this.labelName.Text = "Название";
             // 
-            // textBox1
+            // nameText
             // 
-            this.textBox1.Location = new System.Drawing.Point(80, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 20);
-            this.textBox1.TabIndex = 4;
+            this.nameText.Location = new System.Drawing.Point(80, 18);
+            this.nameText.Name = "nameText";
+            this.nameText.Size = new System.Drawing.Size(202, 20);
+            this.nameText.TabIndex = 4;
             // 
             // AddScheduleBtn
             // 
@@ -60,45 +60,48 @@
             this.AddScheduleBtn.TabIndex = 6;
             this.AddScheduleBtn.Text = "Добавить";
             this.AddScheduleBtn.UseVisualStyleBackColor = true;
+            this.AddScheduleBtn.Click += new System.EventHandler(this.AddScheduleBtn_Click);
             // 
-            // label2
+            // labelSched
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Расписание отсутствует";
+            this.labelSched.AutoSize = true;
+            this.labelSched.Location = new System.Drawing.Point(23, 56);
+            this.labelSched.Name = "labelSched";
+            this.labelSched.Size = new System.Drawing.Size(131, 13);
+            this.labelSched.TabIndex = 8;
+            this.labelSched.Text = "Расписание отсутствует";
             // 
-            // button2
+            // CancelButton
             // 
-            this.button2.Location = new System.Drawing.Point(157, 97);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 43);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Вернуться";
-            this.button2.UseVisualStyleBackColor = true;
+            this.CancelButton.Location = new System.Drawing.Point(157, 97);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(125, 43);
+            this.CancelButton.TabIndex = 10;
+            this.CancelButton.Text = "Вернуться";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // button1
+            // AddButton
             // 
-            this.button1.Location = new System.Drawing.Point(26, 97);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 43);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AddButton.Location = new System.Drawing.Point(26, 97);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(125, 43);
+            this.AddButton.TabIndex = 9;
+            this.AddButton.Text = "Добавить";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // AddBusy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(308, 161);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.AddButton);
+            this.Controls.Add(this.labelSched);
             this.Controls.Add(this.AddScheduleBtn);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.nameText);
             this.Name = "AddBusy";
             this.Text = "Добавить дело";
             this.ResumeLayout(false);
@@ -108,11 +111,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.TextBox nameText;
         private System.Windows.Forms.Button AddScheduleBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelSched;
+        private new System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button AddButton;
     }
 }

@@ -8,7 +8,7 @@ namespace PathPointer
 {
     static class OpenMenu
     {
-        static public void ShowMenu() {
+        public static void ShowMenu() {
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
         }

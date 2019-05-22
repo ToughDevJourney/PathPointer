@@ -28,8 +28,8 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            DataManagement emp = new DataManagement();
-            emp.WriteEmpFiles(nameText.Text, datePicker.Text, Convert.ToInt32(timeText.Text));
+
+            DataManagement.WriteEmpFiles(nameText.Text, Convert.ToInt32(timeText.Text),datePicker.Text);
         }
 
         private void AddGoal_Load(object sender, EventArgs e)

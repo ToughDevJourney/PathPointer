@@ -58,6 +58,12 @@
     <Compile Include="AddBusy.Designer.cs">
       <DependentUpon>AddBusy.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddFun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddFun.Designer.cs">
+      <DependentUpon>AddFun.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddRest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddBusy.resx">
       <DependentUpon>AddBusy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddFun.resx">
+      <DependentUpon>AddFun.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddRest.resx">
       <DependentUpon>AddRest.cs</DependentUpon>

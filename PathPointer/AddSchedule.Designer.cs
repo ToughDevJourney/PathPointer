@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.doneBtn = new System.Windows.Forms.Button();
+            this.cancelBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -61,23 +61,25 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "[Название дела]";
             // 
-            // button1
+            // doneBtn
             // 
-            this.button1.Location = new System.Drawing.Point(222, 249);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(272, 51);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Готово";
-            this.button1.UseVisualStyleBackColor = true;
+            this.doneBtn.Location = new System.Drawing.Point(222, 249);
+            this.doneBtn.Name = "doneBtn";
+            this.doneBtn.Size = new System.Drawing.Size(272, 51);
+            this.doneBtn.TabIndex = 1;
+            this.doneBtn.Text = "Готово";
+            this.doneBtn.UseVisualStyleBackColor = true;
+            this.doneBtn.Click += new System.EventHandler(this.doneBtn_Click);
             // 
-            // button2
+            // cancelBtn
             // 
-            this.button2.Location = new System.Drawing.Point(498, 249);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(272, 51);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Отмена";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cancelBtn.Location = new System.Drawing.Point(498, 249);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(272, 51);
+            this.cancelBtn.TabIndex = 2;
+            this.cancelBtn.Text = "Отмена";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // label2
             // 
@@ -127,7 +129,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 249);
+            this.label7.Location = new System.Drawing.Point(21, 250);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 8;
@@ -190,7 +192,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(109, 249);
+            this.label14.Location = new System.Drawing.Point(109, 250);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(86, 13);
             this.label14.TabIndex = 16;
@@ -268,8 +270,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cancelBtn);
+            this.Controls.Add(this.doneBtn);
             this.Controls.Add(this.label1);
             this.Name = "AddSchedule";
             this.Text = "AddSchedule";
@@ -281,8 +283,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button doneBtn;
+        private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

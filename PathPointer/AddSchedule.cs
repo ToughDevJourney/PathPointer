@@ -16,5 +16,18 @@ namespace PathPointer
         {
             InitializeComponent();
         }
+
+
+        private void doneBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            AddBusy empForm = new AddBusy();
+            empForm.Show();
+            this.Hide();
+        }
     }
 }
