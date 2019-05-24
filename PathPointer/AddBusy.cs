@@ -19,7 +19,13 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles(nameText.Text);
+            if (AddSchedule.shedule == null) {
+                DataManagement.WriteEmpFiles(nameText.Text + " !");
+            }
+            else {
+                DataManagement.WriteEmpFiles($"{nameText.Text} {AddSchedule.shedule}");
+            }
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -34,6 +40,11 @@ namespace PathPointer
             AddSchedule empForm = new AddSchedule();
             empForm.Show();
             this.Hide();
+        }
+
+        private void AddBusy_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

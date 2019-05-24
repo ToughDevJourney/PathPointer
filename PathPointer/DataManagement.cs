@@ -11,9 +11,9 @@ namespace PathPointer
 {
     public class DataManagement
     {
-        public string Business { get; set; }
-        private static string FilePath { get; set; }
-        private static string Schedule { get; set; }
+        public string Business { get; set; }        //DataSource
+        private static string FilePath { get; set; }        //путь к документу
+        private static string Schedule { get; set; }        //расписание
 
         public DataGridView FillGrid(string empType)      //вывод в DataGridView данных из документ с названием empType  
         {
@@ -28,12 +28,13 @@ namespace PathPointer
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        varCells.Add(new DataManagement { Business = line });    //заполнение DataSource данными из документа
+                        varCells.Add(new DataManagement { Business = getName(line) });    //заполнение DataSource данными из документа
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 varCells.Add(new DataManagement { Business = "Отсутствует директория\nсоздайте новую деятельность" });
             }
 
@@ -43,10 +44,15 @@ namespace PathPointer
         }
 
 
-
+        private string getName(string line) {            //вывод только названия занятости
+            if (line.Contains(" ")) {
+                line = line.Remove(line.IndexOf(" "), line.Length - line.IndexOf(" "));
+            }
+            return line;
+        }
         
 
-        public static void WriteEmpFiles(string name)    //запись в файл занятий
+        public static void WriteEmpFiles(string name)    //запись в файл неотложных занятий
         {
 
             using (StreamWriter sw = new StreamWriter(FilePath, true))
@@ -55,7 +61,7 @@ namespace PathPointer
             }
         }
 
-        public static void WriteEmpFiles(string name, int hours)    //запись в файл занятий
+        public static void WriteEmpFiles(string name, int hours)    //запись в файл видов отдыха
         {      
 
             using (StreamWriter sw = new StreamWriter(FilePath, true))
@@ -64,7 +70,7 @@ namespace PathPointer
             }
         }
 
-        public static void WriteEmpFiles(string name, int hours, string wantedTime) //запись в файл занятий
+        public static void WriteEmpFiles(string name, int hours, string wantedTime) //запись в файл целей
         {      
 
             using (StreamWriter sw = new StreamWriter(FilePath, true))

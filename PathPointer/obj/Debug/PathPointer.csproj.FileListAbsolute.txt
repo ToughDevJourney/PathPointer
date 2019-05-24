@@ -17,3 +17,4 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddRest.reso
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddGoal.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddSchedule.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddFun.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache

@@ -104,6 +104,7 @@
             this.Controls.Add(this.nameText);
             this.Name = "AddBusy";
             this.Text = "Добавить дело";
+            this.Load += new System.EventHandler(this.AddBusy_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
