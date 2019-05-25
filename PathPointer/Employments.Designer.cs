@@ -37,8 +37,6 @@
             this.BusinessButton = new System.Windows.Forms.Button();
             this.BackMain = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
-            this.ChangeButton = new System.Windows.Forms.Button();
-            this.DeleteButton = new System.Windows.Forms.Button();
             this.HightButton = new System.Windows.Forms.Button();
             this.LowButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -68,6 +66,7 @@
             this.dataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridBusiness.Size = new System.Drawing.Size(273, 389);
             this.dataGridBusiness.TabIndex = 0;
+            this.dataGridBusiness.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridBusiness_KeyDown);
             // 
             // GoalsButton
             // 
@@ -129,24 +128,6 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // ChangeButton
-            // 
-            this.ChangeButton.Location = new System.Drawing.Point(563, 78);
-            this.ChangeButton.Name = "ChangeButton";
-            this.ChangeButton.Size = new System.Drawing.Size(234, 60);
-            this.ChangeButton.TabIndex = 7;
-            this.ChangeButton.Text = "Изменить";
-            this.ChangeButton.UseVisualStyleBackColor = true;
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Location = new System.Drawing.Point(563, 144);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(234, 60);
-            this.DeleteButton.TabIndex = 8;
-            this.DeleteButton.Text = "Удалить";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            // 
             // HightButton
             // 
             this.HightButton.Location = new System.Drawing.Point(563, 252);
@@ -182,8 +163,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LowButton);
             this.Controls.Add(this.HightButton);
-            this.Controls.Add(this.DeleteButton);
-            this.Controls.Add(this.ChangeButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.BackMain);
             this.Controls.Add(this.BusinessButton);
@@ -210,8 +189,6 @@
         private System.Windows.Forms.Button BusinessButton;
         private System.Windows.Forms.Button BackMain;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button ChangeButton;
-        private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button HightButton;
         private System.Windows.Forms.Button LowButton;
         private System.Windows.Forms.Label label1;

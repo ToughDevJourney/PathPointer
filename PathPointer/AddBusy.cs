@@ -17,34 +17,32 @@ namespace PathPointer
             InitializeComponent();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            if (AddSchedule.shedule == null) {
-                DataManagement.WriteEmpFiles(nameText.Text + " !");
-            }
-            else {
-                DataManagement.WriteEmpFiles($"{nameText.Text} {AddSchedule.shedule}");
-            }
-
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            Employments empForm = new Employments();
-            empForm.Show();
-            this.Hide();
-        }
-
-        private void AddScheduleBtn_Click(object sender, EventArgs e)
+        private void BtnAddSchedule_Click(object sender, EventArgs e)
         {
             AddSchedule empForm = new AddSchedule();
             empForm.Show();
             this.Hide();
         }
 
-        private void AddBusy_Load(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
+            if (AddSchedule.shedule == null)
+            {
+                DataManagement.WriteEmpFiles(textName.Text + "!");
+            }
+            else
+            {
+                DataManagement.WriteEmpFiles($"{textName.Text}!{AddSchedule.shedule}");
+            }
 
+            BtnCancel_Click(null, null);
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Employments empForm = new Employments();
+            empForm.Show();
+            this.Hide();
         }
     }
 }

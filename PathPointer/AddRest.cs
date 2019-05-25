@@ -17,12 +17,13 @@ namespace PathPointer
             InitializeComponent();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles(nameText.Text, Convert.ToInt32(timeText.Text));
+            DataManagement.WriteEmpFiles($"{textName.Text}!{Convert.ToInt32(textTime.Text)}");
+            BtnCancel_Click(null, null);
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Employments empForm = new Employments();
             empForm.Show();

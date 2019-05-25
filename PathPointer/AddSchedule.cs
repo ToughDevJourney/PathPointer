@@ -22,13 +22,15 @@ namespace PathPointer
 
         private void BtnDone_Click(object sender, EventArgs e)
         {
-            string[] schedArr = new string[7] { lblTimeMon.Text, lblTimeTue.Text, lblTimeWed.Text, lblTimeThu.Text, lblTimeFri.Text, lblTimeSat.Text, lblTimeSun.Text };
+            string[] schedArr = new string[7] { lblTimeMon.Text, lblTimeTue.Text, lblTimeWed.Text,      // инициализация строкового массива расписанием
+            lblTimeThu.Text, lblTimeFri.Text, lblTimeSat.Text, lblTimeSun.Text };
 
             for (int i = 0; schedArr.Length > i; i++) {
-                schedArr[i] = schedArr[i].Remove(schedArr[i].IndexOf(" "), 2);             //придание строке вида "09:15 17:20"
+                schedArr[i] = schedArr[i].Remove(schedArr[i].IndexOf(" "), 2);             //форматирование строки в вид "09:15 17:20"
             }
 
-            shedule = $"Пн {schedArr[0]} Вт {schedArr[1]} Ср {schedArr[2]} Чт {schedArr[3]} Пт {schedArr[4]} Сб {schedArr[5]} Вс {schedArr[6]}";
+            shedule = $"Пн {schedArr[0]} Вт {schedArr[1]} Ср {schedArr[2]} Чт {schedArr[3]} Пт {schedArr[4]} Сб {schedArr[5]} Вс {schedArr[6]}";    //подготовка строки к сохранению в файл
+            BtnCancel_Click(null,null);
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)

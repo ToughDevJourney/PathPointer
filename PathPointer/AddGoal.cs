@@ -19,22 +19,17 @@ namespace PathPointer
             InitializeComponent();
         }
 
-        private void BackButton_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            DataManagement.WriteEmpFiles($"{textName.Text}!{Convert.ToInt32(textTime.Text)}!{datePicker.Text}");        //запись цели в файл
+            BtnCancel_Click(null, null);
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Employments empForm = new Employments();
             empForm.Show();
             this.Hide();
-        }
-
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-
-            DataManagement.WriteEmpFiles(nameText.Text, Convert.ToInt32(timeText.Text),datePicker.Text);
-        }
-
-        private void AddGoal_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
