@@ -37,7 +37,7 @@
             this.BusinessButton = new System.Windows.Forms.Button();
             this.BackMain = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
-            this.HightButton = new System.Windows.Forms.Button();
+            this.BtnHight = new System.Windows.Forms.Button();
             this.LowButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).BeginInit();
@@ -128,14 +128,15 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // HightButton
+            // BtnHight
             // 
-            this.HightButton.Location = new System.Drawing.Point(563, 252);
-            this.HightButton.Name = "HightButton";
-            this.HightButton.Size = new System.Drawing.Size(116, 60);
-            this.HightButton.TabIndex = 9;
-            this.HightButton.Text = "Понизить";
-            this.HightButton.UseVisualStyleBackColor = true;
+            this.BtnHight.Location = new System.Drawing.Point(563, 252);
+            this.BtnHight.Name = "BtnHight";
+            this.BtnHight.Size = new System.Drawing.Size(116, 60);
+            this.BtnHight.TabIndex = 9;
+            this.BtnHight.Text = "Понизить";
+            this.BtnHight.UseVisualStyleBackColor = true;
+            this.BtnHight.Click += new System.EventHandler(this.BtnHight_Click);
             // 
             // LowButton
             // 
@@ -162,7 +163,7 @@
             this.ClientSize = new System.Drawing.Size(821, 415);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LowButton);
-            this.Controls.Add(this.HightButton);
+            this.Controls.Add(this.BtnHight);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.BackMain);
             this.Controls.Add(this.BusinessButton);
@@ -189,7 +190,7 @@
         private System.Windows.Forms.Button BusinessButton;
         private System.Windows.Forms.Button BackMain;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button HightButton;
+        private System.Windows.Forms.Button BtnHight;
         private System.Windows.Forms.Button LowButton;
         private System.Windows.Forms.Label label1;
     }

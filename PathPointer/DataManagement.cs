@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,13 @@ namespace PathPointer
         private static string FilePath { get; set; }        //путь к документу
         private static string Schedule { get; set; }        //расписание
 
-        public static DataGridView FillGrid(string empType = null)      //вывод в DataGridView данных из документа с названием empType  
+        public static DataGridView FillGrid()      //вывод в DataGridView данных из документа с названием empType  
         {
-            if (empType != null) {
-                FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\{empType}.txt");  //путь к папке "Документы"
-            }
+
+            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\{Employments.empType}.txt");  //путь к папке "Документы"
+            
             DataGridView dataGridBusiness = new DataGridView();
-            List<DataManagement> varCells = new List<DataManagement>();
+            Employments.varCells = new BindingList<DataManagement>();
             try    //вывод сообщения, если директива не найдена
             {
                 using (StreamReader sr = new StreamReader(FilePath))
@@ -29,16 +30,16 @@ namespace PathPointer
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        varCells.Add(new DataManagement { Business = getName(line) });    //заполнение DataSource данными из документа
+                        Employments.varCells.Add(new DataManagement { Business = getName(line) });    //заполнение DataSource данными из документа
                     }
                 }
             }
             catch
             {
-                varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
+                Employments.varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
             }
 
-            dataGridBusiness.DataSource = varCells;
+            dataGridBusiness.DataSource = Employments.varCells;
             return dataGridBusiness;
         }
 

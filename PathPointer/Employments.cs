@@ -13,8 +13,8 @@ namespace PathPointer
 {
     public partial class Employments : Form
     {
-        static int empType;
-
+        public static string empType = "Goals";
+        public static BindingList<DataManagement> varCells;
 
 
 
@@ -30,26 +30,26 @@ namespace PathPointer
 
         private void BusinessButton_Click(object sender, EventArgs e)
         {
-            empType = 0;
+            empType = "Business";
             FillGrid();
         }
 
         public void GoalsButton_Click(object sender, EventArgs e)
         {
-            empType = 1;
+            empType = "Goals";
             FillGrid();
 
         }
 
         private void RestButton_Click(object sender, EventArgs e)
         {
-            empType = 2;
+            empType = "Rest";
             FillGrid();
         }
 
         private void FunButton_Click(object sender, EventArgs e)
         {
-            empType = 3;
+            empType = "Fun";
             FillGrid();
         }
 
@@ -58,16 +58,16 @@ namespace PathPointer
             Form empForm = new AddGoal();
             switch (empType)
             {
-                case 0:
+                case "Business":
                     empForm = new AddBusy();
                     break;
-                case 1:
+                case "Goals":
                     empForm = new AddGoal();
                     break;
-                case 2:
+                case "Rest":
                     empForm = new AddRest();
                     break;
-                case 3:
+                case "Fun":
                     empForm = new AddFun();
                     break;
             }
@@ -76,23 +76,14 @@ namespace PathPointer
             this.Hide();
         }
 
-        public void FillGrid() {        
-            switch (empType)
-            {
-                case 0:
-                    dataGridBusiness.DataSource = DataManagement.FillGrid("Business").DataSource;
-                    break;
-                case 1:
-                    dataGridBusiness.DataSource = DataManagement.FillGrid("Goals").DataSource;
+        public void FillGrid() {
 
-                    break;
-                case 2:
-                    dataGridBusiness.DataSource = DataManagement.FillGrid("Rest").DataSource;
-                    break;
-                case 3:
-                    dataGridBusiness.DataSource = DataManagement.FillGrid("Fun").DataSource;
-                    break;
-            }
+
+
+            dataGridBusiness.DataSource = DataManagement.FillGrid().DataSource;
+
+
+
 
         }
 
@@ -108,13 +99,23 @@ namespace PathPointer
         }
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)
-        {       //удалить строку во время выполнения метода
-            MessageBox.Show("yeah?");
-            if (e.KeyCode == Keys.Delete)   //ЗАНЯТЬСЯ ЭТИМ ЗАВТРА
+        {       
+
+            if (e.KeyCode == Keys.Delete)
             {
+
+
                 string cellVal = dataGridBusiness.Rows[dataGridBusiness.CurrentCell.RowIndex].Cells[dataGridBusiness.CurrentCell.ColumnIndex].Value.ToString();    //передача в cellVal значения выбранной ячейки
+                varCells.RemoveAt(dataGridBusiness.CurrentCell.RowIndex);
                 DataManagement.DeleteEmpFiles(cellVal);
+
+                
             }
+        }
+
+        private void BtnHight_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
