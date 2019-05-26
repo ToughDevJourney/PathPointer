@@ -45,6 +45,7 @@
             // 
             // dataGridBusiness
             // 
+            this.dataGridBusiness.AllowUserToAddRows = false;
             this.dataGridBusiness.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridBusiness.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -59,6 +60,7 @@
             this.dataGridBusiness.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridBusiness.EnableHeadersVisualStyles = false;
             this.dataGridBusiness.Location = new System.Drawing.Point(270, 12);
+            this.dataGridBusiness.MultiSelect = false;
             this.dataGridBusiness.Name = "dataGridBusiness";
             this.dataGridBusiness.RowHeadersVisible = false;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -66,6 +68,7 @@
             this.dataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridBusiness.Size = new System.Drawing.Size(273, 389);
             this.dataGridBusiness.TabIndex = 0;
+            this.dataGridBusiness.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBusiness_CellValueChanged);
             this.dataGridBusiness.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridBusiness_KeyDown);
             // 
             // GoalsButton
@@ -130,17 +133,16 @@
             // 
             // BtnHight
             // 
-            this.BtnHight.Location = new System.Drawing.Point(563, 252);
+            this.BtnHight.Location = new System.Drawing.Point(563, 265);
             this.BtnHight.Name = "BtnHight";
             this.BtnHight.Size = new System.Drawing.Size(116, 60);
             this.BtnHight.TabIndex = 9;
             this.BtnHight.Text = "Понизить";
             this.BtnHight.UseVisualStyleBackColor = true;
-            this.BtnHight.Click += new System.EventHandler(this.BtnHight_Click);
             // 
             // LowButton
             // 
-            this.LowButton.Location = new System.Drawing.Point(681, 252);
+            this.LowButton.Location = new System.Drawing.Point(681, 265);
             this.LowButton.Name = "LowButton";
             this.LowButton.Size = new System.Drawing.Size(116, 60);
             this.LowButton.TabIndex = 10;
@@ -150,7 +152,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(649, 233);
+            this.label1.Location = new System.Drawing.Point(649, 246);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 11;

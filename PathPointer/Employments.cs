@@ -17,7 +17,6 @@ namespace PathPointer
         public static BindingList<DataManagement> varCells;
 
 
-
         public Employments()
         {
             InitializeComponent();
@@ -53,7 +52,7 @@ namespace PathPointer
             FillGrid();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)   
         {
             Form empForm = new AddGoal();
             switch (empType)
@@ -77,14 +76,7 @@ namespace PathPointer
         }
 
         public void FillGrid() {
-
-
-
             dataGridBusiness.DataSource = DataManagement.FillGrid().DataSource;
-
-
-
-
         }
 
         private void BackMain_Click(object sender, EventArgs e)
@@ -99,23 +91,30 @@ namespace PathPointer
         }
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)
-        {       
+        {
+            string cellVal = dataGridBusiness.Rows[dataGridBusiness.CurrentCell.RowIndex].Cells[dataGridBusiness.CurrentCell.ColumnIndex].Value.ToString();    //передача в cellVal значения выбранной ячейки
 
             if (e.KeyCode == Keys.Delete)
             {
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить \"{cellVal}\"", "Вы уверены?",
+                             MessageBoxButtons.YesNo,
+                             MessageBoxIcon.Question);
 
 
-                string cellVal = dataGridBusiness.Rows[dataGridBusiness.CurrentCell.RowIndex].Cells[dataGridBusiness.CurrentCell.ColumnIndex].Value.ToString();    //передача в cellVal значения выбранной ячейки
-                varCells.RemoveAt(dataGridBusiness.CurrentCell.RowIndex);
-                DataManagement.DeleteEmpFiles(cellVal);
-
-                
+                if (result == DialogResult.Yes)
+                {
+                    varCells.RemoveAt(dataGridBusiness.CurrentCell.RowIndex);
+                    DataManagement.DeleteEmpFiles(cellVal);
+                    
+                } 
             }
         }
 
-        private void BtnHight_Click(object sender, EventArgs e)
-        {
 
+
+        private void dataGridBusiness_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);
         }
     }
 }

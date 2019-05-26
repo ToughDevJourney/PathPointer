@@ -20,7 +20,7 @@ namespace PathPointer
         {
 
             FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\{Employments.empType}.txt");  //путь к папке "Документы"
-            
+
             DataGridView dataGridBusiness = new DataGridView();
             Employments.varCells = new BindingList<DataManagement>();
             try    //вывод сообщения, если директива не найдена
@@ -30,21 +30,28 @@ namespace PathPointer
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        Employments.varCells.Add(new DataManagement { Business = getName(line) });    //заполнение DataSource данными из документа
+                        Employments.varCells.Add(new DataManagement { Business = GetName(line) });    //заполнение DataSource данными из документа
                     }
                 }
             }
             catch
             {
-                Employments.varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
+                emptyGridMessage();
+            }
+
+            if (Employments.varCells.Count == 0) {
+                emptyGridMessage();
             }
 
             dataGridBusiness.DataSource = Employments.varCells;
             return dataGridBusiness;
         }
 
+        private static void emptyGridMessage (){        //Если, данные в документе отстутствуют
+            Employments.varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
+        }
 
-        private static string getName(string line) {            //вывод только названия занятости
+        private static string GetName(string line) {            //вывод только названия занятия
             if (line.Contains("!")) {
                 line = line.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
             }
@@ -52,7 +59,7 @@ namespace PathPointer
         }
         
 
-        public static void WriteEmpFiles(string name)    //запись в файл неотложных занятий
+        public static void WriteEmpFiles(string name)    //запись в файл
         {
             using (StreamWriter sw = new StreamWriter(FilePath, true))
             {
@@ -73,7 +80,7 @@ namespace PathPointer
                 {
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if (String.Compare(getName(line), delLine) == 0)
+                        if (String.Compare(GetName(line), delLine) == 0)
                             continue;
 
                         writer.WriteLine(line);
@@ -83,11 +90,18 @@ namespace PathPointer
 
             File.Copy(interFile, FilePath, true);
             File.Delete(interFile);
-
-
+            
+            
             emp.FillGrid();
         }
 
+
+        public static void EditEmpFiles(string editLine, int rowIndex) {
+            string[] fileRows = File.ReadAllLines(FilePath);        //занесение данных из файла в массив
+            fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetName(fileRows[rowIndex]).Length); // удаление старого наименование
+            fileRows[rowIndex] = fileRows[rowIndex].Insert(0, editLine);        //добавление нового наименования
+            File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
+        }
 
 
 
