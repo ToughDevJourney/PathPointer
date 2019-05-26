@@ -19,7 +19,7 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles($"{textName.Text}!{Convert.ToInt32(textTime.Text)}");
+            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.GetCode()}!{Convert.ToInt32(textTime.Text)}");
             CancelButton_Click(null, null);
         }
 

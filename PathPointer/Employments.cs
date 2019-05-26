@@ -76,7 +76,7 @@ namespace PathPointer
         }
 
         public void FillGrid() {
-            dataGridBusiness.DataSource = DataManagement.FillGrid().DataSource;
+            dataGridBusiness.DataSource = DataManagement.FillGrid().DataSource;  
         }
 
         private void BackMain_Click(object sender, EventArgs e)
@@ -96,16 +96,13 @@ namespace PathPointer
 
             if (e.KeyCode == Keys.Delete)
             {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить \"{cellVal}\"", "Вы уверены?",
-                             MessageBoxButtons.YesNo,
-                             MessageBoxIcon.Question);
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить \"{cellVal}\"", "Вы уверены?", MessageBoxButtons.YesNo);
 
 
                 if (result == DialogResult.Yes)
                 {
                     varCells.RemoveAt(dataGridBusiness.CurrentCell.RowIndex);
                     DataManagement.DeleteEmpFiles(cellVal);
-                    
                 } 
             }
         }
@@ -114,7 +111,7 @@ namespace PathPointer
 
         private void dataGridBusiness_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);
+            DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);  //изменение текущей строки
         }
     }
 }

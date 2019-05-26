@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Windows.Forms;
 
 namespace PathPointer
@@ -15,6 +14,8 @@ namespace PathPointer
         public string Business { get; set; }        //DataSource
         private static string FilePath { get; set; }        //путь к документу
         private static string Schedule { get; set; }        //расписание
+
+
 
         public static DataGridView FillGrid()      //вывод в DataGridView данных из документа с названием empType  
         {
@@ -37,6 +38,7 @@ namespace PathPointer
             catch
             {
                 emptyGridMessage();
+                Console.WriteLine("Эксепшн тут1");
             }
 
             if (Employments.varCells.Count == 0) {
@@ -47,7 +49,29 @@ namespace PathPointer
             return dataGridBusiness;
         }
 
-        private static void emptyGridMessage (){        //Если, данные в документе отстутствуют
+        public static int GetCode(){       //поиск кода деятельности
+            int code = 0;
+            string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");
+            try
+            {
+                string[] fileRows = File.ReadAllLines(FilePath);        //занесение данных из файла в массив
+                for (int i = 0;i < fileRows.Length;i++) {
+                    if (GetName(fileRows[i]) == Employments.empType) {
+                        code = Convert.ToInt32(fileRows[i].Remove(0, GetName(fileRows[i]).Length)) + 1;     //вывод кода из файла
+                        fileRows[i] = fileRows[i].Remove(GetName(fileRows[i]).IndexOf("!"), fileRows[i].Length) + code;     //
+                        break;
+                    }
+                }
+                File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
+            }
+            catch {
+
+                code = 0;
+            }
+            return code;
+        }
+
+        private static void emptyGridMessage (){        //Если, данные или документ отстутствуют
             Employments.varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
         }
 

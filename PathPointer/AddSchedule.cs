@@ -22,7 +22,7 @@ namespace PathPointer
 
         private void BtnDone_Click(object sender, EventArgs e)
         {
-            string[] schedArr = new string[7] { lblTimeMon.Text, lblTimeTue.Text, lblTimeWed.Text,      // инициализация строкового массива расписанием
+            string[] schedArr = new string[7] { lblTimeMon.Text, lblTimeTue.Text, lblTimeWed.Text,      // инициализация массива-расписания
             lblTimeThu.Text, lblTimeFri.Text, lblTimeSat.Text, lblTimeSun.Text };
 
             for (int i = 0; schedArr.Length > i; i++) {

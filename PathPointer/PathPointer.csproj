@@ -101,6 +101,7 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainStatistic.cs" />
     <Compile Include="MoreStat.cs">
       <SubType>Form</SubType>
     </Compile>
