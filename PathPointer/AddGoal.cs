@@ -21,7 +21,7 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.GetCode()}!{Convert.ToInt32(textTime.Text)}!{datePicker.Text}");        //запись цели в файл
+            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.SetCode()}!{Convert.ToInt32(textTime.Text)}!{datePicker.Text}");        //запись цели в файл
             BtnCancel_Click(null, null);
         }
 

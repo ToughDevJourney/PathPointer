@@ -28,11 +28,11 @@ namespace PathPointer
         {
             if (AddSchedule.shedule == null)
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.GetCode()}");
+                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.SetCode()}");
             }
             else
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.GetCode()}!{AddSchedule.shedule}");
+                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.SetCode()}!{AddSchedule.shedule}");
             }
 
             BtnCancel_Click(null, null);

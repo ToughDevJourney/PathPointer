@@ -13,7 +13,7 @@ namespace PathPointer
     {
         public string Business { get; set; }        //DataSource
         private static string FilePath { get; set; }        //путь к документу
-        private static string Schedule { get; set; }        //расписание
+
 
 
 
@@ -38,7 +38,6 @@ namespace PathPointer
             catch
             {
                 emptyGridMessage();
-                Console.WriteLine("Эксепшн тут1");
             }
 
             if (Employments.varCells.Count == 0) {
@@ -49,25 +48,27 @@ namespace PathPointer
             return dataGridBusiness;
         }
 
-        public static int GetCode(){       //поиск кода деятельности
+        public static int SetCode(){       //поиск кода деятельности
             int code = 0;
-            string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");
+            string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");     //путь к кодам занятий
             try
             {
-                string[] fileRows = File.ReadAllLines(FilePath);        //занесение данных из файла в массив
+                string[] fileRows = File.ReadAllLines(codePath);        //занесение данных из файла в массив
                 for (int i = 0;i < fileRows.Length;i++) {
+
                     if (GetName(fileRows[i]) == Employments.empType) {
-                        code = Convert.ToInt32(fileRows[i].Remove(0, GetName(fileRows[i]).Length)) + 1;     //вывод кода из файла
-                        fileRows[i] = fileRows[i].Remove(GetName(fileRows[i]).IndexOf("!"), fileRows[i].Length) + code;     //
+                        code = Convert.ToInt32(fileRows[i].Remove(0, (GetName(fileRows[i]).Length)+1));     //вывод кода из файла
+                        fileRows[i] = fileRows[i].Replace((code).ToString(),(++code).ToString());     //замена старого кода на новый
                         break;
                     }
                 }
-                File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
+                File.WriteAllLines(codePath, fileRows);     //сохранение данных в файл из массива
+
             }
             catch {
-
                 code = 0;
             }
+
             return code;
         }
 
