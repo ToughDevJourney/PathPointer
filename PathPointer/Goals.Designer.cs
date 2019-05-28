@@ -121,6 +121,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Goals";
             this.Text = "Цели";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Goals_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

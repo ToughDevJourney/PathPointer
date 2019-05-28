@@ -28,11 +28,11 @@ namespace PathPointer
         {
             if (AddSchedule.shedule == null)
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.SetCode()}");
+                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}");
             }
             else
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.SetCode()}!{AddSchedule.shedule}");
+                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.shedule}");
             }
 
             BtnCancel_Click(null, null);
@@ -43,6 +43,11 @@ namespace PathPointer
             Employments empForm = new Employments();
             empForm.Show();
             this.Hide();
+        }
+
+        private void AddBusy_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
         }
     }
 }

@@ -275,6 +275,7 @@
             this.Controls.Add(this.businessName);
             this.Name = "AddSchedule";
             this.Text = "AddSchedule";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddSchedule_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

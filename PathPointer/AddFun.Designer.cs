@@ -101,6 +101,7 @@
             this.Controls.Add(this.textName);
             this.Name = "AddFun";
             this.Text = "Добавить развлечение";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddFun_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

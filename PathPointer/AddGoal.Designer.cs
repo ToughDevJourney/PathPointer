@@ -134,6 +134,7 @@
             this.Controls.Add(this.textName);
             this.Name = "AddGoal";
             this.Text = "Добавить цель";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddGoal_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

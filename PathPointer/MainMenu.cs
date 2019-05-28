@@ -17,22 +17,43 @@ namespace PathPointer
             InitializeComponent();
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void EmployButton_Click(object sender, EventArgs e)
         {
             Employments employments = new Employments();
-
             employments.Show();
             this.Hide();
+        }
+
+
+        private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TrayIcon_MouseDoubleClick(null,null);
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
+            }
+        }
+
+        private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+            }
         }
     }
 }

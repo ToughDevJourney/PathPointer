@@ -104,6 +104,7 @@
             this.Controls.Add(this.textName);
             this.Name = "AddBusy";
             this.Text = "Добавить дело";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddBusy_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -16,5 +16,10 @@ namespace PathPointer
         {
             InitializeComponent();
         }
+
+        private void Settings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
+        }
     }
 }

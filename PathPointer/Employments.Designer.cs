@@ -175,7 +175,7 @@
             this.Controls.Add(this.dataGridBusiness);
             this.Name = "Employments";
             this.Text = "Занятия";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Employments_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Employments_FormClosing);
             this.Load += new System.EventHandler(this.Employments_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).EndInit();
             this.ResumeLayout(false);

@@ -13,6 +13,36 @@ namespace PathPointer
     {
         public string Business { get; set; }        //DataSource
         private static string FilePath { get; set; }        //путь к документу
+        private static int code;
+
+        public static int Code {
+            get {
+                string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");     //путь к кодам занятий
+                try
+                {
+                    string[] fileRows = File.ReadAllLines(codePath);        //занесение данных из файла в массив
+                    for (int i = 0; i < fileRows.Length; i++)
+                    {
+
+                        if (GetName(fileRows[i]) == Employments.empType)
+                        {
+                            code = Convert.ToInt32(fileRows[i].Remove(0, (GetName(fileRows[i]).Length) + 1));     //вывод кода из файла
+                            fileRows[i] = fileRows[i].Replace((code).ToString(), (++code).ToString());     //замена старого кода на новый
+                            break;
+                        }
+                    }
+                    File.WriteAllLines(codePath, fileRows);     //сохранение данных в файл из массива
+
+                }
+                catch
+                {
+                    code = 0;
+                }
+                return code;
+            }
+        }
+
+
 
 
 
@@ -48,29 +78,6 @@ namespace PathPointer
             return dataGridBusiness;
         }
 
-        public static int SetCode(){       //поиск кода деятельности
-            int code = 0;
-            string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");     //путь к кодам занятий
-            try
-            {
-                string[] fileRows = File.ReadAllLines(codePath);        //занесение данных из файла в массив
-                for (int i = 0;i < fileRows.Length;i++) {
-
-                    if (GetName(fileRows[i]) == Employments.empType) {
-                        code = Convert.ToInt32(fileRows[i].Remove(0, (GetName(fileRows[i]).Length)+1));     //вывод кода из файла
-                        fileRows[i] = fileRows[i].Replace((code).ToString(),(++code).ToString());     //замена старого кода на новый
-                        break;
-                    }
-                }
-                File.WriteAllLines(codePath, fileRows);     //сохранение данных в файл из массива
-
-            }
-            catch {
-                code = 0;
-            }
-
-            return code;
-        }
 
         private static void emptyGridMessage (){        //Если, данные или документ отстутствуют
             Employments.varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });

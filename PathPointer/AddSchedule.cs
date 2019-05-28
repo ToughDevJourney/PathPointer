@@ -39,5 +39,10 @@ namespace PathPointer
             empForm.Show();
             this.Hide();
         }
+
+        private void AddSchedule_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
+        }
     }
 }

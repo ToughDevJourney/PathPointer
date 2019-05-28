@@ -101,6 +101,7 @@
             this.Controls.Add(this.textName);
             this.Name = "AddRest";
             this.Text = "Добавить отдых";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddRest_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

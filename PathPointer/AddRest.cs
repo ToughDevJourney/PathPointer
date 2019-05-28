@@ -19,7 +19,7 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.SetCode()}!{Convert.ToInt32(textTime.Text)}");
+            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{Convert.ToInt32(textTime.Text)}");
             BtnCancel_Click(null, null);
         }
 
@@ -28,6 +28,11 @@ namespace PathPointer
             Employments empForm = new Employments();
             empForm.Show();
             this.Hide();
+        }
+
+        private void AddRest_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
         }
     }
 }

@@ -205,6 +205,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MoreStat";
             this.Text = "Расширенная статистика";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MoreStat_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

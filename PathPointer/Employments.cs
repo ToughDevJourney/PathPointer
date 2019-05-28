@@ -81,13 +81,13 @@ namespace PathPointer
 
         private void BackMain_Click(object sender, EventArgs e)
         {
-            OpenMenu.ShowMenu();
-            this.Hide();
+            MenuManagement.ShowMenu(this);
+
         }
 
         private void Employments_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+
         }
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)
@@ -112,6 +112,11 @@ namespace PathPointer
         private void dataGridBusiness_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);  //изменение текущей строки
+        }
+
+        private void Employments_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
         }
     }
 }
