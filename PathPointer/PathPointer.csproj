@@ -117,6 +117,12 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="TimeSpent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeSpent.Designer.cs">
+      <DependentUpon>TimeSpent.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Achivements.resx">
       <DependentUpon>Achivements.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +164,9 @@
     </Compile>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeSpent.resx">
+      <DependentUpon>TimeSpent.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

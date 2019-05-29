@@ -40,6 +40,7 @@
             this.TrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pathPointerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TimerHour = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.TrayContextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -128,6 +129,11 @@
             this.закрытьToolStripMenuItem.Text = "Закрыть";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
+            // TimerHour
+            // 
+            this.TimerHour.Enabled = true;
+            this.TimerHour.Tick += new System.EventHandler(this.TimerHour_Tick);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,6 +148,7 @@
             this.Name = "MainMenu";
             this.Text = "Главное меню";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainMenu_FormClosing);
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.TrayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -159,6 +166,7 @@
         private System.Windows.Forms.ToolStripMenuItem pathPointerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         public System.Windows.Forms.NotifyIcon TrayIcon;
+        private System.Windows.Forms.Timer TimerHour;
     }
 }
 

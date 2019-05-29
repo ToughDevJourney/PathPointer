@@ -24,29 +24,29 @@ namespace PathPointer
 
         private void Employments_Load(object sender, EventArgs e)
         {
-            GoalsButton_Click(null, null);
+            BtnGoals_Click(null, null);
         }
 
-        private void BusinessButton_Click(object sender, EventArgs e)
+        private void BtnBusiness_Click(object sender, EventArgs e)
         {
             empType = "Business";
             FillGrid();
         }
 
-        public void GoalsButton_Click(object sender, EventArgs e)
+        public void BtnGoals_Click(object sender, EventArgs e)
         {
             empType = "Goals";
             FillGrid();
 
         }
 
-        private void RestButton_Click(object sender, EventArgs e)
+        private void BtnRest_Click(object sender, EventArgs e)
         {
             empType = "Rest";
             FillGrid();
         }
 
-        private void FunButton_Click(object sender, EventArgs e)
+        private void BtnFun_Click(object sender, EventArgs e)
         {
             empType = "Fun";
             FillGrid();
@@ -84,11 +84,6 @@ namespace PathPointer
             MenuManagement.ShowMenu(this);
 
         }
-
-        private void Employments_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-        }
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)
         {
@@ -118,5 +113,6 @@ namespace PathPointer
         {
             MenuManagement.HideForm(this, e);
         }
+
     }
 }

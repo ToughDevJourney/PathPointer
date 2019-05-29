@@ -31,10 +31,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridBusiness = new System.Windows.Forms.DataGridView();
-            this.GoalsButton = new System.Windows.Forms.Button();
-            this.RestButton = new System.Windows.Forms.Button();
-            this.FunButton = new System.Windows.Forms.Button();
-            this.BusinessButton = new System.Windows.Forms.Button();
+            this.BtnGoals = new System.Windows.Forms.Button();
+            this.BtnRest = new System.Windows.Forms.Button();
+            this.BtnFun = new System.Windows.Forms.Button();
+            this.BtnBusiness = new System.Windows.Forms.Button();
             this.BackMain = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.BtnHight = new System.Windows.Forms.Button();
@@ -71,45 +71,45 @@
             this.dataGridBusiness.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridBusiness_CellValueChanged);
             this.dataGridBusiness.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridBusiness_KeyDown);
             // 
-            // GoalsButton
+            // BtnGoals
             // 
-            this.GoalsButton.Location = new System.Drawing.Point(12, 122);
-            this.GoalsButton.Name = "GoalsButton";
-            this.GoalsButton.Size = new System.Drawing.Size(234, 60);
-            this.GoalsButton.TabIndex = 1;
-            this.GoalsButton.Text = "Цели";
-            this.GoalsButton.UseVisualStyleBackColor = true;
-            this.GoalsButton.Click += new System.EventHandler(this.GoalsButton_Click);
+            this.BtnGoals.Location = new System.Drawing.Point(12, 122);
+            this.BtnGoals.Name = "BtnGoals";
+            this.BtnGoals.Size = new System.Drawing.Size(234, 60);
+            this.BtnGoals.TabIndex = 1;
+            this.BtnGoals.Text = "Цели";
+            this.BtnGoals.UseVisualStyleBackColor = true;
+            this.BtnGoals.Click += new System.EventHandler(this.BtnGoals_Click);
             // 
-            // RestButton
+            // BtnRest
             // 
-            this.RestButton.Location = new System.Drawing.Point(12, 229);
-            this.RestButton.Name = "RestButton";
-            this.RestButton.Size = new System.Drawing.Size(234, 60);
-            this.RestButton.TabIndex = 2;
-            this.RestButton.Text = "Отдых";
-            this.RestButton.UseVisualStyleBackColor = true;
-            this.RestButton.Click += new System.EventHandler(this.RestButton_Click);
+            this.BtnRest.Location = new System.Drawing.Point(12, 229);
+            this.BtnRest.Name = "BtnRest";
+            this.BtnRest.Size = new System.Drawing.Size(234, 60);
+            this.BtnRest.TabIndex = 2;
+            this.BtnRest.Text = "Отдых";
+            this.BtnRest.UseVisualStyleBackColor = true;
+            this.BtnRest.Click += new System.EventHandler(this.BtnRest_Click);
             // 
-            // FunButton
+            // BtnFun
             // 
-            this.FunButton.Location = new System.Drawing.Point(12, 341);
-            this.FunButton.Name = "FunButton";
-            this.FunButton.Size = new System.Drawing.Size(234, 60);
-            this.FunButton.TabIndex = 3;
-            this.FunButton.Text = "Развлечения";
-            this.FunButton.UseVisualStyleBackColor = true;
-            this.FunButton.Click += new System.EventHandler(this.FunButton_Click);
+            this.BtnFun.Location = new System.Drawing.Point(12, 341);
+            this.BtnFun.Name = "BtnFun";
+            this.BtnFun.Size = new System.Drawing.Size(234, 60);
+            this.BtnFun.TabIndex = 3;
+            this.BtnFun.Text = "Развлечения";
+            this.BtnFun.UseVisualStyleBackColor = true;
+            this.BtnFun.Click += new System.EventHandler(this.BtnFun_Click);
             // 
-            // BusinessButton
+            // BtnBusiness
             // 
-            this.BusinessButton.Location = new System.Drawing.Point(12, 12);
-            this.BusinessButton.Name = "BusinessButton";
-            this.BusinessButton.Size = new System.Drawing.Size(234, 60);
-            this.BusinessButton.TabIndex = 4;
-            this.BusinessButton.Text = "Неотложные дела";
-            this.BusinessButton.UseVisualStyleBackColor = true;
-            this.BusinessButton.Click += new System.EventHandler(this.BusinessButton_Click);
+            this.BtnBusiness.Location = new System.Drawing.Point(12, 12);
+            this.BtnBusiness.Name = "BtnBusiness";
+            this.BtnBusiness.Size = new System.Drawing.Size(234, 60);
+            this.BtnBusiness.TabIndex = 4;
+            this.BtnBusiness.Text = "Неотложные дела";
+            this.BtnBusiness.UseVisualStyleBackColor = true;
+            this.BtnBusiness.Click += new System.EventHandler(this.BtnBusiness_Click);
             // 
             // BackMain
             // 
@@ -168,10 +168,10 @@
             this.Controls.Add(this.BtnHight);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.BackMain);
-            this.Controls.Add(this.BusinessButton);
-            this.Controls.Add(this.FunButton);
-            this.Controls.Add(this.RestButton);
-            this.Controls.Add(this.GoalsButton);
+            this.Controls.Add(this.BtnBusiness);
+            this.Controls.Add(this.BtnFun);
+            this.Controls.Add(this.BtnRest);
+            this.Controls.Add(this.BtnGoals);
             this.Controls.Add(this.dataGridBusiness);
             this.Name = "Employments";
             this.Text = "Занятия";
@@ -186,10 +186,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridBusiness;
-        private System.Windows.Forms.Button GoalsButton;
-        private System.Windows.Forms.Button RestButton;
-        private System.Windows.Forms.Button FunButton;
-        private System.Windows.Forms.Button BusinessButton;
+        private System.Windows.Forms.Button BtnGoals;
+        private System.Windows.Forms.Button BtnRest;
+        private System.Windows.Forms.Button BtnFun;
+        private System.Windows.Forms.Button BtnBusiness;
         private System.Windows.Forms.Button BackMain;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button BtnHight;
