@@ -76,7 +76,7 @@ namespace PathPointer
         }
 
         public void FillGrid() {
-            dataGridBusiness.DataSource = DataManagement.FillGrid().DataSource;  
+            dataGridBusiness.DataSource = DataManagement.FillGrid(empType, ref varCells).DataSource;  
         }
 
         private void BackMain_Click(object sender, EventArgs e)
@@ -100,6 +100,9 @@ namespace PathPointer
                     DataManagement.DeleteEmpFiles(cellVal);
                 } 
             }
+
+
+            FillGrid();
         }
 
 

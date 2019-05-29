@@ -13,6 +13,7 @@ namespace PathPointer
     public partial class TimeSpent : Form
     {
         public static string empType = "Goals";
+        public static BindingList<DataManagement> varCells;
 
         public TimeSpent()
         {
@@ -46,9 +47,12 @@ namespace PathPointer
 
         public void FillGrid()
         {
-            dataGridBusiness.DataSource = DataManagement.FillGrid().DataSource;
+            dataGridBusiness.DataSource = DataManagement.FillGrid(empType, ref varCells).DataSource;
         }
 
+        private void BtnReady_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

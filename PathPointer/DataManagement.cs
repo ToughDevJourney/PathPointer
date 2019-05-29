@@ -14,6 +14,7 @@ namespace PathPointer
         public string Business { get; set; }        //DataSource
         private static string FilePath { get; set; }        //путь к документу
         private static int code;
+        private static string empType { get; set; }
 
         public static int Code {
             get {
@@ -24,7 +25,7 @@ namespace PathPointer
                     for (int i = 0; i < fileRows.Length; i++)
                     {
 
-                        if (GetName(fileRows[i]) == Employments.empType)
+                        if (GetName(fileRows[i]) == empType)
                         {
                             code = Convert.ToInt32(fileRows[i].Remove(0, (GetName(fileRows[i]).Length) + 1));     //вывод кода из файла
                             fileRows[i] = fileRows[i].Replace((code).ToString(), (++code).ToString());     //замена старого кода на новый
@@ -47,13 +48,13 @@ namespace PathPointer
 
 
 
-        public static DataGridView FillGrid()      //вывод в DataGridView данных из документа с названием empType  
+        public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells)      //вывод в DataGridView данных из документа с названием empType  
         {
-
-            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\{Employments.empType}.txt");  //путь к папке "Документы"
+            DataManagement.empType = empType;
+            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\{empType}.txt");  //путь к папке "Документы"
 
             DataGridView dataGridBusiness = new DataGridView();
-            Employments.varCells = new BindingList<DataManagement>();
+            varCells = new BindingList<DataManagement>();
             try    //вывод сообщения, если директива не найдена
             {
                 using (StreamReader sr = new StreamReader(FilePath))
@@ -61,26 +62,27 @@ namespace PathPointer
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        Employments.varCells.Add(new DataManagement { Business = GetName(line) });    //заполнение DataSource данными из документа
+                        varCells.Add(new DataManagement { Business = GetName(line) });    //заполнение DataSource данными из документа
                     }
                 }
             }
             catch
             {
-                emptyGridMessage();
+                EmptyGridMessage(ref varCells);
             }
 
-            if (Employments.varCells.Count == 0) {
-                emptyGridMessage();
+            if (varCells.Count == 0) {
+                EmptyGridMessage(ref varCells);
             }
 
-            dataGridBusiness.DataSource = Employments.varCells;
+            dataGridBusiness.DataSource = varCells;
             return dataGridBusiness;
         }
 
 
-        private static void emptyGridMessage (){        //Если, данные или документ отстутствуют
-            Employments.varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
+        private static void EmptyGridMessage (ref BindingList<DataManagement> varCells)
+        {        //Если, данные или документ отстутствуют
+            varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
         }
 
         private static string GetName(string line) {            //вывод только названия занятия
@@ -104,7 +106,7 @@ namespace PathPointer
         {
             string line;
             string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\intermediate.txt"); //промежуточный для удаления файл
-            Employments emp = new Employments();
+
 
             using (StreamReader reader = new StreamReader(FilePath))
              {
@@ -122,9 +124,6 @@ namespace PathPointer
 
             File.Copy(interFile, FilePath, true);
             File.Delete(interFile);
-            
-            
-            emp.FillGrid();
         }
 
 

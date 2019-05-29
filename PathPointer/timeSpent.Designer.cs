@@ -28,23 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridBusiness = new System.Windows.Forms.DataGridView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnBusiness = new System.Windows.Forms.Button();
             this.BtnFun = new System.Windows.Forms.Button();
             this.BtnRest = new System.Windows.Forms.Button();
             this.BtnGoals = new System.Windows.Forms.Button();
             this.BtnReady = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridBusiness = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridBusiness
-            // 
-            this.dataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridBusiness.Location = new System.Drawing.Point(268, 52);
-            this.dataGridBusiness.Name = "dataGridBusiness";
-            this.dataGridBusiness.Size = new System.Drawing.Size(272, 322);
-            this.dataGridBusiness.TabIndex = 0;
             // 
             // BtnBusiness
             // 
@@ -94,6 +88,7 @@
             this.BtnReady.TabIndex = 9;
             this.BtnReady.Text = "Готово";
             this.BtnReady.UseVisualStyleBackColor = true;
+            this.BtnReady.Click += new System.EventHandler(this.BtnReady_Click);
             // 
             // label1
             // 
@@ -105,18 +100,44 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "На что вы потратили большую часть прошедшего часа?";
             // 
+            // dataGridBusiness
+            // 
+            this.dataGridBusiness.AllowUserToAddRows = false;
+            this.dataGridBusiness.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridBusiness.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridBusiness.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridBusiness.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridBusiness.EnableHeadersVisualStyles = false;
+            this.dataGridBusiness.Location = new System.Drawing.Point(294, 52);
+            this.dataGridBusiness.MultiSelect = false;
+            this.dataGridBusiness.Name = "dataGridBusiness";
+            this.dataGridBusiness.RowHeadersVisible = false;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridBusiness.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridBusiness.Size = new System.Drawing.Size(241, 322);
+            this.dataGridBusiness.TabIndex = 11;
+            // 
             // TimeSpent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 464);
+            this.Controls.Add(this.dataGridBusiness);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnReady);
             this.Controls.Add(this.BtnBusiness);
             this.Controls.Add(this.BtnFun);
             this.Controls.Add(this.BtnRest);
             this.Controls.Add(this.BtnGoals);
-            this.Controls.Add(this.dataGridBusiness);
             this.Name = "TimeSpent";
             this.Text = "На что вы потратили большую часть прошедшего часа?";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).EndInit();
@@ -126,13 +147,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridBusiness;
         private System.Windows.Forms.Button BtnBusiness;
         private System.Windows.Forms.Button BtnFun;
         private System.Windows.Forms.Button BtnRest;
         private System.Windows.Forms.Button BtnGoals;
         private System.Windows.Forms.Button BtnReady;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridBusiness;
     }
 }
