@@ -19,10 +19,10 @@ namespace PathPointer
         public MainMenu()
         {
             InitializeComponent();
+
         }
 
         private static void ShowQuest(){
-            Console.WriteLine("It works");
             TimeSpent form = new TimeSpent();
             form.Show();
 
@@ -31,7 +31,9 @@ namespace PathPointer
         private void EmployButton_Click(object sender, EventArgs e)
         {
             Employments employments = new Employments();
+            MenuManagement.AreAllFormsClosed = false;
             employments.Show();
+
             this.Hide();
         }
 
@@ -46,32 +48,31 @@ namespace PathPointer
             Application.Exit();
         }
 
-        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        public void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                this.WindowState = FormWindowState.Minimized;
-                this.ShowInTaskbar = false;
+                this.Hide();
             }
+            MenuManagement.AreAllFormsClosed = true;
         }
 
         private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.ShowInTaskbar = true;
-            }
+            MenuManagement.TrayShow(this);
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            DateTime dateTime1 = new DateTime();   //вызов фрпмы в ближайшие "00" минут
+            MenuManagement.AreAllFormsClosed = false;
+
+            DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
             dateTime1 = DateTime.Now;
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
-            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * 1000;
+            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * 1000 * 60;
             TimerHour.Enabled = true;
+
         }
 
         private void TimerHour_Tick(object sender, EventArgs e)

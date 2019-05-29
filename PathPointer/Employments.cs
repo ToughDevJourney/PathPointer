@@ -81,6 +81,7 @@ namespace PathPointer
 
         private void BackMain_Click(object sender, EventArgs e)
         {
+            
             MenuManagement.ShowMenu(this);
 
         }
@@ -114,6 +115,7 @@ namespace PathPointer
 
         private void Employments_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             MenuManagement.HideForm(this, e);
         }
 

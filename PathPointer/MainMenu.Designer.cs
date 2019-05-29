@@ -166,7 +166,7 @@
         private System.Windows.Forms.ToolStripMenuItem pathPointerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.Timer TimerHour;
-        private System.Windows.Forms.NotifyIcon TrayIcon;
+        public System.Windows.Forms.NotifyIcon TrayIcon;
     }
 }
 

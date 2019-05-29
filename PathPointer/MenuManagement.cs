@@ -9,10 +9,16 @@ namespace PathPointer
 {
     class MenuManagement
     {
+        public static bool AreAllFormsClosed { get; set; } 
+
+
         public static void ShowMenu(Form form) {
             form.Close();
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
+            mainMenu.TrayIcon.Dispose();
+
+            
         }
 
         public static void HideForm(Form form, FormClosingEventArgs e) {
@@ -21,6 +27,15 @@ namespace PathPointer
                 e.Cancel = true;
                 form.Hide();
             }
+            AreAllFormsClosed = true;
+        }
+
+        public static void TrayShow(Form form) {
+            if (AreAllFormsClosed == true) {
+                form.Show();
+            }
+
+
         }
 
     }
