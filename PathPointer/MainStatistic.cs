@@ -18,59 +18,56 @@ namespace PathPointer
 
 
         private static void setPath(string empType) {
-            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\efficiency.txt");  //путь к папке в "Документах"
+            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt");  //путь к папке в "Документах"
         }
 
-        public static DataGridView FillGrid(string empType)      //вывод в DataGridView данных из документа с названием empType  
+
+
+
+
+        public static void WriteStats(string name, string statPath)    //запись в файл
         {
-            setPath(empType);
-            int rowsCount = 0;
+            setPath(statPath);
+            int hour = DateTime.Now.Hour;
+            int dayOfWeek = Convert.ToInt32(DateTime.Now.DayOfWeek);
 
-            DataGridView dataGridView = new DataGridView();
+            string[] efficiency = File.ReadAllLines(FilePath);
+            string checkDay = efficiency[hour];
 
-            BindingList<MainStatistic> varCells = new BindingList<MainStatistic>();
-            try    
-            {
-                using (StreamReader sr = new StreamReader(FilePath))
+
+            for (int i = 0; i<8;i++) {
+                if (checkDay.Contains(";"))
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null || rowsCount >= 7)
+                    checkDay = checkDay.Remove(checkDay.IndexOf(";"), 1);
+                }
+                else {
+                    Console.WriteLine(checkDay);
+                    Console.WriteLine(dayOfWeek);
+
+                    if (dayOfWeek == 0)
                     {
-                        varCells.Add(new MainStatistic { Business = GetName(line), Business2 = GetName(line) });    //заполнение DataSource данными из документа
-                        rowsCount++;
+                        efficiency[hour] += " ;";
                     }
+                    else if (dayOfWeek > i)
+                    {
+                        efficiency[hour] += " ;";
+                    }
+                    else {
+                        break;
+                    }
+                    
+
                 }
             }
-            catch
-            {
-                if (!File.Exists(FilePath)) {
-                    File.Create(FilePath);
-                }     //вывод сообщения, если директива не найдена
-            }
 
+            efficiency[hour] += $"{name};";
 
-            dataGridView.DataSource = Employments.varCells;
-            return dataGridView;
+            File.WriteAllLines(FilePath, efficiency);
+
         }
 
 
 
-        private static string GetName(string line)
-        {            //вывод только названия занятия
-            if (line.Contains("!"))
-            {
-                line = line.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
-            }
-            return line;
-        }
 
-
-        public static void WriteEmpFiles(string name)    //запись в файл
-        {
-            using (StreamWriter sw = new StreamWriter(FilePath, true))
-            {
-                sw.WriteLine(name);
-            }
-        }
     }
 }

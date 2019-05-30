@@ -76,7 +76,7 @@ namespace PathPointer
         }
 
         public void FillGrid() {
-            dataGridBusiness.DataSource = DataManagement.FillGrid(empType, ref varCells).DataSource;  
+            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments//{empType}", ref varCells).DataSource;  
         }
 
         private void BackMain_Click(object sender, EventArgs e)

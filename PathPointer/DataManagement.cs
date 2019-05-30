@@ -14,9 +14,9 @@ namespace PathPointer
         public string Business { get; set; }        //DataSource
         private static string FilePath { get; set; }        //путь к документу
         private static int code;
-        private static string empType { get; set; }
+        public static string EmpType { get; set; }
 
-        public static int Code {
+        public static int Code {        //считывание последнего кода приложения
             get {
                 string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");     //путь к кодам занятий
                 try
@@ -25,7 +25,7 @@ namespace PathPointer
                     for (int i = 0; i < fileRows.Length; i++)
                     {
 
-                        if (GetName(fileRows[i]) == empType)
+                        if (GetName(fileRows[i]) == Employments.empType)
                         {
                             code = Convert.ToInt32(fileRows[i].Remove(0, (GetName(fileRows[i]).Length) + 1));     //вывод кода из файла
                             fileRows[i] = fileRows[i].Replace((code).ToString(), (++code).ToString());     //замена старого кода на новый
@@ -33,7 +33,6 @@ namespace PathPointer
                         }
                     }
                     File.WriteAllLines(codePath, fileRows);     //сохранение данных в файл из массива
-
                 }
                 catch
                 {
@@ -44,16 +43,17 @@ namespace PathPointer
         }
 
 
-
-
-
+        private static void SetPath() {
+            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{EmpType}.txt");  //путь к папке "Документы"
+        }
 
         public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells)      //вывод в DataGridView данных из документа с названием empType  
         {
-            DataManagement.empType = empType;
-            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\{empType}.txt");  //путь к папке "Документы"
+            EmpType = empType;
+            SetPath();
 
             DataGridView dataGridBusiness = new DataGridView();
+
             varCells = new BindingList<DataManagement>();
             try    //вывод сообщения, если директива не найдена
             {
@@ -91,10 +91,33 @@ namespace PathPointer
             }
             return line;
         }
+
+        public static int FindCode(string name) {
+
+            string line;
+            using (StreamReader reader = new StreamReader(FilePath))
+            {
+                while ((line =  reader.ReadLine()) != null)
+                {
+                    if (String.Compare(GetName(line), name) == 0)
+                        break;
+                }
+            }
+
+            line = line.Remove(0, (line.IndexOf("!")+1));
+
+            line = line.Remove(line.IndexOf("!"), (line.Length - line.IndexOf("!")));
+            code = Convert.ToInt32(line);
+
+            return code;
+        }
         
 
-        public static void WriteEmpFiles(string name)    //запись в файл
+        public static void WriteEmpFiles(string name, string empType)    //запись в файл
         {
+            EmpType = empType;
+            SetPath();
+
             using (StreamWriter sw = new StreamWriter(FilePath, true))
             {
                 sw.WriteLine(name);
@@ -129,13 +152,10 @@ namespace PathPointer
 
         public static void EditEmpFiles(string editLine, int rowIndex) {
             string[] fileRows = File.ReadAllLines(FilePath);        //занесение данных из файла в массив
-            fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetName(fileRows[rowIndex]).Length); // удаление старого наименование
+            fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetName(fileRows[rowIndex]).Length);  //удаление старого наименования
             fileRows[rowIndex] = fileRows[rowIndex].Insert(0, editLine);        //добавление нового наименования
             File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
         }
-
-
-
 
     }
 }

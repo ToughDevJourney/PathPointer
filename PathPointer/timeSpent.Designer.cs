@@ -140,6 +140,7 @@
             this.Controls.Add(this.BtnGoals);
             this.Name = "TimeSpent";
             this.Text = "На что вы потратили большую часть прошедшего часа?";
+            this.Load += new System.EventHandler(this.TimeSpent_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

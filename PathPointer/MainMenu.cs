@@ -25,7 +25,7 @@ namespace PathPointer
         private static void ShowQuest(){
             TimeSpent form = new TimeSpent();
             form.Show();
-
+            
         }
 
         private void EmployButton_Click(object sender, EventArgs e)
@@ -72,7 +72,6 @@ namespace PathPointer
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
             TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * 1000 * 60;
             TimerHour.Enabled = true;
-
         }
 
         private void TimerHour_Tick(object sender, EventArgs e)

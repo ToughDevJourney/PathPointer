@@ -12,12 +12,17 @@ namespace PathPointer
 {
     public partial class TimeSpent : Form
     {
-        public static string empType = "Goals";
+        public static string empType;
         public static BindingList<DataManagement> varCells;
 
         public TimeSpent()
         {
             InitializeComponent();
+        }
+
+        private void TimeSpent_Load(object sender, EventArgs e)
+        {
+            BtnGoals_Click(null, null);
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)
@@ -47,12 +52,19 @@ namespace PathPointer
 
         public void FillGrid()
         {
-            dataGridBusiness.DataSource = DataManagement.FillGrid(empType, ref varCells).DataSource;
+            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{empType}", ref varCells).DataSource;
         }
 
         private void BtnReady_Click(object sender, EventArgs e)
         {
+            string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
 
+            MainStatistic.WriteStats($"{empType}!{DataManagement.FindCode(currentCellVal)}", "Efficiency");
+
+            Console.WriteLine(empType);
+            this.Hide();
         }
+
+
     }
 }

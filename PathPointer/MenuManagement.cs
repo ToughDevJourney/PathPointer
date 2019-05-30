@@ -17,7 +17,7 @@ namespace PathPointer
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
             mainMenu.TrayIcon.Dispose();
-
+            mainMenu = null;
             
         }
 
@@ -34,8 +34,6 @@ namespace PathPointer
             if (AreAllFormsClosed == true) {
                 form.Show();
             }
-
-
         }
 
     }
