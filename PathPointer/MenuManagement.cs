@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    class MenuManagement
+    static class MenuManagement
     {
-        public static bool AreAllFormsClosed { get; set; } 
-
+        public static bool AreAllFormsClosed { get; set; }
+        public static bool questCheck = true;
 
         public static void ShowMenu(Form form) {
             form.Close();

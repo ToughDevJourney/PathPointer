@@ -16,6 +16,7 @@ namespace PathPointer
     {
         const int interval60Min = 60 * 60 * 1000;
 
+
         public MainMenu()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace PathPointer
         }
 
         private static void ShowQuest(){
-            TimeSpent form = new TimeSpent();
+            TimeSpent form = TimeSpent.CreateInstance();
             form.Show();
             
         }
@@ -65,19 +66,27 @@ namespace PathPointer
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            MenuManagement.AreAllFormsClosed = false;
 
-            DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
-            dateTime1 = DateTime.Now;
-            dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
-            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * 1000 * 60;
-            TimerHour.Enabled = true;
+                MenuManagement.AreAllFormsClosed = false;
+
+
+                DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
+                dateTime1 = DateTime.Now;
+                dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
+                TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * 1000 * 60;
+                TimerHour.Enabled = true;
+                MenuManagement.questCheck = false;
+            
         }
 
         private void TimerHour_Tick(object sender, EventArgs e)
         {
             TimerHour.Interval = interval60Min;
             ShowQuest();
+            
         }
+
+
+
     }
 }

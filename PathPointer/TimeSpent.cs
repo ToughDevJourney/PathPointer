@@ -15,10 +15,26 @@ namespace PathPointer
         public static string empType;
         public static BindingList<DataManagement> varCells;
 
+        private static TimeSpent _timeSpent;
+
+        private TimeSpent() {
+            InitializeComponent();
+        }
+        public static TimeSpent CreateInstance()
+        {
+            if (_timeSpent == null)
+            {
+                _timeSpent = new TimeSpent();
+            }
+            return _timeSpent;
+        }
+
+        /*
         public TimeSpent()
         {
             InitializeComponent();
         }
+        */
 
         private void TimeSpent_Load(object sender, EventArgs e)
         {
@@ -60,8 +76,8 @@ namespace PathPointer
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
 
             MainStatistic.WriteStats($"{empType}!{DataManagement.FindCode(currentCellVal)}", "Efficiency");
+            MenuManagement.questCheck = false;
 
-            Console.WriteLine(empType);
             this.Hide();
         }
 
