@@ -89,6 +89,7 @@
     <Compile Include="Employments.Designer.cs">
       <DependentUpon>Employments.cs</DependentUpon>
     </Compile>
+    <Compile Include="FilesManagement.cs" />
     <Compile Include="Goals.cs">
       <SubType>Form</SubType>
     </Compile>

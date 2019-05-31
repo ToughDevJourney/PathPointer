@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    static class MenuManagement
+    public static class MenuManagement
     {
         public static bool AreAllFormsClosed { get; set; }
         public static bool questCheck = true;

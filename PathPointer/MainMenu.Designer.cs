@@ -30,19 +30,25 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.EmployButton = new System.Windows.Forms.Button();
             this.BtnMoreStats = new System.Windows.Forms.Button();
             this.BtnGoals = new System.Windows.Forms.Button();
             this.BtnAchivements = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnSettings = new System.Windows.Forms.Button();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pathPointerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TimerHour = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.DataGridBusiness = new System.Windows.Forms.DataGridView();
+            this.DataGridDayOfWeek = new System.Windows.Forms.DataGridView();
             this.TrayContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).BeginInit();
             this.SuspendLayout();
             // 
             // EmployButton
@@ -63,6 +69,7 @@
             this.BtnMoreStats.TabIndex = 2;
             this.BtnMoreStats.Text = "Расширенная статистика";
             this.BtnMoreStats.UseVisualStyleBackColor = true;
+            this.BtnMoreStats.Click += new System.EventHandler(this.BtnMoreStats_Click);
             // 
             // BtnGoals
             // 
@@ -81,14 +88,6 @@
             this.BtnAchivements.TabIndex = 4;
             this.BtnAchivements.Text = "Достижения";
             this.BtnAchivements.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(176, 327);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(930, 155);
-            this.dataGridView1.TabIndex = 5;
             // 
             // BtnSettings
             // 
@@ -134,13 +133,66 @@
             this.TimerHour.Enabled = true;
             this.TimerHour.Tick += new System.EventHandler(this.TimerHour_Tick);
             // 
+            // DataGridBusiness
+            // 
+            this.DataGridBusiness.AllowUserToAddRows = false;
+            this.DataGridBusiness.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridBusiness.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridBusiness.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridBusiness.EnableHeadersVisualStyles = false;
+            this.DataGridBusiness.Location = new System.Drawing.Point(176, 464);
+            this.DataGridBusiness.MultiSelect = false;
+            this.DataGridBusiness.Name = "DataGridBusiness";
+            this.DataGridBusiness.RowHeadersVisible = false;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridBusiness.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.DataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DataGridBusiness.Size = new System.Drawing.Size(930, 22);
+            this.DataGridBusiness.TabIndex = 12;
+            // 
+            // DataGridDayOfWeek
+            // 
+            this.DataGridDayOfWeek.AllowUserToAddRows = false;
+            this.DataGridDayOfWeek.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridDayOfWeek.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.DataGridDayOfWeek.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridDayOfWeek.ColumnHeadersVisible = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridDayOfWeek.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DataGridDayOfWeek.EnableHeadersVisualStyles = false;
+            this.DataGridDayOfWeek.Location = new System.Drawing.Point(176, 405);
+            this.DataGridDayOfWeek.MultiSelect = false;
+            this.DataGridDayOfWeek.Name = "DataGridDayOfWeek";
+            this.DataGridDayOfWeek.RowHeadersVisible = false;
+            this.DataGridDayOfWeek.RowHeadersWidth = 10;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridDayOfWeek.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.DataGridDayOfWeek.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DataGridDayOfWeek.Size = new System.Drawing.Size(930, 20);
+            this.DataGridDayOfWeek.TabIndex = 13;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 494);
+            this.Controls.Add(this.DataGridDayOfWeek);
+            this.Controls.Add(this.DataGridBusiness);
             this.Controls.Add(this.BtnSettings);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.BtnAchivements);
             this.Controls.Add(this.BtnGoals);
             this.Controls.Add(this.BtnMoreStats);
@@ -149,8 +201,9 @@
             this.Text = "Главное меню";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainMenu_FormClosing);
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.TrayContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -160,13 +213,14 @@
         private System.Windows.Forms.Button BtnMoreStats;
         private System.Windows.Forms.Button BtnGoals;
         private System.Windows.Forms.Button BtnAchivements;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.ContextMenuStrip TrayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem pathPointerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.Timer TimerHour;
         public System.Windows.Forms.NotifyIcon TrayIcon;
+        private System.Windows.Forms.DataGridView DataGridBusiness;
+        private System.Windows.Forms.DataGridView DataGridDayOfWeek;
     }
 }
 

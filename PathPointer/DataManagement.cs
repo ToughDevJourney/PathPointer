@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public class DataManagement
+    public class DataManagement : FilesManagement
     {
         public string Business { get; set; }        //DataSource
-        private static string FilePath { get; set; }        //путь к документу
+
         private static int code;
-        public static string EmpType { get; set; }
+
 
         public static int Code {        //считывание последнего кода приложения
             get {
@@ -43,9 +43,7 @@ namespace PathPointer
         }
 
 
-        private static void SetPath() {
-            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{EmpType}.txt");  //путь к папке "Документы"
-        }
+
 
         public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells)      //вывод в DataGridView данных из документа с названием empType  
         {
