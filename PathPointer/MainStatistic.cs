@@ -22,16 +22,13 @@ namespace PathPointer
         
         public static void FillGrid(string empType, ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
         {
-            Console.WriteLine("check");
+            dayOfWeek = dayOfWeek == 0 ? 7 : dayOfWeek;
             EmpType = empType;
-            Console.WriteLine(dayOfWeek);
-            dayOfWeek++;
             dataGridView.ColumnCount = 24;
             dataGridView.RowCount = 1;
 
             SetPath();
             string[] statsFileArr = File.ReadAllLines(FilePath);
-
 
 
 
@@ -82,9 +79,6 @@ namespace PathPointer
                     checkDay = checkDay.Remove(checkDay.IndexOf(";"), 1);
                 }
                 else {
-                    Console.WriteLine(checkDay);
-                    Console.WriteLine(dayOfWeek);
-
                     if (dayOfWeek == 0)
                     {
                         efficiency[hour] += " ;";

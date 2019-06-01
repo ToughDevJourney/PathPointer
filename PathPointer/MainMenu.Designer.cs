@@ -155,7 +155,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGridBusiness.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DataGridBusiness.Size = new System.Drawing.Size(930, 22);
+            this.DataGridBusiness.Size = new System.Drawing.Size(930, 20);
             this.DataGridBusiness.TabIndex = 12;
             // 
             // DataGridDayOfWeek
@@ -184,6 +184,7 @@
             this.DataGridDayOfWeek.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DataGridDayOfWeek.Size = new System.Drawing.Size(930, 20);
             this.DataGridDayOfWeek.TabIndex = 13;
+            this.DataGridDayOfWeek.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridDayOfWeek_CellClick);
             // 
             // MainMenu
             // 

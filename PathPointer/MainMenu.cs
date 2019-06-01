@@ -40,8 +40,8 @@ namespace PathPointer
 
             FillDaysOfWeek();
 
-            MainStatistic.FillGrid("Efficiency",ref DataGridBusiness, 4);
 
+            DataGridDayOfWeek_CellClick(null,null);
         }
 
 
@@ -57,6 +57,11 @@ namespace PathPointer
             this.Hide();
         }
 
+
+        private void BtnMoreStats_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -101,7 +106,7 @@ namespace PathPointer
                 dayOfWeek--;
                 DataGridDayOfWeek.Rows[0].Cells[i].Value = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.AddDays(-dayOfWeek).DayOfWeek);
             }
-            DataGridDayOfWeek.CurrentCell = DataGridDayOfWeek[4,0];
+            DataGridDayOfWeek.CurrentCell = DataGridDayOfWeek[6,0];
 
 
         }
@@ -116,9 +121,10 @@ namespace PathPointer
             MenuManagement.AreAllFormsClosed = true;
         }
 
-        private void BtnMoreStats_Click(object sender, EventArgs e)
+        private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            Console.WriteLine("write");
+            MainStatistic.FillGrid("Efficiency", ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));
         }
     }
 }
