@@ -159,6 +159,7 @@
             this.DataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DataGridBusiness.Size = new System.Drawing.Size(930, 20);
             this.DataGridBusiness.TabIndex = 12;
+            this.DataGridBusiness.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridBusiness_CellClick);
             // 
             // DataGridDayOfWeek
             // 
@@ -193,18 +194,18 @@
             this.lblEmployName.AutoSize = true;
             this.lblEmployName.Location = new System.Drawing.Point(222, 55);
             this.lblEmployName.Name = "lblEmployName";
-            this.lblEmployName.Size = new System.Drawing.Size(35, 13);
+            this.lblEmployName.Size = new System.Drawing.Size(112, 13);
             this.lblEmployName.TabIndex = 14;
-            this.lblEmployName.Text = "label1";
+            this.lblEmployName.Text = "Название занятости";
             // 
             // lblEmployType
             // 
             this.lblEmployType.AutoSize = true;
             this.lblEmployType.Location = new System.Drawing.Point(222, 97);
             this.lblEmployType.Name = "lblEmployType";
-            this.lblEmployType.Size = new System.Drawing.Size(35, 13);
+            this.lblEmployType.Size = new System.Drawing.Size(81, 13);
             this.lblEmployType.TabIndex = 15;
-            this.lblEmployType.Text = "label1";
+            this.lblEmployType.Text = "Тип занятости";
             // 
             // MainMenu
             // 

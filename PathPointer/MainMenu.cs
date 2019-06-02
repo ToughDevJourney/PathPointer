@@ -19,6 +19,7 @@ namespace PathPointer
 
         public static BindingList<MainStatistic> statCells;
 
+
         public MainMenu()
         {
             InitializeComponent();
@@ -41,9 +42,11 @@ namespace PathPointer
             FillDaysOfWeek();
 
 
-            DataGridDayOfWeek_CellClick(null,null);
+            DataGridDayOfWeek_CellClick(null, null);
+
 
             DataGridBusiness.CurrentCell = DataGridBusiness[23, 0];
+            DataGridBusiness_CellClick(null, null);
         }
 
 
@@ -127,5 +130,13 @@ namespace PathPointer
         {
             MainStatistic.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
         }
+
+        private void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MainStatistic.DisplayMainStats(ref lblEmployName,ref lblEmployType, DataGridBusiness.CurrentCell.ColumnIndex);
+        }
+
+
+
     }
 }

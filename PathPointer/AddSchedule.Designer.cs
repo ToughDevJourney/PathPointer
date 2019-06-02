@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.businessName = new System.Windows.Forms.Label();
+            this.lblBusinessName = new System.Windows.Forms.Label();
             this.BtnDone = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.lblMon = new System.Windows.Forms.Label();
@@ -45,21 +45,21 @@
             this.lblTimeFri = new System.Windows.Forms.Label();
             this.lblTimeSat = new System.Windows.Forms.Label();
             this.lblTimeSun = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.beginLbl = new System.Windows.Forms.Label();
             this.endBtn = new System.Windows.Forms.Label();
+            this.TextBegin = new System.Windows.Forms.MaskedTextBox();
+            this.TextEnd = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
-            // businessName
+            // lblBusinessName
             // 
-            this.businessName.AutoSize = true;
-            this.businessName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.businessName.Location = new System.Drawing.Point(21, 18);
-            this.businessName.Name = "businessName";
-            this.businessName.Size = new System.Drawing.Size(175, 25);
-            this.businessName.TabIndex = 0;
-            this.businessName.Text = "[Название дела]";
+            this.lblBusinessName.AutoSize = true;
+            this.lblBusinessName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblBusinessName.Location = new System.Drawing.Point(21, 18);
+            this.lblBusinessName.Name = "lblBusinessName";
+            this.lblBusinessName.Size = new System.Drawing.Size(175, 25);
+            this.lblBusinessName.TabIndex = 0;
+            this.lblBusinessName.Text = "[Название дела]";
             // 
             // BtnDone
             // 
@@ -89,6 +89,7 @@
             this.lblMon.Size = new System.Drawing.Size(75, 13);
             this.lblMon.TabIndex = 3;
             this.lblMon.Text = "Понедельник";
+            this.lblMon.Click += new System.EventHandler(this.lblMon_Click);
             // 
             // lblTue
             // 
@@ -98,6 +99,7 @@
             this.lblTue.Size = new System.Drawing.Size(49, 13);
             this.lblTue.TabIndex = 4;
             this.lblTue.Text = "Вторник";
+            this.lblTue.Click += new System.EventHandler(this.lblTue_Click);
             // 
             // lblWed
             // 
@@ -107,6 +109,7 @@
             this.lblWed.Size = new System.Drawing.Size(38, 13);
             this.lblWed.TabIndex = 5;
             this.lblWed.Text = "Среда";
+            this.lblWed.Click += new System.EventHandler(this.lblWed_Click);
             // 
             // lblThu
             // 
@@ -116,6 +119,7 @@
             this.lblThu.Size = new System.Drawing.Size(49, 13);
             this.lblThu.TabIndex = 6;
             this.lblThu.Text = "Четверг";
+            this.lblThu.Click += new System.EventHandler(this.lblThu_Click);
             // 
             // lblFri
             // 
@@ -125,6 +129,7 @@
             this.lblFri.Size = new System.Drawing.Size(50, 13);
             this.lblFri.TabIndex = 7;
             this.lblFri.Text = "Пятница";
+            this.lblFri.Click += new System.EventHandler(this.lblFri_Click);
             // 
             // lblSat
             // 
@@ -134,6 +139,7 @@
             this.lblSat.Size = new System.Drawing.Size(48, 13);
             this.lblSat.TabIndex = 8;
             this.lblSat.Text = "Суббота";
+            this.lblSat.Click += new System.EventHandler(this.lblSat_Click);
             // 
             // lblSun
             // 
@@ -143,89 +149,70 @@
             this.lblSun.Size = new System.Drawing.Size(74, 13);
             this.lblSun.TabIndex = 9;
             this.lblSun.Text = "Воскресенье";
+            this.lblSun.Click += new System.EventHandler(this.lblSun_Click);
             // 
             // lblTimeMon
             // 
             this.lblTimeMon.AutoSize = true;
             this.lblTimeMon.Location = new System.Drawing.Point(109, 76);
             this.lblTimeMon.Name = "lblTimeMon";
-            this.lblTimeMon.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeMon.Size = new System.Drawing.Size(70, 13);
             this.lblTimeMon.TabIndex = 11;
-            this.lblTimeMon.Text = "8:30 - 17:00";
+            this.lblTimeMon.Text = "08:00 - 17:00";
             // 
             // lblTimeTue
             // 
             this.lblTimeTue.AutoSize = true;
             this.lblTimeTue.Location = new System.Drawing.Point(109, 112);
             this.lblTimeTue.Name = "lblTimeTue";
-            this.lblTimeTue.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeTue.Size = new System.Drawing.Size(70, 13);
             this.lblTimeTue.TabIndex = 12;
-            this.lblTimeTue.Text = "8:30 - 17:00";
+            this.lblTimeTue.Text = "08:00 - 17:00";
             // 
             // lblTimeWed
             // 
             this.lblTimeWed.AutoSize = true;
             this.lblTimeWed.Location = new System.Drawing.Point(108, 147);
             this.lblTimeWed.Name = "lblTimeWed";
-            this.lblTimeWed.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeWed.Size = new System.Drawing.Size(70, 13);
             this.lblTimeWed.TabIndex = 13;
-            this.lblTimeWed.Text = "8:30 - 17:00";
+            this.lblTimeWed.Text = "08:00 - 17:00";
             // 
             // lblTimeThu
             // 
             this.lblTimeThu.AutoSize = true;
             this.lblTimeThu.Location = new System.Drawing.Point(108, 180);
             this.lblTimeThu.Name = "lblTimeThu";
-            this.lblTimeThu.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeThu.Size = new System.Drawing.Size(70, 13);
             this.lblTimeThu.TabIndex = 14;
-            this.lblTimeThu.Text = "8:30 - 17:00";
+            this.lblTimeThu.Text = "08:00 - 17:00";
             // 
             // lblTimeFri
             // 
             this.lblTimeFri.AutoSize = true;
             this.lblTimeFri.Location = new System.Drawing.Point(109, 215);
             this.lblTimeFri.Name = "lblTimeFri";
-            this.lblTimeFri.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeFri.Size = new System.Drawing.Size(70, 13);
             this.lblTimeFri.TabIndex = 15;
-            this.lblTimeFri.Text = "8:30 - 17:00";
+            this.lblTimeFri.Text = "08:00 - 17:00";
             // 
             // lblTimeSat
             // 
             this.lblTimeSat.AutoSize = true;
             this.lblTimeSat.Location = new System.Drawing.Point(109, 250);
             this.lblTimeSat.Name = "lblTimeSat";
-            this.lblTimeSat.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeSat.Size = new System.Drawing.Size(70, 13);
             this.lblTimeSat.TabIndex = 16;
-            this.lblTimeSat.Text = "8:30 - 17:00";
+            this.lblTimeSat.Text = "08:00 - 17:00";
             // 
             // lblTimeSun
             // 
             this.lblTimeSun.AutoSize = true;
             this.lblTimeSun.Location = new System.Drawing.Point(107, 287);
             this.lblTimeSun.Name = "lblTimeSun";
-            this.lblTimeSun.Size = new System.Drawing.Size(64, 13);
+            this.lblTimeSun.Size = new System.Drawing.Size(70, 13);
             this.lblTimeSun.TabIndex = 17;
-            this.lblTimeSun.Text = "8:30 - 17:00";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(466, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(304, 67);
-            this.textBox1.TabIndex = 18;
-            this.textBox1.Text = "10:00";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(466, 161);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(304, 67);
-            this.textBox2.TabIndex = 19;
-            this.textBox2.Text = "18:00";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lblTimeSun.Text = "08:00 - 17:00";
             // 
             // beginLbl
             // 
@@ -247,15 +234,43 @@
             this.endBtn.TabIndex = 21;
             this.endBtn.Text = "КОНЕЦ";
             // 
+            // TextBegin
+            // 
+            this.TextBegin.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F);
+            this.TextBegin.Location = new System.Drawing.Point(466, 76);
+            this.TextBegin.Mask = "00:00";
+            this.TextBegin.Name = "TextBegin";
+            this.TextBegin.Size = new System.Drawing.Size(304, 67);
+            this.TextBegin.TabIndex = 22;
+            this.TextBegin.Text = "0800";
+            this.TextBegin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TextBegin.ValidatingType = typeof(System.DateTime);
+            this.TextBegin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBegin_KeyPress);
+            this.TextBegin.Leave += new System.EventHandler(this.TextBegin_Leave);
+            // 
+            // TextEnd
+            // 
+            this.TextEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F);
+            this.TextEnd.Location = new System.Drawing.Point(466, 149);
+            this.TextEnd.Mask = "00:00";
+            this.TextEnd.Name = "TextEnd";
+            this.TextEnd.Size = new System.Drawing.Size(304, 67);
+            this.TextEnd.TabIndex = 23;
+            this.TextEnd.Text = "1500";
+            this.TextEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TextEnd.ValidatingType = typeof(System.DateTime);
+            this.TextEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextEnd_KeyPress);
+            this.TextEnd.Leave += new System.EventHandler(this.TextEnd_Leave);
+            // 
             // AddSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 320);
+            this.Controls.Add(this.TextEnd);
+            this.Controls.Add(this.TextBegin);
             this.Controls.Add(this.endBtn);
             this.Controls.Add(this.beginLbl);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblTimeSun);
             this.Controls.Add(this.lblTimeSat);
             this.Controls.Add(this.lblTimeFri);
@@ -272,10 +287,11 @@
             this.Controls.Add(this.lblMon);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnDone);
-            this.Controls.Add(this.businessName);
+            this.Controls.Add(this.lblBusinessName);
             this.Name = "AddSchedule";
             this.Text = "AddSchedule";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddSchedule_FormClosing);
+            this.Load += new System.EventHandler(this.AddSchedule_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,7 +299,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label businessName;
+        private System.Windows.Forms.Label lblBusinessName;
         private System.Windows.Forms.Button BtnDone;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Label lblMon;
@@ -300,9 +316,9 @@
         private System.Windows.Forms.Label lblTimeFri;
         private System.Windows.Forms.Label lblTimeSat;
         private System.Windows.Forms.Label lblTimeSun;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label beginLbl;
         private System.Windows.Forms.Label endBtn;
+        private System.Windows.Forms.MaskedTextBox TextBegin;
+        private System.Windows.Forms.MaskedTextBox TextEnd;
     }
 }

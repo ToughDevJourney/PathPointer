@@ -109,14 +109,35 @@ namespace PathPointer
 
 
 
+        public static void DisplayMainStats(ref Label lblName, ref Label lblType, int currentEmployment) {
 
+            SetPath($"Employments\\{GetValueByIndex(statsFileArr[currentEmployment], 0)}");
 
+            if (statsFileArr[currentEmployment] == "" || statsFileArr[currentEmployment] == " ")
+            {
+                lblName.Text = "ПРОПУСК";
+                lblType.Text = "Похоже, что в это время вы занимались чем-то ДЕЙСТВИТЕЛЬНО полезным";
+            }
+            else{
+                using (StreamReader sr = new StreamReader(FilePath))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (GetValueByIndex(line, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1))
+                        {
+                            lblName.Text = GetValueByIndex(line, 0);
+                            break;
+                        }
+                    }
+                }
 
-
-        private static void EmptyGridMessage(ref BindingList<MainStatistic> varCells) {
-
-
+                lblType.Text = GetValueByIndex(statsFileArr[currentEmployment], 0);
+            }
         }
+
+
+
 
 
         public static void WriteStats(string name, string statPath)    //запись в файл

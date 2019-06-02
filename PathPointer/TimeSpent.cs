@@ -14,7 +14,6 @@ namespace PathPointer
     {
         public static string empType;
         public static BindingList<DataManagement> varCells;
-
         private static TimeSpent _timeSpent;
 
         private TimeSpent() {
@@ -74,6 +73,13 @@ namespace PathPointer
             this.Hide();
         }
 
-
+        private void TimeSpent_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+        }
     }
 }
