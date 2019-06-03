@@ -90,6 +90,8 @@
             this.lblMon.TabIndex = 3;
             this.lblMon.Text = "Понедельник";
             this.lblMon.Click += new System.EventHandler(this.lblMon_Click);
+            this.lblMon.MouseEnter += new System.EventHandler(this.lblMon_MouseEnter);
+            this.lblMon.MouseLeave += new System.EventHandler(this.lblMon_MouseLeave);
             // 
             // lblTue
             // 
@@ -100,6 +102,8 @@
             this.lblTue.TabIndex = 4;
             this.lblTue.Text = "Вторник";
             this.lblTue.Click += new System.EventHandler(this.lblTue_Click);
+            this.lblTue.MouseEnter += new System.EventHandler(this.lblTue_MouseEnter);
+            this.lblTue.MouseLeave += new System.EventHandler(this.lblTue_MouseLeave);
             // 
             // lblWed
             // 
@@ -110,6 +114,8 @@
             this.lblWed.TabIndex = 5;
             this.lblWed.Text = "Среда";
             this.lblWed.Click += new System.EventHandler(this.lblWed_Click);
+            this.lblWed.MouseEnter += new System.EventHandler(this.lblWed_MouseEnter);
+            this.lblWed.MouseLeave += new System.EventHandler(this.lblWed_MouseLeave);
             // 
             // lblThu
             // 
@@ -120,6 +126,8 @@
             this.lblThu.TabIndex = 6;
             this.lblThu.Text = "Четверг";
             this.lblThu.Click += new System.EventHandler(this.lblThu_Click);
+            this.lblThu.MouseEnter += new System.EventHandler(this.lblThu_MouseEnter);
+            this.lblThu.MouseLeave += new System.EventHandler(this.lblThu_MouseLeave);
             // 
             // lblFri
             // 
@@ -130,6 +138,8 @@
             this.lblFri.TabIndex = 7;
             this.lblFri.Text = "Пятница";
             this.lblFri.Click += new System.EventHandler(this.lblFri_Click);
+            this.lblFri.MouseEnter += new System.EventHandler(this.lblFri_MouseEnter);
+            this.lblFri.MouseLeave += new System.EventHandler(this.lblFri_MouseLeave);
             // 
             // lblSat
             // 
@@ -140,6 +150,8 @@
             this.lblSat.TabIndex = 8;
             this.lblSat.Text = "Суббота";
             this.lblSat.Click += new System.EventHandler(this.lblSat_Click);
+            this.lblSat.MouseEnter += new System.EventHandler(this.lblSat_MouseEnter);
+            this.lblSat.MouseLeave += new System.EventHandler(this.lblSat_MouseLeave);
             // 
             // lblSun
             // 
@@ -150,6 +162,8 @@
             this.lblSun.TabIndex = 9;
             this.lblSun.Text = "Воскресенье";
             this.lblSun.Click += new System.EventHandler(this.lblSun_Click);
+            this.lblSun.MouseEnter += new System.EventHandler(this.lblSun_MouseEnter);
+            this.lblSun.MouseLeave += new System.EventHandler(this.lblSun_MouseLeave);
             // 
             // lblTimeMon
             // 
@@ -159,6 +173,9 @@
             this.lblTimeMon.Size = new System.Drawing.Size(70, 13);
             this.lblTimeMon.TabIndex = 11;
             this.lblTimeMon.Text = "08:00 - 17:00";
+            this.lblTimeMon.Click += new System.EventHandler(this.lblTimeMon_Click);
+            this.lblTimeMon.MouseEnter += new System.EventHandler(this.lblTimeMon_MouseEnter);
+            this.lblTimeMon.MouseLeave += new System.EventHandler(this.lblTimeMon_MouseLeave);
             // 
             // lblTimeTue
             // 
@@ -168,6 +185,9 @@
             this.lblTimeTue.Size = new System.Drawing.Size(70, 13);
             this.lblTimeTue.TabIndex = 12;
             this.lblTimeTue.Text = "08:00 - 17:00";
+            this.lblTimeTue.Click += new System.EventHandler(this.lblTimeTue_Click);
+            this.lblTimeTue.MouseEnter += new System.EventHandler(this.lblTimeTue_MouseEnter);
+            this.lblTimeTue.MouseLeave += new System.EventHandler(this.lblTimeTue_MouseLeave);
             // 
             // lblTimeWed
             // 
@@ -177,6 +197,9 @@
             this.lblTimeWed.Size = new System.Drawing.Size(70, 13);
             this.lblTimeWed.TabIndex = 13;
             this.lblTimeWed.Text = "08:00 - 17:00";
+            this.lblTimeWed.Click += new System.EventHandler(this.lblTimeWed_Click);
+            this.lblTimeWed.MouseEnter += new System.EventHandler(this.lblTimeWed_MouseEnter);
+            this.lblTimeWed.MouseLeave += new System.EventHandler(this.lblTimeWed_MouseLeave);
             // 
             // lblTimeThu
             // 
@@ -186,6 +209,9 @@
             this.lblTimeThu.Size = new System.Drawing.Size(70, 13);
             this.lblTimeThu.TabIndex = 14;
             this.lblTimeThu.Text = "08:00 - 17:00";
+            this.lblTimeThu.Click += new System.EventHandler(this.lblTimeThu_Click);
+            this.lblTimeThu.MouseEnter += new System.EventHandler(this.lblTimeThu_MouseEnter);
+            this.lblTimeThu.MouseLeave += new System.EventHandler(this.lblTimeThu_MouseLeave);
             // 
             // lblTimeFri
             // 
@@ -195,6 +221,9 @@
             this.lblTimeFri.Size = new System.Drawing.Size(70, 13);
             this.lblTimeFri.TabIndex = 15;
             this.lblTimeFri.Text = "08:00 - 17:00";
+            this.lblTimeFri.Click += new System.EventHandler(this.lblTimeFri_Click);
+            this.lblTimeFri.MouseEnter += new System.EventHandler(this.lblTimeFri_MouseEnter);
+            this.lblTimeFri.MouseLeave += new System.EventHandler(this.lblTimeFri_MouseLeave);
             // 
             // lblTimeSat
             // 
@@ -204,6 +233,9 @@
             this.lblTimeSat.Size = new System.Drawing.Size(70, 13);
             this.lblTimeSat.TabIndex = 16;
             this.lblTimeSat.Text = "08:00 - 17:00";
+            this.lblTimeSat.Click += new System.EventHandler(this.lblTimeSat_Click);
+            this.lblTimeSat.MouseEnter += new System.EventHandler(this.lblTimeSat_MouseEnter);
+            this.lblTimeSat.MouseLeave += new System.EventHandler(this.lblTimeSat_MouseLeave);
             // 
             // lblTimeSun
             // 
@@ -213,6 +245,9 @@
             this.lblTimeSun.Size = new System.Drawing.Size(70, 13);
             this.lblTimeSun.TabIndex = 17;
             this.lblTimeSun.Text = "08:00 - 17:00";
+            this.lblTimeSun.Click += new System.EventHandler(this.lblTimeSun_Click);
+            this.lblTimeSun.MouseEnter += new System.EventHandler(this.lblTimeSun_MouseEnter);
+            this.lblTimeSun.MouseLeave += new System.EventHandler(this.lblTimeSun_MouseLeave);
             // 
             // beginLbl
             // 
@@ -245,6 +280,7 @@
             this.TextBegin.Text = "0800";
             this.TextBegin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TextBegin.ValidatingType = typeof(System.DateTime);
+            this.TextBegin.TextChanged += new System.EventHandler(this.TextBegin_TextChanged);
             this.TextBegin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBegin_KeyPress);
             this.TextBegin.Leave += new System.EventHandler(this.TextBegin_Leave);
             // 
@@ -259,6 +295,7 @@
             this.TextEnd.Text = "1500";
             this.TextEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TextEnd.ValidatingType = typeof(System.DateTime);
+            this.TextEnd.TextChanged += new System.EventHandler(this.TextEnd_TextChanged);
             this.TextEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextEnd_KeyPress);
             this.TextEnd.Leave += new System.EventHandler(this.TextEnd_Leave);
             // 
