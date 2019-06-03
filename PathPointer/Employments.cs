@@ -81,9 +81,7 @@ namespace PathPointer
 
         private void BackMain_Click(object sender, EventArgs e)
         {
-            
             MenuManagement.ShowMenu(this);
-
         }
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)

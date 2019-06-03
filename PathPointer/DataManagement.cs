@@ -12,9 +12,8 @@ namespace PathPointer
     public class DataManagement : FilesManagement
     {
         public string Business { get; set; }        //DataSource
-
         private static int code;
-
+        public static string EmpType { get; set; }
 
         public static int Code {        //считывание последнего кода приложения
             get {
@@ -43,7 +42,10 @@ namespace PathPointer
         }
 
 
-
+        protected static void SetPath()
+        {
+            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{EmpType}.txt");  //путь к папке "Документы"
+        }
 
         public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells)      //вывод в DataGridView данных из документа с названием empType  
         {
@@ -83,12 +85,7 @@ namespace PathPointer
             varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
         }
 
-        private static string GetName(string line) {            //вывод только названия занятия
-            if (line.Contains("!")) {
-                line = line.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
-            }
-            return line;
-        }
+
 
         public static int FindCode(string name) {
 

@@ -42,6 +42,8 @@ namespace PathPointer
 
 
             DataGridDayOfWeek_CellClick(null,null);
+
+            DataGridBusiness.CurrentCell = DataGridBusiness[23, 0];
         }
 
 
@@ -96,7 +98,7 @@ namespace PathPointer
 
         }
 
-        private void FillDaysOfWeek() {
+        private void FillDaysOfWeek() {     //заполнение таблицы дней недели с учетом сдвига
             DataGridDayOfWeek.RowCount = 1;
             DataGridDayOfWeek.ColumnCount = 7;
             int dayOfWeek = 7;
@@ -123,8 +125,7 @@ namespace PathPointer
 
         private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine("write");
-            MainStatistic.FillGrid("Efficiency", ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));
+            MainStatistic.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
         }
     }
 }

@@ -13,6 +13,7 @@ namespace PathPointer
     {
 
         public string Business { get; set; }        //элемент DataSource
+        private static string[] statsFileArr { get; set; }
 
 
         private static void SetPath(string empType) {
@@ -20,40 +21,94 @@ namespace PathPointer
         }
 
         
-        public static void FillGrid(string empType, ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
+        public static void FillGrid(ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
         {
-            dayOfWeek = dayOfWeek == 0 ? 7 : dayOfWeek;
-            EmpType = empType;
+            SetPath("Efficiency");
+
+            int currentDayOfWeekCode = (int)DateTime.Now.DayOfWeek;
+
+            dayOfWeek = dayOfWeek == 0 ? 7 : dayOfWeek;     //американская неделя начинается с воскресенья
+            currentDayOfWeekCode = currentDayOfWeekCode == 0 ? 7 : currentDayOfWeekCode;
+
             dataGridView.ColumnCount = 24;
             dataGridView.RowCount = 1;
 
-            SetPath();
-            string[] statsFileArr = File.ReadAllLines(FilePath);
 
+            if (dayOfWeek > currentDayOfWeekCode)
+            {
+                statsFileArr = FillStatsArray(2);   //заполнить массив данными предыдущей недели
+            }
+            else {
+                statsFileArr = FillStatsArray(1);       //заполнить массив данными текущей недели
+            }
 
 
             for (int i = 0; i<24; i++) {
-                for (int symbCount = 0; symbCount < dayOfWeek; symbCount++) {
-                   
-                    statsFileArr[i] = statsFileArr[i].Remove(0, (statsFileArr[i].IndexOf(";") + 1));
-
+                for (int symbCount = 0; symbCount < dayOfWeek; symbCount++) {       //получение расписания для текущего дня недели
+                    statsFileArr[i] = statsFileArr[i].Remove(0, (statsFileArr[i].IndexOf(";") + 1));    
                 }
                 if (statsFileArr[i].Contains(";")) {
                     statsFileArr[i] = statsFileArr[i].Remove((statsFileArr[i].IndexOf(";")), statsFileArr[i].Length - statsFileArr[i].IndexOf(";"));
 
                 }
 
-                if (statsFileArr[i] != "")
-                {
-                    dataGridView.Rows[0].Cells[i].Value = statsFileArr[i];
-                }
-                else {
-                    dataGridView.Rows[0].Cells[i].Value = "-";
-                }
+                GetCellColor(statsFileArr[i], i, dataGridView);
             }
 
         }
-        
+
+        private static string[] FillStatsArray(int index) {
+            string[] statsArray = new string[24];
+            string readLine;
+            int arrayIndex = 0;
+
+
+            using (StreamReader reader = new StreamReader(FilePath))
+            {
+                for (int i = 0; (readLine = reader.ReadLine()) != null; i++) {
+                    if (24 * (index - 1) <= i) {
+                        statsArray[arrayIndex] = readLine;
+                        arrayIndex++;
+
+                        if (arrayIndex == 24)
+                        {
+                            break;
+                        }
+                    }
+
+
+                }
+            }
+
+            return statsArray;
+        }
+
+
+        private static void GetCellColor(string cellValue, int cellIndex, DataGridView dataGridView) {
+
+            switch (GetName(statsFileArr[cellIndex]))
+            {
+                case "Business":
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Blue;
+                    break;
+                case "Goals":
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.LightGreen;
+                    break;
+                case "Rest":
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.DarkOrange;
+                    break;
+                case "Fun":
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Red;
+                    break;
+                default:
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Gray;
+                    break;
+
+            }
+        }
+
+
+
 
 
 
@@ -95,9 +150,9 @@ namespace PathPointer
                 }
             }
 
-            efficiency[hour] += $"{name};";
+            efficiency[hour] += $"{GetName(name)};";
 
-            File.WriteAllLines(FilePath, efficiency);
+
 
         }
 

@@ -29,13 +29,6 @@ namespace PathPointer
             return _timeSpent;
         }
 
-        /*
-        public TimeSpent()
-        {
-            InitializeComponent();
-        }
-        */
-
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);

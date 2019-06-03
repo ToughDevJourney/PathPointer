@@ -46,6 +46,8 @@
             this.TimerHour = new System.Windows.Forms.Timer(this.components);
             this.DataGridBusiness = new System.Windows.Forms.DataGridView();
             this.DataGridDayOfWeek = new System.Windows.Forms.DataGridView();
+            this.lblEmployName = new System.Windows.Forms.Label();
+            this.lblEmployType = new System.Windows.Forms.Label();
             this.TrayContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).BeginInit();
@@ -186,11 +188,31 @@
             this.DataGridDayOfWeek.TabIndex = 13;
             this.DataGridDayOfWeek.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridDayOfWeek_CellClick);
             // 
+            // lblEmployName
+            // 
+            this.lblEmployName.AutoSize = true;
+            this.lblEmployName.Location = new System.Drawing.Point(222, 55);
+            this.lblEmployName.Name = "lblEmployName";
+            this.lblEmployName.Size = new System.Drawing.Size(35, 13);
+            this.lblEmployName.TabIndex = 14;
+            this.lblEmployName.Text = "label1";
+            // 
+            // lblEmployType
+            // 
+            this.lblEmployType.AutoSize = true;
+            this.lblEmployType.Location = new System.Drawing.Point(222, 97);
+            this.lblEmployType.Name = "lblEmployType";
+            this.lblEmployType.Size = new System.Drawing.Size(35, 13);
+            this.lblEmployType.TabIndex = 15;
+            this.lblEmployType.Text = "label1";
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 494);
+            this.Controls.Add(this.lblEmployType);
+            this.Controls.Add(this.lblEmployName);
             this.Controls.Add(this.DataGridDayOfWeek);
             this.Controls.Add(this.DataGridBusiness);
             this.Controls.Add(this.BtnSettings);
@@ -206,6 +228,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -222,6 +245,8 @@
         public System.Windows.Forms.NotifyIcon TrayIcon;
         private System.Windows.Forms.DataGridView DataGridBusiness;
         private System.Windows.Forms.DataGridView DataGridDayOfWeek;
+        private System.Windows.Forms.Label lblEmployName;
+        private System.Windows.Forms.Label lblEmployType;
     }
 }
 
