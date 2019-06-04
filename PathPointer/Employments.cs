@@ -59,6 +59,7 @@ namespace PathPointer
             {
                 case "Business":
                     empForm = new AddBusy();
+                    AddSchedule.Schedule = null;
                     break;
                 case "Goals":
                     empForm = new AddGoal();

@@ -26,13 +26,13 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (AddSchedule.Shedule == null)
+            if (AddSchedule.Schedule == null)
             {
                 DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!0", DataManagement.EmpType);
             }
             else
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Shedule}", DataManagement.EmpType);
+                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}", DataManagement.EmpType);
             }
 
             BtnCancel_Click(null, null);

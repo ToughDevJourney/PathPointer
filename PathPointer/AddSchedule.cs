@@ -12,7 +12,7 @@ namespace PathPointer
 {
     public partial class AddSchedule : Form
     {
-        public static string Shedule { get; set; }
+        public static string Schedule { get; set; }
         private int PickedDayOfWeek { get; set; }
         private bool firstBeginChange = true;
         private bool firstEndChange = true;
@@ -43,7 +43,7 @@ namespace PathPointer
 
             schedArr = FormatTime(schedArr);
 
-            Shedule = $"Пн {schedArr[0]} Вт {schedArr[1]} Ср {schedArr[2]} Чт {schedArr[3]} Пт {schedArr[4]} Сб {schedArr[5]} Вс {schedArr[6]}";    //подготовка строки к сохранению в файл
+            Schedule = $"Пн {schedArr[0]} Вт {schedArr[1]} Ср {schedArr[2]} Чт {schedArr[3]} Пт {schedArr[4]} Сб {schedArr[5]} Вс {schedArr[6]}";    //подготовка строки к сохранению в файл
             BtnCancel_Click(null, null);
         }
 
@@ -53,15 +53,9 @@ namespace PathPointer
         private void ShowDaySchedule(Label pickedLabel) {
             Label intermediateLbl = pickedDayOfWeek;
 
-            pickedDayOfWeek = pickedLabel;
-
-
+            pickedDayOfWeek = pickedLabel;      //отмена выделения предыдущего выбранного дня недели
             MouseEnterFontEvent(pickedDayOfWeek);
             MouseLeaveFontEvent(intermediateLbl);
-
-
-
-
 
             switch (PickedDayOfWeek) {
                 case 1:
@@ -127,7 +121,7 @@ namespace PathPointer
                 TextBegin_Leave(null, null);
                 TextEnd.Focus();
             }
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) e.Handled = true;
+           // if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) e.Handled = true;
         }
 
         private void TextEnd_KeyPress(object sender, KeyPressEventArgs e)
@@ -137,7 +131,7 @@ namespace PathPointer
                 TextEnd_Leave(null, null);
                 BtnDone.Focus();
             }
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) e.Handled = true;
+            //if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) e.Handled = true;
         }
 
         private void TextBegin_Leave(object sender, EventArgs e)
@@ -161,37 +155,45 @@ namespace PathPointer
             string checkFormat = checkTime;
             int hoursADay = 24;
 
-            if (checkFormat.Length == 0)
+
+            if (checkFormat == "Выходной")
             {
                 checkFormat = "00:00";
             }
             else
             {
-                if (checkFormat.Length == 1)
+                if (checkFormat.Length == 0)
                 {
-                    checkFormat = $"0{checkFormat}:00";
+                    checkFormat = "00:00";
                 }
                 else
                 {
-                    checkFormat = checkFormat.Substring(0, 2);
-
-                    if (checkFormat[0] == 0)
+                    if (checkFormat.Length == 1)
                     {
                         checkFormat = $"0{checkFormat}:00";
                     }
                     else
                     {
-                        if (Convert.ToInt32(checkFormat) >= hoursADay)
+                        checkFormat = checkFormat.Substring(0, 2);
+
+                        if (checkFormat[0] == 0)
                         {
-                            checkFormat = "23:00";
+                            checkFormat = $"0{checkFormat}:00";
                         }
-                        else {
-                            checkFormat = $"{checkFormat}:00";
+                        else
+                        {
+                            if (Convert.ToInt32(checkFormat) >= hoursADay)
+                            {
+                                checkFormat = "23:00";
+                            }
+                            else
+                            {
+                                checkFormat = $"{checkFormat}:00";
+                            }
                         }
                     }
                 }
             }
-
 
             return checkFormat;
         }
@@ -211,8 +213,11 @@ namespace PathPointer
             PickedDayOfWeek = currentPickedDay;
         }
 
-        private void DisplayTime(Label currentLbl)
+        private void DisplayTime(Label currentLbl)      //отображение выбранного времени в строке выбора времени
         {
+            currentLbl.Text = $"{FormatChecking(TextBegin.Text)} - {FormatChecking(TextEnd.Text)}"; 
+            FormatChecking(TextBegin.Text);
+            FormatChecking(TextEnd.Text);
             TextBegin.Text = currentLbl.Text.Remove(currentLbl.Text.IndexOf(" "), currentLbl.Text.Length - currentLbl.Text.IndexOf(" "));
             TextEnd.Text = currentLbl.Text.Substring(currentLbl.Text.IndexOf("-") + 2);
         }
@@ -222,6 +227,11 @@ namespace PathPointer
 
             for (int i = 0; scheduleArray.Length > i; i++)
             {
+                if (scheduleArray[i][0] == 'В')
+                {
+                    scheduleArray[i] = "H";
+                    continue;
+                }
                 scheduleArray[i] = scheduleArray[i].Remove(scheduleArray[i].IndexOf(" "), 2);
                 if (scheduleArray[i][6] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
                 if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
@@ -234,15 +244,10 @@ namespace PathPointer
         {
             beginChanged = true;
         }
-
         private void TextEnd_TextChanged(object sender, EventArgs e)
         {
             endChanged = true;
         }
-
-
-
-
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
@@ -250,7 +255,6 @@ namespace PathPointer
             empForm.Show();
             this.Hide();
         }
-
         private void AddSchedule_FormClosing(object sender, FormClosingEventArgs e)
         {
             MenuManagement.HideForm(this, e);
@@ -267,11 +271,9 @@ namespace PathPointer
                 label.Text = $"{TextBegin.Text} - {TextEnd.Text}";
             }
         }
-
         private void MouseEnterFontEvent(Label label) {
             label.Font = new Font(label.Font, FontStyle.Bold);
         }
-
         private void MouseLeaveFontEvent(Label label)
         {
             if (label != pickedDayOfWeek) {
