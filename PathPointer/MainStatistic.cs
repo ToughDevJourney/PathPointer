@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -170,9 +171,68 @@ namespace PathPointer
 
                 }
             }
-
             efficiency[hour] += $"{GetName(name)};";
+        }
 
+        public static void CheckWeekRelevance() {
+            SetPath("Common");
+
+            Console.WriteLine(FilePath);
+
+            string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Intermediate.txt"); //промежуточный файл
+            string fileContainer = "";
+            string readLine;
+            var cal = new GregorianCalendar();
+            int currentWeekNumber = cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
+            int fileWeekNumber;
+            const int hoursADay = 24;
+            bool weekIsNowRelevant = false;
+
+
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while ((readLine = sr.ReadLine()) != null)
+                {
+                    if (GetValueByIndex(readLine, 0) == "Week Number")
+                    {
+                        fileWeekNumber = Convert.ToInt32(GetValueByIndex(readLine, 1));
+                        if (fileWeekNumber != currentWeekNumber) {
+                            weekIsNowRelevant = true;
+                            fileContainer = File.ReadAllText(FilePath);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (weekIsNowRelevant == true) {
+                using (StreamWriter wr = new StreamWriter(FilePath))
+                {
+                    fileContainer = fileContainer.Replace(readLine, $"Week Number!{currentWeekNumber}");
+                    wr.Write(fileContainer);
+                }
+
+                SetPath("Efficiency");
+
+                using (StreamReader sr = new StreamReader(FilePath)) {
+                    fileContainer = sr.ReadToEnd();
+
+                }
+
+                File.Copy(FilePath,interFile);
+                File.Delete(FilePath);
+
+                using (StreamWriter wr = new StreamWriter(FilePath))
+                {
+                    for (int i = 0; i < hoursADay; i++) {
+                        wr.WriteLine($"{i}:00;");
+                    }
+                    wr.Write(fileContainer);
+                }
+
+
+
+            }
 
 
         }

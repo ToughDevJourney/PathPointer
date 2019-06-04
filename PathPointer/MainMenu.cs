@@ -38,7 +38,7 @@ namespace PathPointer
             TimerHour.Enabled = true;
             MenuManagement.questCheck = false;
 
-
+            MainStatistic.CheckWeekRelevance();
             FillDaysOfWeek();
 
 

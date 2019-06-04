@@ -123,7 +123,7 @@ namespace PathPointer
         public static void DeleteEmpFiles(string delLine)
         {
             string line;
-            string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\intermediate.txt"); //промежуточный для удаления файл
+            string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
 
 
             using (StreamReader reader = new StreamReader(FilePath))

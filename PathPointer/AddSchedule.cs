@@ -18,7 +18,7 @@ namespace PathPointer
         private bool firstEndChange = true;
         private bool beginChanged = false;
         private bool endChanged = false;
-        private Label pickedDayOfWeek;
+        private Label pickedLabelDayOfWeek;
 
 
 
@@ -30,8 +30,8 @@ namespace PathPointer
 
         private void AddSchedule_Load(object sender, EventArgs e)
         {
+            pickedLabelDayOfWeek = lblMon;
             lblMon_Click(null, null);
-            pickedDayOfWeek = lblMon;
             MouseEnterFontEvent(lblMon);
         }
 
@@ -51,10 +51,10 @@ namespace PathPointer
 
 
         private void ShowDaySchedule(Label pickedLabel) {
-            Label intermediateLbl = pickedDayOfWeek;
+            Label intermediateLbl = pickedLabelDayOfWeek;
 
-            pickedDayOfWeek = pickedLabel;      //отмена выделения предыдущего выбранного дня недели
-            MouseEnterFontEvent(pickedDayOfWeek);
+            pickedLabelDayOfWeek = pickedLabel;      //отмена выделения предыдущего выбранного дня недели
+            MouseEnterFontEvent(pickedLabelDayOfWeek);
             MouseLeaveFontEvent(intermediateLbl);
 
             switch (PickedDayOfWeek) {
@@ -121,7 +121,6 @@ namespace PathPointer
                 TextBegin_Leave(null, null);
                 TextEnd.Focus();
             }
-           // if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) e.Handled = true;
         }
 
         private void TextEnd_KeyPress(object sender, KeyPressEventArgs e)
@@ -129,9 +128,8 @@ namespace PathPointer
             if (e.KeyChar == 13)
             {
                 TextEnd_Leave(null, null);
-                BtnDone.Focus();
+                TextBegin.Focus();
             }
-            //if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) e.Handled = true;
         }
 
         private void TextBegin_Leave(object sender, EventArgs e)
@@ -276,9 +274,12 @@ namespace PathPointer
         }
         private void MouseLeaveFontEvent(Label label)
         {
-            if (label != pickedDayOfWeek) {
+            if (label != pickedLabelDayOfWeek) {
                 label.Font = new Font(label.Font, FontStyle.Regular);
+                Console.WriteLine("qwe");
             }
+
+
         }
 
         private void lblMon_MouseEnter(object sender, EventArgs e)
