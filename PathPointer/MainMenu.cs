@@ -15,7 +15,7 @@ namespace PathPointer
 {
     public partial class MainMenu : Form
     {
-        const int interval60Min = 60 * 60 * 1000;
+
 
         public static BindingList<MainStatistic> statCells;
 
@@ -29,12 +29,14 @@ namespace PathPointer
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            const int miliseconds = 1000;
+            const int minutes = 60;
             MenuManagement.AreAllFormsClosed = false;
 
             DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
             dateTime1 = DateTime.Now;
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
-            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * 1000 * 60;
+            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * miliseconds * minutes;
             TimerHour.Enabled = true;
             MenuManagement.questCheck = false;
 
@@ -89,9 +91,9 @@ namespace PathPointer
 
         private void TimerHour_Tick(object sender, EventArgs e)
         {
-            TimerHour.Interval = interval60Min;
+            const int interval60Mins = 60 * 60 * 1000;
+            TimerHour.Interval = interval60Mins;
             ShowQuest();
-            
         }
 
         private static void ShowQuest()

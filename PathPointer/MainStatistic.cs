@@ -45,11 +45,11 @@ namespace PathPointer
 
 
             for (int i = 0; i<24; i++) {
-                for (int symbCount = 0; symbCount < dayOfWeek; symbCount++) {       //получение расписания для текущего дня недели
-                    statsFileArr[i] = statsFileArr[i].Remove(0, (statsFileArr[i].IndexOf(";") + 1));    
+                for (int symbCount = 0; symbCount < dayOfWeek; symbCount++) {       //получение расписания для текущего дня недели 
+                    statsFileArr[i] = statsFileArr[i].Substring(statsFileArr[i].IndexOf(";") + 1);
                 }
                 if (statsFileArr[i].Contains(";")) {
-                    statsFileArr[i] = statsFileArr[i].Remove((statsFileArr[i].IndexOf(";")), statsFileArr[i].Length - statsFileArr[i].IndexOf(";"));
+                    statsFileArr[i] = statsFileArr[i].Substring(0, (statsFileArr[i].IndexOf(";")));
 
                 }
 
@@ -58,7 +58,7 @@ namespace PathPointer
 
         }
 
-        private static string[] FillStatsArray(int index) {
+        private static string[] FillStatsArray(int index) { //вывод массива данных об определенной недели
             string[] statsArray = new string[24];
             string readLine;
             int arrayIndex = 0;
@@ -87,7 +87,7 @@ namespace PathPointer
 
         private static void GetCellColor(string cellValue, int cellIndex, DataGridView dataGridView) {
 
-            switch (GetName(statsFileArr[cellIndex]))
+            switch (GetValueByIndex(statsFileArr[cellIndex]))
             {
                 case "Business":
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Blue;
@@ -112,7 +112,7 @@ namespace PathPointer
 
         public static void DisplayMainStats(ref Label lblName, ref Label lblType, int currentEmployment) {
 
-            SetPath($"Employments\\{GetValueByIndex(statsFileArr[currentEmployment], 0)}");
+            SetPath($"Employments\\{GetValueByIndex(statsFileArr[currentEmployment])}");
 
             if (statsFileArr[currentEmployment] == "" || statsFileArr[currentEmployment] == " ")
             {
@@ -127,7 +127,7 @@ namespace PathPointer
                     {
                         if (GetValueByIndex(line, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1))
                         {
-                            lblName.Text = GetValueByIndex(line, 0);
+                            lblName.Text = GetValueByIndex(line);
                             break;
                         }
                     }
@@ -141,7 +141,7 @@ namespace PathPointer
 
 
 
-        public static void WriteStats(string name, string statPath)    //запись в файл
+        public static void WriteStats(string name, string statPath)    
         {
             SetPath(statPath);
             int hour = DateTime.Now.Hour;
@@ -150,28 +150,18 @@ namespace PathPointer
             string[] efficiency = File.ReadAllLines(FilePath);
             string checkDay = efficiency[hour];
 
-            for (int i = 0; i<8;i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
+            for (int i = 0; i<=7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
                 if (checkDay.Contains(";"))
                 {
-                    checkDay = checkDay.Remove(checkDay.IndexOf(";"), 1);
+                    checkDay = checkDay.Remove(checkDay.IndexOf(";"), 1);                  
                 }
-                else {
-                    if (dayOfWeek == 0)
-                    {
-                        efficiency[hour] += " ;";
-                    }
-                    else if (dayOfWeek > i)
-                    {
-                        efficiency[hour] += " ;";
-                    }
-                    else {
-                        break;
-                    }
-                    
-
-                }
+                else if (dayOfWeek == 0 || dayOfWeek > i) efficiency[hour] += " ;";
+                else break;
             }
-            efficiency[hour] += $"{GetName(name)};";
+            efficiency[hour] += $"{name};";
+
+            File.WriteAllLines(FilePath, efficiency);
+
         }
 
         public static void CheckWeekRelevance() {
@@ -179,7 +169,6 @@ namespace PathPointer
 
             Console.WriteLine(FilePath);
 
-            string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Intermediate.txt"); //промежуточный файл
             string fileContainer = "";
             string readLine;
             var cal = new GregorianCalendar();
@@ -189,7 +178,7 @@ namespace PathPointer
             bool weekIsNowRelevant = false;
 
 
-            using (StreamReader sr = new StreamReader(FilePath))
+            using (StreamReader sr = new StreamReader(FilePath))    //если последняя запись в файл производилась не на этой неделе
             {
                 while ((readLine = sr.ReadLine()) != null)
                 {
@@ -214,12 +203,7 @@ namespace PathPointer
 
                 SetPath("Efficiency");
 
-                using (StreamReader sr = new StreamReader(FilePath)) {
-                    fileContainer = sr.ReadToEnd();
-
-                }
-
-                File.Copy(FilePath,interFile);
+                using (StreamReader sr = new StreamReader(FilePath)) fileContainer = sr.ReadToEnd();
                 File.Delete(FilePath);
 
                 using (StreamWriter wr = new StreamWriter(FilePath))
@@ -229,12 +213,7 @@ namespace PathPointer
                     }
                     wr.Write(fileContainer);
                 }
-
-
-
             }
-
-
         }
 
 

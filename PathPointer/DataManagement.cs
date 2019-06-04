@@ -24,9 +24,9 @@ namespace PathPointer
                     for (int i = 0; i < fileRows.Length; i++)
                     {
 
-                        if (GetName(fileRows[i]) == Employments.empType)
+                        if (GetValueByIndex(fileRows[i]) == Employments.empType)
                         {
-                            code = Convert.ToInt32(fileRows[i].Remove(0, (GetName(fileRows[i]).Length) + 1));     //вывод кода из файла
+                            code = Convert.ToInt32(fileRows[i].Substring((GetValueByIndex(fileRows[i]).Length) + 1));     //вывод кода из файла
                             fileRows[i] = fileRows[i].Replace((code).ToString(), (++code).ToString());     //замена старого кода на новый
                             break;
                         }
@@ -62,7 +62,7 @@ namespace PathPointer
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        varCells.Add(new DataManagement { Business = GetName(line) });    //заполнение DataSource данными из документа
+                        varCells.Add(new DataManagement { Business = GetValueByIndex(line) });    //заполнение DataSource данными из документа
                     }
                 }
             }
@@ -94,14 +94,12 @@ namespace PathPointer
             {
                 while ((line =  reader.ReadLine()) != null)
                 {
-                    if (String.Compare(GetName(line), name) == 0)
+                    if (String.Compare(GetValueByIndex(line), name) == 0)
                         break;
                 }
             }
 
-            line = line.Remove(0, (line.IndexOf("!")+1));
-
-            line = line.Remove(line.IndexOf("!"), (line.Length - line.IndexOf("!")));
+            line = GetValueByIndex(line,1);
             code = Convert.ToInt32(line);
 
             return code;
@@ -132,7 +130,7 @@ namespace PathPointer
                 {
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if (String.Compare(GetName(line), delLine) == 0)
+                        if (String.Compare(GetValueByIndex(line), delLine) == 0)
                             continue;
 
                         writer.WriteLine(line);
@@ -147,7 +145,7 @@ namespace PathPointer
 
         public static void EditEmpFiles(string editLine, int rowIndex) {
             string[] fileRows = File.ReadAllLines(FilePath);        //занесение данных из файла в массив
-            fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetName(fileRows[rowIndex]).Length);  //удаление старого наименования
+            fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetValueByIndex(fileRows[rowIndex]).Length);  //удаление старого наименования
             fileRows[rowIndex] = fileRows[rowIndex].Insert(0, editLine);        //добавление нового наименования
             File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
         }

@@ -14,11 +14,11 @@ namespace PathPointer
 
 
 
-        public static string GetName(string line)
+        public static string GetValueByIndex(string line)
         {            //вывод только названия занятия
             if (line.Contains("!"))
             {
-                line = line.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
+                line = line.Substring(0, line.IndexOf("!")); //.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
             }
             return line;
         }
@@ -34,7 +34,7 @@ namespace PathPointer
 
             if (line.Contains("!"))
             {
-                line = line.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
+                line = line.Substring(0, line.IndexOf("!"));
             }
 
             return line;
