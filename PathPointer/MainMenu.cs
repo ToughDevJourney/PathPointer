@@ -23,7 +23,6 @@ namespace PathPointer
         public MainMenu()
         {
             InitializeComponent();
-
         }
 
 

@@ -18,6 +18,8 @@ namespace PathPointer
 
         private TimeSpent() {
             InitializeComponent();
+            TopMost = true;
+
         }
         public static TimeSpent CreateInstance()
         {
@@ -31,6 +33,8 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
+
+
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)
@@ -43,7 +47,6 @@ namespace PathPointer
         {
             empType = "Goals";
             FillGrid();
-
         }
 
         private void BtnRest_Click(object sender, EventArgs e)
@@ -61,11 +64,11 @@ namespace PathPointer
         public void FillGrid()
         {
             dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{empType}", ref varCells).DataSource;
-            dataGridBusiness.CurrentCell = dataGridBusiness[0,0];
         }
 
         private void BtnReady_Click(object sender, EventArgs e)
         {
+
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
 
             StatsManagement.WriteStats($"{empType}!{DataManagement.FindCode(currentCellVal)}", "Efficiency");

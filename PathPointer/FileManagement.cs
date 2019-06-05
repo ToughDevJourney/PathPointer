@@ -52,8 +52,8 @@ namespace PathPointer
             {
                 string[] fileArray = new string[48];
                 for (int j = 0; j < 2; j++)
-                for (int i = 0; i<fileArray.Length; i++) {
-                    fileArray[i] = $"{i+(j*24)}:00;";
+                for (int i = 0; i<24; i++) {
+                    fileArray[i + (j * 24)] = $"{i}:00;";
                 }
                 File.WriteAllLines(FilePath, fileArray);
             }

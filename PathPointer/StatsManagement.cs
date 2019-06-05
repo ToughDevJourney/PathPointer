@@ -112,27 +112,63 @@ namespace PathPointer
 
             SetPath($"Employments\\{GetValueByIndex(statsFileArr[currentEmployment])}");
 
+            string employmentName = "";
+            string employmentType = "";
+
             if (statsFileArr[currentEmployment] == "" || statsFileArr[currentEmployment] == " ")
             {
-                lblName.Text = "ПРОПУСК";
-                lblType.Text = "Похоже, что в это время вы занимались чем-то ДЕЙСТВИТЕЛЬНО полезным";
+                employmentName = "ПРОПУСК";
+                employmentType = "Похоже, что в это время вы занимались чем-то ДЕЙСТВИТЕЛЬНО полезным";
             }
             else{
-                using (StreamReader sr = new StreamReader(FilePath))
+                try
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
+                    using (StreamReader sr = new StreamReader(FilePath))
                     {
-                        if (GetValueByIndex(line, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1))
+                        while ((employmentName = sr.ReadLine()) != null)
                         {
-                            lblName.Text = GetValueByIndex(line);
-                            break;
+                            if (GetValueByIndex(employmentName, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1))
+                            {
+                                employmentName = GetValueByIndex(employmentName);
+                                employmentType = GetValueByIndex(statsFileArr[currentEmployment], 0);
+                                break;
+                            }
                         }
                     }
                 }
+                finally {
 
-                lblType.Text = GetValueByIndex(statsFileArr[currentEmployment], 0);
+                    switch (employmentType) {
+                        case "":
+                            employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
+                            employmentType = "Обратитесь к вашему системному администратору" +
+                                            "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
+                            break;
+                        case "Business":
+                            employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
+                                            "\nЗнайте, что разработчику этой программы очень вас жалко :)";
+                            break;
+                        case "Goals":
+                            employmentType = "Ого, вы на верном пути к вашей цели!" +
+                                            "\nВы ведь не потратили это время на чепуху, в роде, \"Смотреть весь день телевизор\", верно?";
+                            break;
+                        case "Rest":
+                            employmentType = "Надеюсь, вы хорошо отдохнули!" +
+                                            "\nНо помните, что если вы провели 4 часа за компьютером, \"Посидеть в вашем модном телефончике\" - не будет для вас отдыхом" +
+                                            "\nОтдых - это смена деятельности, лучше сходите на прогулку или поиграйте с кошкой";
+                            break;
+                        case "Fun":
+                            employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
+                                            "\nБудьте осторожны";
+                            break;
+                    }
+                }
             }
+
+
+
+            lblName.Text = employmentName;
+            lblType.Text = employmentType;
         }
 
 
