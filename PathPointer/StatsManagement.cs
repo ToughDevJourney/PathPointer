@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public class MainStatistic : FilesManagement
+    public class StatsManagement : Management
     {
 
         public string Business { get; set; }        //элемент DataSource
         private static string[] statsFileArr { get; set; }
 
 
-        private static void SetPath(string empType) {
-            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt");  //путь к папке в "Документах"
-        }
+
 
         
         public static void FillGrid(ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
@@ -144,7 +142,7 @@ namespace PathPointer
         public static void WriteStats(string name, string statPath)    
         {
             SetPath(statPath);
-            int hour = DateTime.Now.Hour;
+            int hour = DateTime.Now.Hour-1;
             int dayOfWeek = Convert.ToInt32(DateTime.Now.DayOfWeek);
 
             string[] efficiency = File.ReadAllLines(FilePath);

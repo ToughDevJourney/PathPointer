@@ -17,7 +17,7 @@ namespace PathPointer
     {
 
 
-        public static BindingList<MainStatistic> statCells;
+        public static BindingList<StatsManagement> statCells;
 
 
         public MainMenu()
@@ -31,6 +31,8 @@ namespace PathPointer
         {
             const int miliseconds = 1000;
             const int minutes = 60;
+
+            FileManagement.CheckAllFiles();
             MenuManagement.AreAllFormsClosed = false;
 
             DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
@@ -40,7 +42,7 @@ namespace PathPointer
             TimerHour.Enabled = true;
             MenuManagement.questCheck = false;
 
-            MainStatistic.CheckWeekRelevance();
+            StatsManagement.CheckWeekRelevance();
             FillDaysOfWeek();
 
 
@@ -96,7 +98,7 @@ namespace PathPointer
             ShowQuest();
         }
 
-        private static void ShowQuest()
+        public static void ShowQuest()
         {
             TimeSpent form = TimeSpent.CreateInstance();
             form.Show();
@@ -130,12 +132,12 @@ namespace PathPointer
 
         private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            MainStatistic.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
+            StatsManagement.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
         }
 
         private void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            MainStatistic.DisplayMainStats(ref lblEmployName,ref lblEmployType, DataGridBusiness.CurrentCell.ColumnIndex);
+            StatsManagement.DisplayMainStats(ref lblEmployName,ref lblEmployType, DataGridBusiness.CurrentCell.ColumnIndex);
         }
 
 

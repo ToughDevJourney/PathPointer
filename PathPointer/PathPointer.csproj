@@ -89,7 +89,8 @@
     <Compile Include="Employments.Designer.cs">
       <DependentUpon>Employments.cs</DependentUpon>
     </Compile>
-    <Compile Include="FilesManagement.cs" />
+    <Compile Include="FileManagement.cs" />
+    <Compile Include="Management.cs" />
     <Compile Include="Goals.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,7 +103,7 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainStatistic.cs" />
+    <Compile Include="StatsManagement.cs" />
     <Compile Include="MoreStat.cs">
       <SubType>Form</SubType>
     </Compile>

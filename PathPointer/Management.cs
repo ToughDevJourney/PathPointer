@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace PathPointer
 {
-    public class FilesManagement
+    public abstract class Management
     {
         protected static string FilePath { get; set; }        //путь к документу
 
-
-
+        protected static void SetPath(string empType = "")
+        {
+            if (empType != "") FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt");  //путь к папке в "Документах"
+            else FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer");
+        }
 
 
         public static string GetValueByIndex(string line)

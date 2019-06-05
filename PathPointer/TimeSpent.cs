@@ -61,13 +61,14 @@ namespace PathPointer
         public void FillGrid()
         {
             dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{empType}", ref varCells).DataSource;
+            dataGridBusiness.CurrentCell = dataGridBusiness[0,0];
         }
 
         private void BtnReady_Click(object sender, EventArgs e)
         {
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
 
-            MainStatistic.WriteStats($"{empType}!{DataManagement.FindCode(currentCellVal)}", "Efficiency");
+            StatsManagement.WriteStats($"{empType}!{DataManagement.FindCode(currentCellVal)}", "Efficiency");
             MenuManagement.questCheck = false;
 
             this.Hide();

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public class DataManagement : FilesManagement
+    public class DataManagement : Management
     {
         public string Business { get; set; }        //DataSource
         private static int code;
@@ -42,7 +42,7 @@ namespace PathPointer
         }
 
 
-        protected static void SetPath()
+        private static void SetPath()
         {
             FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{EmpType}.txt");  //путь к папке "Документы"
         }
