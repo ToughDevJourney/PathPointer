@@ -25,8 +25,9 @@ namespace PathPointer
             SetPath("Efficiency");
 
             int currentDayOfWeekCode = (int)DateTime.Now.DayOfWeek;
+            bool pickedCurrentDay = currentDayOfWeekCode == dayOfWeek ? true : false;
 
-            dayOfWeek = dayOfWeek == 0 ? 7 : dayOfWeek;     //американская неделя начинается с воскресенья
+            dayOfWeek = dayOfWeek == 0 ? 7 : dayOfWeek;     //американская неделя начинается с воскресенья, исправление
             currentDayOfWeekCode = currentDayOfWeekCode == 0 ? 7 : currentDayOfWeekCode;
 
             dataGridView.ColumnCount = 24;
@@ -35,10 +36,10 @@ namespace PathPointer
 
             if (dayOfWeek > currentDayOfWeekCode)
             {
-                statsFileArr = FillStatsArray(2);   //заполнить массив данными предыдущей недели
+                statsFileArr = FillStatsArray(2, pickedCurrentDay);   //заполнить массив данными предыдущей недели
             }
             else {
-                statsFileArr = FillStatsArray(1);       //заполнить массив данными текущей недели
+                statsFileArr = FillStatsArray(1, pickedCurrentDay);       //заполнить массив данными текущей недели
             }
 
 
@@ -56,23 +57,27 @@ namespace PathPointer
 
         }
 
-        private static string[] FillStatsArray(int index) { //вывод массива данных об определенной недели
+        private static string[] FillStatsArray(int index, bool pickedCurrentDay) { //вывод массива данных об определенной недели
             string[] statsArray = new string[24];
             string readLine;
             int arrayIndex = 0;
-
+            int currentHour = DateTime.Now.Hour;
 
             using (StreamReader reader = new StreamReader(FilePath))
             {
                 for (int i = 0; (readLine = reader.ReadLine()) != null; i++) {
                     if (24 * (index - 1) <= i) {
                         statsArray[arrayIndex] = readLine;
-                        arrayIndex++;
 
-                        if (arrayIndex == 24)
-                        {
-                            break;
+
+                        if (pickedCurrentDay == true) {
+                            if (arrayIndex == currentHour) statsArray[arrayIndex] = "T";
+                            else if (arrayIndex > currentHour) statsArray[arrayIndex] = "F";
                         }
+
+                        arrayIndex++;
+                        if (arrayIndex == 24) break;
+                        
                     }
 
 
@@ -99,6 +104,12 @@ namespace PathPointer
                 case "Fun":
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Red;
                     break;
+                case "T":
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.LightBlue ;
+                    break;
+                case "F":
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Black;
+                    break;
                 default:
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Gray;
                     break;
@@ -118,9 +129,24 @@ namespace PathPointer
             if (statsFileArr[currentEmployment] == "" || statsFileArr[currentEmployment] == " ")
             {
                 employmentName = "ПРОПУСК";
-                employmentType = "Похоже, что в это время вы занимались чем-то ДЕЙСТВИТЕЛЬНО полезным";
+                employmentType = "Похоже, что в это время вы занимались чем-то ДЕЙСТВИТЕЛЬНО полезным" +
+                                "\nВам должно быть стыдно";
             }
-            else{
+            else if (statsFileArr[currentEmployment] == "T")
+            {
+                employmentName = "СЕЙЧАС";
+                employmentType = "Ваша судьба в ваших руках" +
+                                "\nПочему бы не заняться чем-нибудь полезным прямо сейчас?";
+            }
+            else if (statsFileArr[currentEmployment] == "F")
+            {
+
+                employmentName = "БУДУЩЕЕ";
+                employmentType = "Этот отрезок времени покрыт великой тайной..." +
+                                "\nНикто не знает, будете ли вы через пару часов смотреть телевизор или встанете на путь к своей цели" +
+                                "\nРазработчик этой программы верит в вас (Пожалуйста, встаньте на на путь к своей цели, не расстраивайте программиста)";
+            }
+            else {
                 try
                 {
                     using (StreamReader sr = new StreamReader(FilePath))
@@ -136,9 +162,11 @@ namespace PathPointer
                         }
                     }
                 }
-                finally {
-
-                    switch (employmentType) {
+                catch { }
+                finally
+                {
+                    switch (employmentType)
+                    {
                         case "":
                             employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
                             employmentType = "Обратитесь к вашему системному администратору" +
@@ -161,6 +189,8 @@ namespace PathPointer
                             employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
                                             "\nБудьте осторожны";
                             break;
+
+
                     }
                 }
             }
