@@ -122,7 +122,6 @@ namespace PathPointer
                 TextEnd.Focus();
             }
         }
-
         private void TextEnd_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)

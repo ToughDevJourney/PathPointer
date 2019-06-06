@@ -12,13 +12,21 @@ namespace PathPointer
 {
     public partial class AddBusy : Form
     {
+        public static string BusyName { get; set; }
+
         public AddBusy()
         {
             InitializeComponent();
         }
 
+        private void AddBusy_Load(object sender, EventArgs e)
+        {
+            BusyName = null;
+        }
+
         private void BtnAddSchedule_Click(object sender, EventArgs e)
         {
+            textName.Text = DataManagement.checkEmploymentFormat(textName.Text);
             AddSchedule empForm = new AddSchedule();
             empForm.Show();
             this.Hide();
@@ -49,5 +57,7 @@ namespace PathPointer
         {
             MenuManagement.HideForm(this, e);
         }
+
+
     }
 }

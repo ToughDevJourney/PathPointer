@@ -78,9 +78,11 @@
             // textTime
             // 
             this.textTime.Location = new System.Drawing.Point(199, 70);
+            this.textTime.MaxLength = 6;
             this.textTime.Name = "textTime";
             this.textTime.Size = new System.Drawing.Size(45, 20);
             this.textTime.TabIndex = 6;
+            this.textTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textTime_KeyPress);
             // 
             // label3
             // 
@@ -99,6 +101,7 @@
             this.datePicker.Name = "datePicker";
             this.datePicker.Size = new System.Drawing.Size(74, 20);
             this.datePicker.TabIndex = 10;
+            this.datePicker.ValueChanged += new System.EventHandler(this.datePicker_ValueChanged);
             // 
             // label2
             // 

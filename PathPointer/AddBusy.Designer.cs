@@ -105,6 +105,7 @@
             this.Name = "AddBusy";
             this.Text = "Добавить дело";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddBusy_FormClosing);
+            this.Load += new System.EventHandler(this.AddBusy_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

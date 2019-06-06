@@ -19,7 +19,12 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{Convert.ToInt32(textTime.Text)}", DataManagement.EmpType);
+            string funName = DataManagement.checkEmploymentFormat(textName.Text);
+            string funTime = textTime.Text;
+
+            if (funTime == "" || Convert.ToInt32(funTime) > 24) funTime = "1";
+
+            DataManagement.WriteEmpFiles($"{funName}!{DataManagement.Code}!{Convert.ToInt32(funTime)}", DataManagement.EmpType);
             CancelButton_Click(null, null);
         }
 
@@ -33,6 +38,11 @@ namespace PathPointer
         private void AddFun_FormClosing(object sender, FormClosingEventArgs e)
         {
             MenuManagement.HideForm(this, e);
+        }
+
+        private void textTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8)) e.Handled = true;
         }
     }
 }

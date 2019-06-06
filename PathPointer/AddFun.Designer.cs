@@ -48,9 +48,11 @@
             // textTime
             // 
             this.textTime.Location = new System.Drawing.Point(155, 41);
+            this.textTime.MaxLength = 4;
             this.textTime.Name = "textTime";
             this.textTime.Size = new System.Drawing.Size(123, 20);
             this.textTime.TabIndex = 22;
+            this.textTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textTime_KeyPress);
             // 
             // nameLabel
             // 

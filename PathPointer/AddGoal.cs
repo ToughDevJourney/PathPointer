@@ -21,7 +21,12 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{Convert.ToInt32(textTime.Text)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
+            string goaltName = DataManagement.checkEmploymentFormat(textName.Text);
+            string goalTime = textTime.Text;
+
+            if (goalTime == "") goalTime = "0";
+
+            DataManagement.WriteEmpFiles($"{goaltName}!{DataManagement.Code}!{Convert.ToInt32(goalTime)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
 
             BtnCancel_Click(null, null);
         }
@@ -36,6 +41,21 @@ namespace PathPointer
         private void AddGoal_FormClosing(object sender, FormClosingEventArgs e)
         {
             MenuManagement.HideForm(this, e);
+        }
+
+        private void textTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void datePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (datePicker.Value < DateTime.Now) {
+                datePicker.Value = DateTime.Now;
+            }
         }
     }
 }

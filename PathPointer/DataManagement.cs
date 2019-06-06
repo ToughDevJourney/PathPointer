@@ -78,14 +78,14 @@ namespace PathPointer
             }
 
             if (varCells.Count == 0) EmptyGridMessage(ref varCells);
-            
+
 
             dataGridBusiness.DataSource = varCells;
             return dataGridBusiness;
         }
 
 
-        private static void EmptyGridMessage (ref BindingList<DataManagement> varCells)
+        private static void EmptyGridMessage(ref BindingList<DataManagement> varCells)
         {        //Если, данные или документ отстутствуют
             varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
         }
@@ -107,7 +107,7 @@ namespace PathPointer
 
 
             using (StreamReader reader = new StreamReader(FilePath))
-             {
+            {
                 using (StreamWriter writer = new StreamWriter(interFile))
                 {
                     while ((line = reader.ReadLine()) != null)
@@ -118,7 +118,7 @@ namespace PathPointer
                         writer.WriteLine(line);
                     }
                 }
-             }
+            }
 
             File.Copy(interFile, FilePath, true);
             File.Delete(interFile);
@@ -130,6 +130,16 @@ namespace PathPointer
             fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetValueByIndex(fileRows[rowIndex]).Length);  //удаление старого наименования
             fileRows[rowIndex] = fileRows[rowIndex].Insert(0, editLine);        //добавление нового наименования
             File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
+        }
+
+        public static string checkEmploymentFormat(string formatChecking){
+            while (true) {
+                if (formatChecking.Contains("!")) formatChecking = formatChecking.Remove(formatChecking.IndexOf("!"), 1);
+                else if (formatChecking.Contains(";")) formatChecking = formatChecking.Remove(formatChecking.IndexOf(";"), 1);
+                else break;
+            }
+
+            return formatChecking;
         }
 
     }

@@ -19,7 +19,13 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{Convert.ToInt32(textTime.Text)}", DataManagement.EmpType);
+
+            string restName = DataManagement.checkEmploymentFormat(textName.Text);
+            string restTime = textTime.Text;
+
+            if (restTime == "" || Convert.ToInt32(restTime) > 24) restTime = "0";
+
+            DataManagement.WriteEmpFiles($"{restName}!{DataManagement.Code}!{Convert.ToInt32(restTime)}", DataManagement.EmpType);
 
             BtnCancel_Click(null, null);
         }
@@ -35,5 +41,15 @@ namespace PathPointer
         {
             MenuManagement.HideForm(this, e);
         }
+
+        private void textTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            {
+                e.Handled = true;
+            }
+        }
+
+
     }
 }
