@@ -175,9 +175,10 @@ namespace PathPointer
 
 
 
-        public static void WriteStats(string name, string statPath)    
+        public static void WriteStats(string name)    
         {
-            SetPath(statPath);
+            SetPath("Efficiency");
+
             int hour = DateTime.Now.Hour-1;
             int dayOfWeek = Convert.ToInt32(DateTime.Now.DayOfWeek);
 
@@ -196,6 +197,27 @@ namespace PathPointer
 
             File.WriteAllLines(FilePath, efficiency);
 
+        }
+
+        public static int FindCode(string name, string empType)
+        {
+            SetPath($"Employments\\{empType}");
+            int code = 0;
+            string line;
+            using (StreamReader reader = new StreamReader(FilePath))
+            {
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (String.Compare(GetValueByIndex(line), name) == 0)
+                    {
+                        line = GetValueByIndex(line, 1);
+                        code = Convert.ToInt32(line);
+                        break;
+                    }
+                }
+            }
+
+            return code;
         }
 
         public static void CheckWeekRelevance() {

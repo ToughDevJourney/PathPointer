@@ -13,7 +13,17 @@ namespace PathPointer
     {
         public string Business { get; set; }        //DataSource
         private static int code;
-        public static string EmpType { get; set; }
+        private static string empType;
+
+        public static string EmpType {
+            get {
+                return empType;
+            }
+            set {
+                SetPath(value);
+                empType = value;
+            }
+        }
 
         public static int Code {        //считывание последнего кода приложения
             get {
@@ -42,15 +52,11 @@ namespace PathPointer
         }
 
 
-        private static void SetPath()
-        {
-            FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{EmpType}.txt");  //путь к папке "Документы"
-        }
 
         public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells)      //вывод в DataGridView данных из документа с названием empType  
         {
             EmpType = empType;
-            SetPath();
+
 
             DataGridView dataGridBusiness = new DataGridView();
 
@@ -71,9 +77,8 @@ namespace PathPointer
                 EmptyGridMessage(ref varCells);
             }
 
-            if (varCells.Count == 0) {
-                EmptyGridMessage(ref varCells);
-            }
+            if (varCells.Count == 0) EmptyGridMessage(ref varCells);
+            
 
             dataGridBusiness.DataSource = varCells;
             return dataGridBusiness;
@@ -85,38 +90,15 @@ namespace PathPointer
             varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
         }
 
-
-
-        public static int FindCode(string name) {
-
-            string line;
-            using (StreamReader reader = new StreamReader(FilePath))
-            {
-                while ((line =  reader.ReadLine()) != null)
-                {
-                    if (String.Compare(GetValueByIndex(line), name) == 0)
-                        break;
-                }
-            }
-
-            line = GetValueByIndex(line,1);
-            code = Convert.ToInt32(line);
-
-            return code;
-        }
-        
-
         public static void WriteEmpFiles(string name, string empType)    //запись в файл
         {
             EmpType = empType;
-            SetPath();
 
             using (StreamWriter sw = new StreamWriter(FilePath, true))
             {
                 sw.WriteLine(name);
             }
         }
-
 
         public static void DeleteEmpFiles(string delLine)
         {

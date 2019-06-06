@@ -34,7 +34,6 @@ namespace PathPointer
         {
             BtnGoals_Click(null, null);
 
-
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)
@@ -68,10 +67,8 @@ namespace PathPointer
 
         private void BtnReady_Click(object sender, EventArgs e)
         {
-
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
-
-            StatsManagement.WriteStats($"{empType}!{DataManagement.FindCode(currentCellVal)}", "Efficiency");
+            StatsManagement.WriteStats($"{empType}!{StatsManagement.FindCode(currentCellVal, empType)}");
             MenuManagement.questCheck = false;
 
             this.Hide();
@@ -84,6 +81,11 @@ namespace PathPointer
                 e.Cancel = true;
                 this.Hide();
             }
+        }
+
+        private void TimeSpent_Shown(object sender, EventArgs e)
+        {
+           
         }
     }
 }

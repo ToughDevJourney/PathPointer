@@ -148,9 +148,9 @@ namespace PathPointer
 
         }
 
-        private string FormatChecking(string checkTime) {
+        private string FormatChecking(string checkFormat) {
 
-            string checkFormat = checkTime;
+            checkFormat = checkFormat.Substring(0, 2);
             int hoursADay = 24;
 
 
@@ -160,19 +160,19 @@ namespace PathPointer
             }
             else
             {
-                if (checkFormat.Length == 0)
+                if (checkFormat[0] == ' ')
                 {
                     checkFormat = "00:00";
                 }
                 else
                 {
-                    if (checkFormat.Length == 1)
+                    if (checkFormat[1] == ' ')
                     {
-                        checkFormat = $"0{checkFormat}:00";
+                        checkFormat = $"0{checkFormat[0]}:00";
                     }
                     else
                     {
-                        checkFormat = checkFormat.Substring(0, 2);
+
 
                         if (checkFormat[0] == 0)
                         {

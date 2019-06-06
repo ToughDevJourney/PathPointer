@@ -142,6 +142,7 @@
             this.Text = "На что вы потратили большую часть прошедшего часа?";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TimeSpent_FormClosing);
             this.Load += new System.EventHandler(this.TimeSpent_Load);
+            this.Shown += new System.EventHandler(this.TimeSpent_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
