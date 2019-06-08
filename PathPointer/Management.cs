@@ -17,7 +17,7 @@ namespace PathPointer
         }
 
 
-        public static string GetValueByIndex(string line)
+        protected static string GetValueByIndex(string line)
         {            //вывод только названия занятия
             if (line.Contains("!"))
             {
@@ -26,7 +26,7 @@ namespace PathPointer
             return line;
         }
 
-        public static string GetValueByIndex(string line, int index) {
+        protected static string GetValueByIndex(string line, int index) {
 
             for (int i = 0; i < index; i++) {
                 if (line.Contains("!"))

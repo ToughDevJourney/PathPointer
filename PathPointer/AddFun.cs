@@ -22,10 +22,17 @@ namespace PathPointer
             string funName = DataManagement.checkEmploymentFormat(textName.Text);
             string funTime = textTime.Text;
 
-            if (funTime == "" || Convert.ToInt32(funTime) > 24) funTime = "1";
+            if (funName == "")
+            {
+                MessageBox.Show("Не сочтите за труд, введите название развлечения", "Телепатия появится в следующих обновлениях");
+            }
+            else
+            {
+                if (funTime == "" || Convert.ToInt32(funTime) > 24) funTime = "1";
 
-            DataManagement.WriteEmpFiles($"{funName}!{DataManagement.Code}!{Convert.ToInt32(funTime)}", DataManagement.EmpType);
-            CancelButton_Click(null, null);
+                DataManagement.WriteEmpFiles($"{funName}!{DataManagement.Code}!{Convert.ToInt32(funTime)}", DataManagement.EmpType);
+                CancelButton_Click(null, null);
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

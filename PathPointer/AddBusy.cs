@@ -21,11 +21,12 @@ namespace PathPointer
 
         private void AddBusy_Load(object sender, EventArgs e)
         {
-            BusyName = null;
+            textName.Text = BusyName;
         }
 
         private void BtnAddSchedule_Click(object sender, EventArgs e)
         {
+            BusyName = textName.Text;
             textName.Text = DataManagement.checkEmploymentFormat(textName.Text);
             AddSchedule empForm = new AddSchedule();
             empForm.Show();
@@ -34,13 +35,16 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            if (AddSchedule.Schedule == null)
+            string businessName = textName.Text;
+
+            if (businessName == "")
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!0", DataManagement.EmpType);
+                MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
             }
             else
             {
-                DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}", DataManagement.EmpType);
+                if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!N", DataManagement.EmpType);
+                else DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}", DataManagement.EmpType);
             }
 
             BtnCancel_Click(null, null);

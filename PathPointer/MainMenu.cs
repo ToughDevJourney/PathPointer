@@ -34,12 +34,13 @@ namespace PathPointer
             FileManagement.CheckAllFiles();
             MenuManagement.AreAllFormsClosed = false;
 
+
             DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
             dateTime1 = DateTime.Now;
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
-            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * miliseconds * minutes;
+            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
             TimerHour.Enabled = true;
-            MenuManagement.questCheck = false;
+     //       MenuManagement.questCheck = false;
 
             StatsManagement.CheckWeekRelevance();
             FillDaysOfWeek();
@@ -94,11 +95,12 @@ namespace PathPointer
         {
             const int interval60Mins = 60 * 60 * 1000;
             TimerHour.Interval = interval60Mins;
-            ShowQuest();
+            if (!StatsManagement.CheckSchedule()) ShowQuest();
         }
 
         public static void ShowQuest()
         {
+
             TimeSpent form = TimeSpent.CreateInstance();
             form.Show();
 

@@ -253,8 +253,6 @@ namespace PathPointer
         public static void CheckWeekRelevance() {
             SetPath("Common");
 
-            Console.WriteLine(FilePath);
-
             string fileContainer = "";
             string readLine;
             var cal = new GregorianCalendar();
@@ -303,6 +301,30 @@ namespace PathPointer
         }
 
 
+        public static bool CheckSchedule() {        //занят ли текущий час расписанием
+            SetPath("Employments\\Business");
+            string[] businessArray = File.ReadAllLines(FilePath);
+            bool hourInSchedule = false;
+            int beginHour;
+            int endHour;
+
+            for (int i = 0; i < businessArray.Length; i++) {
+                if (GetValueByIndex(businessArray[i], 2) == "N") continue;
+                else
+                {
+                    businessArray[i] = GetValueByIndex(businessArray[i], CurrentDateInfo.DayOfWeek + 2);
+                    if (businessArray[i] == "H") continue;
+                    beginHour = Convert.ToInt32(businessArray[i].Remove(businessArray[i].IndexOf(" ")));
+                    endHour = Convert.ToInt32(businessArray[i].Substring(businessArray[i].IndexOf(" ") + 1));
+                    if (beginHour <= CurrentDateInfo.Hour-1 && CurrentDateInfo.Hour-1 < endHour) {
+                        hourInSchedule = true;
+                        break;
+                    }
+                }
+            }
+
+            return hourInSchedule;
+        }
 
 
     }

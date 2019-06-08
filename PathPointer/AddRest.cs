@@ -19,15 +19,21 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-
             string restName = DataManagement.checkEmploymentFormat(textName.Text);
             string restTime = textTime.Text;
 
-            if (restTime == "" || Convert.ToInt32(restTime) > 24) restTime = "0";
+            if (restName == "")
+            {
+                MessageBox.Show("Пожалуйста, введите название", "Отдыхать еще рано");
+            }
+            else
+            {
+                if (restTime == "" || Convert.ToInt32(restTime) > 24) restTime = "0";
 
-            DataManagement.WriteEmpFiles($"{restName}!{DataManagement.Code}!{Convert.ToInt32(restTime)}", DataManagement.EmpType);
+                DataManagement.WriteEmpFiles($"{restName}!{DataManagement.Code}!{Convert.ToInt32(restTime)}", DataManagement.EmpType);
 
-            BtnCancel_Click(null, null);
+                BtnCancel_Click(null, null);
+            }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)

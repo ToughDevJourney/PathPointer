@@ -82,6 +82,7 @@
     <Compile Include="AddSchedule.Designer.cs">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="CurrentDateInfo.cs" />
     <Compile Include="DataManagement.cs" />
     <Compile Include="Employments.cs">
       <SubType>Form</SubType>

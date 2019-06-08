@@ -60,6 +60,7 @@ namespace PathPointer
                 case "Business":
                     empForm = new AddBusy();
                     AddSchedule.Schedule = null;
+                    AddBusy.BusyName = null;
                     break;
                 case "Goals":
                     empForm = new AddGoal();
@@ -109,7 +110,10 @@ namespace PathPointer
 
         private void dataGridBusiness_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);  //изменение текущей строки
+            if (dataGridBusiness.CurrentCell.Value.ToString() != "")
+            {
+                DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);  //изменение текущей строки
+            }
         }
 
         private void Employments_FormClosing(object sender, FormClosingEventArgs e)

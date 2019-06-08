@@ -33,6 +33,8 @@ namespace PathPointer
             pickedLabelDayOfWeek = lblMon;
             lblMon_Click(null, null);
             MouseEnterFontEvent(lblMon);
+            if (AddBusy.BusyName == "") lblBusinessName.Text = "Неназванное дело";
+            else lblBusinessName.Text = AddBusy.BusyName;
         }
 
 
@@ -43,7 +45,7 @@ namespace PathPointer
 
             schedArr = FormatTime(schedArr);
 
-            Schedule = $"Пн {schedArr[0]} Вт {schedArr[1]} Ср {schedArr[2]} Чт {schedArr[3]} Пт {schedArr[4]} Сб {schedArr[5]} Вс {schedArr[6]}";    //подготовка строки к сохранению в файл
+            Schedule = $"{schedArr[0]}{schedArr[1]}{schedArr[2]}{schedArr[3]}{schedArr[4]}{schedArr[5]}{schedArr[6]}";    //подготовка строки к сохранению в файл
             BtnCancel_Click(null, null);
         }
 
@@ -134,6 +136,7 @@ namespace PathPointer
         private void TextBegin_Leave(object sender, EventArgs e)
         {
             TextBegin.Text = FormatChecking(TextBegin.Text);
+            BeginTimeIsLessCheck();
             if (firstBeginChange == true && beginChanged == true) ChangeAllDays(ref firstBeginChange);  //при первом изменении, изменяется расписание всех дней
             else UpdateSchedule();
 
@@ -142,6 +145,7 @@ namespace PathPointer
         private void TextEnd_Leave(object sender, EventArgs e)
         {
             TextEnd.Text = FormatChecking(TextEnd.Text);
+            BeginTimeIsLessCheck();
             if (firstEndChange == true && endChanged == true) ChangeAllDays(ref firstEndChange);
             else UpdateSchedule();
 
@@ -151,7 +155,6 @@ namespace PathPointer
 
             checkFormat = checkFormat.Substring(0, 2);
             int hoursADay = 24;
-
 
             if (checkFormat == "Выходной")
             {
@@ -171,8 +174,6 @@ namespace PathPointer
                     }
                     else
                     {
-
-
                         if (checkFormat[0] == 0)
                         {
                             checkFormat = $"0{checkFormat}:00";
@@ -191,10 +192,18 @@ namespace PathPointer
                     }
                 }
             }
-
             return checkFormat;
         }
 
+        private void BeginTimeIsLessCheck() {
+            int beginTime = Convert.ToInt32(TextBegin.Text.Remove(2));
+            int endTime = Convert.ToInt32(TextEnd.Text.Remove(2));
+
+            if (beginTime > endTime)
+            {
+                TextEnd.Text = TextBegin.Text;
+            }
+        }
 
 
         private void ChangeAllDays(ref bool pickedChange) {     //при первом изменении часов, изменяются часы всех дней недели
@@ -215,23 +224,29 @@ namespace PathPointer
             currentLbl.Text = $"{FormatChecking(TextBegin.Text)} - {FormatChecking(TextEnd.Text)}"; 
             FormatChecking(TextBegin.Text);
             FormatChecking(TextEnd.Text);
-            TextBegin.Text = currentLbl.Text.Remove(currentLbl.Text.IndexOf(" "), currentLbl.Text.Length - currentLbl.Text.IndexOf(" "));
+            TextBegin.Text = currentLbl.Text.Remove(currentLbl.Text.IndexOf(" "));
             TextEnd.Text = currentLbl.Text.Substring(currentLbl.Text.IndexOf("-") + 2);
+
+
         }
 
-        private string[] FormatTime(string[] scheduleArray) //форматирование строки в вид "9:00 17:00"
+        private string[] FormatTime(string[] scheduleArray) //форматирование строки в вид "9 17!"
         {
 
             for (int i = 0; scheduleArray.Length > i; i++)
             {
-                if (scheduleArray[i][0] == 'В')
+                if (scheduleArray[i][0] == 'В') //если по расписанию выхожной
                 {
-                    scheduleArray[i] = "H";
+                    scheduleArray[i] = "H!";
                     continue;
                 }
-                scheduleArray[i] = scheduleArray[i].Remove(scheduleArray[i].IndexOf(" "), 2);
-                if (scheduleArray[i][6] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
+                scheduleArray[i] = scheduleArray[i].Replace(" - ", " ");    
+                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
+                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
+
+                if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
                 if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
+                scheduleArray[i] += "!";
             }
 
             return scheduleArray;
@@ -275,7 +290,6 @@ namespace PathPointer
         {
             if (label != pickedLabelDayOfWeek) {
                 label.Font = new Font(label.Font, FontStyle.Regular);
-                Console.WriteLine("qwe");
             }
 
 

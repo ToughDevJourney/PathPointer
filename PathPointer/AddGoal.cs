@@ -24,11 +24,18 @@ namespace PathPointer
             string goaltName = DataManagement.checkEmploymentFormat(textName.Text);
             string goalTime = textTime.Text;
 
-            if (goalTime == "") goalTime = "0";
+            if (goaltName == "")
+            {
+                MessageBox.Show("Пожалуйста, введите название", "Вы упустили пунктик");
+            }
+            else
+            {
+                if (goalTime == "") goalTime = "0";
 
-            DataManagement.WriteEmpFiles($"{goaltName}!{DataManagement.Code}!{Convert.ToInt32(goalTime)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
+                DataManagement.WriteEmpFiles($"{goaltName}!{DataManagement.Code}!{Convert.ToInt32(goalTime)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
 
-            BtnCancel_Click(null, null);
+                BtnCancel_Click(null, null);
+            }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
