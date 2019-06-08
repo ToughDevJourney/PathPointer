@@ -301,30 +301,51 @@ namespace PathPointer
         }
 
 
-        public static bool CheckSchedule() {        //занят ли текущий час расписанием
+        public static bool CheckSchedule() {        //указан ли текущий час в расписании
             SetPath("Employments\\Business");
-            string[] businessArray = File.ReadAllLines(FilePath);
+            string[] scheduleFileArray = File.ReadAllLines(FilePath);
             bool hourInSchedule = false;
             int beginHour;
             int endHour;
 
-            for (int i = 0; i < businessArray.Length; i++) {
-                if (GetValueByIndex(businessArray[i], 2) == "N") continue;
+            for (int i = 0; i < scheduleFileArray.Length; i++) {
+                if (GetValueByIndex(scheduleFileArray[i], 2) == "N") continue;
                 else
                 {
-                    businessArray[i] = GetValueByIndex(businessArray[i], CurrentDateInfo.DayOfWeek + 2);
-                    if (businessArray[i] == "H") continue;
-                    beginHour = Convert.ToInt32(businessArray[i].Remove(businessArray[i].IndexOf(" ")));
-                    endHour = Convert.ToInt32(businessArray[i].Substring(businessArray[i].IndexOf(" ") + 1));
-                    if (beginHour <= CurrentDateInfo.Hour-1 && CurrentDateInfo.Hour-1 < endHour) {
+                    scheduleFileArray[i] = GetValueByIndex(scheduleFileArray[i], CurrentDateInfo.DayOfWeek + 2);
+
+                    if (scheduleFileArray[i] == "H") continue;
+                    beginHour = Convert.ToInt32(scheduleFileArray[i].Remove(scheduleFileArray[i].IndexOf(" ")));
+                    endHour = Convert.ToInt32(scheduleFileArray[i].Substring(scheduleFileArray[i].IndexOf(" ") + 1));
+
+                    if (beginHour <= DateTime.Now.Hour - 1 && DateTime.Now.Hour - 1 < endHour) {
                         hourInSchedule = true;
                         break;
                     }
                 }
             }
 
+            if (hourInSchedule == false) {
+                SetPath("Efficiency");
+                scheduleFileArray = File.ReadAllLines(FilePath);
+                string choosedHourEmployment = GetValueByIndex(scheduleFileArray[DateTime.Now.Hour - 1], CurrentDateInfo.DayOfWeek, ";");
+
+                if (!(choosedHourEmployment == " " || choosedHourEmployment == "")) {  //если в этот час опрос уже был показан
+                    hourInSchedule = true;
+                }
+            }
+
             return hourInSchedule;
         }
+
+
+
+
+
+
+
+
+
 
 
     }

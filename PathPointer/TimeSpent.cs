@@ -33,7 +33,6 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
-
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)
@@ -83,9 +82,6 @@ namespace PathPointer
             }
         }
 
-        private void TimeSpent_Shown(object sender, EventArgs e)
-        {
-           
-        }
+
     }
 }

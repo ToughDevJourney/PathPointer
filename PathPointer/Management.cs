@@ -26,18 +26,18 @@ namespace PathPointer
             return line;
         }
 
-        protected static string GetValueByIndex(string line, int index) {
+        protected static string GetValueByIndex(string line, int index, string symbol = "!") {
 
             for (int i = 0; i < index; i++) {
-                if (line.Contains("!"))
+                if (line.Contains(symbol))
                 {
-                    line = line.Remove(0, (line.IndexOf("!")+1));
+                    line = line.Remove(0, (line.IndexOf(symbol) +1));
                 }
             }
 
-            if (line.Contains("!"))
+            if (line.Contains(symbol))
             {
-                line = line.Substring(0, line.IndexOf("!"));
+                line = line.Substring(0, line.IndexOf(symbol));
             }
 
             return line;

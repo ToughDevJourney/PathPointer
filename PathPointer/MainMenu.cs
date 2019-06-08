@@ -23,6 +23,8 @@ namespace PathPointer
         public MainMenu()
         {
             InitializeComponent();
+
+
         }
 
 
@@ -30,31 +32,31 @@ namespace PathPointer
         {
             const int miliseconds = 1000;
             const int minutes = 60;
+            int interval;
 
             FileManagement.CheckAllFiles();
             MenuManagement.AreAllFormsClosed = false;
 
+            FillDaysOfWeek();
+            DataGridDayOfWeek_CellClick(null, null);
+            DataGridBusiness.CurrentCell = DataGridBusiness[DateTime.Now.Hour - 1, 0];
+            DataGridBusiness_CellClick(null, null);
 
             DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
             dateTime1 = DateTime.Now;
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
-            TimerHour.Interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
-            TimerHour.Enabled = true;
-     //       MenuManagement.questCheck = false;
+            interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
 
-            StatsManagement.CheckWeekRelevance();
-            FillDaysOfWeek();
-
-
-            DataGridDayOfWeek_CellClick(null, null);
-
-
-            DataGridBusiness.CurrentCell = DataGridBusiness[23, 0];
-            DataGridBusiness_CellClick(null, null);
+            TimerHour.Interval = interval == 0 ? 1 : interval;
         }
 
 
+        private void MainMenu_Shown(object sender, EventArgs e)
+        {
 
+
+
+        }
 
 
         private void EmployButton_Click(object sender, EventArgs e)
@@ -76,14 +78,10 @@ namespace PathPointer
         {
             TrayIcon_MouseDoubleClick(null,null);
         }
-
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-
-
         private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             MenuManagement.TrayShow(this);
@@ -94,6 +92,7 @@ namespace PathPointer
         private void TimerHour_Tick(object sender, EventArgs e)
         {
             const int interval60Mins = 60 * 60 * 1000;
+            StatsManagement.CheckWeekRelevance();
             TimerHour.Interval = interval60Mins;
             if (!StatsManagement.CheckSchedule()) ShowQuest();
         }
@@ -121,6 +120,19 @@ namespace PathPointer
 
         }
 
+        private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            StatsManagement.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
+            DataGridBusiness_CellClick(null, null);
+        }
+
+        private void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            StatsManagement.DisplayMainStats(ref lblEmployName,ref lblEmployType, DataGridBusiness.CurrentCell.ColumnIndex);
+        }
+
+
         public void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -130,17 +142,6 @@ namespace PathPointer
             }
             MenuManagement.AreAllFormsClosed = true;
         }
-
-        private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            StatsManagement.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
-        }
-
-        private void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            StatsManagement.DisplayMainStats(ref lblEmployName,ref lblEmployType, DataGridBusiness.CurrentCell.ColumnIndex);
-        }
-
 
 
     }
