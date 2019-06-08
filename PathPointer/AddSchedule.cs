@@ -14,6 +14,7 @@ namespace PathPointer
     {
         public static string Schedule { get; set; }
         private int PickedDayOfWeek { get; set; }
+        private Label[] lblsTimeOfDaysOfWeek = new Label[7];
         private bool firstBeginChange = true;
         private bool firstEndChange = true;
         private bool beginChanged = false;
@@ -30,92 +31,33 @@ namespace PathPointer
 
         private void AddSchedule_Load(object sender, EventArgs e)
         {
+            InitializeDaysOfWeekArray();
             pickedLabelDayOfWeek = lblMon;
             lblMon_Click(null, null);
             MouseEnterFontEvent(lblMon);
             if (AddBusy.BusyName == "") lblBusinessName.Text = "Неназванное дело";
             else lblBusinessName.Text = AddBusy.BusyName;
         }
-
+        private void InitializeDaysOfWeekArray() {
+            lblsTimeOfDaysOfWeek[0] = lblTimeMon;
+            lblsTimeOfDaysOfWeek[1] = lblTimeTue;
+            lblsTimeOfDaysOfWeek[2] = lblTimeWed;
+            lblsTimeOfDaysOfWeek[3] = lblTimeThu;
+            lblsTimeOfDaysOfWeek[4] = lblTimeFri;
+            lblsTimeOfDaysOfWeek[5] = lblTimeSat;
+            lblsTimeOfDaysOfWeek[6] = lblTimeSun;
+        }
 
         private void BtnDone_Click(object sender, EventArgs e)
         {
             string[] schedArr = new string[7] { lblTimeMon.Text, lblTimeTue.Text, lblTimeWed.Text,      // инициализация массива-расписания
             lblTimeThu.Text, lblTimeFri.Text, lblTimeSat.Text, lblTimeSun.Text };
 
-            schedArr = FormatTime(schedArr);
+            schedArr = ExportFormatTime(schedArr);
 
             Schedule = $"{schedArr[0]}{schedArr[1]}{schedArr[2]}{schedArr[3]}{schedArr[4]}{schedArr[5]}{schedArr[6]}";    //подготовка строки к сохранению в файл
             BtnCancel_Click(null, null);
         }
-
-
-
-
-        private void ShowDaySchedule(Label pickedLabel) {
-            Label intermediateLbl = pickedLabelDayOfWeek;
-
-            pickedLabelDayOfWeek = pickedLabel;      //отмена выделения предыдущего выбранного дня недели
-            MouseEnterFontEvent(pickedLabelDayOfWeek);
-            MouseLeaveFontEvent(intermediateLbl);
-
-            switch (PickedDayOfWeek) {
-                case 1:
-                    DisplayTime(lblTimeMon);
-                    break;
-                case 2:
-                    DisplayTime(lblTimeTue);
-                    break;
-                case 3:
-                    DisplayTime(lblTimeWed);
-                    break;
-                case 4:
-                    DisplayTime(lblTimeThu);
-                    break;
-                case 5:
-                    DisplayTime(lblTimeFri);
-                    break;
-                case 6:
-                    DisplayTime(lblTimeSat);
-                    break;
-                case 7:
-                    DisplayTime(lblTimeSun);
-                    break;
-            }
-        }
-
-        private void UpdateSchedule()
-        {
-            string pickedTime = $"{TextBegin.Text} - {TextEnd.Text}";
-            switch (PickedDayOfWeek)
-            {
-                case 1:
-                    lblTimeMon.Text = pickedTime;
-                    break;
-                case 2:
-                    lblTimeTue.Text = pickedTime;
-                    break;
-                case 3:
-                    lblTimeWed.Text = pickedTime;
-                    break;
-                case 4:
-                    lblTimeThu.Text = pickedTime;
-                    break;
-                case 5:
-                    lblTimeFri.Text = pickedTime;
-                    break;
-                case 6:
-                    lblTimeSat.Text = pickedTime;
-                    break;
-                case 7:
-                    lblTimeSun.Text = pickedTime;
-                    break;
-            }
-        }
-
-
-
-
         private void TextBegin_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -132,28 +74,46 @@ namespace PathPointer
                 TextBegin.Focus();
             }
         }
-
         private void TextBegin_Leave(object sender, EventArgs e)
         {
             TextBegin.Text = FormatChecking(TextBegin.Text);
-            BeginTimeIsLessCheck();
+            BeginTimeIsLessThenEndTimeCheck();
             if (firstBeginChange == true && beginChanged == true) ChangeAllDays(ref firstBeginChange);  //при первом изменении, изменяется расписание всех дней
-            else UpdateSchedule();
-
+            else FromTimePickToSchedule();
         }
-
         private void TextEnd_Leave(object sender, EventArgs e)
         {
             TextEnd.Text = FormatChecking(TextEnd.Text);
-            BeginTimeIsLessCheck();
+            BeginTimeIsLessThenEndTimeCheck();
             if (firstEndChange == true && endChanged == true) ChangeAllDays(ref firstEndChange);
-            else UpdateSchedule();
-
+            else FromTimePickToSchedule();
         }
 
-        private string FormatChecking(string checkFormat) {
+        private string[] ExportFormatTime(string[] scheduleArray) //форматирование строки в вид "9 17!"
+        {
 
-            checkFormat = checkFormat.Substring(0, 2);
+            for (int i = 0; scheduleArray.Length > i; i++)
+            {
+                if (scheduleArray[i][0] == 'В') //если по расписанию выхожной
+                {
+                    scheduleArray[i] = "H!";
+                    continue;
+                }
+                scheduleArray[i] = scheduleArray[i].Replace(" - ", " ");
+                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
+                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
+
+                if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
+                if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
+                scheduleArray[i] += "!";
+            }
+
+            return scheduleArray;
+        }
+        private string FormatChecking(string checkFormat)
+        {
+
+
             int hoursADay = 24;
 
             if (checkFormat == "Выходной")
@@ -162,6 +122,7 @@ namespace PathPointer
             }
             else
             {
+                checkFormat = checkFormat.Substring(0, 2);
                 if (checkFormat[0] == ' ')
                 {
                     checkFormat = "00:00";
@@ -195,61 +156,61 @@ namespace PathPointer
             return checkFormat;
         }
 
-        private void BeginTimeIsLessCheck() {
+
+        private void DayOfWeekClick(Label pickedLabel)
+        {
+            Label intermediateLbl = pickedLabelDayOfWeek;
+            Label currentLbl = lblsTimeOfDaysOfWeek[PickedDayOfWeek];
+
+            pickedLabelDayOfWeek = pickedLabel;      //отмена выделения предыдущего выбранного дня недели
+            MouseEnterFontEvent(pickedLabelDayOfWeek);
+            MouseLeaveFontEvent(intermediateLbl);
+
+            if (currentLbl.Text == "Выходной")
+            {
+                TextBegin.Text = "08:00";
+                TextEnd.Text = "15:00";
+                currentLbl.Text = "08:00 - 15:00";
+            }
+            else
+            {
+                TextBegin.Text = currentLbl.Text.Remove(currentLbl.Text.IndexOf(" "));
+                TextEnd.Text = currentLbl.Text.Substring(currentLbl.Text.IndexOf("-") + 2);
+            }
+        }
+
+        private void FromTimePickToSchedule()
+        {
+            string pickedTime = $"{TextBegin.Text} - {TextEnd.Text}";
+            lblsTimeOfDaysOfWeek[PickedDayOfWeek].Text = pickedTime;
+        }
+
+        private void BeginTimeIsLessThenEndTimeCheck() {
             int beginTime = Convert.ToInt32(TextBegin.Text.Remove(2));
             int endTime = Convert.ToInt32(TextEnd.Text.Remove(2));
 
-            if (beginTime > endTime)
-            {
-                TextEnd.Text = TextBegin.Text;
-            }
+            if (beginTime > endTime) TextEnd.Text = TextBegin.Text;
         }
 
 
-        private void ChangeAllDays(ref bool pickedChange) {     //при первом изменении часов, изменяются часы всех дней недели
+        private void ChangeAllDays(ref bool firstChange) //при первом изменении часов, изменяются часы всех дней недели
+        {     
             int currentPickedDay = PickedDayOfWeek;
 
-            for (int i = 1; i <= 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 PickedDayOfWeek = i;
-                UpdateSchedule();
+                FromTimePickToSchedule();
             }
 
-            pickedChange = false;
+            firstChange = false;
             PickedDayOfWeek = currentPickedDay;
         }
 
-        private void DisplayTime(Label currentLbl)      //отображение выбранного времени в строке выбора времени
-        {
-            currentLbl.Text = $"{FormatChecking(TextBegin.Text)} - {FormatChecking(TextEnd.Text)}"; 
-            FormatChecking(TextBegin.Text);
-            FormatChecking(TextEnd.Text);
-            TextBegin.Text = currentLbl.Text.Remove(currentLbl.Text.IndexOf(" "));
-            TextEnd.Text = currentLbl.Text.Substring(currentLbl.Text.IndexOf("-") + 2);
-
-
-        }
-
-        private string[] FormatTime(string[] scheduleArray) //форматирование строки в вид "9 17!"
-        {
-
-            for (int i = 0; scheduleArray.Length > i; i++)
-            {
-                if (scheduleArray[i][0] == 'В') //если по расписанию выхожной
-                {
-                    scheduleArray[i] = "H!";
-                    continue;
-                }
-                scheduleArray[i] = scheduleArray[i].Replace(" - ", " ");    
-                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
-                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
-
-                if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
-                if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
-                scheduleArray[i] += "!";
-            }
-
-            return scheduleArray;
+        private void TimeClick(Label label)
+        { 
+            if (label.Text != "Выходной") label.Text = "Выходной";
+            else label.Text = "08:00 - 15:00";
         }
 
         private void TextBegin_TextChanged(object sender, EventArgs e)
@@ -259,29 +220,6 @@ namespace PathPointer
         private void TextEnd_TextChanged(object sender, EventArgs e)
         {
             endChanged = true;
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            AddBusy empForm = new AddBusy();
-            empForm.Show();
-            this.Hide();
-        }
-        private void AddSchedule_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            MenuManagement.HideForm(this, e);
-        }
-
-        private void TimeClick(Label label){
-            if (label.Text != "Выходной")
-            {
-                label.Text = "Выходной";
-            }
-            else {
-                TextBegin.Text = FormatChecking(TextBegin.Text);
-                TextEnd.Text = FormatChecking(TextEnd.Text);
-                label.Text = $"{TextBegin.Text} - {TextEnd.Text}";
-            }
         }
         private void MouseEnterFontEvent(Label label) {
             label.Font = new Font(label.Font, FontStyle.Bold);
@@ -440,38 +378,52 @@ namespace PathPointer
 
         private void lblMon_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 1;
-            ShowDaySchedule(lblMon);
+            PickedDayOfWeek = 0;
+            DayOfWeekClick(lblMon);
         }
         private void lblTue_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 2;
-            ShowDaySchedule(lblTue);
+            PickedDayOfWeek = 1;
+            DayOfWeekClick(lblTue);
         }
         private void lblWed_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 3;
-            ShowDaySchedule(lblWed);
+            PickedDayOfWeek = 2;
+            DayOfWeekClick(lblWed);
         }
         private void lblThu_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 4;
-            ShowDaySchedule(lblThu);
+            PickedDayOfWeek = 3;
+            DayOfWeekClick(lblThu);
         }
         private void lblFri_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 5;
-            ShowDaySchedule(lblFri);
+            PickedDayOfWeek = 4;
+            DayOfWeekClick(lblFri);
         }
         private void lblSat_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 6;
-            ShowDaySchedule(lblSat);
+            PickedDayOfWeek = 5;
+            DayOfWeekClick(lblSat);
         }
         private void lblSun_Click(object sender, EventArgs e)
         {
-            PickedDayOfWeek = 7;
-            ShowDaySchedule(lblSun);
+            PickedDayOfWeek = 6;
+            DayOfWeekClick(lblSun);
         }
+
+
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            AddBusy empForm = new AddBusy();
+            empForm.Show();
+            this.Hide();
+        }
+        private void AddSchedule_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
+        }
+
     }
 }
