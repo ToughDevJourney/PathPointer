@@ -46,33 +46,33 @@ namespace PathPointer
 
         private void BtnBusiness_Click(object sender, EventArgs e)
         {
-            empType = "Business";
+            EmpType = "Business";
         }
 
         public void BtnGoals_Click(object sender, EventArgs e)
         {
-            empType = "Goals";
+            EmpType = "Goals";
         }
 
         private void BtnRest_Click(object sender, EventArgs e)
         {
-            empType = "Rest";
+            EmpType = "Rest";
         }
 
         private void BtnFun_Click(object sender, EventArgs e)
         {
-            empType = "Fun";
+            EmpType = "Fun";
         }
 
         public void FillGrid()
         {
-            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{empType}", ref varCells).DataSource;
+            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{EmpType}", ref varCells).DataSource;
         }
 
         private void BtnReady_Click(object sender, EventArgs e)
         {
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
-            StatsManagement.WriteStats($"{empType}!{StatsManagement.FindCode(currentCellVal, empType)}");
+            StatsManagement.WriteStats($"{EmpType}!{StatsManagement.FindCode(currentCellVal, EmpType)}");
             MenuManagement.questCheck = false;
 
             this.Hide();

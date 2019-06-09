@@ -21,7 +21,7 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            string goaltName = DataManagement.checkEmploymentFormat(textName.Text);
+            string goaltName = DataManagement.CheckEmploymentFormat(textName.Text);
             string goalTime = textTime.Text;
 
             if (goaltName == "")

@@ -19,7 +19,7 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            string restName = DataManagement.checkEmploymentFormat(textName.Text);
+            string restName = DataManagement.CheckEmploymentFormat(textName.Text);
             string restTime = textTime.Text;
 
             if (restName == "")

@@ -33,7 +33,6 @@ namespace PathPointer
                     string[] fileRows = File.ReadAllLines(codePath);        //занесение данных из файла в массив
                     for (int i = 0; i < fileRows.Length; i++)
                     {
-
                         if (GetValueByIndex(fileRows[i]) == Employments.empType)
                         {
                             code = Convert.ToInt32(fileRows[i].Substring((GetValueByIndex(fileRows[i]).Length) + 1));     //вывод кода из файла
@@ -112,9 +111,7 @@ namespace PathPointer
                 {
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if (String.Compare(GetValueByIndex(line), delLine) == 0)
-                            continue;
-
+                        if (String.Compare(GetValueByIndex(line), delLine) == 0) continue;
                         writer.WriteLine(line);
                     }
                 }
@@ -132,7 +129,7 @@ namespace PathPointer
             File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
         }
 
-        public static string checkEmploymentFormat(string formatChecking){
+        public static string CheckEmploymentFormat(string formatChecking){
             while (true) {
                 if (formatChecking.Contains("!")) formatChecking = formatChecking.Remove(formatChecking.IndexOf("!"), 1);
                 else if (formatChecking.Contains(";")) formatChecking = formatChecking.Remove(formatChecking.IndexOf(";"), 1);

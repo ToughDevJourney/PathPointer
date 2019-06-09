@@ -27,7 +27,7 @@ namespace PathPointer
         private void BtnAddSchedule_Click(object sender, EventArgs e)
         {
             BusyName = textName.Text;
-            textName.Text = DataManagement.checkEmploymentFormat(textName.Text);
+            textName.Text = DataManagement.CheckEmploymentFormat(textName.Text);
             AddSchedule empForm = new AddSchedule();
             empForm.Show();
             this.Hide();
