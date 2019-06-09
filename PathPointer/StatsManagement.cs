@@ -119,7 +119,7 @@ namespace PathPointer
 
 
 
-        public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, int currentEmployment) {
+        public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, ref Label lblMustSpend, int currentEmployment) {
 
             
 
@@ -127,9 +127,11 @@ namespace PathPointer
             string employmentName = "";
             string employmentType  = GetValueByIndex(statsFileArr[currentEmployment]);
             string employmentHours = "";
+            string employmentsMustSpend = "";
+            DateTime dateGoal = new DateTime();
             int hoursGoal;
             int doneHours;
-
+            int needDays;
 
 
             if (employmentType == "" || employmentType == " ")
@@ -161,11 +163,13 @@ namespace PathPointer
                     SetPath($"Employments\\{employmentType}");    //ищем в документе с указанным видом деятельности информацию о занятии
                     using (StreamReader sr = new StreamReader(FilePath))
                     {
+                        employmentType = "";
                         while ((employment = sr.ReadLine()) != null)
                         {
                             if (GetValueByIndex(employment, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1)) //проверка сходства кода из расписания и кода из списка деятельности
                             {
                                 employmentName = GetValueByIndex(employment);
+                                employmentType = GetValueByIndex(statsFileArr[currentEmployment]);
                                 employmentHours = GetValueByIndex(employment, 2);
 
 
@@ -181,7 +185,7 @@ namespace PathPointer
                     switch (employmentType)
                     {
                         case "":
-                            employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
+                            employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ"; 
                             employmentType = "Обратитесь к вашему системному администратору" +
                                             "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
                             employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
@@ -189,14 +193,25 @@ namespace PathPointer
                         case "Business":
                             employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
                                             "\nЗнайте, что разработчику этой программы очень вас жалко :)";
-                            employmentHours = employmentHours == "N" ? "Для этого дела нет расписания" : FormatTime(GetValueByIndex(employment, CurrentDateInfo.DayOfWeek));
+                            employmentHours = employmentHours == "N" ? "Для этого дела нет расписания" : $"Расписание для этого дела: {FormatTime(GetValueByIndex(employment, CurrentDateInfo.DayOfWeek))}";
                             break;
                         case "Goals":
+                            dateGoal = Convert.ToDateTime(GetValueByIndex(employment,3));
+                            needDays = (int)(dateGoal - DateTime.Now).TotalDays;
                             employmentType = "Ого, вы на верном пути к вашей цели!" +
                                             "\nВы ведь не потратили это время на чепуху, в роде, \"Смотреть весь день телевизор\", верно?";
                             hoursGoal = Convert.ToInt32(employmentHours);
                             doneHours = CountReadyHours(statsFileArr[currentEmployment], hoursGoal);
-                            employmentHours = $"Выполнено {doneHours} из {hoursGoal} часов";
+                            
+                            employmentHours = hoursGoal == doneHours ? $"Цель выполнена, на ее выполнение вы потратили {doneHours} часов! Но не спешите расслабляться, у вас еще много дел впереди!" : $"Выполнено {doneHours} из {hoursGoal} часов";
+                            if (hoursGoal != doneHours)
+                            {
+                                if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
+                                else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
+                                else if ((needDays == 0 && 24 - DateTime.Now.Hour < hoursGoal - doneHours) || (needDays * 24 - (hoursGoal - doneHours) < 0)) employmentsMustSpend = "Увы, но даже если вы возьметесь за дело прямо сейчас, уже не успеете :(";
+                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
+                            }
+                            else employmentsMustSpend = $"Цель должна была быть выполнена {dateGoal.ToLongDateString()}";
                             break;
                         case "Rest":
                             employmentType = "Надеюсь, вы хорошо отдохнули!" +
@@ -206,6 +221,7 @@ namespace PathPointer
                             doneHours = CountReadyHours(statsFileArr[currentEmployment], hoursGoal, true);
                             
                             employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
+
                             break;
                         case "Fun":
                             employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
@@ -214,6 +230,7 @@ namespace PathPointer
                             doneHours = CountReadyHours(statsFileArr[currentEmployment], hoursGoal, true);
 
                             employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
+                            employmentsMustSpend = $"Каждый пол года вы тратите на это {hoursGoal * 27} часов, это {(hoursGoal * 27) / 24} полных суток";
                             break;
                     }
                 }
@@ -224,6 +241,7 @@ namespace PathPointer
             lblName.Text = employmentName;
             lblType.Text = employmentType;
             lblDoneHours.Text = employmentHours;
+            lblMustSpend.Text = employmentsMustSpend;
         }
 
 

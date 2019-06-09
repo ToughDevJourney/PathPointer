@@ -128,7 +128,7 @@ namespace PathPointer
 
         private void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            StatsManagement.DisplayMainStats(ref lblEmployName, ref lblEmployType, ref lblDoneHours, DataGridBusiness.CurrentCell.ColumnIndex);
+            StatsManagement.DisplayMainStats(ref lblEmployName, ref lblEmployType, ref lblDoneHours, ref lblMustSpend, DataGridBusiness.CurrentCell.ColumnIndex);
         }
 
 

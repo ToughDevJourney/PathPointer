@@ -50,7 +50,6 @@
             this.lblEmployType = new System.Windows.Forms.Label();
             this.lblDoneHours = new System.Windows.Forms.Label();
             this.lblMustSpend = new System.Windows.Forms.Label();
-            this.lblFirstUse = new System.Windows.Forms.Label();
             this.TrayContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).BeginInit();
@@ -230,21 +229,11 @@
             this.lblMustSpend.TabIndex = 17;
             this.lblMustSpend.Text = "Такими темпами";
             // 
-            // lblFirstUse
-            // 
-            this.lblFirstUse.AutoSize = true;
-            this.lblFirstUse.Location = new System.Drawing.Point(222, 334);
-            this.lblFirstUse.Name = "lblFirstUse";
-            this.lblFirstUse.Size = new System.Drawing.Size(213, 13);
-            this.lblFirstUse.TabIndex = 18;
-            this.lblFirstUse.Text = "Первый раз занимались на этой неделе";
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 494);
-            this.Controls.Add(this.lblFirstUse);
             this.Controls.Add(this.lblMustSpend);
             this.Controls.Add(this.lblDoneHours);
             this.Controls.Add(this.lblEmployType);
@@ -286,7 +275,6 @@
         private System.Windows.Forms.Label lblEmployType;
         private System.Windows.Forms.Label lblDoneHours;
         private System.Windows.Forms.Label lblMustSpend;
-        private System.Windows.Forms.Label lblFirstUse;
     }
 }
 
