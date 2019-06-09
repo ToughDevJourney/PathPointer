@@ -17,16 +17,7 @@ namespace PathPointer
         }
 
 
-        protected static string GetValueByIndex(string line)
-        {            //вывод только названия занятия
-            if (line.Contains("!"))
-            {
-                line = line.Substring(0, line.IndexOf("!")); //.Remove(line.IndexOf("!"), line.Length - line.IndexOf("!"));
-            }
-            return line;
-        }
-
-        protected static string GetValueByIndex(string line, int index, string symbol = "!") {
+        protected static string GetValueByIndex(string line, int index = 0, string symbol = "!") {
 
             for (int i = 0; i < index; i++) {
                 if (line.Contains(symbol))

@@ -12,7 +12,16 @@ namespace PathPointer
 {
     public partial class TimeSpent : Form
     {
-        public static string empType;
+        private static string empType;
+        public string EmpType {
+            get {
+                return empType;
+            }
+            set {
+                empType = value;
+                FillGrid();
+            }
+        }
         public static BindingList<DataManagement> varCells;
         private static TimeSpent _timeSpent;
 
@@ -38,25 +47,21 @@ namespace PathPointer
         private void BtnBusiness_Click(object sender, EventArgs e)
         {
             empType = "Business";
-            FillGrid();
         }
 
         public void BtnGoals_Click(object sender, EventArgs e)
         {
             empType = "Goals";
-            FillGrid();
         }
 
         private void BtnRest_Click(object sender, EventArgs e)
         {
             empType = "Rest";
-            FillGrid();
         }
 
         private void BtnFun_Click(object sender, EventArgs e)
         {
             empType = "Fun";
-            FillGrid();
         }
 
         public void FillGrid()

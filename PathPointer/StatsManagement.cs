@@ -19,7 +19,7 @@ namespace PathPointer
 
 
 
-        
+
         public static void FillGrid(ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
         {
             SetPath("Efficiency");
@@ -43,7 +43,7 @@ namespace PathPointer
             }
 
 
-            for (int i = 0; i<24; i++) {
+            for (int i = 0; i < 24; i++) {
                 for (int symbCount = 0; symbCount < dayOfWeek; symbCount++) {       //получение расписания для текущего дня недели 
                     statsFileArr[i] = statsFileArr[i].Substring(statsFileArr[i].IndexOf(";") + 1);
                 }
@@ -77,7 +77,7 @@ namespace PathPointer
 
                         arrayIndex++;
                         if (arrayIndex == 24) break;
-                        
+
                     }
 
 
@@ -105,7 +105,7 @@ namespace PathPointer
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Red;
                     break;
                 case "T":
-                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.LightBlue ;
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.LightBlue;
                     break;
                 case "F":
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Black;
@@ -119,44 +119,57 @@ namespace PathPointer
 
 
 
-        public static void DisplayMainStats(ref Label lblName, ref Label lblType, int currentEmployment) {
+        public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, int currentEmployment) {
 
-            SetPath($"Employments\\{GetValueByIndex(statsFileArr[currentEmployment])}");
+            
 
+            string employment = "";
             string employmentName = "";
-            string employmentType = "";
+            string employmentType  = GetValueByIndex(statsFileArr[currentEmployment]);
+            string employmentHours = "";
+            int hoursGoal;
+            int doneHours;
 
-            if (statsFileArr[currentEmployment] == "" || statsFileArr[currentEmployment] == " ")
+
+
+            if (employmentType == "" || employmentType == " ")
             {
                 employmentName = "ПРОПУСК";
                 employmentType = "Похоже, что в это время вы занимались чем-то ДЕЙСТВИТЕЛЬНО полезным" +
                                 "\nВам должно быть стыдно";
+                employmentHours = "Ноль часов из нуля - стопроцентная продуктивность для ленивых";
             }
-            else if (statsFileArr[currentEmployment] == "T")
+            else if (employmentType == "T")
             {
                 employmentName = "СЕЙЧАС";
                 employmentType = "Ваша судьба в ваших руках" +
                                 "\nПочему бы не заняться чем-нибудь полезным прямо сейчас?";
+                employmentHours = "Самое время изменить вашу жизнь к лучшему!";
             }
-            else if (statsFileArr[currentEmployment] == "F")
+            else if (employmentType == "F")
             {
 
                 employmentName = "БУДУЩЕЕ";
                 employmentType = "Этот отрезок времени покрыт великой тайной..." +
                                 "\nНикто не знает, будете ли вы через пару часов смотреть телевизор или встанете на путь к своей цели" +
                                 "\nРазработчик этой программы верит в вас (Пожалуйста, встаньте на на путь к своей цели, не расстраивайте программиста)";
+                employmentHours = "Ваш успех зависит от ваших действий";
             }
             else {
                 try
                 {
+                    SetPath($"Employments\\{employmentType}");    //ищем в документе с указанным видом деятельности информацию о занятии
                     using (StreamReader sr = new StreamReader(FilePath))
                     {
-                        while ((employmentName = sr.ReadLine()) != null)
+                        while ((employment = sr.ReadLine()) != null)
                         {
-                            if (GetValueByIndex(employmentName, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1))
+                            if (GetValueByIndex(employment, 1) == GetValueByIndex(statsFileArr[currentEmployment], 1)) //проверка сходства кода из расписания и кода из списка деятельности
                             {
-                                employmentName = GetValueByIndex(employmentName);
-                                employmentType = GetValueByIndex(statsFileArr[currentEmployment], 0);
+                                employmentName = GetValueByIndex(employment);
+                                employmentHours = GetValueByIndex(employment, 2);
+
+
+
                                 break;
                             }
                         }
@@ -171,26 +184,37 @@ namespace PathPointer
                             employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
                             employmentType = "Обратитесь к вашему системному администратору" +
                                             "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
+                            employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
                             break;
                         case "Business":
                             employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
                                             "\nЗнайте, что разработчику этой программы очень вас жалко :)";
+                            employmentHours = employmentHours == "N" ? "Для этого дела нет расписания" : FormatTime(GetValueByIndex(employment, CurrentDateInfo.DayOfWeek));
                             break;
                         case "Goals":
                             employmentType = "Ого, вы на верном пути к вашей цели!" +
                                             "\nВы ведь не потратили это время на чепуху, в роде, \"Смотреть весь день телевизор\", верно?";
+                            hoursGoal = Convert.ToInt32(employmentHours);
+                            doneHours = CountReadyHours(statsFileArr[currentEmployment], hoursGoal);
+                            employmentHours = $"Выполнено {doneHours} из {hoursGoal} часов";
                             break;
                         case "Rest":
                             employmentType = "Надеюсь, вы хорошо отдохнули!" +
                                             "\nНо помните, что если вы провели 4 часа за компьютером, \"Посидеть в вашем модном телефончике\" - не будет для вас отдыхом" +
                                             "\nОтдых - это смена деятельности, лучше сходите на прогулку или поиграйте с кошкой";
+                            hoursGoal = Convert.ToInt32(employmentHours) * 7;
+                            doneHours = CountReadyHours(statsFileArr[currentEmployment], hoursGoal, true);
+                            
+                            employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
                             break;
                         case "Fun":
                             employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
                                             "\nБудьте осторожны";
+                            hoursGoal = Convert.ToInt32(employmentHours) * 7;
+                            doneHours = CountReadyHours(statsFileArr[currentEmployment], hoursGoal, true);
+
+                            employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
                             break;
-
-
                     }
                 }
             }
@@ -199,26 +223,37 @@ namespace PathPointer
 
             lblName.Text = employmentName;
             lblType.Text = employmentType;
+            lblDoneHours.Text = employmentHours;
+        }
+
+
+        private static string FormatTime(string time) {
+            string beginTime = time.Remove(time.IndexOf(" "));
+            string endTime = time.Substring(time.IndexOf(" ") + 1);
+
+            beginTime = beginTime.Length == 2 ? $"{beginTime}:00" : $"0{beginTime}:00";
+            endTime = endTime.Length == 2 ? $"{endTime}:00" : $"0{endTime}:00";
+
+            time = $"{beginTime} - {endTime}";
+            return time;
         }
 
 
 
-
-
-        public static void WriteStats(string name)    
+        public static void WriteStats(string name)
         {
             SetPath("Efficiency");
 
-            int hour = DateTime.Now.Hour-1;
+            int hour = DateTime.Now.Hour - 1;
             int dayOfWeek = Convert.ToInt32(DateTime.Now.DayOfWeek);
 
             string[] efficiency = File.ReadAllLines(FilePath);
             string checkDay = efficiency[hour];
 
-            for (int i = 0; i<=7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
+            for (int i = 0; i <= 7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
                 if (checkDay.Contains(";"))
                 {
-                    checkDay = checkDay.Remove(checkDay.IndexOf(";"), 1);                  
+                    checkDay = checkDay.Remove(checkDay.IndexOf(";"), 1);
                 }
                 else if (dayOfWeek == 0 || dayOfWeek > i) efficiency[hour] += " ;";
                 else break;
@@ -341,7 +376,30 @@ namespace PathPointer
 
 
 
+        public static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
+        {
+            SetPath("Efficiency");
+            int hoursDone = 0;
+            
+            string readLine;
 
+            using (StreamReader reader = new StreamReader(FilePath))
+            {
+                for (int j = 0; (readLine = reader.ReadLine()) != null; j++)
+                {
+                    for (int i = 1; i <= 7; i++) {
+                        if (GetValueByIndex(readLine, i, ";") == "") break;
+                        else if (desiredEmployment == GetValueByIndex(readLine, i, ";")) hoursDone++;  
+                    }
+
+                    if (hoursDone >= hoursGoal && restCheck == false) break;
+                    else if (restCheck == true && j == 23) break;
+                }
+            }
+
+
+            return hoursDone;
+        }
 
 
 
