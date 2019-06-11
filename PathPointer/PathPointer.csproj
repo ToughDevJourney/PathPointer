@@ -82,7 +82,7 @@
     <Compile Include="AddSchedule.Designer.cs">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppSettings.cs" />
+    <Compile Include="UserSettings.cs" />
     <Compile Include="CurrentDateInfo.cs" />
     <Compile Include="DataManagement.cs" />
     <Compile Include="Employments.cs">

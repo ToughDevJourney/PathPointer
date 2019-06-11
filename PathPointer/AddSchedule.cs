@@ -112,7 +112,7 @@ namespace PathPointer
         }
         private string FormatChecking(string checkFormat)
         {
-
+            Console.WriteLine("here is Checking");
 
             int hoursADay = 24;
 

@@ -13,7 +13,7 @@ namespace PathPointer
     public partial class TimeSpent : Form
     {
         private static string empType;
-        private static int currentRange = AppSettings.EmploymentCheckRange;
+        private static int currentRange = UserSettings.EmploymentCheckRange;
 
         public string EmpType {
             get {
@@ -44,7 +44,7 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
-            for (int i = AppSettings.EmploymentCheckRange; i > 0; i--)//нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
+            for (int i = UserSettings.EmploymentCheckRange; i > 0; i--)//нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
             {
                 if (!StatsManagement.CheckIsFileOccupied(i))
                 {

@@ -91,8 +91,9 @@ namespace PathPointer
         private void TimerHour_Tick(object sender, EventArgs e)
         {
             const int interval60Mins = 60 * 60 * 1000;
-            StatsManagement.CheckWeekRelevance();
             TimerHour.Interval = interval60Mins;
+            FileManagement.CheckAllFiles();
+            StatsManagement.CheckWeekRelevance();
             if (!StatsManagement.CheckIsFileOccupied()) ShowQuest();
         }
 
@@ -123,6 +124,8 @@ namespace PathPointer
         {
             StatsManagement.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
             DataGridBusiness_CellClick(null, null);
+            DataGridDayOfWeek.ClearSelection();
+            PointToDayOfWeek();
         }
 
         public void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -130,9 +133,17 @@ namespace PathPointer
             StatsManagement.DisplayMainStats(ref lblEmployName, ref lblEmployType, ref lblDoneHours, ref lblMustSpend, DataGridBusiness.CurrentCell.ColumnIndex);
             if (DataGridBusiness.CurrentCell.ColumnIndex < 10) lblEmploymentHour.Text = $"0{DataGridBusiness.CurrentCell.ColumnIndex.ToString()}:00";
             else lblEmploymentHour.Text = $"{DataGridBusiness.CurrentCell.ColumnIndex.ToString()}:00";
-
+          //  DataGridBusiness.ClearSelection();
         }
 
+        private void PointToDayOfWeek() {/*
+            dayOfWeekPointer.ColumnCount = 7;
+            dayOfWeekPointer.RowCount = 1;
+            int indexer = DataGridDayOfWeek.CurrentCell.RowIndex;
+
+            dayOfWeekPointer.Rows.Clear();
+            dayOfWeekPointer.Rows[0].Cells[DataGridDayOfWeek.CurrentCell.RowIndex].Value = "here";*/
+        }
 
         public void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {

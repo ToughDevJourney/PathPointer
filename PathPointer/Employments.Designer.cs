@@ -37,9 +37,6 @@
             this.BtnBusiness = new System.Windows.Forms.Button();
             this.BackMain = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
-            this.BtnHight = new System.Windows.Forms.Button();
-            this.LowButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,41 +128,11 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // BtnHight
-            // 
-            this.BtnHight.Location = new System.Drawing.Point(563, 265);
-            this.BtnHight.Name = "BtnHight";
-            this.BtnHight.Size = new System.Drawing.Size(116, 60);
-            this.BtnHight.TabIndex = 9;
-            this.BtnHight.Text = "Понизить";
-            this.BtnHight.UseVisualStyleBackColor = true;
-            // 
-            // LowButton
-            // 
-            this.LowButton.Location = new System.Drawing.Point(681, 265);
-            this.LowButton.Name = "LowButton";
-            this.LowButton.Size = new System.Drawing.Size(116, 60);
-            this.LowButton.TabIndex = 10;
-            this.LowButton.Text = "Повысить";
-            this.LowButton.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(649, 246);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Приоритет";
-            // 
             // Employments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 415);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.LowButton);
-            this.Controls.Add(this.BtnHight);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.BackMain);
             this.Controls.Add(this.BtnBusiness);
@@ -179,7 +146,6 @@
             this.Load += new System.EventHandler(this.Employments_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -192,8 +158,5 @@
         private System.Windows.Forms.Button BtnBusiness;
         private System.Windows.Forms.Button BackMain;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button BtnHight;
-        private System.Windows.Forms.Button LowButton;
-        private System.Windows.Forms.Label label1;
     }
 }

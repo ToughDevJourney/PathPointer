@@ -39,10 +39,13 @@ namespace PathPointer
 
         private static void CheckForCommon(){
             if (!CheckFileExistance("Common")) {
-                string[] fileArray = new string[1];
+                string[] fileArray = new string[4];
                 var cal = new GregorianCalendar();
                 int currentWeekNumber = cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-                fileArray[0] = $"Week Number!{currentWeekNumber}";
+                fileArray[0] = "Common info:";
+                fileArray[1] = $"Week Number!{currentWeekNumber}";
+                fileArray[2] = "User settings:";
+                fileArray[3] = "Employment Check Range!1";
                 File.WriteAllLines(FilePath, fileArray);
             }
         }
@@ -50,12 +53,8 @@ namespace PathPointer
         private static void CheckForEfficiency() {
             if (!CheckFileExistance("Efficiency"))
             {
-                string[] fileArray = new string[48];
-                for (int j = 0; j < 2; j++)
-                for (int i = 0; i<24; i++) {
-                    fileArray[i + (j * 24)] = $"{i}:00;";
-                }
-                File.WriteAllLines(FilePath, fileArray);
+                using (File.Create(FilePath)) { }
+                for (int j = 0; j <= 2; j++) StatsManagement.AddNewWeekIntoEfficiency();
             }
 
         }
@@ -73,10 +72,7 @@ namespace PathPointer
         }
 
         private static void CheckForBusiness() {
-            if (!CheckFileExistance("Employments\\Business"))
-            {
-                using (File.Create(FilePath)) { }
-            }
+            if (!CheckFileExistance("Employments\\Business")) using (File.Create(FilePath)) { }
         }
 
         private static void CheckForGoals()
@@ -85,23 +81,17 @@ namespace PathPointer
             {
                 using (File.Create(FilePath)) { }
                 DataManagement.WriteEmpFiles($"Установка PathPointer!{DataManagement.Code}!1!{DateTime.Today.ToShortDateString()}", "Employments\\Goals");
-                MainMenu.ShowQuest();
             }
         }
 
         private static void CheckForRest() {
-            if (!CheckFileExistance("Employments\\Rest"))
-            {
-                using (File.Create(FilePath)) { }
-            }
+            if (!CheckFileExistance("Employments\\Rest")) using (File.Create(FilePath)) { }
+
         }
 
         private static void CheckForFun()
         {
-            if (!CheckFileExistance("Employments\\Fun"))
-            {
-                using (File.Create(FilePath)) { }
-            }
+            if (!CheckFileExistance("Employments\\Fun")) using (File.Create(FilePath)) { }
         }
 
         private static bool CheckFileExistance(string fileStr) {
