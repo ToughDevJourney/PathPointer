@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnBusiness = new System.Windows.Forms.Button();
             this.BtnFun = new System.Windows.Forms.Button();
             this.BtnRest = new System.Windows.Forms.Button();
             this.BtnGoals = new System.Windows.Forms.Button();
             this.BtnReady = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPrevHour = new System.Windows.Forms.Label();
             this.dataGridBusiness = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusiness)).BeginInit();
             this.SuspendLayout();
@@ -90,15 +90,16 @@
             this.BtnReady.UseVisualStyleBackColor = true;
             this.BtnReady.Click += new System.EventHandler(this.BtnReady_Click);
             // 
-            // label1
+            // lblPrevHour
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(21, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(514, 24);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "На что вы потратили большую часть прошедшего часа?";
+            this.lblPrevHour.AutoSize = true;
+            this.lblPrevHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrevHour.Location = new System.Drawing.Point(21, 11);
+            this.lblPrevHour.Name = "lblPrevHour";
+            this.lblPrevHour.Size = new System.Drawing.Size(514, 24);
+            this.lblPrevHour.TabIndex = 10;
+            this.lblPrevHour.Text = "На что вы потратили большую часть прошедшего часа?";
+            this.lblPrevHour.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dataGridBusiness
             // 
@@ -107,21 +108,21 @@
             this.dataGridBusiness.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridBusiness.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridBusiness.ColumnHeadersVisible = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridBusiness.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridBusiness.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridBusiness.EnableHeadersVisualStyles = false;
             this.dataGridBusiness.Location = new System.Drawing.Point(294, 52);
             this.dataGridBusiness.MultiSelect = false;
             this.dataGridBusiness.Name = "dataGridBusiness";
             this.dataGridBusiness.RowHeadersVisible = false;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridBusiness.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridBusiness.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridBusiness.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridBusiness.Size = new System.Drawing.Size(241, 322);
             this.dataGridBusiness.TabIndex = 11;
@@ -132,7 +133,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 464);
             this.Controls.Add(this.dataGridBusiness);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPrevHour);
             this.Controls.Add(this.BtnReady);
             this.Controls.Add(this.BtnBusiness);
             this.Controls.Add(this.BtnFun);
@@ -154,7 +155,7 @@
         private System.Windows.Forms.Button BtnRest;
         private System.Windows.Forms.Button BtnGoals;
         private System.Windows.Forms.Button BtnReady;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPrevHour;
         private System.Windows.Forms.DataGridView dataGridBusiness;
     }
 }

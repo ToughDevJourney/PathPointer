@@ -50,6 +50,7 @@
             this.lblEmployType = new System.Windows.Forms.Label();
             this.lblDoneHours = new System.Windows.Forms.Label();
             this.lblMustSpend = new System.Windows.Forms.Label();
+            this.lblEmploymentHour = new System.Windows.Forms.Label();
             this.TrayContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).BeginInit();
@@ -152,7 +153,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DataGridBusiness.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridBusiness.EnableHeadersVisualStyles = false;
-            this.DataGridBusiness.Location = new System.Drawing.Point(176, 464);
+            this.DataGridBusiness.Location = new System.Drawing.Point(176, 448);
             this.DataGridBusiness.MultiSelect = false;
             this.DataGridBusiness.Name = "DataGridBusiness";
             this.DataGridBusiness.ReadOnly = true;
@@ -180,7 +181,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DataGridDayOfWeek.DefaultCellStyle = dataGridViewCellStyle3;
             this.DataGridDayOfWeek.EnableHeadersVisualStyles = false;
-            this.DataGridDayOfWeek.Location = new System.Drawing.Point(176, 405);
+            this.DataGridDayOfWeek.Location = new System.Drawing.Point(176, 422);
             this.DataGridDayOfWeek.MultiSelect = false;
             this.DataGridDayOfWeek.Name = "DataGridDayOfWeek";
             this.DataGridDayOfWeek.ReadOnly = true;
@@ -229,11 +230,21 @@
             this.lblMustSpend.TabIndex = 17;
             this.lblMustSpend.Text = "Такими темпами";
             // 
+            // lblEmploymentHour
+            // 
+            this.lblEmploymentHour.AutoSize = true;
+            this.lblEmploymentHour.Location = new System.Drawing.Point(942, 42);
+            this.lblEmploymentHour.Name = "lblEmploymentHour";
+            this.lblEmploymentHour.Size = new System.Drawing.Size(129, 13);
+            this.lblEmploymentHour.TabIndex = 18;
+            this.lblEmploymentHour.Text = "Выполнено 0 часов из 0";
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 494);
+            this.Controls.Add(this.lblEmploymentHour);
             this.Controls.Add(this.lblMustSpend);
             this.Controls.Add(this.lblDoneHours);
             this.Controls.Add(this.lblEmployType);
@@ -275,6 +286,7 @@
         private System.Windows.Forms.Label lblEmployType;
         private System.Windows.Forms.Label lblDoneHours;
         private System.Windows.Forms.Label lblMustSpend;
+        private System.Windows.Forms.Label lblEmploymentHour;
     }
 }
 

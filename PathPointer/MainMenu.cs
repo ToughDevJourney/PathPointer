@@ -23,8 +23,6 @@ namespace PathPointer
         public MainMenu()
         {
             InitializeComponent();
-
-
         }
 
 
@@ -48,6 +46,7 @@ namespace PathPointer
             interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
+            if (!StatsManagement.CheckIsFileOccupied()) ShowQuest();
         }
 
 
@@ -94,7 +93,7 @@ namespace PathPointer
             const int interval60Mins = 60 * 60 * 1000;
             StatsManagement.CheckWeekRelevance();
             TimerHour.Interval = interval60Mins;
-            if (!StatsManagement.CheckSchedule()) ShowQuest();
+            if (!StatsManagement.CheckIsFileOccupied()) ShowQuest();
         }
 
         public static void ShowQuest()
@@ -126,9 +125,12 @@ namespace PathPointer
             DataGridBusiness_CellClick(null, null);
         }
 
-        private void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
+        public void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             StatsManagement.DisplayMainStats(ref lblEmployName, ref lblEmployType, ref lblDoneHours, ref lblMustSpend, DataGridBusiness.CurrentCell.ColumnIndex);
+            if (DataGridBusiness.CurrentCell.ColumnIndex < 10) lblEmploymentHour.Text = $"0{DataGridBusiness.CurrentCell.ColumnIndex.ToString()}:00";
+            else lblEmploymentHour.Text = $"{DataGridBusiness.CurrentCell.ColumnIndex.ToString()}:00";
+
         }
 
 

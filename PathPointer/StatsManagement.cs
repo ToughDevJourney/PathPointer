@@ -18,7 +18,7 @@ namespace PathPointer
 
         public static void FillGrid(ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
         {
-            
+
             SetPath("Efficiency");
 
             int currentDayOfWeekCode = CurrentDateInfo.DayOfWeek;
@@ -30,11 +30,11 @@ namespace PathPointer
 
             if (dayOfWeek > currentDayOfWeekCode) StatsFileArr = FillStatsArray(2, pickedCurrentDay);     //заполнить массив данными предыдущей недели
             else StatsFileArr = FillStatsArray(1, pickedCurrentDay);                                      //заполнить массив данными текущей недели
-                
+
             for (int i = 0; i < 24; i++) {
                 for (int symbCount = 0; symbCount < dayOfWeek; symbCount++)                               //получение расписания для текущего дня недели 
                     StatsFileArr[i] = StatsFileArr[i].Substring(StatsFileArr[i].IndexOf(";") + 1);
-                             
+
                 if (StatsFileArr[i].Contains(";")) StatsFileArr[i] = StatsFileArr[i].Substring(0, (StatsFileArr[i].IndexOf(";")));
                 GetCellColor(StatsFileArr[i], i, dataGridView);
             }
@@ -98,7 +98,7 @@ namespace PathPointer
         public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, ref Label lblMustSpend, int currentEmployment) {
             string employment = "";
             string employmentName = "";
-            string employmentType  = GetValueByIndex(StatsFileArr[currentEmployment]);
+            string employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
             string employmentHours = "";
             string employmentsMustSpend = "";
             DateTime dateGoal = new DateTime();
@@ -155,7 +155,7 @@ namespace PathPointer
                     switch (employmentType)
                     {
                         case "":
-                            employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ"; 
+                            employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
                             employmentType = "Обратитесь к вашему системному администратору" +
                                             "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
                             employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
@@ -166,13 +166,13 @@ namespace PathPointer
                             employmentHours = employmentHours == "N" ? "Для этого дела нет расписания" : $"Расписание для этого дела: {FormatTime(GetValueByIndex(employment, CurrentDateInfo.DayOfWeek))}";
                             break;
                         case "Goals":
-                            dateGoal = Convert.ToDateTime(GetValueByIndex(employment,3));
+                            dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
                             needDays = (int)(dateGoal - DateTime.Now).TotalDays;
                             employmentType = "Ого, вы на верном пути к вашей цели!" +
                                             "\nВы ведь не потратили это время на чепуху, в роде, \"Смотреть весь день телевизор\", верно?";
                             hoursGoal = Convert.ToInt32(employmentHours);
                             doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal);
-                            
+
                             employmentHours = hoursGoal == doneHours ? $"Цель выполнена, на ее выполнение вы потратили {doneHours} часов! Но не спешите расслабляться, у вас еще много дел впереди!" : $"Выполнено {doneHours} из {hoursGoal} часов";
                             if (hoursGoal != doneHours)
                             {
@@ -189,7 +189,7 @@ namespace PathPointer
                                             "\nОтдых - это смена деятельности, лучше сходите на прогулку или поиграйте с кошкой";
                             hoursGoal = Convert.ToInt32(employmentHours) * 7;
                             doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal, true);
-                            
+
                             employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
 
                             break;
@@ -205,9 +205,6 @@ namespace PathPointer
                     }
                 }
             }
-
-
-
             lblName.Text = employmentName;
             lblType.Text = employmentType;
             lblDoneHours.Text = employmentHours;
@@ -229,27 +226,24 @@ namespace PathPointer
         {
             SetPath("Efficiency");
 
-            int hour = DateTime.Now.Hour - range;
-            int dayOfWeek = CurrentDateInfo.DayOfWeek;
-
-            if (hour < 0 && dayOfWeek == 1)
-            {
-                hour = 47;
-                dayOfWeek = 7;
-            }
-            else if (hour < 0) {
-                dayOfWeek--;
-                hour = 23;
-            }
-
-
+            int settableHour = DateTime.Now.Hour - range;
+            int settableDayOfWeek = CurrentDateInfo.DayOfWeek;
             string[] efficiency = File.ReadAllLines(FilePath);
 
+
+            PreviousHourFix(ref settableHour, ref settableDayOfWeek);
+
+            string chckNumOfEmps = efficiency[settableHour];
+
+
+
+
             for (int i = 1; i < 7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
-                if (dayOfWeek > i) efficiency[hour] += " ;";
+                if (chckNumOfEmps.Contains(";")) chckNumOfEmps = chckNumOfEmps.Remove(chckNumOfEmps.IndexOf(";"), 1);    
+                else if (settableDayOfWeek >= i) efficiency[settableHour] += " ;";
                 else break;
             }
-            efficiency[hour] += $"{name};";
+            efficiency[settableHour] += $"{name};";
 
             File.WriteAllLines(FilePath, efficiency);
 
@@ -282,7 +276,7 @@ namespace PathPointer
             string fileContainer = "";
             string[] commonFileArr = File.ReadAllLines(FilePath);
 
-            for (int i = 0; i< commonFileArr.Length; i++) {
+            for (int i = 0; i < commonFileArr.Length; i++) {
                 if (GetValueByIndex(commonFileArr[i], 0) == "Week Number")
                 {
                     fileWeekNumber = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 1));
@@ -308,64 +302,33 @@ namespace PathPointer
                     }
                 }
             }
-            /*
-            using (StreamReader sr = new StreamReader(FilePath))    //если последняя запись в файл производилась не на этой неделе
-            {
-                while ((readLine = sr.ReadLine()) != null)
-                {
-                    if (GetValueByIndex(readLine, 0) == "Week Number")
-                    {
-                        fileWeekNumber = Convert.ToInt32(GetValueByIndex(readLine, 1));
-                        if (fileWeekNumber != currentWeekNumber) {
-                            weekIsNowRelevant = true;
-                            fileContainer = File.ReadAllText(FilePath);
-                        }
-                        break;
-                    }
-                }
-            }
-
-            if (weekIsNowRelevant == true) {
-                using (StreamWriter wr = new StreamWriter(FilePath))
-                {
-                    fileContainer = fileContainer.Replace(readLine, $"Week Number!{currentWeekNumber}");
-                    wr.Write(fileContainer);
-                }
-
-                SetPath("Efficiency");
-
-                using (StreamReader sr = new StreamReader(FilePath)) fileContainer = sr.ReadToEnd();
-                File.Delete(FilePath);
-
-                using (StreamWriter wr = new StreamWriter(FilePath))
-                {
-                    for (int i = 0; i < hoursADay; i++) {
-                        wr.WriteLine($"{i}:00;");
-                    }
-                    wr.Write(fileContainer);
-                }
-            }            */
         }
 
 
-        public static bool CheckSchedule() {        //указан ли текущий час в расписании
+        public static bool CheckIsFileOccupied(int range = 1) {
             SetPath("Employments\\Business");
-            string[] scheduleFileArray = File.ReadAllLines(FilePath);
-            string choosedHourEmployment;
-            bool hourInSchedule = false;
+
+            bool fileOccupied = false;
             int checkingDayOfWeek = CurrentDateInfo.DayOfWeek;
-            int checkingHour = DateTime.Now.Hour - 1;
+            int checkingHour = DateTime.Now.Hour - range;
+
+            PreviousHourFix(ref checkingHour, ref checkingDayOfWeek);
+
+            fileOccupied = IsHourInSchedule(checkingHour, checkingDayOfWeek);
+
+            if (fileOccupied == false) fileOccupied = IsHourInEfficiency(checkingHour, checkingDayOfWeek);
+
+            return fileOccupied;
+        }
+
+        private static bool IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
             int beginHour;
             int endHour;
+            bool hourIsInSchedule = false; 
 
-            if (checkingHour == -1 && checkingDayOfWeek == 1)
+            string[] scheduleFileArray = File.ReadAllLines(FilePath);
+            for (int i = 0; i < scheduleFileArray.Length; i++) //указан ли текущий час в расписании
             {
-                checkingHour = 47;
-                checkingDayOfWeek = 7;
-            }
-            else if (checkingHour == -1) checkingHour = 47;
-
-            for (int i = 0; i < scheduleFileArray.Length; i++) {
                 if (GetValueByIndex(scheduleFileArray[i], 2) == "N") continue;
                 else
                 {
@@ -375,32 +338,38 @@ namespace PathPointer
                     beginHour = Convert.ToInt32(scheduleFileArray[i].Remove(scheduleFileArray[i].IndexOf(" ")));
                     endHour = Convert.ToInt32(scheduleFileArray[i].Substring(scheduleFileArray[i].IndexOf(" ") + 1));
 
-                    if (beginHour <= checkingHour && checkingHour - 1 < endHour) {
-                        hourInSchedule = true;
+                    if (beginHour <= checkingHour && checkingHour - 1 < endHour)
+                    {
+                        hourIsInSchedule = true; 
                         break;
                     }
                 }
             }
 
-            if (hourInSchedule == false) {
-                SetPath("Efficiency");
-                scheduleFileArray = File.ReadAllLines(FilePath);
-
-                
-
-
-                choosedHourEmployment = GetValueByIndex(scheduleFileArray[checkingHour], checkingDayOfWeek, ";");
-
-                if (!(choosedHourEmployment == " " || choosedHourEmployment == "")) {  //если в этот час опрос уже был показан
-                    hourInSchedule = true;
-                }
-            }
-
-            return hourInSchedule;
+            return hourIsInSchedule;
         }
 
+        private static bool IsHourInEfficiency(int checkingHour, int checkingDayOfWeek) //если в этот час опрос уже был показан
+        {
 
+            SetPath("Efficiency");
+            string[] scheduleFileArray = File.ReadAllLines(FilePath);
+            string choosedHourOfEmployment;
 
+            choosedHourOfEmployment = GetValueByIndex(scheduleFileArray[checkingHour], checkingDayOfWeek, ";");   
+
+            if (!(choosedHourOfEmployment == "")) return true;
+            else return false;
+        }
+
+        private static void PreviousHourFix(ref int checkingHour, ref int checkingDayOfWeek)
+        {
+            if (checkingHour < 0)
+            {
+                checkingHour = 48 - AppSettings.EmploymentCheckRange;
+                if (checkingDayOfWeek == 1)  checkingDayOfWeek = 7;
+            }
+        }
 
         public static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
         {
@@ -426,10 +395,6 @@ namespace PathPointer
 
             return hoursDone;
         }
-
-
-
-
 
 
     }

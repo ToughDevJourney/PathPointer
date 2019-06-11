@@ -13,6 +13,8 @@ namespace PathPointer
     public partial class TimeSpent : Form
     {
         private static string empType;
+        private static int currentRange = AppSettings.EmploymentCheckRange;
+
         public string EmpType {
             get {
                 return empType;
@@ -42,6 +44,24 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
+            for (int i = AppSettings.EmploymentCheckRange; i > 0; i--)//нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
+            {
+                if (!StatsManagement.CheckIsFileOccupied(i))
+                {
+                    currentRange = i;
+                    break;
+                }
+            }
+            SetLabelValue();
+        }
+
+        private void SetLabelValue() {
+            string hourType = "час";
+            if (currentRange == 1) hourType = "час";
+            else if (currentRange <= 4) hourType = "часа";
+            else hourType = "часов";
+
+            lblPrevHour.Text = $"Чем вы занимались {currentRange} {hourType} назад";
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)
@@ -72,10 +92,12 @@ namespace PathPointer
         private void BtnReady_Click(object sender, EventArgs e)
         {
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
-            StatsManagement.WriteStats($"{EmpType}!{StatsManagement.FindCode(currentCellVal, EmpType)}");
+            StatsManagement.WriteStats($"{EmpType}!{StatsManagement.FindCode(currentCellVal, EmpType)}", currentRange);
             MenuManagement.questCheck = false;
 
-            this.Hide();
+            currentRange--;
+            SetLabelValue();
+            if (currentRange <= 0) this.Hide();
         }
 
         private void TimeSpent_FormClosing(object sender, FormClosingEventArgs e)
