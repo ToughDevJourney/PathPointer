@@ -46,7 +46,7 @@ namespace PathPointer
             interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
-            if (!StatsManagement.CheckIsFileOccupied()) ShowQuest();
+            if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
         }
 
 
@@ -94,7 +94,7 @@ namespace PathPointer
             TimerHour.Interval = interval60Mins;
             FileManagement.CheckAllFiles();
             StatsManagement.CheckWeekRelevance();
-            if (!StatsManagement.CheckIsFileOccupied()) ShowQuest();
+            if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
         }
 
         public static void ShowQuest()
@@ -124,8 +124,8 @@ namespace PathPointer
         {
             StatsManagement.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
             DataGridBusiness_CellClick(null, null);
+            PointToDayOfWeek(DataGridDayOfWeek.CurrentCell.ColumnIndex);
             DataGridDayOfWeek.ClearSelection();
-            PointToDayOfWeek();
         }
 
         public void DataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -133,17 +133,23 @@ namespace PathPointer
             StatsManagement.DisplayMainStats(ref lblEmployName, ref lblEmployType, ref lblDoneHours, ref lblMustSpend, DataGridBusiness.CurrentCell.ColumnIndex);
             if (DataGridBusiness.CurrentCell.ColumnIndex < 10) lblEmploymentHour.Text = $"0{DataGridBusiness.CurrentCell.ColumnIndex.ToString()}:00";
             else lblEmploymentHour.Text = $"{DataGridBusiness.CurrentCell.ColumnIndex.ToString()}:00";
-          //  DataGridBusiness.ClearSelection();
+            PointToBusiness(DataGridBusiness.CurrentCell.ColumnIndex);
+            DataGridBusiness.ClearSelection();
         }
 
-        private void PointToDayOfWeek() {/*
+        private void PointToDayOfWeek(int index) {           
+            dayOfWeekPointer.Rows.Clear();
             dayOfWeekPointer.ColumnCount = 7;
             dayOfWeekPointer.RowCount = 1;
-            int indexer = DataGridDayOfWeek.CurrentCell.RowIndex;
-
-            dayOfWeekPointer.Rows.Clear();
-            dayOfWeekPointer.Rows[0].Cells[DataGridDayOfWeek.CurrentCell.RowIndex].Value = "here";*/
+            dayOfWeekPointer.Rows[0].Cells[index].Value = "↓";
         }
+        private void PointToBusiness(int index) {
+            businessPointer.Rows.Clear();
+            businessPointer.ColumnCount = 24;
+            businessPointer.RowCount = 1;
+            businessPointer.Rows[0].Cells[index].Value = "↑";
+        }
+
 
         public void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -154,7 +160,5 @@ namespace PathPointer
             }
             MenuManagement.AreAllFormsClosed = true;
         }
-
-
     }
 }

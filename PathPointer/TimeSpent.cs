@@ -44,13 +44,10 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
-            for (int i = UserSettings.EmploymentCheckRange; i > 0; i--)//нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
+            for (int i = 1; i <= UserSettings.EmploymentCheckRange; i++)//нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
             {
-                if (!StatsManagement.CheckIsFileOccupied(i))
-                {
-                    currentRange = i;
-                    break;
-                }
+                if (StatsManagement.CheckIsHourAvailable(i)) currentRange = i;                
+                else break;
             }
             SetLabelValue();
         }
@@ -61,7 +58,7 @@ namespace PathPointer
             else if (currentRange <= 4) hourType = "часа";
             else hourType = "часов";
 
-            lblPrevHour.Text = $"Чем вы занимались {currentRange} {hourType} назад";
+            lblPrevHour.Text = $"Чем вы занимались {currentRange} {hourType} назад?";
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)

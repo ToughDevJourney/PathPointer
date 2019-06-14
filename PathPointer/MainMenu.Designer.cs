@@ -36,6 +36,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.EmployButton = new System.Windows.Forms.Button();
             this.BtnMoreStats = new System.Windows.Forms.Button();
             this.BtnGoals = new System.Windows.Forms.Button();
@@ -54,10 +56,12 @@
             this.lblMustSpend = new System.Windows.Forms.Label();
             this.lblEmploymentHour = new System.Windows.Forms.Label();
             this.dayOfWeekPointer = new System.Windows.Forms.DataGridView();
+            this.businessPointer = new System.Windows.Forms.DataGridView();
             this.TrayContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayOfWeekPointer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.businessPointer)).BeginInit();
             this.SuspendLayout();
             // 
             // EmployButton
@@ -264,11 +268,11 @@
             this.dayOfWeekPointer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayOfWeekPointer.ColumnHeadersVisible = false;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dayOfWeekPointer.DefaultCellStyle = dataGridViewCellStyle5;
             this.dayOfWeekPointer.EnableHeadersVisualStyles = false;
@@ -282,14 +286,51 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dayOfWeekPointer.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dayOfWeekPointer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dayOfWeekPointer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dayOfWeekPointer.Size = new System.Drawing.Size(930, 20);
             this.dayOfWeekPointer.TabIndex = 19;
+            // 
+            // businessPointer
+            // 
+            this.businessPointer.AllowUserToAddRows = false;
+            this.businessPointer.AllowUserToDeleteRows = false;
+            this.businessPointer.AllowUserToResizeColumns = false;
+            this.businessPointer.AllowUserToResizeRows = false;
+            this.businessPointer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.businessPointer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.businessPointer.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.businessPointer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.businessPointer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.businessPointer.ColumnHeadersVisible = false;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.businessPointer.DefaultCellStyle = dataGridViewCellStyle7;
+            this.businessPointer.EnableHeadersVisualStyles = false;
+            this.businessPointer.GridColor = System.Drawing.SystemColors.Control;
+            this.businessPointer.Location = new System.Drawing.Point(176, 470);
+            this.businessPointer.MultiSelect = false;
+            this.businessPointer.Name = "businessPointer";
+            this.businessPointer.ReadOnly = true;
+            this.businessPointer.RowHeadersVisible = false;
+            this.businessPointer.RowHeadersWidth = 10;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.businessPointer.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.businessPointer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.businessPointer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.businessPointer.Size = new System.Drawing.Size(930, 20);
+            this.businessPointer.TabIndex = 20;
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 494);
+            this.Controls.Add(this.businessPointer);
             this.Controls.Add(this.dayOfWeekPointer);
             this.Controls.Add(this.lblEmploymentHour);
             this.Controls.Add(this.lblMustSpend);
@@ -312,6 +353,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dayOfWeekPointer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.businessPointer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,6 +378,7 @@
         private System.Windows.Forms.Label lblMustSpend;
         private System.Windows.Forms.Label lblEmploymentHour;
         private System.Windows.Forms.DataGridView dayOfWeekPointer;
+        private System.Windows.Forms.DataGridView businessPointer;
     }
 }
 

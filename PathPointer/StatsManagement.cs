@@ -18,7 +18,6 @@ namespace PathPointer
 
         public static void FillGrid(ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
         {
-
             SetPath("Efficiency");
 
             int currentDayOfWeekCode = CurrentDateInfo.DayOfWeek;
@@ -32,10 +31,7 @@ namespace PathPointer
             else StatsFileArr = FillStatsArray(1, pickedCurrentDay);                                      //заполнить массив данными текущей недели
 
             for (int i = 0; i < 24; i++) {
-                StatsFileArr[i] = GetValueByIndex(StatsFileArr[i], dayOfWeek);//получение расписания для текущего дня недели 
-
-               // for (int symbCount = 0; symbCount < dayOfWeek; symbCount++)                               
-                   // StatsFileArr[i] = StatsFileArr[i].Substring(StatsFileArr[i].IndexOf(";") + 1);
+                StatsFileArr[i] = GetValueByIndex(StatsFileArr[i], dayOfWeek, ";");  //получение расписания для текущего дня недели 
 
                 if (StatsFileArr[i].Contains(";")) StatsFileArr[i] = StatsFileArr[i].Substring(0, (StatsFileArr[i].IndexOf(";")));
                 GetCellColor(StatsFileArr[i], i, dataGridView);
@@ -98,6 +94,7 @@ namespace PathPointer
         }
 
         public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, ref Label lblMustSpend, int currentEmployment) {
+            SetPath("Efficiency");
             string employment = "";
             string employmentName = "";
             string employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
@@ -325,23 +322,25 @@ namespace PathPointer
 
 
 
-        public static bool CheckIsFileOccupied(int range = 1) {
+        public static bool CheckIsHourAvailable(int range = 1) {
             SetPath("Employments\\Business");
 
             bool fileOccupied = false;
             int checkingDayOfWeek = CurrentDateInfo.DayOfWeek;
             int checkingHour = DateTime.Now.Hour - range;
 
+
             PreviousHourFix(ref checkingHour, ref checkingDayOfWeek);
 
             fileOccupied = IsHourInSchedule(checkingHour, checkingDayOfWeek);
 
-            if (fileOccupied == false) fileOccupied = IsHourInEfficiency(checkingHour, checkingDayOfWeek);
+            fileOccupied = fileOccupied == false ? IsHourInEfficiency(checkingHour, checkingDayOfWeek) : false;
 
             return fileOccupied;
         }
 
         private static bool IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
+            SetPath("Employments\\Business");
             int beginHour;
             int endHour;
             bool hourIsInSchedule = false; 
@@ -378,7 +377,7 @@ namespace PathPointer
 
             choosedHourOfEmployment = GetValueByIndex(scheduleFileArray[checkingHour], checkingDayOfWeek, ";");   
 
-            if (!(choosedHourOfEmployment == "")) return true;
+            if (choosedHourOfEmployment == "") return true;
             else return false;
         }
 
