@@ -55,7 +55,7 @@ namespace PathPointer
 
             schedArr = ExportFormatTime(schedArr);
 
-            Schedule = $"{schedArr[0]}{schedArr[1]}{schedArr[2]}{schedArr[3]}{schedArr[4]}{schedArr[5]}{schedArr[6]}";    //подготовка строки к сохранению в файл
+            Schedule = $"{schedArr[0]}/{schedArr[1]}/{schedArr[2]}/{schedArr[3]}/{schedArr[4]}/{schedArr[5]}/{schedArr[6]}";    //подготовка строки к сохранению в файл
             BtnCancel_Click(null, null);
         }
         private void TextBegin_KeyPress(object sender, KeyPressEventArgs e)
@@ -94,9 +94,9 @@ namespace PathPointer
 
             for (int i = 0; scheduleArray.Length > i; i++)
             {
-                if (scheduleArray[i][0] == 'В') //если по расписанию выхожной
+                if (scheduleArray[i] == "Выходной") //если по расписанию выхожной
                 {
-                    scheduleArray[i] = "H!";
+                    scheduleArray[i] = "H";
                     continue;
                 }
                 scheduleArray[i] = scheduleArray[i].Replace(" - ", " ");
@@ -105,7 +105,6 @@ namespace PathPointer
 
                 if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
                 if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
-                scheduleArray[i] += "!";
             }
 
             return scheduleArray;

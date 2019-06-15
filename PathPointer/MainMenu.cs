@@ -16,7 +16,7 @@ namespace PathPointer
     public partial class MainMenu : Form
     {
 
-
+        public static int pickedDayOfWeek;
         public static BindingList<StatsManagement> statCells;
 
 
@@ -33,6 +33,8 @@ namespace PathPointer
             int interval;
 
             FileManagement.CheckAllFiles();
+            StatsManagement.CheckWeekRelevance();
+            StatsManagement.WriteHoursFromSchedule();
             MenuManagement.AreAllFormsClosed = false;
 
             FillDaysOfWeek();
@@ -40,10 +42,12 @@ namespace PathPointer
             DataGridBusiness.CurrentCell = DataGridBusiness[DateTime.Now.Hour - 1, 0];
             DataGridBusiness_CellClick(null, null);
 
-            DateTime dateTime1 = new DateTime();   //"будильник" на вызов фрпмы в ближайшие "00" минут
+            DateTime dateTime1 = new DateTime();   //"будильник" на вызов формы в ближайшие "00" минут
             dateTime1 = DateTime.Now;
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
             interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
+
+
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
@@ -52,9 +56,6 @@ namespace PathPointer
 
         private void MainMenu_Shown(object sender, EventArgs e)
         {
-
-
-
         }
 
 
@@ -70,7 +71,6 @@ namespace PathPointer
 
         private void BtnMoreStats_Click(object sender, EventArgs e)
         {
-
         }
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,7 +122,8 @@ namespace PathPointer
 
         private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            StatsManagement.FillGrid(ref DataGridBusiness, Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek));  //вывод деятельности за 24 часа выбранного дня недели
+            pickedDayOfWeek = Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek);
+            StatsManagement.FillGrid(ref DataGridBusiness);  //вывод деятельности за 24 часа выбранного дня недели
             DataGridBusiness_CellClick(null, null);
             PointToDayOfWeek(DataGridDayOfWeek.CurrentCell.ColumnIndex);
             DataGridDayOfWeek.ClearSelection();

@@ -43,8 +43,8 @@ namespace PathPointer
             }
             else
             {
-                if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!N", DataManagement.EmpType);
-                else DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}", DataManagement.EmpType);
+                if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!N!N", DataManagement.EmpType);
+                else DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
             }
 
             BtnCancel_Click(null, null);

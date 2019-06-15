@@ -213,47 +213,52 @@
             // lblEmployName
             // 
             this.lblEmployName.AutoSize = true;
-            this.lblEmployName.Location = new System.Drawing.Point(222, 55);
+            this.lblEmployName.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblEmployName.Location = new System.Drawing.Point(218, 30);
             this.lblEmployName.Name = "lblEmployName";
-            this.lblEmployName.Size = new System.Drawing.Size(112, 13);
+            this.lblEmployName.Size = new System.Drawing.Size(290, 33);
             this.lblEmployName.TabIndex = 14;
             this.lblEmployName.Text = "Название занятости";
             // 
             // lblEmployType
             // 
             this.lblEmployType.AutoSize = true;
-            this.lblEmployType.Location = new System.Drawing.Point(222, 97);
+            this.lblEmployType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblEmployType.Location = new System.Drawing.Point(221, 150);
             this.lblEmployType.Name = "lblEmployType";
-            this.lblEmployType.Size = new System.Drawing.Size(81, 13);
+            this.lblEmployType.Size = new System.Drawing.Size(119, 20);
             this.lblEmployType.TabIndex = 15;
             this.lblEmployType.Text = "Тип занятости";
             // 
             // lblDoneHours
             // 
             this.lblDoneHours.AutoSize = true;
-            this.lblDoneHours.Location = new System.Drawing.Point(222, 278);
+            this.lblDoneHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblDoneHours.Location = new System.Drawing.Point(221, 295);
             this.lblDoneHours.Name = "lblDoneHours";
-            this.lblDoneHours.Size = new System.Drawing.Size(129, 13);
+            this.lblDoneHours.Size = new System.Drawing.Size(224, 24);
             this.lblDoneHours.TabIndex = 16;
             this.lblDoneHours.Text = "Выполнено 0 часов из 0";
             // 
             // lblMustSpend
             // 
             this.lblMustSpend.AutoSize = true;
-            this.lblMustSpend.Location = new System.Drawing.Point(222, 307);
+            this.lblMustSpend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblMustSpend.Location = new System.Drawing.Point(223, 321);
             this.lblMustSpend.Name = "lblMustSpend";
-            this.lblMustSpend.Size = new System.Drawing.Size(94, 13);
+            this.lblMustSpend.Size = new System.Drawing.Size(135, 20);
             this.lblMustSpend.TabIndex = 17;
             this.lblMustSpend.Text = "Такими темпами";
             // 
             // lblEmploymentHour
             // 
             this.lblEmploymentHour.AutoSize = true;
-            this.lblEmploymentHour.Location = new System.Drawing.Point(942, 42);
+            this.lblEmploymentHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblEmploymentHour.Location = new System.Drawing.Point(969, 30);
             this.lblEmploymentHour.Name = "lblEmploymentHour";
-            this.lblEmploymentHour.Size = new System.Drawing.Size(129, 13);
+            this.lblEmploymentHour.Size = new System.Drawing.Size(112, 42);
             this.lblEmploymentHour.TabIndex = 18;
-            this.lblEmploymentHour.Text = "Выполнено 0 часов из 0";
+            this.lblEmploymentHour.Text = "00:00";
             // 
             // dayOfWeekPointer
             // 

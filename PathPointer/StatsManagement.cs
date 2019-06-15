@@ -16,10 +16,10 @@ namespace PathPointer
         public string Business { get; set; }        //элемент DataSource
 
 
-        public static void FillGrid(ref DataGridView dataGridView, int dayOfWeek)      //вывод в DataGridView данных из документа с названием empType  
+        public static void FillGrid(ref DataGridView dataGridView)      //вывод в DataGridView данных из документа с названием empType  
         {
             SetPath("Efficiency");
-
+            int dayOfWeek = MainMenu.pickedDayOfWeek;
             int currentDayOfWeekCode = CurrentDateInfo.DayOfWeek;
             dayOfWeek = dayOfWeek == 0 ? 7 : dayOfWeek;     //американская неделя начинается с воскресенья, исправление
             bool pickedCurrentDay = currentDayOfWeekCode == dayOfWeek ? true : false;
@@ -33,7 +33,7 @@ namespace PathPointer
             for (int i = 0; i < 24; i++) {
                 StatsFileArr[i] = GetValueByIndex(StatsFileArr[i], dayOfWeek, ";");  //получение расписания для текущего дня недели 
 
-                if (StatsFileArr[i].Contains(";")) StatsFileArr[i] = StatsFileArr[i].Substring(0, (StatsFileArr[i].IndexOf(";")));
+                // if (StatsFileArr[i].Contains(";")) StatsFileArr[i] = StatsFileArr[i].Substring(0, (StatsFileArr[i].IndexOf(";")));
                 GetCellColor(StatsFileArr[i], i, dataGridView);
             }
 
@@ -101,6 +101,7 @@ namespace PathPointer
             string employmentHours = "";
             string employmentsMustSpend = "";
             DateTime dateGoal = new DateTime();
+            int pickedDayOfWeek = MainMenu.pickedDayOfWeek;
             int hoursGoal;
             int doneHours;
             int needDays;
@@ -162,7 +163,8 @@ namespace PathPointer
                         case "Business":
                             employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
                                             "\nЗнайте, что разработчику этой программы очень вас жалко :)";
-                            employmentHours = employmentHours == "N" ? "Для этого дела нет расписания" : $"Расписание для этого дела: {FormatTime(GetValueByIndex(employment, CurrentDateInfo.DayOfWeek))}";
+                            if (employmentHours == "N") employmentHours = "Для этого дела нет расписания";
+                            else employmentHours = $"Расписание для этого дела: {FormatTime(GetValueByIndex(employmentHours, pickedDayOfWeek - 1, "/"))}";
                             break;
                         case "Goals":
                             dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
@@ -178,7 +180,7 @@ namespace PathPointer
                                 if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
                                 else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
                                 else if ((needDays == 0 && 24 - DateTime.Now.Hour < hoursGoal - doneHours) || (needDays * 24 - (hoursGoal - doneHours) < 0)) employmentsMustSpend = "Увы, но даже если вы возьметесь за дело прямо сейчас, уже не успеете :(";
-                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
+                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
                             }
                             else employmentsMustSpend = $"Цель должна была быть выполнена {dateGoal.ToLongDateString()}";
                             break;
@@ -238,7 +240,7 @@ namespace PathPointer
 
 
             for (int i = 1; i < 7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
-                if (chckNumOfEmps.Contains(";")) chckNumOfEmps = chckNumOfEmps.Remove(chckNumOfEmps.IndexOf(";"), 1);    
+                if (chckNumOfEmps.Contains(";")) chckNumOfEmps = chckNumOfEmps.Remove(chckNumOfEmps.IndexOf(";"), 1);
                 else if (settableDayOfWeek >= i) efficiency[settableHour] += " ;";
                 else break;
             }
@@ -325,6 +327,7 @@ namespace PathPointer
         public static bool CheckIsHourAvailable(int range = 1) {
             SetPath("Employments\\Business");
 
+            string scheduleForHour;
             bool fileOccupied = false;
             int checkingDayOfWeek = CurrentDateInfo.DayOfWeek;
             int checkingHour = DateTime.Now.Hour - range;
@@ -332,41 +335,146 @@ namespace PathPointer
 
             PreviousHourFix(ref checkingHour, ref checkingDayOfWeek);
 
-            fileOccupied = IsHourInSchedule(checkingHour, checkingDayOfWeek);
+            scheduleForHour = IsHourInSchedule(checkingHour, checkingDayOfWeek);
+            if (scheduleForHour != null) fileOccupied = true;
+            if (fileOccupied == true && range == 1) WriteSchedHrToEfficiency(scheduleForHour);
 
             fileOccupied = fileOccupied == false ? IsHourInEfficiency(checkingHour, checkingDayOfWeek) : false;
 
             return fileOccupied;
         }
 
-        private static bool IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
+        private static void WriteSchedHrToEfficiency(string scheduleLine){
+            WriteStats($"Business!{GetValueByIndex(scheduleLine, 1)}");
+            SetPath("Employments\\Business");
+
+            string[] scheduleFileArray = File.ReadAllLines(FilePath);
+
+
+            string oldUpdateDate = GetValueByIndex(scheduleLine, 3);
+
+            for (int i = 0; i < scheduleFileArray.Length; i++) {
+                if (scheduleFileArray[i] == scheduleLine) {
+                    scheduleFileArray[i].Replace(oldUpdateDate, DateTime.Now.ToShortDateString());
+                    break;
+                }
+            }
+
+            File.WriteAllLines(FilePath, scheduleFileArray);  
+        }
+
+        private static string IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
             SetPath("Employments\\Business");
             int beginHour;
             int endHour;
-            bool hourIsInSchedule = false; 
+            string schedule;
+            string hourSchedule = null;
 
             string[] scheduleFileArray = File.ReadAllLines(FilePath);
             for (int i = 0; i < scheduleFileArray.Length; i++) //указан ли текущий час в расписании
             {
-                if (GetValueByIndex(scheduleFileArray[i], 2) == "N") continue;
+                if (GetValueByIndex(scheduleFileArray[i], 2) == "N") continue;  //если расписание отсутствует
                 else
                 {
-                    scheduleFileArray[i] = GetValueByIndex(scheduleFileArray[i], checkingDayOfWeek + 1);
+                    schedule = GetValueByIndex(scheduleFileArray[i], 2);    //возврат расписания
+                    schedule = GetValueByIndex(schedule, checkingDayOfWeek - 1, "/"); //возврат расписания для конкретного дня
 
-                    if (scheduleFileArray[i] == "H") continue;
-                    beginHour = Convert.ToInt32(scheduleFileArray[i].Remove(scheduleFileArray[i].IndexOf(" ")));
-                    endHour = Convert.ToInt32(scheduleFileArray[i].Substring(scheduleFileArray[i].IndexOf(" ") + 1));
+                    if (schedule == "H") continue;
+                    beginHour = Convert.ToInt32(schedule.Remove(schedule.IndexOf(" ")));
+                    endHour = Convert.ToInt32(schedule.Substring(schedule.IndexOf(" ") + 1));
 
                     if (beginHour <= checkingHour && checkingHour - 1 < endHour)
-                    {
-                        hourIsInSchedule = true; 
+                    {                                               
+                        hourSchedule = scheduleFileArray[i];
                         break;
                     }
                 }
             }
 
-            return hourIsInSchedule;
+            return hourSchedule;
         }
+
+        public static void WriteHoursFromSchedule (){   //расписание не позже текущего часа и время добавления
+
+            SetPath("Efficiency");
+            DateTime lastSchUpdate;
+            string intermediateFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Eff Intermediate.txt";
+            string[] effArr = new string[48];
+            string effLine;
+            string fileLine;
+            string schedule;
+            int checkingHour;
+            int dayOfWeek;
+            int lineCount = 0;
+            int lastWeek = 0;
+
+
+            using (StreamReader reader = new StreamReader(FilePath)) {
+                for (int eff = 0; eff < 48; eff++) effArr[eff] = reader.ReadLine();
+            }
+
+            for (int eff = 0; eff < 48; eff++)
+            {
+                lastWeek = eff >= 24 ? 7 : 0;
+                effLine = effArr[eff];
+
+                dayOfWeek = effLine.ToCharArray().Count(c => c == ';');
+
+                for (int dow = dayOfWeek; dow <= 7; dow++)
+                {
+                    if(lastWeek == 0 && ((dow == CurrentDateInfo.DayOfWeek && eff >= DateTime.Now.Hour - 1) || dow > CurrentDateInfo.DayOfWeek))   //если достигнут текущих час, происходит переход на следующую неделю
+                    {
+                        break;
+                    }
+                    checkingHour = eff >= 24 ? eff - 24 : eff;
+                    schedule = IsHourInSchedule(checkingHour, dow);
+
+                    if (schedule != null)
+                    {
+                        lastSchUpdate = Convert.ToDateTime(GetValueByIndex(schedule, 3));
+                        if (DateTime.Now.Day - lastSchUpdate.Day >= (CurrentDateInfo.DayOfWeek + lastWeek) - dow) //если в последний раз расписание изменялось не раньше проверяемого дня
+                        {
+                            schedule = GetValueByIndex(schedule, 1);        //вывод индекса
+                            effArr[eff] += $"Business!{schedule};";
+                        }
+                        else effArr[eff] += " ;";
+                    }
+                    else effArr[eff] += " ;";
+
+                }
+
+            }
+            SetPath("Efficiency");
+
+            File.Copy(FilePath, intermediateFile);
+            File.WriteAllLines(FilePath, effArr);
+
+            using (StreamReader interFile = new StreamReader(intermediateFile))
+            {
+                using (StreamWriter effFile = File.AppendText(FilePath))
+                {
+                    while ((fileLine = interFile.ReadLine()) != null) {
+                        if (lineCount >= 48) effFile.WriteLine(fileLine);
+                        else lineCount++;
+                    }
+                }
+            }
+
+            UpdateAllSchedulesDates();
+            File.Delete(intermediateFile);
+        }
+
+        private static void UpdateAllSchedulesDates() {
+            SetPath("Employments/Business");
+            string[] scheduleArr = File.ReadAllLines(FilePath);
+            string oldLastUpdate;
+            for (int i = 0; i<scheduleArr.Length; i++) {
+                oldLastUpdate = GetValueByIndex(scheduleArr[i], 3);
+                scheduleArr[i] = scheduleArr[i].Replace(oldLastUpdate, DateTime.Now.ToShortDateString());
+            }
+            File.WriteAllLines(FilePath, scheduleArr);
+        }
+
 
         private static bool IsHourInEfficiency(int checkingHour, int checkingDayOfWeek) //если в этот час опрос уже был показан
         {
