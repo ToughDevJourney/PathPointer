@@ -33,7 +33,7 @@ namespace PathPointer
             int interval;
 
             FileManagement.CheckAllFiles();
-            StatsManagement.CheckWeekRelevance();
+            CurrentDateInfo.CheckWeekRelevance();
             StatsManagement.WriteHoursFromSchedule();
             MenuManagement.AreAllFormsClosed = false;
 
@@ -93,7 +93,7 @@ namespace PathPointer
             const int interval60Mins = 60 * 60 * 1000;
             TimerHour.Interval = interval60Mins;
             FileManagement.CheckAllFiles();
-            StatsManagement.CheckWeekRelevance();
+            CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
         }
 

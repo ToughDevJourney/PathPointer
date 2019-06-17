@@ -30,7 +30,6 @@ namespace PathPointer
         private TimeSpent() {
             InitializeComponent();
             TopMost = true;
-
         }
         public static TimeSpent CreateInstance()
         {
@@ -84,12 +83,15 @@ namespace PathPointer
         public void FillGrid()
         {
             dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{EmpType}", ref varCells).DataSource;
+            varCells.Add(new DataManagement { Business = "Другое" });
+            dataGridBusiness.Focus();
         }
-
+        
         private void BtnReady_Click(object sender, EventArgs e)
         {
             string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
-            StatsManagement.WriteStats($"{EmpType}!{StatsManagement.FindCode(currentCellVal, EmpType)}", currentRange);
+            if (currentCellVal == "Другое") StatsManagement.WriteStats($"{EmpType}!0", currentRange);
+            else StatsManagement.WriteStats($"{EmpType}!{StatsManagement.FindCode(currentCellVal, EmpType)}", currentRange);
             MenuManagement.questCheck = false;
 
             currentRange--;

@@ -78,7 +78,14 @@ namespace PathPointer
         }
 
         public void FillGrid() {
-            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments//{empType}", ref varCells).DataSource;  
+            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments//{empType}", ref varCells).DataSource;
+            if (dataGridBusiness[0, 0].Value.ToString() != Texts.emptyEmpFile)
+            {
+                dataGridBusiness.ReadOnly = false;
+                dataGridBusiness.CurrentCell = dataGridBusiness[0, 0];
+                dataGridBusiness.Focus();
+            }
+            else dataGridBusiness.ReadOnly = true;
         }
 
         private void BackMain_Click(object sender, EventArgs e)
@@ -110,15 +117,17 @@ namespace PathPointer
 
         private void dataGridBusiness_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridBusiness.CurrentCell.Value.ToString() != "")
+            if (dataGridBusiness.CurrentCell.Value != null)
             {
-                DataManagement.EditEmpFiles(dataGridBusiness.CurrentCell.Value.ToString(), dataGridBusiness.CurrentCell.RowIndex);  //изменение текущей строки
+                string editedEmp = dataGridBusiness.CurrentCell.Value.ToString();
+                editedEmp = DataManagement.CheckEmploymentFormat(editedEmp);
+                if (editedEmp != "") DataManagement.EditEmpFiles(editedEmp, dataGridBusiness.CurrentCell.RowIndex);
             }
+            FillGrid();
         }
 
         private void Employments_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
+        {           
             MenuManagement.HideForm(this, e);
         }
 

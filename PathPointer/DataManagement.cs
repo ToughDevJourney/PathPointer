@@ -86,7 +86,7 @@ namespace PathPointer
 
         private static void EmptyGridMessage(ref BindingList<DataManagement> varCells)
         {        //Если, данные или документ отстутствуют
-            varCells.Add(new DataManagement { Business = "Ого! Похоже, что вы новенький!\nДобавьте новую деятельность!" });
+            varCells.Add(new DataManagement { Business = Texts.emptyEmpFile });
         }
 
         public static void WriteEmpFiles(string name, string empType)    //запись в файл
@@ -105,9 +105,7 @@ namespace PathPointer
             string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
             string archive = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Archive\\{Employments.empType}.txt"); //промежуточный для удаления файл
 
-            
-            
-
+                     
             using (StreamReader reader = new StreamReader(FilePath))
             {
                 using (StreamWriter writer = new StreamWriter(interFile))
@@ -130,17 +128,27 @@ namespace PathPointer
 
 
         public static void EditEmpFiles(string editLine, int rowIndex) {
-            string[] fileRows = File.ReadAllLines(FilePath);        //занесение данных из файла в массив
-            fileRows[rowIndex] = fileRows[rowIndex].Remove(0, GetValueByIndex(fileRows[rowIndex]).Length);  //удаление старого наименования
-            fileRows[rowIndex] = fileRows[rowIndex].Insert(0, editLine);        //добавление нового наименования
-            File.WriteAllLines(FilePath, fileRows);     //Сохранение данных в файл из массива
+            string[] fileRows = File.ReadAllLines(FilePath);
+            fileRows[rowIndex] = fileRows[rowIndex].Replace(GetValueByIndex(fileRows[rowIndex]), editLine); //замена старого названия на новое
+            File.WriteAllLines(FilePath, fileRows);
         }
 
         public static string CheckEmploymentFormat(string formatChecking){
-            while (true) {
+            string[] empArr = File.ReadAllLines(FilePath);
+            while (true)
+            {
                 if (formatChecking.Contains("!")) formatChecking = formatChecking.Remove(formatChecking.IndexOf("!"), 1);
-                else if (formatChecking.Contains(";")) formatChecking = formatChecking.Remove(formatChecking.IndexOf(";"), 1);
+                else if (formatChecking.Contains(";")) formatChecking = formatChecking.Remove(formatChecking.IndexOf(";"), 1);                
                 else break;
+            }
+
+
+
+            for (int i = 0; i<empArr.Length; i++) {
+                if (GetValueByIndex(empArr[i]) == formatChecking) {
+                    formatChecking += " новый";
+                    i = -1;
+                }
             }
 
             return formatChecking;

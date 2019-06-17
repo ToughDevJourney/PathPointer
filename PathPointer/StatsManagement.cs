@@ -32,8 +32,6 @@ namespace PathPointer
 
             for (int i = 0; i < 24; i++) {
                 StatsFileArr[i] = GetValueByIndex(StatsFileArr[i], dayOfWeek, ";");  //получение расписания для текущего дня недели 
-
-                // if (StatsFileArr[i].Contains(";")) StatsFileArr[i] = StatsFileArr[i].Substring(0, (StatsFileArr[i].IndexOf(";")));
                 GetCellColor(StatsFileArr[i], i, dataGridView);
             }
 
@@ -114,6 +112,12 @@ namespace PathPointer
                                 "\nВам должно быть стыдно";
                 employmentHours = "Ноль часов из нуля - стопроцентная продуктивность для ленивых";
             }
+            else if(GetValueByIndex(StatsFileArr[currentEmployment], 1) == "0")
+            {
+                employmentName = "ДРУГОЕ";
+                employmentType = "Постарайтесь продумывать вашу деятельность заранее" +
+                                "\nВо всяком случае, почему бы вам не дополнить ее прямо сейчас?";
+            }
             else if (employmentType == "T")
             {
                 employmentName = "СЕЙЧАС";
@@ -123,11 +127,10 @@ namespace PathPointer
             }
             else if (employmentType == "F")
             {
-
                 employmentName = "БУДУЩЕЕ";
                 employmentType = "Этот отрезок времени покрыт великой тайной..." +
-                                "\nНикто не знает, будете ли вы через пару часов смотреть телевизор или встанете на путь к своей цели" +
-                                "\nРазработчик этой программы верит в вас (Пожалуйста, встаньте на на путь к своей цели, не расстраивайте программиста)";
+                                "\nНикто не знает, будете ли вы через пару часов смотреть телевизор или есть хлопья" +
+                                "\nP.S. Пожалуйста, встаньте на путь к своей цели, не расстраивайте разработчика этой программы";
                 employmentHours = "Ваш успех зависит от ваших действий";
             }
             else {
@@ -288,63 +291,6 @@ namespace PathPointer
 
             return code;
         }
-
-        public static void CheckWeekRelevance() {
-            SetPath("Common");
-
-
-
-            int fileWeekNumber;
-
-
-            string[] commonFileArr = File.ReadAllLines(FilePath);
-
-            for (int i = 0; i < commonFileArr.Length; i++) {
-                if (GetValueByIndex(commonFileArr[i], 0) == "Week Number")
-                {
-                    fileWeekNumber = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 1));
-                    if (fileWeekNumber != CurrentDateInfo.WeekNumber)
-                    {
-                        commonFileArr[i] = $"Week Number!{CurrentDateInfo.WeekNumber}";
-
-                        File.WriteAllLines(FilePath, commonFileArr);
-
-                        AddNewWeekIntoEfficiency();
-                        break;
-                    }
-                }
-            }
-        }
-
-        public static void AddNewWeekIntoEfficiency() {
-            SetPath("Efficiency");
-            string fileContainer = "";
-            string intermediateFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Eff Intermediate.txt";
-            const int hoursADay = 24;
-
-            File.Copy(FilePath, intermediateFile);
-            File.Delete(FilePath);
-
-            using (StreamWriter writer = new StreamWriter(FilePath))
-            {
-                for (int j = 0; j < hoursADay; j++)
-                {
-                    writer.WriteLine($"{j}:00;");
-                }
-
-                using (StreamReader reader = new StreamReader(intermediateFile))
-                {
-                    while ((fileContainer = reader.ReadLine()) != null)
-                    {
-                        writer.WriteLine(fileContainer);
-                    }
-                }
-            }
-
-            File.Delete(intermediateFile);
-        }
-
-
 
         public static bool CheckIsHourAvailable(int range = 1) {
             SetPath("Employments\\Business");

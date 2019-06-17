@@ -22,6 +22,10 @@ namespace PathPointer
         private void AddBusy_Load(object sender, EventArgs e)
         {
             textName.Text = BusyName;
+            if (AddSchedule.Schedule != null) {
+                labelSched.Text = "Расписание добавлено";
+                BtnAddSchedule.Text = "Изменить";
+            }
         }
 
         private void BtnAddSchedule_Click(object sender, EventArgs e)
@@ -38,9 +42,11 @@ namespace PathPointer
             string businessName = textName.Text;
 
             if (businessName == "") MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
-            else if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-            else DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-
+            else {
+                businessName = DataManagement.CheckEmploymentFormat(businessName);
+                if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{businessName}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+                else DataManagement.WriteEmpFiles($"{businessName}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+            }
             BtnCancel_Click(null, null);
         }
 
