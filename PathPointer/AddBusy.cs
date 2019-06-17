@@ -37,15 +37,9 @@ namespace PathPointer
         {
             string businessName = textName.Text;
 
-            if (businessName == "")
-            {
-                MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
-            }
-            else
-            {
-                if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!N!N", DataManagement.EmpType);
-                else DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-            }
+            if (businessName == "") MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
+            else if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+            else DataManagement.WriteEmpFiles($"{textName.Text}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
 
             BtnCancel_Click(null, null);
         }

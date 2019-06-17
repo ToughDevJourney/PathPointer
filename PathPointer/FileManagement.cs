@@ -26,14 +26,9 @@ namespace PathPointer
 
         private static void CheckForDirectory() {
             SetPath();
-            if (!Directory.Exists(FilePath))
-            {
-                Directory.CreateDirectory(FilePath);
-            }
-            if (!Directory.Exists(FilePath + "\\Employments"))
-            {
-                Directory.CreateDirectory(FilePath + "\\Employments");
-            }
+            if (!Directory.Exists(FilePath)) Directory.CreateDirectory(FilePath);
+            if (!Directory.Exists(FilePath + "\\Employments")) Directory.CreateDirectory(FilePath + "\\Employments");
+            if (!Directory.Exists(FilePath + "\\Employments\\Archive")) Directory.CreateDirectory(FilePath + "\\Employments\\Archive");
 
         }
 

@@ -103,7 +103,10 @@ namespace PathPointer
         {
             string line;
             string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
+            string archive = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Archive\\{Employments.empType}.txt"); //промежуточный для удаления файл
 
+            
+            
 
             using (StreamReader reader = new StreamReader(FilePath))
             {
@@ -111,7 +114,11 @@ namespace PathPointer
                 {
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if (String.Compare(GetValueByIndex(line), delLine) == 0) continue;
+                        if (String.Compare(GetValueByIndex(line), delLine) == 0)
+                        {
+                            using (StreamWriter archiveWriter = File.AppendText(archive)) archiveWriter.WriteLine(line);
+                            continue;
+                        } 
                         writer.WriteLine(line);
                     }
                 }

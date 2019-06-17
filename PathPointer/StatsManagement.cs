@@ -148,6 +148,23 @@ namespace PathPointer
                             }
                         }
                     }
+                    if (employmentType == "") {
+                        SetPath($"Employments\\Archive\\{GetValueByIndex(StatsFileArr[currentEmployment])}");   //поиск в директории удаленных занятостей
+                        using (StreamReader sr = new StreamReader(FilePath))
+                        {
+                            while ((employment = sr.ReadLine()) != null)
+                            {
+                                if (GetValueByIndex(employment, 1) == GetValueByIndex(StatsFileArr[currentEmployment], 1)) //проверка сходства кода из расписания и кода из списка деятельности
+                                {
+                                    employmentName = GetValueByIndex(employment);
+                                    employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
+                                    employmentHours = GetValueByIndex(employment, 2);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 catch { }
                 finally
@@ -159,6 +176,7 @@ namespace PathPointer
                             employmentType = "Обратитесь к вашему системному администратору" +
                                             "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
                             employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
+                            
                             break;
                         case "Business":
                             employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
@@ -213,13 +231,17 @@ namespace PathPointer
         }
 
         private static string FormatTime(string time) {
-            string beginTime = time.Remove(time.IndexOf(" "));
-            string endTime = time.Substring(time.IndexOf(" ") + 1);
+            if (time == "H") time = "сегодня выходной!";
+            else
+            {
+                string beginTime = time.Remove(time.IndexOf(" "));
+                string endTime = time.Substring(time.IndexOf(" ") + 1);
 
-            beginTime = beginTime.Length == 2 ? $"{beginTime}:00" : $"0{beginTime}:00";
-            endTime = endTime.Length == 2 ? $"{endTime}:00" : $"0{endTime}:00";
+                beginTime = beginTime.Length == 2 ? $"{beginTime}:00" : $"0{beginTime}:00";
+                endTime = endTime.Length == 2 ? $"{endTime}:00" : $"0{endTime}:00";
 
-            time = $"{beginTime} - {endTime}";
+                time = $"{beginTime} - {endTime}";
+            }
             return time;
         }
 
@@ -437,8 +459,10 @@ namespace PathPointer
                             schedule = GetValueByIndex(schedule, 1);        //вывод индекса
                             effArr[eff] += $"Business!{schedule};";
                         }
+                        else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
                         else effArr[eff] += " ;";
                     }
+                    else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
                     else effArr[eff] += " ;";
 
                 }
