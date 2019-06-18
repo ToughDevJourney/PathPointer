@@ -52,31 +52,25 @@ namespace PathPointer
 
 
 
-        public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells)      //вывод в DataGridView данных из документа с названием empType  
+        public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells, bool timeSpentForm = false)      //вывод в DataGridView данных из документа с названием empType  
         {
             EmpType = empType;
-
+            string readLine;
 
             DataGridView dataGridBusiness = new DataGridView();
 
             varCells = new BindingList<DataManagement>();
-            try    //вывод сообщения, если директива не найдена
+            try    
             {
                 using (StreamReader sr = new StreamReader(FilePath))
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        varCells.Add(new DataManagement { Business = GetValueByIndex(line) });    //заполнение DataSource данными из документа
-                    }
+                    while ((readLine = sr.ReadLine()) != null) varCells.Add(new DataManagement { Business = GetValueByIndex(readLine) });
                 }
             }
-            catch
-            {
-                EmptyGridMessage(ref varCells);
-            }
+            catch { }
 
-            if (varCells.Count == 0) EmptyGridMessage(ref varCells);
+            if(timeSpentForm == true) varCells.Add(new DataManagement { Business = "Другое" });
+            else if (varCells.Count == 0) varCells.Add(new DataManagement { Business = Texts.emptyEmpFile });
 
 
             dataGridBusiness.DataSource = varCells;
@@ -84,10 +78,6 @@ namespace PathPointer
         }
 
 
-        private static void EmptyGridMessage(ref BindingList<DataManagement> varCells)
-        {        //Если, данные или документ отстутствуют
-            varCells.Add(new DataManagement { Business = Texts.emptyEmpFile });
-        }
 
         public static void WriteEmpFiles(string name, string empType)    //запись в файл
         {

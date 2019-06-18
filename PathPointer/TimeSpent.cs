@@ -52,7 +52,7 @@ namespace PathPointer
         }
 
         private void SetLabelValue() {
-            string hourType = "час";
+            string hourType;
             if (currentRange == 1) hourType = "час";
             else if (currentRange <= 4) hourType = "часа";
             else hourType = "часов";
@@ -82,8 +82,7 @@ namespace PathPointer
 
         public void FillGrid()
         {
-            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{EmpType}", ref varCells).DataSource;
-            varCells.Add(new DataManagement { Business = "Другое" });
+            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{EmpType}", ref varCells, true).DataSource;
             dataGridBusiness.Focus();
         }
         

@@ -79,10 +79,10 @@ namespace PathPointer
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Red;
                     break;
                 case "T":
-                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.LightBlue;
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.LightBlue; //сейчас
                     break;
                 case "F":
-                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Black;
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Black; //будущее
                     break;
                 default:
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Gray;
@@ -191,12 +191,16 @@ namespace PathPointer
                             dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
                             needDays = (int)(dateGoal - DateTime.Now).TotalDays;
                             employmentType = "Ого, вы на верном пути к вашей цели!" +
-                                            "\nВы ведь не потратили это время на чепуху, в роде, \"Смотреть весь день телевизор\", верно?";
+                                            "\nВы ведь не потратили это время на чепуху, в плане, \"Смотреть весь день телевизор\", верно?";
                             hoursGoal = Convert.ToInt32(employmentHours);
                             doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal);
 
-                            employmentHours = hoursGoal == doneHours ? $"Цель выполнена, на ее выполнение вы потратили {doneHours} часов! Но не спешите расслабляться, у вас еще много дел впереди!" : $"Выполнено {doneHours} из {hoursGoal} часов";
-                            if (hoursGoal != doneHours)
+                            if(hoursGoal == 0) employmentHours = $"На эту цель вы потратили уже {doneHours} часов!";
+                            else if (hoursGoal <= doneHours) employmentHours = $"Цель выполнена, на ее выполнение вы потратили {hoursGoal} часов!" +
+                                    $"\nНо не спешите расслабляться, у вас еще много дел впереди!";
+                            else employmentHours = $"Выполнено {doneHours} из {hoursGoal} часов";
+
+                            if (hoursGoal > doneHours && hoursGoal != 0)
                             {
                                 if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
                                 else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
@@ -218,11 +222,11 @@ namespace PathPointer
                         case "Fun":
                             employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
                                             "\nБудьте осторожны";
-                            hoursGoal = Convert.ToInt32(employmentHours) * 7;
-                            doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal, true);
+                            hoursGoal = UserSettings.WeekFunTime;
+                            doneHours = CountFunHours();
 
-                            employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
-                            employmentsMustSpend = $"Каждый пол года вы тратите на это {hoursGoal * 27} часов, это {(hoursGoal * 27) / 24} полных суток";
+                            employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена {doneHours-hoursGoal} часов, задумайтесь";
+                            employmentsMustSpend = $"Каждый пол года вы тратите на развлечения {hoursGoal * 26} часов, это {(hoursGoal * 26) / 24} полных суток";
                             break;
                     }
                 }
@@ -468,7 +472,7 @@ namespace PathPointer
             }
         }
 
-        public static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
+        private static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
         {
             SetPath("Efficiency");
             int hoursDone = 0;
@@ -481,17 +485,39 @@ namespace PathPointer
                 {
                     for (int i = 1; i <= 7; i++) {
                         if (GetValueByIndex(readLine, i, ";") == "") break;
-                        else if (desiredEmployment == GetValueByIndex(readLine, i, ";")) hoursDone++;  
-                    }
-
-                    if (hoursDone >= hoursGoal && restCheck == false) break;
-                    else if (restCheck == true && j == 23) break;
+                        else if (desiredEmployment == GetValueByIndex(readLine, i, ";")) {
+                            hoursDone++;
+                            if (hoursDone >= hoursGoal && restCheck == false && hoursGoal != 0) break;
+                        }
+                    }                    
+                    if (restCheck == true && j == 23) break;
                 }
             }
-
-
             return hoursDone;
         }
+
+
+        private static int CountFunHours()
+        {
+            SetPath("Efficiency");
+            int hoursDone = 0;
+
+            string readLine;
+
+            using (StreamReader reader = new StreamReader(FilePath))
+            {
+                for (int j = 0; ((readLine = reader.ReadLine()) != null) || j < 24; j++)
+                {
+                    for (int i = 1; i <= 7; i++)
+                    {
+                        if (GetValueByIndex(readLine, i, ";") == "") break;
+                        else if ("Fun" == GetValueByIndex(GetValueByIndex(readLine), i, ";")) hoursDone++;
+                    }                   
+                }
+            }
+            return hoursDone;
+        }
+
 
 
     }

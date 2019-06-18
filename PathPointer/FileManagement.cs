@@ -12,6 +12,7 @@ namespace PathPointer
 {
     public class FileManagement : Management
     {
+        public static string[] CommonFileArray{ get; set; }
 
         public static void CheckAllFiles() {
             CheckForDirectory();
@@ -33,16 +34,21 @@ namespace PathPointer
         }
 
         private static void CheckForCommon(){
+            FillCommonFileArray();
             if (!CheckFileExistance("Common")) {
-                string[] fileArray = new string[4];
-                var cal = new GregorianCalendar();
-                int currentWeekNumber = cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-                fileArray[0] = "Common info:";
-                fileArray[1] = $"Week Number!{currentWeekNumber}";
-                fileArray[2] = "User settings:";
-                fileArray[3] = "Employment Check Range!1";
-                File.WriteAllLines(FilePath, fileArray);
+                File.WriteAllLines(FilePath, CommonFileArray);
             }
+        }
+
+        private static void FillCommonFileArray() {
+            CommonFileArray = new string[7];
+            CommonFileArray[0] = "Common info:";
+            CommonFileArray[1] = $"Week Number!{CurrentDateInfo.WeekNumber}";
+            CommonFileArray[2] = "User settings:";
+            CommonFileArray[3] = "Employment Check Range!1";
+            CommonFileArray[4] = "Week Fun Time!7";
+            CommonFileArray[5] = "Sleep Time Begin!0";
+            CommonFileArray[6] = "Sleep Time End!7";
         }
 
         private static void CheckForEfficiency() {
@@ -51,7 +57,6 @@ namespace PathPointer
                 using (File.Create(FilePath)) { }
                 for (int j = 1; j <= 2; j++) CurrentDateInfo.AddNewWeekIntoEfficiency();
             }
-
         }
 
         private static void CheckForCodes() {
