@@ -284,21 +284,20 @@ namespace PathPointer
 
         }
 
-        public static int FindCode(string name, string empType)
+        public static string FindEmploymentByName(string name, string empType)
         {
             SetPath($"Employments\\{empType}");
-            int code = 0;
+
             string[] empTypeFileArr = File.ReadAllLines(FilePath);
 
             for (int i = 0; i < empTypeFileArr.Length; i++) {
-                if (GetValueByIndex(empTypeFileArr[i]) == name)
-                {
-                    code = Convert.ToInt32(GetValueByIndex(empTypeFileArr[i], 1));
+                if (GetValueByIndex(empTypeFileArr[i]) == name) {
+                    name = empTypeFileArr[i];
                     break;
                 }
             }
 
-            return code;
+            return name;
         }
 
         public static bool CheckIsHourAvailable(int range = 1) {
@@ -491,7 +490,7 @@ namespace PathPointer
             }
         }
 
-        private static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
+        public static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
         {
             SetPath("Efficiency");
             int hoursDone = 0;

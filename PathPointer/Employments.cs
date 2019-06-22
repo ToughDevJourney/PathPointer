@@ -95,8 +95,8 @@ namespace PathPointer
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)
         {
-            string cellVal = dataGridBusiness.Rows[dataGridBusiness.CurrentCell.RowIndex].Cells[dataGridBusiness.CurrentCell.ColumnIndex].Value.ToString();    //передача в cellVal значения выбранной ячейки
-
+            string cellVal = dataGridBusiness.CurrentCell.Value.ToString();    //передача в cellVal значения выбранной ячейки
+            //string cellVal = dataGridBusiness.Rows[dataGridBusiness.CurrentCell.RowIndex].Cells[dataGridBusiness.CurrentCell.ColumnIndex].Value.ToString(); 
             if (e.KeyCode == Keys.Delete)
             {
                 var result = MessageBox.Show($"Вы уверены, что хотите удалить \"{cellVal}\"", "Вы уверены?", MessageBoxButtons.YesNo);
@@ -105,7 +105,7 @@ namespace PathPointer
                 if (result == DialogResult.Yes)
                 {
                     varCells.RemoveAt(dataGridBusiness.CurrentCell.RowIndex);
-                    DataManagement.DeleteEmpFiles(cellVal);
+                    DataManagement.DeleteEmpFiles(cellVal, empType);
                 } 
             }
 

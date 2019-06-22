@@ -89,8 +89,9 @@ namespace PathPointer
             }
         }
 
-        public static void DeleteEmpFiles(string delLine)
+        public static void DeleteEmpFiles(string delLine, string empType)
         {
+            EmpType = $"Employments\\{empType}";
             string line;
             string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
             string archive = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Archive\\{Employments.empType}.txt"); //промежуточный для удаления файл
@@ -142,6 +143,20 @@ namespace PathPointer
             }
 
             return formatChecking;
+        }
+
+        public static void SetEmpAsConst(int empCode) {
+            string[] goalsArray = File.ReadAllLines(FilePath);
+
+            for (int i = 0; i<goalsArray.Length; i++) {
+                if (Convert.ToInt32(GetValueByIndex(goalsArray[i]), 1) == empCode) {
+                    goalsArray[i] = $"{GetValueByIndex(goalsArray[i])}!{GetValueByIndex(goalsArray[i], 1)}!0!{GetValueByIndex(goalsArray[i], 3)}!";
+                    break;
+                }
+            }
+
+            
+
         }
 
     }

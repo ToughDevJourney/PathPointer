@@ -87,10 +87,48 @@ namespace PathPointer
         }
         
         private void BtnReady_Click(object sender, EventArgs e)
-        {
-            string currentCellVal = dataGridBusiness.CurrentCell.Value.ToString();
-            if (currentCellVal == "Другое") StatsManagement.WriteStats($"{EmpType}!0", currentRange);
-            else StatsManagement.WriteStats($"{EmpType}!{StatsManagement.FindCode(currentCellVal, EmpType)}", currentRange);
+        {            
+            string employmentName = dataGridBusiness.CurrentCell.Value.ToString();
+            string employment;
+            string message;
+            DateTime goalDate;
+            int doneHours;
+            int hoursGoal;
+            int code;
+
+            if (employmentName == "Другое") StatsManagement.WriteStats($"{EmpType}!0", currentRange);
+            else {
+                employment = StatsManagement.FindEmploymentByName(employmentName, EmpType);
+                code = Convert.ToInt32(Management.GetValueByIndex(employment, 1));
+
+                StatsManagement.WriteStats($"{EmpType}!{code}", currentRange);
+
+                if (empType == "Goals") {
+                    hoursGoal = Convert.ToInt32(Management.GetValueByIndex(employment, 2));
+                    doneHours = StatsManagement.CountReadyHours($"Goals!{code}", 2);
+                    goalDate = Convert.ToDateTime(StatsManagement.GetValueByIndex(employment, 3));
+                    if ((hoursGoal <= doneHours || goalDate < DateTime.Now) && hoursGoal != 0)
+                    {
+                        message = goalDate < DateTime.Now ? "просрочена" : "достигнута";
+
+                        var result = MessageBox.Show($"Ваша цель \"{employmentName}\" {message}" +
+                            $"\nСделать из нее постоянную цель?", "Цель достигнута!", MessageBoxButtons.YesNo);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            DataManagement.WriteEmpFiles($"{employmentName} DN!{DataManagement.Code}!0!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+                            DataManagement.DeleteEmpFiles(employmentName, empType);
+                            FillGrid();
+                        }
+                        else
+                        {
+                            DataManagement.DeleteEmpFiles(employmentName, empType);
+                            FillGrid();
+                        }
+                    }
+
+                }
+            }
             MenuManagement.questCheck = false;
 
             currentRange--;
