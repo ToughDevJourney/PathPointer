@@ -17,7 +17,7 @@ namespace PathPointer
         }
 
 
-        protected static string GetValueByIndex(string line, int index = 0, string symbol = "!") {
+        public static string GetValueByIndex(string line, int index = 0, string symbol = "!") {
 
             for (int i = 0; i < index; i++) {
                 if (line.Contains(symbol))

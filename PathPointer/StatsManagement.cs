@@ -341,7 +341,7 @@ namespace PathPointer
             File.WriteAllLines(FilePath, scheduleFileArray);  
         }
 
-        private static string IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
+        public static string IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
             SetPath("Employments\\Business");
             int beginHour;
             int endHour;

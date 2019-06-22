@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,11 +53,20 @@ namespace PathPointer
         {
             string[] schedArr = new string[7] { lblTimeMon.Text, lblTimeTue.Text, lblTimeWed.Text,      // инициализация массива-расписания
             lblTimeThu.Text, lblTimeFri.Text, lblTimeSat.Text, lblTimeSun.Text };
+            string message = "";
 
             schedArr = ExportFormatTime(schedArr);
 
-            Schedule = $"{schedArr[0]}/{schedArr[1]}/{schedArr[2]}/{schedArr[3]}/{schedArr[4]}/{schedArr[5]}/{schedArr[6]}";    //подготовка строки к сохранению в файл
-            BtnCancel_Click(null, null);
+            message = IsScheduleAlreadyAdded(schedArr);
+            if (message != "")
+            {
+                MessageBox.Show(message, "Ошибка");
+            }
+            else
+            {
+                Schedule = $"{schedArr[0]}/{schedArr[1]}/{schedArr[2]}/{schedArr[3]}/{schedArr[4]}/{schedArr[5]}/{schedArr[6]}";    //подготовка строки к сохранению в файл
+                BtnCancel_Click(null, null);
+            }
         }
         private void TextBegin_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -89,9 +99,45 @@ namespace PathPointer
             else FromTimePickToSchedule();
         }
 
+        private string IsScheduleAlreadyAdded(string[] scheduleArr) {
+            int beginTime;
+            int endTime;
+            int dayOfWeek;
+            string schedule;
+            string message;
+            string employment = "";
+
+            for (int i = 0; i < 7; i++) {
+                if (scheduleArr[i] == "H") continue;
+                beginTime = Convert.ToInt32(scheduleArr[i].Remove(scheduleArr[i].IndexOf(" ")));
+                endTime = Convert.ToInt32(scheduleArr[i].Substring(scheduleArr[i].IndexOf(" ") + 1));
+
+                schedule = StatsManagement.IsHourInSchedule(beginTime, i);
+                if (schedule == null) schedule = StatsManagement.IsHourInSchedule(endTime, i);
+                if (schedule != null)
+                {
+                    employment = Management.GetValueByIndex(schedule);
+
+                    schedule = Management.GetValueByIndex(schedule, 2); //выывод расписания
+                    schedule = Management.GetValueByIndex(schedule, i, "/"); //вывод расписания для конкрентого дня недели
+
+                    beginTime = Convert.ToInt32(schedule.Remove(schedule.IndexOf(" ")));
+                    endTime = Convert.ToInt32(schedule.Substring(schedule.IndexOf(" ") + 1));
+
+                    dayOfWeek = i + 1;
+                    dayOfWeek = dayOfWeek == 7 ? 0 : dayOfWeek;
+
+                    message = $"Ваш {CultureInfo.CurrentCulture.DateTimeFormat.DayNames[dayOfWeek]} уже занят." +
+                        $"\nВ это время вы занимаетесь \"{employment}, с {beginTime} по {endTime}.";
+                    return message;
+                }
+            }
+
+            return "";
+        }
+
         private string[] ExportFormatTime(string[] scheduleArray) //форматирование строки в вид "9 17!"
         {
-
             for (int i = 0; scheduleArray.Length > i; i++)
             {
                 if (scheduleArray[i] == "Выходной") //если по расписанию выхожной
@@ -101,14 +147,14 @@ namespace PathPointer
                 }
                 scheduleArray[i] = scheduleArray[i].Replace(" - ", " ");
                 scheduleArray[i] = scheduleArray[i].Replace(":00", "");
-                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
 
-                if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(6, 1);
+                if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(3, 1);
                 if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
             }
 
             return scheduleArray;
         }
+
         private string FormatChecking(string checkFormat)
         {
             Console.WriteLine("here is Checking");
