@@ -225,7 +225,7 @@ namespace PathPointer
                             hoursGoal = UserSettings.WeekFunTime;
                             doneHours = CountFunHours();
 
-                            employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена {doneHours-hoursGoal} часов, задумайтесь";
+                            employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена на {doneHours-hoursGoal} часов, задумайтесь";
                             employmentsMustSpend = $"Каждый пол года вы тратите на развлечения {hoursGoal * 26} часов, это {(hoursGoal * 26) / 24} полных суток";
                             break;
                     }
@@ -300,20 +300,21 @@ namespace PathPointer
             SetPath("Employments\\Business");
 
             string scheduleForHour;
-            bool fileOccupied = false;
+            bool fileInSchedule = false;
+            bool fileIsFree = false;
             int checkingDayOfWeek = CurrentDateInfo.DayOfWeek;
             int checkingHour = DateTime.Now.Hour - range;
-
 
             PreviousHourFix(ref checkingHour, ref checkingDayOfWeek);
 
             scheduleForHour = IsHourInSchedule(checkingHour, checkingDayOfWeek);
-            if (scheduleForHour != null) fileOccupied = true;
-            if (fileOccupied == true && range == 1) WriteSchedHrToEfficiency(scheduleForHour);
+            if (scheduleForHour != null) fileInSchedule = true;
 
-            fileOccupied = fileOccupied == false ? IsHourInEfficiency(checkingHour, checkingDayOfWeek) : false;
+            fileIsFree = IsHourInEfficiency(checkingHour, checkingDayOfWeek);
+            if (fileIsFree == true && range == 1 && fileInSchedule == true) WriteSchedHrToEfficiency(scheduleForHour);
 
-            return fileOccupied;
+            if (fileIsFree = true && fileInSchedule == false) return true;
+            else return fileIsFree;
         }
 
         private static void WriteSchedHrToEfficiency(string scheduleLine){
@@ -356,7 +357,7 @@ namespace PathPointer
                     endHour = Convert.ToInt32(schedule.Substring(schedule.IndexOf(" ") + 1));
 
                     if (beginHour <= checkingHour && checkingHour - 1 < endHour)
-                    {                                               
+                    {                                                
                         hourSchedule = scheduleFileArray[i];
                         break;
                     }
@@ -399,6 +400,9 @@ namespace PathPointer
                         break;
                     }
                     checkingHour = eff >= 24 ? eff - 24 : eff;
+
+
+
                     schedule = IsHourInSchedule(checkingHour, dow);
 
                     if (schedule != null)
@@ -501,17 +505,20 @@ namespace PathPointer
         {
             SetPath("Efficiency");
             int hoursDone = 0;
-
+            string dayOfWeekEmp;
             string readLine;
 
             using (StreamReader reader = new StreamReader(FilePath))
             {
-                for (int j = 0; ((readLine = reader.ReadLine()) != null) || j < 24; j++)
+                for (int j = 0; ((readLine = reader.ReadLine()) != null) && j < 24; j++)
                 {
                     for (int i = 1; i <= 7; i++)
                     {
                         if (GetValueByIndex(readLine, i, ";") == "") break;
-                        else if ("Fun" == GetValueByIndex(GetValueByIndex(readLine), i, ";")) hoursDone++;
+                        else {
+                            dayOfWeekEmp = GetValueByIndex(readLine, i, ";");
+                            if ("Fun" == GetValueByIndex(dayOfWeekEmp)) hoursDone++;
+                        }
                     }                   
                 }
             }

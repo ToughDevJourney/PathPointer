@@ -12,8 +12,8 @@ namespace PathPointer
 
         protected static void SetPath(string empType = "")
         {
-            if (empType != "") FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt");  //путь к папке в "Документах"
-            else FilePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer");
+            if (empType != "") FilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt";  //путь к папке в "Документах"
+            else FilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer";
         }
 
 

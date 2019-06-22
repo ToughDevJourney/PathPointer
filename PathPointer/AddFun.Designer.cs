@@ -28,31 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.timeLabel = new System.Windows.Forms.Label();
-            this.textTime = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.CancelButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.textName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // timeLabel
-            // 
-            this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(11, 44);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(138, 13);
-            this.timeLabel.TabIndex = 23;
-            this.timeLabel.Text = "Необходимо часов в день";
-            // 
-            // textTime
-            // 
-            this.textTime.Location = new System.Drawing.Point(155, 41);
-            this.textTime.MaxLength = 4;
-            this.textTime.Name = "textTime";
-            this.textTime.Size = new System.Drawing.Size(123, 20);
-            this.textTime.TabIndex = 22;
-            this.textTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textTime_KeyPress);
             // 
             // nameLabel
             // 
@@ -95,8 +75,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 123);
-            this.Controls.Add(this.timeLabel);
-            this.Controls.Add(this.textTime);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.AddButton);
@@ -110,9 +88,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label timeLabel;
-        private System.Windows.Forms.TextBox textTime;
         private System.Windows.Forms.Label nameLabel;
         private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button AddButton;

@@ -32,8 +32,6 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.textName = new System.Windows.Forms.TextBox();
-            this.timeLabel = new System.Windows.Forms.Label();
-            this.textTime = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -72,31 +70,11 @@
             this.textName.Size = new System.Drawing.Size(210, 20);
             this.textName.TabIndex = 12;
             // 
-            // timeLabel
-            // 
-            this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(22, 59);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(138, 13);
-            this.timeLabel.TabIndex = 17;
-            this.timeLabel.Text = "Необходимо часов в день";
-            // 
-            // textTime
-            // 
-            this.textTime.Location = new System.Drawing.Point(166, 56);
-            this.textTime.MaxLength = 7;
-            this.textTime.Name = "textTime";
-            this.textTime.Size = new System.Drawing.Size(123, 20);
-            this.textTime.TabIndex = 16;
-            this.textTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textTime_KeyPress);
-            // 
             // AddRest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 150);
-            this.Controls.Add(this.timeLabel);
-            this.Controls.Add(this.textTime);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnAdd);
@@ -115,7 +93,5 @@
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.TextBox textName;
-        private System.Windows.Forms.Label timeLabel;
-        private System.Windows.Forms.TextBox textTime;
     }
 }

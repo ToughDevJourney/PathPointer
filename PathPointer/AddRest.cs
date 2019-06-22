@@ -20,7 +20,7 @@ namespace PathPointer
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             string restName = DataManagement.CheckEmploymentFormat(textName.Text);
-            string restTime = textTime.Text;
+
 
             if (restName == "")
             {
@@ -28,9 +28,7 @@ namespace PathPointer
             }
             else
             {
-                if (restTime == "" || Convert.ToInt32(restTime) > 24) restTime = "0";
-
-                DataManagement.WriteEmpFiles($"{restName}!{DataManagement.Code}!{Convert.ToInt32(restTime)}", DataManagement.EmpType);
+                DataManagement.WriteEmpFiles($"{restName}!{DataManagement.Code}", DataManagement.EmpType);
 
                 BtnCancel_Click(null, null);
             }
