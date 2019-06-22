@@ -112,11 +112,16 @@ namespace PathPointer
                                 "\nВам должно быть стыдно";
                 employmentHours = "Ноль часов из нуля - стопроцентная продуктивность для ленивых";
             }
-            else if(GetValueByIndex(StatsFileArr[currentEmployment], 1) == "0")
+            else if (GetValueByIndex(StatsFileArr[currentEmployment], 1) == "0")
             {
                 employmentName = "ДРУГОЕ";
                 employmentType = "Постарайтесь продумывать вашу деятельность заранее" +
                                 "\nВо всяком случае, почему бы вам не дополнить ее прямо сейчас?";
+            }
+            else if (GetValueByIndex(StatsFileArr[currentEmployment], 1) == "@") {
+                employmentName = "СОН";
+                employmentType = "Доброго вам утра" +
+                                "\nУтро - пик вашей продуктивности, даже если вы сова, попробуйте поработать на собой утром";
             }
             else if (employmentType == "T")
             {
@@ -167,7 +172,7 @@ namespace PathPointer
                             }
                         }
                     }
-                    
+
                 }
                 catch { }
                 finally
@@ -179,7 +184,7 @@ namespace PathPointer
                             employmentType = "Обратитесь к вашему системному администратору" +
                                             "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
                             employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
-                            
+
                             break;
                         case "Business":
                             employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
@@ -195,7 +200,7 @@ namespace PathPointer
                             hoursGoal = Convert.ToInt32(employmentHours);
                             doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal);
 
-                            if(hoursGoal == 0) employmentHours = $"На эту цель вы потратили уже {doneHours} часов!";
+                            if (hoursGoal == 0) employmentHours = $"На эту цель вы потратили уже {doneHours} часов!";
                             else if (hoursGoal <= doneHours) employmentHours = $"Цель выполнена, на ее выполнение вы потратили {hoursGoal} часов!" +
                                     $"\nНо не спешите расслабляться, у вас еще много дел впереди!";
                             else employmentHours = $"Выполнено {doneHours} из {hoursGoal} часов";
@@ -225,7 +230,7 @@ namespace PathPointer
                             hoursGoal = UserSettings.WeekFunTime;
                             doneHours = CountFunHours();
 
-                            employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена на {doneHours-hoursGoal} часов, задумайтесь";
+                            employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена на {doneHours - hoursGoal} часов, задумайтесь";
                             employmentsMustSpend = $"Каждый пол года вы тратите на развлечения {hoursGoal * 26} часов, это {(hoursGoal * 26) / 24} полных суток";
                             break;
                     }
@@ -312,9 +317,9 @@ namespace PathPointer
 
             fileIsFree = IsHourInEfficiency(checkingHour, checkingDayOfWeek);
             if (fileIsFree == true && range == 1 && fileInSchedule == true) WriteSchedHrToEfficiency(scheduleForHour);
-
-            if (fileIsFree = true && fileInSchedule == false) return true;
-            else return fileIsFree;
+            
+            if (fileIsFree == true && fileInSchedule == false) return true;
+            else return false;
         }
 
         private static void WriteSchedHrToEfficiency(string scheduleLine){
@@ -401,24 +406,31 @@ namespace PathPointer
                     }
                     checkingHour = eff >= 24 ? eff - 24 : eff;
 
-
-
-                    schedule = IsHourInSchedule(checkingHour, dow);
-
-                    if (schedule != null)
+                    if (UserSettings.SleepTimeBegin <= checkingHour && checkingHour < UserSettings.SleepTimeEnd && UserSettings.SleepTimeBegin <= UserSettings.SleepTimeEnd)    //если начало сна позже 00:00
                     {
-                        lastSchUpdate = Convert.ToDateTime(GetValueByIndex(schedule, 3));
-                        if (DateTime.Now.Day - lastSchUpdate.Day >= (CurrentDateInfo.DayOfWeek + lastWeek) - dow) //если в последний раз расписание изменялось не раньше проверяемого дня
+                        effArr[eff] += $"Rest!@;";
+                    }
+                    else if ((UserSettings.SleepTimeBegin <= checkingHour || checkingHour < UserSettings.SleepTimeEnd) && UserSettings.SleepTimeBegin > UserSettings.SleepTimeEnd) {  //если начало сна раньше 00:00
+                        effArr[eff] += $"Rest!@;";
+                    }
+                    else
+                    {
+                        schedule = IsHourInSchedule(checkingHour, dow);
+
+                        if (schedule != null)
                         {
-                            schedule = GetValueByIndex(schedule, 1);        //вывод индекса
-                            effArr[eff] += $"Business!{schedule};";
+                            lastSchUpdate = Convert.ToDateTime(GetValueByIndex(schedule, 3));
+                            if (DateTime.Now.Day - lastSchUpdate.Day >= (CurrentDateInfo.DayOfWeek + lastWeek) - dow) //если в последний раз расписание изменялось не раньше проверяемого дня
+                            {
+                                schedule = GetValueByIndex(schedule, 1);        //вывод индекса
+                                effArr[eff] += $"Business!{schedule};";
+                            }
+                            else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
+                            else effArr[eff] += " ;";
                         }
                         else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
                         else effArr[eff] += " ;";
                     }
-                    else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
-                    else effArr[eff] += " ;";
-
                 }
 
             }
@@ -456,12 +468,15 @@ namespace PathPointer
 
         private static bool IsHourInEfficiency(int checkingHour, int checkingDayOfWeek) //если в этот час опрос уже был показан
         {
-
             SetPath("Efficiency");
-            string[] scheduleFileArray = File.ReadAllLines(FilePath);
+            string efficiencyString = "";
             string choosedHourOfEmployment;
 
-            choosedHourOfEmployment = GetValueByIndex(scheduleFileArray[checkingHour], checkingDayOfWeek, ";");   
+            using (StreamReader reader = new StreamReader(FilePath)) {
+                for (int i = 0; i <= checkingHour && (efficiencyString = reader.ReadLine()) != null; i++) { }                                   
+            }
+               
+            choosedHourOfEmployment = GetValueByIndex(efficiencyString, checkingDayOfWeek, ";");   
 
             if (choosedHourOfEmployment == "") return true;
             else return false;
