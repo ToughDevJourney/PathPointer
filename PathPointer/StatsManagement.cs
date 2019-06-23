@@ -194,7 +194,7 @@ namespace PathPointer
                             break;
                         case "Goals":
                             dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
-                            needDays = (int)(dateGoal - DateTime.Now).TotalDays;
+                            needDays = (dateGoal.Date - DateTime.Now.Date).Days;
                             employmentType = "Ого, вы на верном пути к вашей цели!" +
                                             "\nВы ведь не потратили это время на чепуху, в плане, \"Смотреть весь день телевизор\", верно?";
                             hoursGoal = Convert.ToInt32(employmentHours);
@@ -210,7 +210,7 @@ namespace PathPointer
                                 if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
                                 else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
                                 else if ((needDays == 0 && 24 - DateTime.Now.Hour < hoursGoal - doneHours) || (needDays * 24 - (hoursGoal - doneHours) < 0)) employmentsMustSpend = "Увы, но даже если вы возьметесь за дело прямо сейчас, уже не успеете :(";
-                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
+                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {((hoursGoal - doneHours) / needDays + 1) - 1} часов в сутки";  
                             }
                             else employmentsMustSpend = $"Цель должна была быть выполнена {dateGoal.ToLongDateString()}";
                             break;
@@ -360,7 +360,7 @@ namespace PathPointer
                     beginHour = Convert.ToInt32(schedule.Remove(schedule.IndexOf(" ")));
                     endHour = Convert.ToInt32(schedule.Substring(schedule.IndexOf(" ") + 1));
 
-                    if (beginHour <= checkingHour && checkingHour - 1 < endHour)
+                    if (beginHour <= checkingHour && checkingHour < endHour)    // checkingHour - 1 
                     {                                                
                         hourSchedule = scheduleFileArray[i];
                         break;

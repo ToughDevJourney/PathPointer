@@ -48,6 +48,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -232,11 +233,21 @@
             this.button5.Text = "Вернуться";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(350, 419);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(257, 60);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Сброс";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 505);
+            this.ClientSize = new System.Drawing.Size(791, 505);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.label11);
@@ -287,5 +298,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button1;
     }
 }

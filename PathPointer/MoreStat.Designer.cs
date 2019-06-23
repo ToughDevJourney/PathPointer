@@ -41,8 +41,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,30 +164,11 @@
             this.label12.Text = "Если бы вы тратили в день на развлечения на час меньше, было бы [70]%, задумайтес" +
     "ь об этом";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(698, 312);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Диапазон";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(764, 307);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(187, 21);
-            this.comboBox1.TabIndex = 16;
-            // 
             // MoreStat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 423);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -227,7 +206,5 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
