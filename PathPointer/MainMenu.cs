@@ -15,14 +15,27 @@ namespace PathPointer
 {
     public partial class MainMenu : Form
     {
-
+        private static MainMenu _mainMenu;
+        private static Tray tray;
         public static int pickedDayOfWeek;
         public static BindingList<StatsManagement> statCells;
 
 
         public MainMenu()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        public static MainMenu CreateInstance(Form sender)
+        {
+            if (_mainMenu == null)
+            {
+                _mainMenu = new MainMenu();
+            }
+            sender.Close();
+            _mainMenu.TrayIcon.Dispose();
+            _mainMenu.Show();
+            return _mainMenu;
         }
 
 
@@ -36,6 +49,9 @@ namespace PathPointer
             CurrentDateInfo.CheckWeekRelevance();
             StatsManagement.WriteHoursFromSchedule();
             MenuManagement.AreAllFormsClosed = false;
+            tray = new Tray(this.TrayIcon);
+
+            Tray.ProductiveMessage();
 
             FillDaysOfWeek();
             DataGridDayOfWeek_CellClick(null, null);
@@ -46,8 +62,6 @@ namespace PathPointer
             dateTime1 = DateTime.Now;
             dateTime1 = dateTime1.AddHours(1).AddMinutes(-dateTime1.Minute);
             interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
-
-
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
@@ -83,7 +97,7 @@ namespace PathPointer
         }
         private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            MenuManagement.TrayShow(this);
+            MenuManagement.TrayShow(_mainMenu);
         }
 
 
@@ -92,6 +106,8 @@ namespace PathPointer
         {
             const int interval60Mins = 60 * 60 * 1000;
             TimerHour.Interval = interval60Mins;
+            tray.ScheduleBeginMessage();
+
             FileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();

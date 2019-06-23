@@ -118,7 +118,7 @@ namespace PathPointer
                 {
                     employment = Management.GetValueByIndex(schedule);
 
-                    schedule = Management.GetValueByIndex(schedule, 2); //вывод расписания
+                    schedule = Management.GetValueByIndex(schedule, 2); //выывод расписания
                     schedule = Management.GetValueByIndex(schedule, i, "/"); //вывод расписания для конкрентого дня недели
 
                     beginTime = Convert.ToInt32(schedule.Remove(schedule.IndexOf(" ")));

@@ -14,6 +14,8 @@ namespace PathPointer
         public static int WeekFunTime { get; set; }
         public static int SleepTimeBegin { get; set; }
         public static int SleepTimeEnd { get; set; }
+        public static int HoursToWorkNotify { get; set; }
+        public static int HoursToRestNotify { get; set; }
 
         static UserSettings() {
             UpdateAllSettings();
@@ -24,6 +26,8 @@ namespace PathPointer
             WeekFunTime = GetFileValue("Week Fun Time");
             SleepTimeBegin = GetFileValue("Sleep Time Begin");
             SleepTimeEnd = GetFileValue("Sleep Time End");
+            HoursToWorkNotify = GetFileValue("Hours To Work Notify");
+            HoursToRestNotify = GetFileValue("Hours To Rest Notify");
         }
 
         private static int GetFileValue(string settingName){

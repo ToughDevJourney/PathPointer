@@ -41,7 +41,7 @@ namespace PathPointer
         }
 
         private static void FillCommonFileArray() {
-            CommonFileArray = new string[7];
+            CommonFileArray = new string[9];
             CommonFileArray[0] = "Common info:";
             CommonFileArray[1] = $"Week Number!{CurrentDateInfo.WeekNumber}";
             CommonFileArray[2] = "User settings:";
@@ -49,6 +49,9 @@ namespace PathPointer
             CommonFileArray[4] = "Week Fun Time!7";
             CommonFileArray[5] = "Sleep Time Begin!0";
             CommonFileArray[6] = "Sleep Time End!7";
+            CommonFileArray[7] = "Hours To Rest Notify!4";
+            CommonFileArray[8] = "Hours To Rest Notify!1";
+            
         }
 
         private static void CheckForEfficiency() {

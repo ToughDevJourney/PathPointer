@@ -12,14 +12,14 @@ namespace PathPointer
         public static bool AreAllFormsClosed { get; set; }
         public static bool questCheck = true;
 
-        public static void ShowMenu(Form form) {
-            form.Close();
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-            mainMenu.TrayIcon.Dispose();
-            mainMenu = null;
+        //public static void ShowMenu(Form form) {
+        //    form.Close();
+        //    MainMenu mainMenu = new MainMenu();
+        //    mainMenu.Show();
+        //    mainMenu.TrayIcon.Dispose();
+        //    mainMenu = null;
             
-        }
+        //}
 
         public static void HideForm(Form form, FormClosingEventArgs e) {
             if (e.CloseReason == CloseReason.UserClosing)

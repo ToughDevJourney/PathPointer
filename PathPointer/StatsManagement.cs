@@ -37,7 +37,9 @@ namespace PathPointer
 
         }
 
-        private static string[] FillStatsArray(int index, bool pickedCurrentDay) { //вывод массива данных об определенной недели
+        public static string[] FillStatsArray(int index, bool pickedCurrentDay) { //вывод массива данных об определенной недели
+            SetPath("Efficiency");
+
             string[] statsArray = new string[24];
             string readLine;
             int arrayIndex = 0;
@@ -85,7 +87,7 @@ namespace PathPointer
                     dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Black; //будущее
                     break;
                 default:
-                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Gray;
+                    dataGridView.Rows[0].Cells[cellIndex].Style.BackColor = System.Drawing.Color.Gray;  //пропуск
                     break;
 
             }
@@ -194,7 +196,7 @@ namespace PathPointer
                             break;
                         case "Goals":
                             dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
-                            needDays = (dateGoal.Date - DateTime.Now.Date).Days;
+                            needDays = (int)(dateGoal - DateTime.Now).TotalDays;
                             employmentType = "Ого, вы на верном пути к вашей цели!" +
                                             "\nВы ведь не потратили это время на чепуху, в плане, \"Смотреть весь день телевизор\", верно?";
                             hoursGoal = Convert.ToInt32(employmentHours);
@@ -210,7 +212,7 @@ namespace PathPointer
                                 if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
                                 else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
                                 else if ((needDays == 0 && 24 - DateTime.Now.Hour < hoursGoal - doneHours) || (needDays * 24 - (hoursGoal - doneHours) < 0)) employmentsMustSpend = "Увы, но даже если вы возьметесь за дело прямо сейчас, уже не успеете :(";
-                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {((hoursGoal - doneHours) / needDays + 1) - 1} часов в сутки";  
+                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
                             }
                             else employmentsMustSpend = $"Цель должна была быть выполнена {dateGoal.ToLongDateString()}";
                             break;
@@ -263,19 +265,20 @@ namespace PathPointer
 
             int settableHour = DateTime.Now.Hour - range;
             int settableDayOfWeek = CurrentDateInfo.DayOfWeek;
+            int empDayOfWeek;
             string[] efficiency = File.ReadAllLines(FilePath);
 
+            
 
             PreviousHourFix(ref settableHour, ref settableDayOfWeek);
 
             string chckNumOfEmps = efficiency[settableHour];
+            empDayOfWeek = chckNumOfEmps.ToCharArray().Count(c => c == ';');
 
 
 
-
-            for (int i = 1; i < 7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
-                if (chckNumOfEmps.Contains(";")) chckNumOfEmps = chckNumOfEmps.Remove(chckNumOfEmps.IndexOf(";"), 1);
-                else if (settableDayOfWeek >= i) efficiency[settableHour] += " ;";
+            for (int i = empDayOfWeek; i <= 7; i++) {      //заполнение дней недели пропусками, если пользователь в это время был неактивен
+                if (settableDayOfWeek > i) efficiency[settableHour] += " ;";   
                 else break;
             }
             efficiency[settableHour] += $"{name};";
@@ -360,7 +363,7 @@ namespace PathPointer
                     beginHour = Convert.ToInt32(schedule.Remove(schedule.IndexOf(" ")));
                     endHour = Convert.ToInt32(schedule.Substring(schedule.IndexOf(" ") + 1));
 
-                    if (beginHour <= checkingHour && checkingHour < endHour)    // checkingHour - 1 
+                    if (beginHour <= checkingHour && checkingHour - 1 < endHour)
                     {                                                
                         hourSchedule = scheduleFileArray[i];
                         break;

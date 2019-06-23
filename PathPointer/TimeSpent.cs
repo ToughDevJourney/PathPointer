@@ -13,6 +13,8 @@ namespace PathPointer
     public partial class TimeSpent : Form
     {
         private static string empType;
+        public static BindingList<DataManagement> varCells;
+        private static TimeSpent _timeSpent;
         private static int currentRange = UserSettings.EmploymentCheckRange;
 
         public string EmpType {
@@ -24,8 +26,7 @@ namespace PathPointer
                 FillGrid();
             }
         }
-        public static BindingList<DataManagement> varCells;
-        private static TimeSpent _timeSpent;
+
 
         private TimeSpent() {
             InitializeComponent();
@@ -109,7 +110,7 @@ namespace PathPointer
                     goalDate = Convert.ToDateTime(StatsManagement.GetValueByIndex(employment, 3));
                     if ((hoursGoal <= doneHours || goalDate < DateTime.Now) && hoursGoal != 0)
                     {
-                        message = goalDate < DateTime.Now ? "просрочена" : "достигнута";
+                        message = goalDate.Day < DateTime.Now.Day ? "просрочена" : "достигнута";
 
                         var result = MessageBox.Show($"Ваша цель \"{employmentName}\" {message}" +
                             $"\nСделать из нее постоянную цель?", "Цель достигнута!", MessageBoxButtons.YesNo);
@@ -133,7 +134,10 @@ namespace PathPointer
 
             currentRange--;
             SetLabelValue();
-            if (currentRange <= 0) this.Hide();
+            if (currentRange <= 0) {
+                Tray.CheckNotifyNeed();
+                this.Hide();
+            }
         }
 
         private void TimeSpent_FormClosing(object sender, FormClosingEventArgs e)

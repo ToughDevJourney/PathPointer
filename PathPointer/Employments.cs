@@ -90,7 +90,7 @@ namespace PathPointer
 
         private void BackMain_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowMenu(this);
+            MainMenu mainMenu = MainMenu.CreateInstance(this);
         }
         
         private void dataGridBusiness_KeyDown(object sender, KeyEventArgs e)
