@@ -110,6 +110,7 @@
             this.BtnSettings.TabIndex = 6;
             this.BtnSettings.Text = "Настройки";
             this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // TrayIcon
             // 

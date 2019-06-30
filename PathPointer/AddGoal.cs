@@ -32,7 +32,7 @@ namespace PathPointer
             {
                 if (goalTime == "") goalTime = "0";
 
-                DataManagement.WriteEmpFiles($"{goaltName}!{DataManagement.Code}!{Convert.ToInt32(goalTime)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
+                DataManagement.WriteToFile($"{goaltName}!{DataManagement.Code}!{Convert.ToInt32(goalTime)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
 
                 BtnCancel_Click(null, null);
             }

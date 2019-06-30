@@ -28,7 +28,7 @@ namespace PathPointer
             }
             else
             {
-                DataManagement.WriteEmpFiles($"{funName}!{DataManagement.Code}", DataManagement.EmpType);
+                DataManagement.WriteToFile($"{funName}!{DataManagement.Code}", DataManagement.EmpType);
                 CancelButton_Click(null, null);
             }
         }

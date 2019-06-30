@@ -82,6 +82,13 @@
     <Compile Include="AddSchedule.Designer.cs">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="BiggerCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BiggerCheckBox.Designer.cs">
+      <DependentUpon>BiggerCheckBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinesFormat.cs" />
     <Compile Include="Texts.cs" />
     <Compile Include="Tray.cs" />
     <Compile Include="UserSettings.cs" />
@@ -146,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddSchedule.resx">
       <DependentUpon>AddSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BiggerCheckBox.resx">
+      <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Employments.resx">
       <DependentUpon>Employments.cs</DependentUpon>

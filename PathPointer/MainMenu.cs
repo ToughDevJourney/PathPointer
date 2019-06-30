@@ -19,7 +19,7 @@ namespace PathPointer
         private static Tray tray;
         public static int pickedDayOfWeek;
         public static BindingList<StatsManagement> statCells;
-
+        FileManagement fileManagement = new FileManagement();
 
         public MainMenu()
         {
@@ -33,7 +33,6 @@ namespace PathPointer
                 _mainMenu = new MainMenu();
             }
             sender.Close();
-            _mainMenu.TrayIcon.Dispose();
             _mainMenu.Show();
             return _mainMenu;
         }
@@ -45,13 +44,14 @@ namespace PathPointer
             const int minutes = 60;
             int interval;
 
-            FileManagement.CheckAllFiles();
+            fileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             StatsManagement.WriteHoursFromSchedule();
             MenuManagement.AreAllFormsClosed = false;
             tray = new Tray(this.TrayIcon);
 
             Tray.ProductiveMessage();
+            _mainMenu = this;
 
             FillDaysOfWeek();
             DataGridDayOfWeek_CellClick(null, null);
@@ -81,7 +81,14 @@ namespace PathPointer
 
             this.Hide();
         }
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            MenuManagement.AreAllFormsClosed = false;
+            settings.Show();
 
+            this.Hide();
+        }
 
         private void BtnMoreStats_Click(object sender, EventArgs e)
         {
@@ -108,7 +115,7 @@ namespace PathPointer
             TimerHour.Interval = interval60Mins;
             tray.ScheduleBeginMessage();
 
-            FileManagement.CheckAllFiles();
+            fileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
         }
@@ -177,5 +184,7 @@ namespace PathPointer
             }
             MenuManagement.AreAllFormsClosed = true;
         }
+
+
     }
 }

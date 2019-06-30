@@ -13,19 +13,22 @@ namespace PathPointer
     public class FileManagement : Management
     {
         public static string[] CommonFileArray{ get; set; }
+        public delegate void CheckFiles();
+        public CheckFiles CheckAllFiles;
 
-        public static void CheckAllFiles() {
-            CheckForDirectory();
-            CheckForCommon();
-            CheckForEfficiency();
-            CheckForCodes();
-            CheckForBusiness();
-            CheckForFun();
-            CheckForGoals();
-            CheckForRest();
+        public FileManagement() {           
+            CheckAllFiles += CheckForDirectory;
+            CheckAllFiles += CheckForCommon;
+            CheckAllFiles += CheckForEfficiency;
+            CheckAllFiles += CheckForCodes;
+            CheckAllFiles += CheckForBusiness;
+            CheckAllFiles += CheckForFun;
+            CheckAllFiles += CheckForGoals;
+            CheckAllFiles += CheckForRest;
+            CheckAllFiles();
         }
 
-        private static void CheckForDirectory() {
+        private void CheckForDirectory() {
             SetPath();
             if (!Directory.Exists(FilePath)) Directory.CreateDirectory(FilePath);
             if (!Directory.Exists(FilePath + "\\Employments")) Directory.CreateDirectory(FilePath + "\\Employments");
@@ -33,14 +36,14 @@ namespace PathPointer
 
         }
 
-        private static void CheckForCommon(){
+        private void CheckForCommon(){
             FillCommonFileArray();
             if (!CheckFileExistance("Common")) {
                 File.WriteAllLines(FilePath, CommonFileArray);
             }
         }
 
-        private static void FillCommonFileArray() {
+        private void FillCommonFileArray() {
             CommonFileArray = new string[9];
             CommonFileArray[0] = "Common info:";
             CommonFileArray[1] = $"Week Number!{CurrentDateInfo.WeekNumber}";
@@ -54,7 +57,7 @@ namespace PathPointer
             
         }
 
-        private static void CheckForEfficiency() {
+        private void CheckForEfficiency() {
             if (!CheckFileExistance("Efficiency"))
             {
                 using (File.Create(FilePath)) { }
@@ -62,7 +65,7 @@ namespace PathPointer
             }
         }
 
-        private static void CheckForCodes() {
+        private void CheckForCodes() {
             if (!CheckFileExistance("Employments\\Codes"))
             {
                 string[] fileArray = new string[4];
@@ -74,30 +77,30 @@ namespace PathPointer
             }
         }
 
-        private static void CheckForBusiness() {
+        private void CheckForBusiness() {
             if (!CheckFileExistance("Employments\\Business")) using (File.Create(FilePath)) { }
         }
 
-        private static void CheckForGoals()
+        private void CheckForGoals()
         {
             if (!CheckFileExistance("Employments\\Goals"))
             {
                 using (File.Create(FilePath)) { }
-                DataManagement.WriteEmpFiles($"Установка PathPointer!{DataManagement.Code}!1!{DateTime.Today.ToShortDateString()}", "Employments\\Goals");
+                DataManagement.WriteToFile($"Установка PathPointer!{DataManagement.Code}!1!{DateTime.Today.ToShortDateString()}", "Employments\\Goals");
             }
         }
 
-        private static void CheckForRest() {
+        private void CheckForRest() {
             if (!CheckFileExistance("Employments\\Rest")) using (File.Create(FilePath)) { }
 
         }
 
-        private static void CheckForFun()
+        private void CheckForFun()
         {
             if (!CheckFileExistance("Employments\\Fun")) using (File.Create(FilePath)) { }
         }
 
-        private static bool CheckFileExistance(string fileStr) {
+        private bool CheckFileExistance(string fileStr) {
             SetPath(fileStr);
             if (File.Exists(FilePath)) return true;
             else return false;

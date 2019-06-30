@@ -105,7 +105,7 @@ namespace PathPointer
                 if (result == DialogResult.Yes)
                 {
                     varCells.RemoveAt(dataGridBusiness.CurrentCell.RowIndex);
-                    DataManagement.DeleteEmpFiles(cellVal, empType);
+                    DataManagement.DeleteLineFromFile(cellVal, $"Employments\\{empType}");
                 } 
             }
 

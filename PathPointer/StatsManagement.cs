@@ -123,7 +123,7 @@ namespace PathPointer
             else if (GetValueByIndex(StatsFileArr[currentEmployment], 1) == "@") {
                 employmentName = "СОН";
                 employmentType = "Доброго вам утра" +
-                                "\nУтро - пик вашей продуктивности, даже если вы сова, попробуйте поработать на собой утром";
+                                "\nУтро - пик вашей продуктивности, даже если вы сова, попробуйте поработать над собой утром";
             }
             else if (employmentType == "T")
             {

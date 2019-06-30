@@ -44,8 +44,8 @@ namespace PathPointer
             if (businessName == "") MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
             else {
                 businessName = DataManagement.CheckEmploymentFormat(businessName);
-                if (AddSchedule.Schedule == null) DataManagement.WriteEmpFiles($"{businessName}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-                else DataManagement.WriteEmpFiles($"{businessName}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+                if (AddSchedule.Schedule == null) DataManagement.WriteToFile($"{businessName}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+                else DataManagement.WriteToFile($"{businessName}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
             }
             BtnCancel_Click(null, null);
         }

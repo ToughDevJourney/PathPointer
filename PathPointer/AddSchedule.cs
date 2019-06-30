@@ -23,7 +23,6 @@ namespace PathPointer
         private Label pickedLabelDayOfWeek;
 
 
-
         public AddSchedule()
         {
             InitializeComponent();
@@ -34,8 +33,8 @@ namespace PathPointer
         {
             InitializeDaysOfWeekArray();
             pickedLabelDayOfWeek = lblMon;
-            lblMon_Click(null, null);
-            MouseEnterFontEvent(lblMon);
+            DayOfWeekClick(lblMon, null);
+            MouseEnterLabelEvent(lblMon, null);
             if (AddBusy.BusyName == "") lblBusinessName.Text = "Неназванное дело";
             else lblBusinessName.Text = AddBusy.BusyName;
         }
@@ -86,14 +85,14 @@ namespace PathPointer
         }
         private void TextBegin_Leave(object sender, EventArgs e)
         {
-            TextBegin.Text = FormatChecking(TextBegin.Text);
+            TextBegin.Text = LinesFormat.TimeFormat(TextBegin.Text);
             BeginTimeIsLessThenEndTimeCheck();
             if (firstBeginChange == true && beginChanged == true) ChangeAllDays(ref firstBeginChange);  //при первом изменении, изменяется расписание всех дней
             else FromTimePickToSchedule();
         }
         private void TextEnd_Leave(object sender, EventArgs e)
         {
-            TextEnd.Text = FormatChecking(TextEnd.Text);
+            TextEnd.Text = LinesFormat.TimeFormat(TextEnd.Text);
             BeginTimeIsLessThenEndTimeCheck();
             if (firstEndChange == true && endChanged == true) ChangeAllDays(ref firstEndChange);
             else FromTimePickToSchedule();
@@ -155,61 +154,20 @@ namespace PathPointer
             return scheduleArray;
         }
 
-        private string FormatChecking(string checkFormat)
+
+
+
+        private void DayOfWeekClick(object sender, EventArgs e)
         {
-            Console.WriteLine("here is Checking");
+            Label pickedLabel = (Label)sender;
+            PickedDayOfWeek = Convert.ToInt32(pickedLabel.Tag);
 
-            int hoursADay = 24;
-
-            if (checkFormat == "Выходной")
-            {
-                checkFormat = "00:00";
-            }
-            else
-            {
-                checkFormat = checkFormat.Substring(0, 2);
-                if (checkFormat[0] == ' ')
-                {
-                    checkFormat = "00:00";
-                }
-                else
-                {
-                    if (checkFormat[1] == ' ')
-                    {
-                        checkFormat = $"0{checkFormat[0]}:00";
-                    }
-                    else
-                    {
-                        if (checkFormat[0] == 0)
-                        {
-                            checkFormat = $"0{checkFormat}:00";
-                        }
-                        else
-                        {
-                            if (Convert.ToInt32(checkFormat) >= hoursADay)
-                            {
-                                checkFormat = "23:00";
-                            }
-                            else
-                            {
-                                checkFormat = $"{checkFormat}:00";
-                            }
-                        }
-                    }
-                }
-            }
-            return checkFormat;
-        }
-
-
-        private void DayOfWeekClick(Label pickedLabel)
-        {
             Label intermediateLbl = pickedLabelDayOfWeek;
             Label currentLbl = lblsTimeOfDaysOfWeek[PickedDayOfWeek];
 
             pickedLabelDayOfWeek = pickedLabel;      //отмена выделения предыдущего выбранного дня недели
-            MouseEnterFontEvent(pickedLabelDayOfWeek);
-            MouseLeaveFontEvent(intermediateLbl);
+            MouseEnterLabelEvent(pickedLabelDayOfWeek, null);
+            MouseLeaveFontEvent(intermediateLbl, null);
 
             if (currentLbl.Text == "Выходной")
             {
@@ -252,8 +210,9 @@ namespace PathPointer
             PickedDayOfWeek = currentPickedDay;
         }
 
-        private void TimeClick(Label label)
-        { 
+        private void TimeClick(object sender, EventArgs e)
+        {
+            Label label = (Label)sender;
             if (label.Text != "Выходной") label.Text = "Выходной";
             else label.Text = "08:00 - 15:00";
         }
@@ -266,198 +225,15 @@ namespace PathPointer
         {
             endChanged = true;
         }
-        private void MouseEnterFontEvent(Label label) {
-            label.Font = new Font(label.Font, FontStyle.Bold);
+        private void MouseEnterLabelEvent(object sender, EventArgs e) {
+            Label enterLabel = (Label)sender;
+            enterLabel.Font = new Font(enterLabel.Font, FontStyle.Bold);
         }
-        private void MouseLeaveFontEvent(Label label)
+        private void MouseLeaveFontEvent(object sender, EventArgs e)
         {
-            if (label != pickedLabelDayOfWeek) {
-                label.Font = new Font(label.Font, FontStyle.Regular);
-            }
-
-
+            Label leaveLabel = (Label)sender;
+            if (leaveLabel != pickedLabelDayOfWeek) leaveLabel.Font = new Font(leaveLabel.Font, FontStyle.Regular);
         }
-
-        private void lblMon_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblMon);
-        }
-        private void lblTue_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTue);
-        }
-        private void lblWed_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblWed);
-        }
-        private void lblThu_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblThu);
-        }
-        private void lblFri_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblFri);
-        }
-        private void lblSat_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblSat);
-        }
-        private void lblSun_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblSun);
-        }
-        private void lblTimeMon_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeMon);
-        }
-        private void lblTimeTue_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeTue);
-        }
-        private void lblTimeWed_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeWed);
-        }
-        private void lblTimeFri_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeFri);
-        }
-        private void lblTimeThu_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeThu);
-        }
-        private void lblTimeSat_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeSat);
-        }
-        private void lblTimeSun_MouseEnter(object sender, EventArgs e)
-        {
-            MouseEnterFontEvent(lblTimeSun);
-        }
-
-        private void lblMon_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblMon);
-        }
-        private void lblTue_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTue);
-        }
-        private void lblWed_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblWed);
-        }
-        private void lblThu_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblThu);
-        }
-        private void lblFri_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblFri);
-        }
-        private void lblSat_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblSat);
-        }
-        private void lblSun_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblSun);
-        }
-        private void lblTimeMon_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeMon);
-        }
-        private void lblTimeTue_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeTue);
-        }
-        private void lblTimeWed_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeWed);
-        }
-        private void lblTimeThu_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeThu);
-        }
-        private void lblTimeFri_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeFri);
-        }
-        private void lblTimeSat_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeSat);
-        }
-        private void lblTimeSun_MouseLeave(object sender, EventArgs e)
-        {
-            MouseLeaveFontEvent(lblTimeSun);
-        }
-
-        private void lblTimeMon_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeMon);
-        }
-        private void lblTimeTue_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeTue);
-        }
-        private void lblTimeWed_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeWed);
-        }
-        private void lblTimeThu_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeThu);
-        }
-        private void lblTimeFri_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeFri);
-        }
-        private void lblTimeSat_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeSat);
-        }
-        private void lblTimeSun_Click(object sender, EventArgs e)
-        {
-            TimeClick(lblTimeSun);
-        }
-
-        private void lblMon_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 0;
-            DayOfWeekClick(lblMon);
-        }
-        private void lblTue_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 1;
-            DayOfWeekClick(lblTue);
-        }
-        private void lblWed_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 2;
-            DayOfWeekClick(lblWed);
-        }
-        private void lblThu_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 3;
-            DayOfWeekClick(lblThu);
-        }
-        private void lblFri_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 4;
-            DayOfWeekClick(lblFri);
-        }
-        private void lblSat_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 5;
-            DayOfWeekClick(lblSat);
-        }
-        private void lblSun_Click(object sender, EventArgs e)
-        {
-            PickedDayOfWeek = 6;
-            DayOfWeekClick(lblSun);
-        }
-
-
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {

@@ -44,9 +44,10 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
-            for (int i = 1; i <= UserSettings.EmploymentCheckRange; i++)//нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
+            currentRange = UserSettings.EmploymentCheckRange;
+            for (int i = 1; i <= UserSettings.EmploymentCheckRange; i++)    //нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
             {
-                if (StatsManagement.CheckIsHourAvailable(i)) currentRange = i;                
+                if (StatsManagement.CheckIsHourAvailable(i)) currentRange = i;
                 else break;
             }
             SetLabelValue();
@@ -113,19 +114,12 @@ namespace PathPointer
                         message = goalDate.Day < DateTime.Now.Day ? "просрочена" : "достигнута";
 
                         var result = MessageBox.Show($"Ваша цель \"{employmentName}\" {message}" +
-                            $"\nСделать из нее постоянную цель?", "Цель достигнута!", MessageBoxButtons.YesNo);
+                            $"\nСделать из нее постоянную цель?", $"Цель {message}!", MessageBoxButtons.YesNo);
 
-                        if (result == DialogResult.Yes)
-                        {
-                            DataManagement.WriteEmpFiles($"{employmentName} DN!{DataManagement.Code}!0!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-                            DataManagement.DeleteEmpFiles(employmentName, empType);
-                            FillGrid();
-                        }
-                        else
-                        {
-                            DataManagement.DeleteEmpFiles(employmentName, empType);
-                            FillGrid();
-                        }
+                        if (result == DialogResult.Yes) DataManagement.WriteToFile($"{employmentName} DN!{DataManagement.Code}!0!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+
+                        DataManagement.DeleteLineFromFile(employmentName, $"Employments\\{empType}");
+                        FillGrid();
                     }
 
                 }

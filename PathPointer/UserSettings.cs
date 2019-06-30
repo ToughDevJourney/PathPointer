@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PathPointer
 {
     class UserSettings : Management
     {
+       
 
         public static int EmploymentCheckRange { get; set; }
         public static int WeekFunTime { get; set; }
@@ -19,9 +21,13 @@ namespace PathPointer
 
         static UserSettings() {
             UpdateAllSettings();
+
+
+            if (!File.Exists(FilePath)) using (File.Create(FilePath)) { };
+
         }
 
-        public static void UpdateAllSettings(){
+        public static void UpdateAllSettings() {
             EmploymentCheckRange = GetFileValue("Employment Check Range");
             WeekFunTime = GetFileValue("Week Fun Time");
             SleepTimeBegin = GetFileValue("Sleep Time Begin");
@@ -30,7 +36,7 @@ namespace PathPointer
             HoursToRestNotify = GetFileValue("Hours To Rest Notify");
         }
 
-        private static int GetFileValue(string settingName){
+        private static int GetFileValue(string settingName) {
             SetPath("Common");
             int value = 1;
             if (File.Exists(FilePath))
@@ -46,6 +52,25 @@ namespace PathPointer
                 }
             }
             return value;
+        }
+
+
+        public static void ShowGames(ComboBox GamesComboBox){
+            SetPath("GamesList");
+            GamesComboBox.Items.Clear();
+            string[] gamesArr = File.ReadAllLines(FilePath);
+            foreach (var line in gamesArr) GamesComboBox.Items.Add(line);
+            GamesComboBox.Text = "";
+        }
+
+        public static void AddGame(string gameName) {
+            if (!DataManagement.IsLineInFile(gameName, "GamesList")) DataManagement.WriteToFile(gameName, "GamesList");
+            else MessageBox.Show("Игра с таким именем уже добавлена!", "Уже готово!");
+        }
+
+        public static void DelGame(string gameName)
+        {
+            DataManagement.DeleteLineFromFile(gameName, "GamesList");
         }
 
     }

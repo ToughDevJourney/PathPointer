@@ -79,9 +79,9 @@ namespace PathPointer
 
 
 
-        public static void WriteEmpFiles(string name, string empType)    //запись в файл
+        public static void WriteToFile(string name, string fileName)    //запись в файл
         {
-            EmpType = empType;
+            EmpType = fileName;
 
             using (StreamWriter sw = new StreamWriter(FilePath, true))
             {
@@ -89,9 +89,9 @@ namespace PathPointer
             }
         }
 
-        public static void DeleteEmpFiles(string delLine, string empType)
+        public static void DeleteLineFromFile(string delLine, string filePath)
         {
-            EmpType = $"Employments\\{empType}";
+            EmpType = $"{filePath}";
             string line;
             string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
             string archive = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Archive\\{Employments.empType}.txt"); //промежуточный для удаления файл
@@ -154,9 +154,20 @@ namespace PathPointer
                     break;
                 }
             }
+        }
 
-            
 
+        public static bool IsLineInFile(string line, string fileName = null, bool onlyFirstNameCheck = false) {
+            if (fileName != null) SetPath(fileName);
+            string readLine;
+
+            using (StreamReader reader = new StreamReader(FilePath)) {
+                while ((readLine = reader.ReadLine()) != null) {
+                    readLine = onlyFirstNameCheck == true ? GetValueByIndex(readLine) : readLine;
+                    if (readLine == line) return true;
+                }
+            }
+            return false;
         }
 
     }
