@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,7 +26,6 @@ namespace PathPointer
             CheckAllFiles += CheckForFun;
             CheckAllFiles += CheckForGoals;
             CheckAllFiles += CheckForRest;
-            CheckAllFiles();
         }
 
         private void CheckForDirectory() {
@@ -37,24 +37,30 @@ namespace PathPointer
         }
 
         private void CheckForCommon(){
-            FillCommonFileArray();
-            if (!CheckFileExistance("Common")) {
-                File.WriteAllLines(FilePath, CommonFileArray);
-            }
+            if (!CheckFileExistance("Common")) FillCommonFileArray(); 
         }
 
-        private void FillCommonFileArray() {
-            CommonFileArray = new string[9];
+
+
+        public void FillCommonFileArray(string statsCheckRange = "3", string weekFunHrs = "14", string sleepHrBegin = "0", 
+            string sleepHrEnd = "9", string hrsToRest = "4", string hrsToWork = "1", string SoftMotiv = "1", string HadrMotiv = "0") {
+
+            SetPath("Common");
+
+            CommonFileArray = new string[11];
             CommonFileArray[0] = "Common info:";
             CommonFileArray[1] = $"Week Number!{CurrentDateInfo.WeekNumber}";
             CommonFileArray[2] = "User settings:";
-            CommonFileArray[3] = "Employment Check Range!1";
-            CommonFileArray[4] = "Week Fun Time!7";
-            CommonFileArray[5] = "Sleep Time Begin!0";
-            CommonFileArray[6] = "Sleep Time End!7";
-            CommonFileArray[7] = "Hours To Rest Notify!4";
-            CommonFileArray[8] = "Hours To Rest Notify!1";
-            
+            CommonFileArray[3] = $"Employment Check Range!{statsCheckRange}";
+            CommonFileArray[4] = $"Week Fun Time!{weekFunHrs}";
+            CommonFileArray[5] = $"Sleep Time Begin!{sleepHrBegin}";
+            CommonFileArray[6] = $"Sleep Time End!{sleepHrEnd}";
+            CommonFileArray[7] = $"Hours To Rest Notify!{hrsToRest}";
+            CommonFileArray[8] = $"Hours To Work Notify!{hrsToWork}";
+            CommonFileArray[9] = $"SoftMotivation!{SoftMotiv}";
+            CommonFileArray[10] = $"HardMotivation!{HadrMotiv}";
+
+            File.WriteAllLines(FilePath, CommonFileArray);
         }
 
         private void CheckForEfficiency() {
@@ -106,6 +112,14 @@ namespace PathPointer
             else return false;
         }
 
+
+        public void ResetProgram() {
+            SetPath();
+
+            Directory.Delete(FilePath, true);
+            CheckAllFiles();
+            StatsManagement.WriteHoursFromSchedule();
+        }
 
     }
 }

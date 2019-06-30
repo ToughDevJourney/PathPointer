@@ -57,6 +57,7 @@ namespace PathPointer
 
         public static void ShowGames(ComboBox GamesComboBox){
             SetPath("GamesList");
+            if(!File.Exists(FilePath)) using (File.Create(FilePath)) { }
             GamesComboBox.Items.Clear();
             string[] gamesArr = File.ReadAllLines(FilePath);
             foreach (var line in gamesArr) GamesComboBox.Items.Add(line);

@@ -11,8 +11,6 @@ namespace PathPointer
 
         public static string TimeFormat(string checkFormat)
         {
-            Console.WriteLine("here is Checking");
-
             int hoursADay = 24;
 
             if (checkFormat == "Выходной")
@@ -53,6 +51,13 @@ namespace PathPointer
                 }
             }
             return checkFormat;
+        }
+
+        public static string ShortFormatTime(string time)
+        {
+            time = time.Replace(":00", "");
+            if (time[0] == '0') time = time.Substring(1);
+            return time;
         }
 
     }

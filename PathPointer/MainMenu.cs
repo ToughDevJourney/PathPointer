@@ -122,10 +122,8 @@ namespace PathPointer
 
         public static void ShowQuest()
         {
-
             TimeSpent form = TimeSpent.CreateInstance();
             form.Show();
-
         }
 
         private void FillDaysOfWeek() {     //заполнение таблицы дней недели с учетом сдвига

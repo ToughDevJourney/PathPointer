@@ -54,7 +54,7 @@ namespace PathPointer
             lblTimeThu.Text, lblTimeFri.Text, lblTimeSat.Text, lblTimeSun.Text };
             string message = "";
 
-            schedArr = ExportFormatTime(schedArr);
+            schedArr = ExportToFileFormatTime(schedArr);
 
             message = IsScheduleAlreadyAdded(schedArr);
             if (message != "")
@@ -135,8 +135,10 @@ namespace PathPointer
             return "";
         }
 
-        private string[] ExportFormatTime(string[] scheduleArray) //форматирование строки в вид "9 17!"
+        private string[] ExportToFileFormatTime(string[] scheduleArray) //форматирование строки в вид "9 17!"
         {
+            string beginHour;
+            string endHour;
             for (int i = 0; scheduleArray.Length > i; i++)
             {
                 if (scheduleArray[i] == "Выходной") //если по расписанию выхожной
@@ -145,10 +147,16 @@ namespace PathPointer
                     continue;
                 }
                 scheduleArray[i] = scheduleArray[i].Replace(" - ", " ");
-                scheduleArray[i] = scheduleArray[i].Replace(":00", "");
 
-                if (scheduleArray[i][3] == '0') scheduleArray[i] = scheduleArray[i].Remove(3, 1);
-                if (scheduleArray[i][0] == '0') scheduleArray[i] = scheduleArray[i].Remove(0, 1);
+                beginHour = scheduleArray[i].Remove(scheduleArray[i].IndexOf(" "));
+                endHour = scheduleArray[i].Substring(scheduleArray[i].IndexOf(" ") + 1);
+
+                beginHour = LinesFormat.ShortFormatTime(beginHour);
+                endHour = LinesFormat.ShortFormatTime(endHour);
+
+                scheduleArray[i] = $"{beginHour} {endHour}";
+
+
             }
 
             return scheduleArray;

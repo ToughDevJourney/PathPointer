@@ -52,17 +52,12 @@ namespace PathPointer
 
         private void textTime_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
-            {
-                e.Handled = true;
-            }
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8)) e.Handled = true;
         }
 
         private void datePicker_ValueChanged(object sender, EventArgs e)
         {
-            if (datePicker.Value < DateTime.Now) {
-                datePicker.Value = DateTime.Now;
-            }
+            if (datePicker.Value < DateTime.Now) datePicker.Value = DateTime.Now;
         }
     }
 }

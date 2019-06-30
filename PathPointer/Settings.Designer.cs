@@ -46,12 +46,12 @@
             this.BtnBack = new System.Windows.Forms.Button();
             this.BtnDefault = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.TBHrsToRest = new System.Windows.Forms.TextBox();
+            this.TBHrsToWork = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.TBGetStatsHrs = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.TBFunHrsPerWeek = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.CBGamesList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -205,21 +205,23 @@
             // 
             // BtnBack
             // 
-            this.BtnBack.Location = new System.Drawing.Point(671, 185);
+            this.BtnBack.Location = new System.Drawing.Point(671, 182);
             this.BtnBack.Name = "BtnBack";
-            this.BtnBack.Size = new System.Drawing.Size(252, 40);
+            this.BtnBack.Size = new System.Drawing.Size(252, 50);
             this.BtnBack.TabIndex = 19;
             this.BtnBack.Text = "Вернуться";
             this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // BtnDefault
             // 
-            this.BtnDefault.Location = new System.Drawing.Point(350, 185);
+            this.BtnDefault.Location = new System.Drawing.Point(350, 182);
             this.BtnDefault.Name = "BtnDefault";
-            this.BtnDefault.Size = new System.Drawing.Size(252, 40);
+            this.BtnDefault.Size = new System.Drawing.Size(252, 50);
             this.BtnDefault.TabIndex = 20;
             this.BtnDefault.Text = "Сброс программы";
             this.BtnDefault.UseVisualStyleBackColor = true;
+            this.BtnDefault.Click += new System.EventHandler(this.BtnDefault_Click);
             // 
             // label12
             // 
@@ -230,23 +232,25 @@
             this.label12.TabIndex = 21;
             this.label12.Text = "Напоминать о работе через часов отдыха";
             // 
-            // textBox4
+            // TBHrsToRest
             // 
-            this.textBox4.Location = new System.Drawing.Point(588, 28);
-            this.textBox4.MaxLength = 1;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(14, 20);
-            this.textBox4.TabIndex = 22;
-            this.textBox4.Text = "1";
+            this.TBHrsToRest.Location = new System.Drawing.Point(588, 28);
+            this.TBHrsToRest.MaxLength = 1;
+            this.TBHrsToRest.Name = "TBHrsToRest";
+            this.TBHrsToRest.Size = new System.Drawing.Size(14, 20);
+            this.TBHrsToRest.TabIndex = 22;
+            this.TBHrsToRest.Text = "1";
+            this.TBHrsToRest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
             // 
-            // textBox5
+            // TBHrsToWork
             // 
-            this.textBox5.Location = new System.Drawing.Point(588, 53);
-            this.textBox5.MaxLength = 1;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(14, 20);
-            this.textBox5.TabIndex = 25;
-            this.textBox5.Text = "4";
+            this.TBHrsToWork.Location = new System.Drawing.Point(588, 53);
+            this.TBHrsToWork.MaxLength = 1;
+            this.TBHrsToWork.Name = "TBHrsToWork";
+            this.TBHrsToWork.Size = new System.Drawing.Size(14, 20);
+            this.TBHrsToWork.TabIndex = 25;
+            this.TBHrsToWork.Text = "4";
+            this.TBHrsToWork.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
             // 
             // label15
             // 
@@ -257,14 +261,15 @@
             this.label15.TabIndex = 24;
             this.label15.Text = "Напоминать об отдыхе через часов работы";
             // 
-            // textBox6
+            // TBGetStatsHrs
             // 
-            this.textBox6.Location = new System.Drawing.Point(588, 95);
-            this.textBox6.MaxLength = 1;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(14, 20);
-            this.textBox6.TabIndex = 28;
-            this.textBox6.Text = "2";
+            this.TBGetStatsHrs.Location = new System.Drawing.Point(588, 95);
+            this.TBGetStatsHrs.MaxLength = 1;
+            this.TBGetStatsHrs.Name = "TBGetStatsHrs";
+            this.TBGetStatsHrs.Size = new System.Drawing.Size(14, 20);
+            this.TBGetStatsHrs.TabIndex = 28;
+            this.TBGetStatsHrs.Text = "2";
+            this.TBGetStatsHrs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
             // 
             // label17
             // 
@@ -275,14 +280,15 @@
             this.label17.TabIndex = 27;
             this.label17.Text = "Количество часов сбора статистики";
             // 
-            // textBox7
+            // TBFunHrsPerWeek
             // 
-            this.textBox7.Location = new System.Drawing.Point(582, 138);
-            this.textBox7.MaxLength = 2;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(20, 20);
-            this.textBox7.TabIndex = 31;
-            this.textBox7.Text = "14";
+            this.TBFunHrsPerWeek.Location = new System.Drawing.Point(582, 138);
+            this.TBFunHrsPerWeek.MaxLength = 2;
+            this.TBFunHrsPerWeek.Name = "TBFunHrsPerWeek";
+            this.TBFunHrsPerWeek.Size = new System.Drawing.Size(20, 20);
+            this.TBFunHrsPerWeek.TabIndex = 31;
+            this.TBFunHrsPerWeek.Text = "14";
+            this.TBFunHrsPerWeek.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
             // 
             // label19
             // 
@@ -332,9 +338,9 @@
             // 
             // BtnAccept
             // 
-            this.BtnAccept.Location = new System.Drawing.Point(26, 185);
+            this.BtnAccept.Location = new System.Drawing.Point(26, 182);
             this.BtnAccept.Name = "BtnAccept";
-            this.BtnAccept.Size = new System.Drawing.Size(252, 40);
+            this.BtnAccept.Size = new System.Drawing.Size(252, 50);
             this.BtnAccept.TabIndex = 38;
             this.BtnAccept.Text = "Применить";
             this.BtnAccept.UseVisualStyleBackColor = true;
@@ -348,6 +354,7 @@
             this.MTBSleepBegin.Size = new System.Drawing.Size(31, 20);
             this.MTBSleepBegin.TabIndex = 41;
             this.MTBSleepBegin.ValidatingType = typeof(System.DateTime);
+            this.MTBSleepBegin.Leave += new System.EventHandler(this.CheckFormat);
             // 
             // MTBSleepEnd
             // 
@@ -357,12 +364,13 @@
             this.MTBSleepEnd.Size = new System.Drawing.Size(31, 20);
             this.MTBSleepEnd.TabIndex = 42;
             this.MTBSleepEnd.ValidatingType = typeof(System.DateTime);
+            this.MTBSleepEnd.Leave += new System.EventHandler(this.CheckFormat);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 253);
+            this.ClientSize = new System.Drawing.Size(963, 247);
             this.Controls.Add(this.MTBSleepEnd);
             this.Controls.Add(this.MTBSleepBegin);
             this.Controls.Add(this.BtnAccept);
@@ -370,13 +378,13 @@
             this.Controls.Add(this.BtnAddGame);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CBGamesList);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.TBFunHrsPerWeek);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.TBGetStatsHrs);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.TBHrsToWork);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.TBHrsToRest);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.BtnDefault);
             this.Controls.Add(this.BtnBack);
@@ -424,12 +432,12 @@
         private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.Button BtnDefault;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox TBHrsToRest;
+        private System.Windows.Forms.TextBox TBHrsToWork;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox TBGetStatsHrs;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox TBFunHrsPerWeek;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox CBGamesList;
         private System.Windows.Forms.Label label1;
