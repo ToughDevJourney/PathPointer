@@ -38,7 +38,7 @@
             this.ChBCloseGames = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TBHrsToStopGms = new System.Windows.Forms.TextBox();
             this.ChBHardMotiv = new System.Windows.Forms.CheckBox();
             this.lblHardMotivation = new System.Windows.Forms.Label();
             this.lblSoftMotivation = new System.Windows.Forms.Label();
@@ -106,6 +106,7 @@
             this.ChBMotivHints.Size = new System.Drawing.Size(15, 14);
             this.ChBMotivHints.TabIndex = 7;
             this.ChBMotivHints.UseVisualStyleBackColor = true;
+            this.ChBMotivHints.CheckedChanged += new System.EventHandler(this.ChBMotivHints_CheckedChanged);
             // 
             // lblDifficultyLvl
             // 
@@ -154,18 +155,19 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(668, 145);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(240, 13);
+            this.label8.Size = new System.Drawing.Size(237, 13);
             this.label8.TabIndex = 12;
-            this.label8.Text = "Часов игры до принудительного завершения:";
+            this.label8.Text = "Часов до принудительного завершения игры";
             // 
-            // textBox3
+            // TBHrsToStopGms
             // 
-            this.textBox3.Location = new System.Drawing.Point(908, 142);
-            this.textBox3.MaxLength = 1;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(15, 20);
-            this.textBox3.TabIndex = 13;
-            this.textBox3.Text = "2";
+            this.TBHrsToStopGms.Location = new System.Drawing.Point(908, 142);
+            this.TBHrsToStopGms.MaxLength = 1;
+            this.TBHrsToStopGms.Name = "TBHrsToStopGms";
+            this.TBHrsToStopGms.Size = new System.Drawing.Size(15, 20);
+            this.TBHrsToStopGms.TabIndex = 13;
+            this.TBHrsToStopGms.Text = "2";
+            this.TBHrsToStopGms.Leave += new System.EventHandler(this.CheckTextBoxForEmptiness);
             // 
             // ChBHardMotiv
             // 
@@ -175,6 +177,7 @@
             this.ChBHardMotiv.Size = new System.Drawing.Size(15, 14);
             this.ChBHardMotiv.TabIndex = 16;
             this.ChBHardMotiv.UseVisualStyleBackColor = true;
+            this.ChBHardMotiv.CheckStateChanged += new System.EventHandler(this.AreAllMotivCheckBoxesEnabled);
             // 
             // lblHardMotivation
             // 
@@ -202,6 +205,7 @@
             this.ChBSoftMotiv.Size = new System.Drawing.Size(15, 14);
             this.ChBSoftMotiv.TabIndex = 18;
             this.ChBSoftMotiv.UseVisualStyleBackColor = true;
+            this.ChBSoftMotiv.CheckStateChanged += new System.EventHandler(this.AreAllMotivCheckBoxesEnabled);
             // 
             // BtnBack
             // 
@@ -241,6 +245,7 @@
             this.TBHrsToRest.TabIndex = 22;
             this.TBHrsToRest.Text = "1";
             this.TBHrsToRest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
+            this.TBHrsToRest.Leave += new System.EventHandler(this.CheckTextBoxForEmptiness);
             // 
             // TBHrsToWork
             // 
@@ -251,6 +256,7 @@
             this.TBHrsToWork.TabIndex = 25;
             this.TBHrsToWork.Text = "4";
             this.TBHrsToWork.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
+            this.TBHrsToWork.Leave += new System.EventHandler(this.CheckTextBoxForEmptiness);
             // 
             // label15
             // 
@@ -270,6 +276,7 @@
             this.TBGetStatsHrs.TabIndex = 28;
             this.TBGetStatsHrs.Text = "2";
             this.TBGetStatsHrs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
+            this.TBGetStatsHrs.Leave += new System.EventHandler(this.CheckTextBoxForEmptiness);
             // 
             // label17
             // 
@@ -289,6 +296,7 @@
             this.TBFunHrsPerWeek.TabIndex = 31;
             this.TBFunHrsPerWeek.Text = "14";
             this.TBFunHrsPerWeek.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckNumberLine);
+            this.TBFunHrsPerWeek.Leave += new System.EventHandler(this.CheckTextBoxForEmptiness);
             // 
             // label19
             // 
@@ -353,16 +361,20 @@
             this.MTBSleepBegin.Name = "MTBSleepBegin";
             this.MTBSleepBegin.Size = new System.Drawing.Size(31, 20);
             this.MTBSleepBegin.TabIndex = 41;
+            this.MTBSleepBegin.Text = "0000";
+            this.MTBSleepBegin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.MTBSleepBegin.ValidatingType = typeof(System.DateTime);
             this.MTBSleepBegin.Leave += new System.EventHandler(this.CheckFormat);
             // 
             // MTBSleepEnd
             // 
-            this.MTBSleepEnd.Location = new System.Drawing.Point(247, 58);
+            this.MTBSleepEnd.Location = new System.Drawing.Point(240, 62);
             this.MTBSleepEnd.Mask = "00:00";
             this.MTBSleepEnd.Name = "MTBSleepEnd";
-            this.MTBSleepEnd.Size = new System.Drawing.Size(31, 20);
+            this.MTBSleepEnd.Size = new System.Drawing.Size(38, 20);
             this.MTBSleepEnd.TabIndex = 42;
+            this.MTBSleepEnd.Text = "0700";
+            this.MTBSleepEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.MTBSleepEnd.ValidatingType = typeof(System.DateTime);
             this.MTBSleepEnd.Leave += new System.EventHandler(this.CheckFormat);
             // 
@@ -392,7 +404,7 @@
             this.Controls.Add(this.lblSoftMotivation);
             this.Controls.Add(this.ChBHardMotiv);
             this.Controls.Add(this.lblHardMotivation);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.TBHrsToStopGms);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ChBCloseGames);
             this.Controls.Add(this.label7);
@@ -424,7 +436,7 @@
         private System.Windows.Forms.CheckBox ChBCloseGames;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TBHrsToStopGms;
         private System.Windows.Forms.CheckBox ChBHardMotiv;
         private System.Windows.Forms.Label lblHardMotivation;
         private System.Windows.Forms.Label lblSoftMotivation;

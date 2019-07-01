@@ -65,6 +65,8 @@ namespace PathPointer
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
+
+            
         }
 
 
@@ -118,6 +120,7 @@ namespace PathPointer
             fileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
+            if(UserSettings.StopGames == true) UserSettings.CloseGame();
         }
 
         public static void ShowQuest()
