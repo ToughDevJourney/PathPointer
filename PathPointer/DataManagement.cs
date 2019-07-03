@@ -126,6 +126,9 @@ namespace PathPointer
 
         public static string CheckEmploymentFormat(string formatChecking){
             string[] empArr = File.ReadAllLines(FilePath);
+
+            if(formatChecking.Contains("!") | formatChecking.Contains(";")) MessageBox.Show("Системные знаки были удалены", "Упс");
+
             while (true)
             {
                 if (formatChecking.Contains("!")) formatChecking = formatChecking.Remove(formatChecking.IndexOf("!"), 1);

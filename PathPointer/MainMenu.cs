@@ -28,12 +28,12 @@ namespace PathPointer
 
         public static MainMenu CreateInstance(Form sender)
         {
-            if (_mainMenu == null)
+            if (_mainMenu == null) _mainMenu = new MainMenu();
+            if (sender != null)
             {
-                _mainMenu = new MainMenu();
+                sender.Close();
+                _mainMenu.Show();
             }
-            sender.Close();
-            _mainMenu.Show();
             return _mainMenu;
         }
 
@@ -86,6 +86,11 @@ namespace PathPointer
 
         private void BtnMoreStats_Click(object sender, EventArgs e)
         {
+            MoreStat moreStat = new MoreStat();
+            MenuManagement.AreAllFormsClosed = false;
+            moreStat.Show();
+
+            this.Hide();
         }
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,7 +141,7 @@ namespace PathPointer
 
         }
 
-        private void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
+        public void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             pickedDayOfWeek = Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek);
             StatsManagement.FillGrid(ref DataGridBusiness);  //вывод деятельности за 24 часа выбранного дня недели

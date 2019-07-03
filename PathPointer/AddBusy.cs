@@ -40,10 +40,10 @@ namespace PathPointer
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             string businessName = textName.Text;
+            businessName = DataManagement.CheckEmploymentFormat(businessName);
 
             if (businessName == "") MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
-            else {
-                businessName = DataManagement.CheckEmploymentFormat(businessName);
+            else {              
                 if (AddSchedule.Schedule == null) DataManagement.WriteToFile($"{businessName}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
                 else DataManagement.WriteToFile($"{businessName}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
             }

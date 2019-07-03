@@ -128,6 +128,12 @@ namespace PathPointer
 
             currentRange--;
             SetLabelValue();
+
+            MainMenu mainManu = MainMenu.CreateInstance(null);
+            mainManu.DataGridDayOfWeek_CellClick(null, null);
+            mainManu.DataGridBusiness.CurrentCell = mainManu.DataGridBusiness[DateTime.Now.Hour - (currentRange + 1), 0];
+            mainManu.DataGridBusiness_CellClick(null, null);
+
             if (currentRange <= 0) {
                 Tray.CheckNotifyNeed();
                 this.Hide();

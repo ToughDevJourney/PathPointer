@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnBack = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -43,7 +46,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.DGVMoreStats = new System.Windows.Forms.DataGridView();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVMoreStats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,14 +89,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Потрачено времени на развлечения:";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 120);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(939, 178);
-            this.dataGridView1.TabIndex = 7;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -109,14 +107,15 @@
             this.label8.TabIndex = 9;
             this.label8.Text = "Потрачено времени на отдых:";
             // 
-            // button1
+            // BtnBack
             // 
-            this.button1.Location = new System.Drawing.Point(711, 374);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(240, 40);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Вернуться";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnBack.Location = new System.Drawing.Point(711, 374);
+            this.BtnBack.Name = "BtnBack";
+            this.BtnBack.Size = new System.Drawing.Size(240, 40);
+            this.BtnBack.TabIndex = 10;
+            this.BtnBack.Text = "Вернуться";
+            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // label9
             // 
@@ -142,9 +141,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(9, 367);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(235, 13);
+            this.label10.Size = new System.Drawing.Size(274, 13);
             this.label10.TabIndex = 13;
-            this.label10.Text = "Ваша мечта стала реальностью уже на [40]%";
+            this.label10.Text = "Ваша мечта [мечта] стала реальностью уже на [40]%";
             // 
             // label11
             // 
@@ -183,11 +182,61 @@
             this.comboBox1.Size = new System.Drawing.Size(187, 21);
             this.comboBox1.TabIndex = 16;
             // 
+            // DGVMoreStats
+            // 
+            this.DGVMoreStats.AllowUserToAddRows = false;
+            this.DGVMoreStats.AllowUserToDeleteRows = false;
+            this.DGVMoreStats.AllowUserToResizeColumns = false;
+            this.DGVMoreStats.AllowUserToResizeRows = false;
+            this.DGVMoreStats.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGVMoreStats.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.DGVMoreStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVMoreStats.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGVMoreStats.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DGVMoreStats.EnableHeadersVisualStyles = false;
+            this.DGVMoreStats.GridColor = System.Drawing.Color.Black;
+            this.DGVMoreStats.Location = new System.Drawing.Point(14, 120);
+            this.DGVMoreStats.MultiSelect = false;
+            this.DGVMoreStats.Name = "DGVMoreStats";
+            this.DGVMoreStats.ReadOnly = true;
+            this.DGVMoreStats.RowHeadersVisible = false;
+            this.DGVMoreStats.RowHeadersWidth = 10;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVMoreStats.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.DGVMoreStats.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.DGVMoreStats.Size = new System.Drawing.Size(937, 142);
+            this.DGVMoreStats.TabIndex = 18;
+            // 
+            // chart1
+            // 
+            this.chart1.BackColor = System.Drawing.SystemColors.Control;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Location = new System.Drawing.Point(723, -5);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(203, 121);
+            this.chart1.TabIndex = 19;
+            this.chart1.Text = "chart1";
+            // 
             // MoreStat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 423);
+            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.DGVMoreStats);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label12);
@@ -195,10 +244,9 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -206,7 +254,9 @@
             this.Name = "MoreStat";
             this.Text = "Расширенная статистика";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MoreStat_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.MoreStat_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DGVMoreStats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,10 +268,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label10;
@@ -229,5 +278,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.DataGridView DGVMoreStats;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

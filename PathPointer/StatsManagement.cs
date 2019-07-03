@@ -37,11 +37,12 @@ namespace PathPointer
 
         }
 
-        public static string[] FillStatsArray(int index, bool pickedCurrentDay) { //вывод массива данных об определенной недели
+        public static string[] FillStatsArray(int index, bool pickedCurrentDay = false) { //вывод массива данных об определенной недели
             SetPath("Efficiency");
 
             string[] statsArray = new string[24];
             string readLine;
+            bool weekExists = false;
             int arrayIndex = 0;
             int currentHour = DateTime.Now.Hour;
 
@@ -50,10 +51,10 @@ namespace PathPointer
                 for (int i = 0; (readLine = reader.ReadLine()) != null; i++) {
                     if (24 * (index - 1) <= i) {
                         statsArray[arrayIndex] = readLine;
-
-                        if (pickedCurrentDay == true) {
-                            if (arrayIndex == currentHour) statsArray[arrayIndex] = "T";
-                            else if (arrayIndex > currentHour) statsArray[arrayIndex] = "F";
+                        weekExists = true;
+                        if (pickedCurrentDay == true) {     //пометки для часов после текущего
+                            if (arrayIndex == currentHour) statsArray[arrayIndex] = "T";    //сейчас
+                            else if (arrayIndex > currentHour) statsArray[arrayIndex] = "F";    //будущее
                         }
 
                         arrayIndex++;
@@ -61,7 +62,8 @@ namespace PathPointer
                     }
                 }
             }
-            return statsArray;
+            if (weekExists == false) return null;
+            else return statsArray;
         }
 
         private static void GetCellColor(string cellValue, int cellIndex, DataGridView dataGridView) {

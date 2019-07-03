@@ -375,8 +375,6 @@
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.Timer TimerHour;
         public System.Windows.Forms.NotifyIcon TrayIcon;
-        private System.Windows.Forms.DataGridView DataGridBusiness;
-        private System.Windows.Forms.DataGridView DataGridDayOfWeek;
         private System.Windows.Forms.Label lblEmployName;
         private System.Windows.Forms.Label lblEmployType;
         private System.Windows.Forms.Label lblDoneHours;
@@ -384,6 +382,8 @@
         private System.Windows.Forms.Label lblEmploymentHour;
         private System.Windows.Forms.DataGridView dayOfWeekPointer;
         private System.Windows.Forms.DataGridView businessPointer;
+        public System.Windows.Forms.DataGridView DataGridBusiness;
+        public System.Windows.Forms.DataGridView DataGridDayOfWeek;
     }
 }
 
