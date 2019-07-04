@@ -11,22 +11,27 @@ namespace PathPointer
     class YearsStatsGoals : YearStats
     {
         public override string EmpType { get { return "Goals"; } }
-        public void SetMainEmployment() {
-            string goal = "";
+        public int spentHours;
 
-            Management.SetPath("Employments//Goals");
+        public void SetMainEmployment() {
+            string readGoal = "";
+           string goal = "";
+
+            Management.SetPath("Employments\\Goals");
             using (StreamReader reader = new StreamReader(Management.FilePath)) {
-                while ((goal = reader.ReadLine()) != null) {
+                while ((readGoal = reader.ReadLine()) != null) {
+                    goal = readGoal;
                     if (Management.GetValueByIndex(goal, 2) != "0") break;
                 }               
             }
 
             if (goal != "") MainEmployment = goal;
-            else MainEmployment = "У вас нет целей";
+            else MainEmployment = "Цели отсутствуют";
         }
 
         protected override void CountHours(string currentEmp)
         {
+            spentHours++;
             if (MainEmployment == null) SetMainEmployment();
             else if (Management.GetValueByIndex(currentEmp, 1) == Management.GetValueByIndex(MainEmployment, 1)) MainEmploymentHrs++;
         }

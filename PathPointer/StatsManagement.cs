@@ -217,10 +217,9 @@ namespace PathPointer
                                 employmentType = "Надеюсь, вы хорошо отдохнули!" +
                                                 "\nНо помните, что если вы провели 4 часа за компьютером, \"Посидеть в вашем модном телефончике\" - не будет для вас отдыхом" +
                                                 "\nОтдых - это смена деятельности, лучше сходите на прогулку или поиграйте с кошкой";
-                                hoursGoal = Convert.ToInt32(employmentHours) * 7;
-                                doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal, true);
+                                doneHours = CountReadyHours(StatsFileArr[currentEmployment], 0, true);
 
-                                employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
+                                employmentHours = $"Потрачено на этой неделе: {doneHours} часов";
 
                                 break;
                             case "Fun":
@@ -496,7 +495,7 @@ namespace PathPointer
             }
         }
 
-        public static int CountReadyHours(string desiredEmployment, int hoursGoal, bool restCheck = false)
+        public static int CountReadyHours(string desiredEmployment, int hoursGoal = 0, bool restCheck = false)
         {
             SetPath("Efficiency");
             int hoursDone = 0;

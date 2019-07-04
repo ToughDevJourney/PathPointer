@@ -14,12 +14,12 @@ namespace PathPointer
 
         public YearsStatsFun()
         {
-            MainEmploymentHrs = allFunEmps.Max(s => s.Value);
-            MainEmployment = allFunEmps.FirstOrDefault(s => s.Value == MainEmploymentHrs).Key;
+            int maxFun = allFunEmps.Max(s => s.Value);
+            MainEmployment = allFunEmps.FirstOrDefault(s => s.Value == maxFun).Key;
         }
 
         protected override void CountHours(string currentEmp) {
-
+            MainEmploymentHrs++;
             if (currentEmp != "Fun!0") //пропуск варианта "другое" из опросника
             {
                 if (allFunEmps.ContainsKey(currentEmp)) allFunEmps[currentEmp] += 1;
