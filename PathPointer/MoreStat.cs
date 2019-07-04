@@ -12,6 +12,11 @@ namespace PathPointer
 {
     public partial class MoreStat : Form
     {
+        YearsStatsBusiness business = new YearsStatsBusiness();
+        YearsStatsGoals goals = new YearsStatsGoals();
+        YearsStatsRest rest = new YearsStatsRest();
+        YearsStatsFun fun = new YearsStatsFun();
+
         public MoreStat()
         {
             InitializeComponent();
@@ -31,71 +36,71 @@ namespace PathPointer
         {
             DGVMoreStats.RowCount = 7;
             DGVMoreStats.ColumnCount = 52;
-            ColorDataGridView("Goals");
+            ColorDataGridView(fun);
+            SetFormText();
         }
 
+        private void ColorDataGridView(YearStats yearStats) {
+            int contrast = 30;
 
-        private void ColorDataGridView(string empType) {
-            int[,] yearEmpNum = new int[7, 52];
-            int[] dayEmpNum = new int[7];
-            int getWeek = 0;
-
-            string currentEmp;
-
-            for (int yw = 51; yw >= 0; yw--)
+            for (int yw = 0; yw < 52; yw++)
             {
-                getWeek++;
                 for (int dow = 0; dow < 7; dow++)
                 {
-                    string[] weekEmp = StatsManagement.FillStatsArray(getWeek);
-                    if(weekEmp != null)
-                    for (int hr = 0; hr < 24; hr++)
+                    if (yearStats.yearEmpNum[dow, yw] > 0)
                     {
-                        currentEmp = Management.GetValueByIndex(weekEmp[hr], dow + 1, ";");
-                        if (Management.GetValueByIndex(currentEmp) == empType)
-                        {
-                            yearEmpNum[dow, yw]++;
-                        }
+                        int colorCode = 200 - 30 * contrast;
+                        colorCode = colorCode < 0 ? 0 : colorCode;
+                        DGVMoreStats.Rows[dow].Cells[yw].Style.BackColor = yearStats.GetCellColor(colorCode);
+
                     }
+                }
 
-
-                    if (yearEmpNum[dow, yw] > 0) DGVMoreStats.Rows[dow].Cells[yw].Style.BackColor = SetCellColor(empType, yearEmpNum[dow, yw]);
-
-                }                
             }
-
-
-            
-            //заполнять справа налвео
-            //из файла читать сверху вниз
         }
 
-        private Color SetCellColor(string empType, int contrast) {
-            Color cellColor = Color.FromArgb(0xFF, 0x83, 0x83, 0x83);
 
-            int colorCode = 200 - 30 * contrast;
-            colorCode = colorCode < 0 ? 0 : colorCode;
+        private void SetFormText()
+        {
+            SetProductiveText();
+            lblBusinessHrsSpent.Text = $"Потрачено часов на неотложные дела: {business.MainEmploymentHrs}";
 
+            lblFavRest.Text = $"Любимый вид отдыха \"{ReturnFavouriteRestName(rest)}\"";
+            lblRestTimeSpent.Text = rest.MainEmploymentHrs.ToString();
 
-            switch (empType) {
-                case "Business":
-                    cellColor = Color.FromArgb(255, colorCode, colorCode, 255);
-                    break;
-                case "Goals":
-                    cellColor = Color.FromArgb(255, colorCode, 255, colorCode);
-                    break;
-                case "Fun":
-                    cellColor = Color.FromArgb(255, 255, colorCode, colorCode);
-                    break;
-                case "Rest":
-                    cellColor = Color.FromArgb(255, 255, 165, colorCode);
-                    break;
+            lblFavFun.Text = $"Любимое развлечение \"{ReturnFavouriteRestName(fun)}\""; 
+            lblFunTimeSpent.Text = fun.MainEmploymentHrs.ToString();
+        }
+
+        private void SetProductiveText() {
+            int productiveToday = goals.yearEmpNum[CurrentDateInfo.DayOfWeek - 1, 51];
+            int productiveYesterday = CurrentDateInfo.DayOfWeek == 1 ? goals.yearEmpNum[6, 50] : goals.yearEmpNum[CurrentDateInfo.DayOfWeek - 2, 51];
+            double productivePercent;
+            if (productiveToday > productiveYesterday)
+            {
+                productivePercent = Math.Round(((double)productiveToday / (double)productiveYesterday - 1) * 100);
+                lblProductive.Text = $"Сегодня вы продуктивнее, чем вчера на {productivePercent}%";
             }
+            else if (productiveToday < productiveYesterday)
+            {
+                productivePercent = Math.Round(((double)productiveYesterday / (double)productiveToday - 1) * 100);
+                lblProductive.Text = $"Вчера вы были продуктивнее на {productivePercent}%";
+            }
+            else lblProductive.Text = $"Ваша продуктивность такая же, как и вчера";
+        }
 
+        private string ReturnFavouriteRestName(YearStats restKind) {
+            string restName = "";
+            string restCode = Management.GetValueByIndex(restKind.MainEmployment, 1);
+            string restType = restKind.EmpType;
 
-
-            return cellColor;
+            restName = StatsManagement.FindEmploymentByCode(restCode, restType);
+            if (restName == "") restName = StatsManagement.FindEmploymentByCode(restCode, restType, true);
+            if (restName != "") restName = Management.GetValueByIndex(restName);
+            return restName;
         }
 
     }
+
 }
+

@@ -8,9 +8,9 @@ namespace PathPointer
 {
     public abstract class Management
     {
-        protected static string FilePath { get; set; }        //путь к документу
+        public static string FilePath { get; set; }        //путь к документу
 
-        protected static void SetPath(string empType = "")
+        public static void SetPath(string empType = "")
         {
             if (empType != "") FilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt";  //путь к папке в "Документах"
             else FilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer";

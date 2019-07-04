@@ -95,10 +95,27 @@ namespace PathPointer
             }
         }
 
+        public static string FindEmploymentByCode(string code, string employmentType, bool searchArchive = false) {
+            string employment;
+            if(searchArchive) SetPath($"Employments\\Archive\\{employmentType}");
+            else SetPath($"Employments\\{employmentType}");    //ищем в документе с указанным видом деятельности информацию о занятии
+
+            using (StreamReader sr = new StreamReader(FilePath))
+            {
+                while ((employment = sr.ReadLine()) != null)
+                {
+                    if (GetValueByIndex(employment, 1) == code) break;  //проверка сходства кода из расписания и кода из списка деятельности
+                    else employment = "";
+                }
+            }
+            return employment;
+        }
+
         public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, ref Label lblMustSpend, int currentEmployment) {
             SetPath("Efficiency");
             string employment = "";
             string employmentName = "";
+            string employmentCode = GetValueByIndex(StatsFileArr[currentEmployment], 1);
             string employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
             string employmentHours = "";
             string employmentsMustSpend = "";
@@ -116,13 +133,13 @@ namespace PathPointer
                                 "\nВам должно быть стыдно";
                 employmentHours = "Ноль часов из нуля - стопроцентная продуктивность для ленивых";
             }
-            else if (GetValueByIndex(StatsFileArr[currentEmployment], 1) == "0")
+            else if (employmentCode == "0")
             {
                 employmentName = "ДРУГОЕ";
                 employmentType = "Постарайтесь продумывать вашу деятельность заранее" +
                                 "\nВо всяком случае, почему бы вам не дополнить ее прямо сейчас?";
             }
-            else if (GetValueByIndex(StatsFileArr[currentEmployment], 1) == "@") {
+            else if (employmentCode == "@") {
                 employmentName = "СОН";
                 employmentType = "Доброго вам утра" +
                                 "\nУтро - пик вашей продуктивности, даже если вы сова, попробуйте поработать над собой утром";
@@ -145,98 +162,77 @@ namespace PathPointer
             else {
                 try
                 {
-                    SetPath($"Employments\\{employmentType}");    //ищем в документе с указанным видом деятельности информацию о занятии
-                    using (StreamReader sr = new StreamReader(FilePath))
+                    employment = FindEmploymentByCode(employmentCode, employmentType);  
+                    if(employment == "") employment = FindEmploymentByCode(employmentCode, employmentType, true);
+                    if (employment != "")
                     {
-                        employmentType = "";
-                        while ((employment = sr.ReadLine()) != null)
-                        {
-                            if (GetValueByIndex(employment, 1) == GetValueByIndex(StatsFileArr[currentEmployment], 1)) //проверка сходства кода из расписания и кода из списка деятельности
-                            {
-                                employmentName = GetValueByIndex(employment);
-                                employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
-                                employmentHours = GetValueByIndex(employment, 2);
-                                break;
-                            }
-                        }
+                        employmentName = GetValueByIndex(employment);
+                        employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
+                        employmentHours = GetValueByIndex(employment, 2);
                     }
-                    if (employmentType == "") {
-                        SetPath($"Employments\\Archive\\{GetValueByIndex(StatsFileArr[currentEmployment])}");   //поиск в директории удаленных занятостей
-                        using (StreamReader sr = new StreamReader(FilePath))
-                        {
-                            while ((employment = sr.ReadLine()) != null)
-                            {
-                                if (GetValueByIndex(employment, 1) == GetValueByIndex(StatsFileArr[currentEmployment], 1)) //проверка сходства кода из расписания и кода из списка деятельности
-                                {
-                                    employmentName = GetValueByIndex(employment);
-                                    employmentType = GetValueByIndex(StatsFileArr[currentEmployment]);
-                                    employmentHours = GetValueByIndex(employment, 2);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
                 }
                 catch { }
                 finally
                 {
-                    switch (employmentType)
+                    if (employment == "")
                     {
-                        case "":
-                            employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
-                            employmentType = "Обратитесь к вашему системному администратору" +
-                                            "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
-                            employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
+                        employmentName = "УПС, КАЖЕТСЯ, МЫ ПОТЕРЯЛИ ВАШИ ДАННЫЕ";
+                        employmentType = "Обратитесь к вашему системному администратору" +
+                                        "\nНе факт, что он найдет, но разработчик этой программы очень любит людей";
+                        employmentHours = "Ваша продуктивность появится сразу, как только найдутся ваши данные";
+                    }
+                    else
+                    {
+                        switch (employmentType)
+                        {
+                            case "Business":
+                                employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
+                                                "\nЗнайте, что разработчику этой программы очень вас жалко :)";
+                                if (employmentHours == "N") employmentHours = "Для этого дела нет расписания";
+                                else employmentHours = $"Расписание для этого дела: {FormatTime(GetValueByIndex(employmentHours, pickedDayOfWeek - 1, "/"))}";
+                                break;
+                            case "Goals":
+                                dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
+                                needDays = (int)(dateGoal - DateTime.Now).TotalDays;
+                                employmentType = "Ого, вы на верном пути к вашей цели!" +
+                                                "\nВы ведь не потратили это время на чепуху, в плане, \"Смотреть весь день телевизор\", верно?";
+                                hoursGoal = Convert.ToInt32(employmentHours);
+                                doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal);
 
-                            break;
-                        case "Business":
-                            employmentType = "Похоже, в это время вы гуляли с собакой и вам было очень холодно" +
-                                            "\nЗнайте, что разработчику этой программы очень вас жалко :)";
-                            if (employmentHours == "N") employmentHours = "Для этого дела нет расписания";
-                            else employmentHours = $"Расписание для этого дела: {FormatTime(GetValueByIndex(employmentHours, pickedDayOfWeek - 1, "/"))}";
-                            break;
-                        case "Goals":
-                            dateGoal = Convert.ToDateTime(GetValueByIndex(employment, 3));
-                            needDays = (int)(dateGoal - DateTime.Now).TotalDays;
-                            employmentType = "Ого, вы на верном пути к вашей цели!" +
-                                            "\nВы ведь не потратили это время на чепуху, в плане, \"Смотреть весь день телевизор\", верно?";
-                            hoursGoal = Convert.ToInt32(employmentHours);
-                            doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal);
+                                if (hoursGoal == 0) employmentHours = $"На эту цель вы потратили уже {doneHours} часов!";
+                                else if (hoursGoal <= doneHours) employmentHours = $"Цель выполнена, на ее выполнение вы потратили {hoursGoal} часов!" +
+                                        $"\nНо не спешите расслабляться, у вас еще много дел впереди!";
+                                else employmentHours = $"Выполнено {doneHours} из {hoursGoal} часов";
 
-                            if (hoursGoal == 0) employmentHours = $"На эту цель вы потратили уже {doneHours} часов!";
-                            else if (hoursGoal <= doneHours) employmentHours = $"Цель выполнена, на ее выполнение вы потратили {hoursGoal} часов!" +
-                                    $"\nНо не спешите расслабляться, у вас еще много дел впереди!";
-                            else employmentHours = $"Выполнено {doneHours} из {hoursGoal} часов";
+                                if (hoursGoal > doneHours && hoursGoal != 0)
+                                {
+                                    if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
+                                    else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
+                                    else if ((needDays == 0 && 24 - DateTime.Now.Hour < hoursGoal - doneHours) || (needDays * 24 - (hoursGoal - doneHours) < 0)) employmentsMustSpend = "Увы, но даже если вы возьметесь за дело прямо сейчас, уже не успеете :(";
+                                    else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
+                                }
+                                else employmentsMustSpend = $"Цель должна была быть выполнена {dateGoal.ToLongDateString()}";
+                                break;
+                            case "Rest":
+                                employmentType = "Надеюсь, вы хорошо отдохнули!" +
+                                                "\nНо помните, что если вы провели 4 часа за компьютером, \"Посидеть в вашем модном телефончике\" - не будет для вас отдыхом" +
+                                                "\nОтдых - это смена деятельности, лучше сходите на прогулку или поиграйте с кошкой";
+                                hoursGoal = Convert.ToInt32(employmentHours) * 7;
+                                doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal, true);
 
-                            if (hoursGoal > doneHours && hoursGoal != 0)
-                            {
-                                if (needDays < 0) employmentsMustSpend = "Увы, время вышло, старайтесь лучше в следующий раз";
-                                else if (needDays == 0 && 24 - DateTime.Now.Hour >= hoursGoal - doneHours) employmentsMustSpend = "Цель должна быть выполнена уже сегодня! Спешите!";
-                                else if ((needDays == 0 && 24 - DateTime.Now.Hour < hoursGoal - doneHours) || (needDays * 24 - (hoursGoal - doneHours) < 0)) employmentsMustSpend = "Увы, но даже если вы возьметесь за дело прямо сейчас, уже не успеете :(";
-                                else employmentsMustSpend = $"В среднем, чтобы достичь этой цели до {dateGoal.ToShortDateString()}, вы должны тратить по {(hoursGoal - doneHours) / needDays} часов в сутки";
-                            }
-                            else employmentsMustSpend = $"Цель должна была быть выполнена {dateGoal.ToLongDateString()}";
-                            break;
-                        case "Rest":
-                            employmentType = "Надеюсь, вы хорошо отдохнули!" +
-                                            "\nНо помните, что если вы провели 4 часа за компьютером, \"Посидеть в вашем модном телефончике\" - не будет для вас отдыхом" +
-                                            "\nОтдых - это смена деятельности, лучше сходите на прогулку или поиграйте с кошкой";
-                            hoursGoal = Convert.ToInt32(employmentHours) * 7;
-                            doneHours = CountReadyHours(StatsFileArr[currentEmployment], hoursGoal, true);
+                                employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
 
-                            employmentHours = hoursGoal == 0 ? $"Потрачено на этой неделе: {doneHours} часов" : $"Потрачено {doneHours} из доступных {hoursGoal} часов";
+                                break;
+                            case "Fun":
+                                employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
+                                                "\nБудьте осторожны";
+                                hoursGoal = UserSettings.WeekFunTime;
+                                doneHours = CountFunHours();
 
-                            break;
-                        case "Fun":
-                            employmentType = "Развлечения могут повысить продуктивность, но чрезмерное злоупотребление ими, может вас погубить" +
-                                            "\nБудьте осторожны";
-                            hoursGoal = UserSettings.WeekFunTime;
-                            doneHours = CountFunHours();
-
-                            employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена на {doneHours - hoursGoal} часов, задумайтесь";
-                            employmentsMustSpend = $"Каждый пол года вы тратите на развлечения {hoursGoal * 26} часов, это {(hoursGoal * 26) / 24} полных суток";
-                            break;
+                                employmentHours = hoursGoal >= doneHours ? $"Потрачено {doneHours} из доступных {hoursGoal} часов" : $"Норма развлечений на этой неделе превышена на {doneHours - hoursGoal} часов, задумайтесь";
+                                employmentsMustSpend = $"Каждый пол года вы тратите на развлечения {hoursGoal * 26} часов, это {(hoursGoal * 26) / 24} полных суток";
+                                break;
+                        }
                     }
                 }
             }

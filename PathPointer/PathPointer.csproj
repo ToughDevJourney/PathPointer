@@ -137,6 +137,11 @@
     <Compile Include="TimeSpent.Designer.cs">
       <DependentUpon>TimeSpent.cs</DependentUpon>
     </Compile>
+    <Compile Include="YearsStatsBusiness.cs" />
+    <Compile Include="YearsStatsFun.cs" />
+    <Compile Include="YearsStatsGoals.cs" />
+    <Compile Include="YearsStatsRest.cs" />
+    <Compile Include="YearStats.cs" />
     <EmbeddedResource Include="Achivements.resx">
       <DependentUpon>Achivements.cs</DependentUpon>
     </EmbeddedResource>
