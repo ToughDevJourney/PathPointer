@@ -92,6 +92,7 @@
             this.BtnGoals.TabIndex = 3;
             this.BtnGoals.Text = "Ваши цели";
             this.BtnGoals.UseVisualStyleBackColor = true;
+            this.BtnGoals.Click += new System.EventHandler(this.BtnGoals_Click);
             // 
             // BtnAchivements
             // 

@@ -35,9 +35,7 @@ namespace PathPointer
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            Employments empForm = new Employments();
-            empForm.Show();
-            this.Hide();
+            MenuManagement.ShowForm(this, new Employments());
         }
 
         private void AddFun_FormClosing(object sender, FormClosingEventArgs e)

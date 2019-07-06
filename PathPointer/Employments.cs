@@ -54,7 +54,7 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)   
         {
-            Form empForm = new AddGoal();
+            Form empForm;
             switch (empType)
             {
                 case "Business":
@@ -68,13 +68,12 @@ namespace PathPointer
                 case "Rest":
                     empForm = new AddRest();
                     break;
-                case "Fun":
+                default:
                     empForm = new AddFun();
                     break;
             }
 
-            empForm.Show();
-            this.Hide();
+            MenuManagement.ShowForm(this, empForm);
         }
 
         public void FillGrid() {

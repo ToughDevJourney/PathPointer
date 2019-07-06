@@ -141,14 +141,14 @@ namespace PathPointer
             for (int i = 0; i<empArr.Length; i++) {
                 if (GetValueByIndex(empArr[i]) == formatChecking) {
                     formatChecking += " новый";
-                    i = -1;
+                    i = -1; //в случае, если уже существует деятельность с окончанием " новый", такое окончание добавляется еще раз 
                 }
             }
 
             return formatChecking;
         }
-
-        public static void SetEmpAsConst(int empCode) {
+/*
+        public static void TurnEmpIntoConst(int empCode) {
             string[] goalsArray = File.ReadAllLines(FilePath);
 
             for (int i = 0; i<goalsArray.Length; i++) {
@@ -158,7 +158,7 @@ namespace PathPointer
                 }
             }
         }
-
+        */
 
         public static bool IsLineInFile(string line, string fileName = null, bool onlyFirstNameCheck = false) {
             if (fileName != null) SetPath(fileName);

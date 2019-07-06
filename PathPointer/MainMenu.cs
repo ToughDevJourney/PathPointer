@@ -69,28 +69,21 @@ namespace PathPointer
 
         private void EmployButton_Click(object sender, EventArgs e)
         {
-            Employments employments = new Employments();
-            MenuManagement.AreAllFormsClosed = false;
-            employments.Show();
-
-            this.Hide();
+            MenuManagement.ShowForm(this, new Employments());
         }
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings();
-            MenuManagement.AreAllFormsClosed = false;
-            settings.Show();
-
-            this.Hide();
+            MenuManagement.ShowForm(this, new Settings());
         }
 
         private void BtnMoreStats_Click(object sender, EventArgs e)
         {
-            MoreStat moreStat = new MoreStat();
-            MenuManagement.AreAllFormsClosed = false;
-            moreStat.Show();
+            MenuManagement.ShowForm(this, new MoreStat());
+        }
 
-            this.Hide();
+        private void BtnGoals_Click(object sender, EventArgs e)
+        {
+            MenuManagement.ShowForm(this, new Goals());
         }
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)

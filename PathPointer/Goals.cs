@@ -21,5 +21,14 @@ namespace PathPointer
         {
             MenuManagement.HideForm(this, e);
         }
+
+        private void Goals_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            MainMenu mainMenu = MainMenu.CreateInstance(this);
+        }
     }
 }

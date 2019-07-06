@@ -28,24 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button5 = new System.Windows.Forms.Button();
+            this.BtnBack = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button5
+            // BtnBack
             // 
-            this.button5.Location = new System.Drawing.Point(307, 378);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(473, 60);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "Вернуться";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BtnBack.Location = new System.Drawing.Point(307, 378);
+            this.BtnBack.Name = "BtnBack";
+            this.BtnBack.Size = new System.Drawing.Size(473, 60);
+            this.BtnBack.TabIndex = 13;
+            this.BtnBack.Text = "Вернуться";
+            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // dataGridView1
             // 
@@ -102,26 +104,37 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(304, 330);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(445, 36);
+            this.label5.Size = new System.Drawing.Size(445, 18);
             this.label5.TabIndex = 18;
-            this.label5.Text = "В среднем вы приближаетесь к цели на [2] часа в день,\r\nТакими темпами, вы достигн" +
-    "ите ее через [3] дня, поднажмите!";
+            this.label5.Text = "Такими темпами, вы достигните ее через [3] дня, поднажмите!";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(304, 312);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(513, 18);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "В среднем, на этой неделе, вы приближаетесь к цели на [2] часа в день,";
             // 
             // Goals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Goals";
             this.Text = "Цели";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Goals_FormClosing);
+            this.Load += new System.EventHandler(this.Goals_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -129,12 +142,13 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -29,16 +29,13 @@ namespace PathPointer
             else
             {
                 DataManagement.WriteToFile($"{restName}!{DataManagement.Code}", DataManagement.EmpType);
-
                 BtnCancel_Click(null, null);
             }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            Employments empForm = new Employments();
-            empForm.Show();
-            this.Hide();
+            MenuManagement.ShowForm(this, new Employments());
         }
 
         private void AddRest_FormClosing(object sender, FormClosingEventArgs e)

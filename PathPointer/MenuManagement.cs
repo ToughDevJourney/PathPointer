@@ -21,6 +21,14 @@ namespace PathPointer
             AreAllFormsClosed = true;
         }
 
+        public static void ShowForm(Form sender, Form formToOpen){
+            Form form = formToOpen;
+            AreAllFormsClosed = false;
+
+            form.Show();
+            sender.Hide();
+        }
+
         public static void TrayShow(Form form) {
             if (AreAllFormsClosed == true) {
                 form.Show();

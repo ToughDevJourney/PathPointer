@@ -16,7 +16,7 @@ namespace PathPointer
         public int[,] yearEmpNum = new int[7, 52];
 
 
-        public YearStats()
+        public YearStats()  //поиск статистики за целый год
         {
             int getWeek = 0;
 
@@ -40,7 +40,8 @@ namespace PathPointer
                             }
                         }
                     }
-                    else {
+                    else
+                    {
                         yw = 0;
                         break;
                     }
