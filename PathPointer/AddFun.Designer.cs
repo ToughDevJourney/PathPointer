@@ -82,6 +82,7 @@
             this.Name = "AddFun";
             this.Text = "Добавить развлечение";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddFun_FormClosing);
+            this.Load += new System.EventHandler(this.AddFun_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

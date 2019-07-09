@@ -9,157 +9,191 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public class DataManagement : Management
+    public class DataManagement
     {
-        public string Business { get; set; }        //DataSource
-        private static int code;
-        private static string empType;
 
-        public static string EmpType {
-            get {
-                return empType;
-            }
-            set {
-                SetPath(value);
-                empType = value;
-            }
-        }
+        public string Business { get; set; }
+        private static readonly string intermediateFile = Management.GetPath("Intermediate File");
 
-        public static int Code {        //считывание последнего кода приложения
-            get {
-                string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");     //путь к кодам занятий
-                try
-                {
-                    string[] fileRows = File.ReadAllLines(codePath);        //занесение данных из файла в массив
-                    for (int i = 0; i < fileRows.Length; i++)
-                    {
-                        if (GetValueByIndex(fileRows[i]) == Employments.empType)
-                        {
-                            code = Convert.ToInt32(fileRows[i].Substring((GetValueByIndex(fileRows[i]).Length) + 1));     //вывод кода из файла
-                            fileRows[i] = fileRows[i].Replace((code).ToString(), (++code).ToString());     //замена старого кода на новый
-                            break;
-                        }
-                    }
-                    File.WriteAllLines(codePath, fileRows);     //сохранение данных в файл из массива
-                }
-                catch
-                {
-                    code = 0;
-                }
-                return code;
-            }
-        }
+        /*   public string Business { get; set; }        //DataSource
+           private static int code;
+           private static string empType;
+
+           public static string EmpType {
+               get {
+                   return empType;
+               }
+               set {
+                   SetPath(value);
+                   empType = value;
+               }
+           }
+
+           public static int Code {        //считывание последнего кода приложения
+               get {
+                   string codePath = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Codes.txt");     //путь к кодам занятий
+                   try
+                   {
+                       string[] fileRows = File.ReadAllLines(codePath);        //занесение данных из файла в массив
+                       for (int i = 0; i < fileRows.Length; i++)
+                       {
+                           if (GetValueByIndex(fileRows[i]) == AddEmployments.empType)
+                           {
+                               code = Convert.ToInt32(fileRows[i].Substring((GetValueByIndex(fileRows[i]).Length) + 1));     //вывод кода из файла
+                               fileRows[i] = fileRows[i].Replace((code).ToString(), (++code).ToString());     //замена старого кода на новый
+                               break;
+                           }
+                       }
+                       File.WriteAllLines(codePath, fileRows);     //сохранение данных в файл из массива
+                   }
+                   catch
+                   {
+                       code = 0;
+                   }
+                   return code;
+               }
+           }
 
 
 
-        public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells, bool timeSpentForm = false)      //вывод в DataGridView данных из документа с названием empType  
+           public static DataGridView FillGrid(string empType, ref BindingList<DataManagement> varCells, bool timeSpentForm = false)      //вывод в DataGridView данных из документа с названием empType  
+           {
+               EmpType = empType;
+               string readLine;
+
+               DataGridView dataGridBusiness = new DataGridView();
+
+               varCells = new BindingList<DataManagement>();
+               try    
+               {
+                   using (StreamReader sr = new StreamReader(FilePath))
+                   {
+                       while ((readLine = sr.ReadLine()) != null) varCells.Add(new DataManagement { Business = GetValueByIndex(readLine) });
+                   }
+               }
+               catch { }
+
+               if(timeSpentForm == true) varCells.Add(new DataManagement { Business = "Другое" });
+               else if (varCells.Count == 0) varCells.Add(new DataManagement { Business = Texts.emptyEmpFile });
+
+
+               dataGridBusiness.DataSource = varCells;
+               return dataGridBusiness;
+           }
+
+
+
+           public static void WriteToFile(string name, string fileName)    //запись в файл
+           {
+               EmpType = fileName;
+
+               using (StreamWriter sw = new StreamWriter(FilePath, true))
+               {
+                   sw.WriteLine(name);
+               }
+           }
+
+           public static void DeleteLineFromFile(string delLine, string filePath)
+           {
+               EmpType = $"{filePath}";
+               string line;
+               string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
+               string archive = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Archive\\{AddEmployments.empType}.txt"); //промежуточный для удаления файл
+
+
+               using (StreamReader reader = new StreamReader(FilePath))
+               {
+                   using (StreamWriter writer = new StreamWriter(interFile))
+                   {
+                       while ((line = reader.ReadLine()) != null)
+                       {
+                           if (String.Compare(GetValueByIndex(line), delLine) == 0)
+                           {
+                               using (StreamWriter archiveWriter = File.AppendText(archive)) archiveWriter.WriteLine(line);
+                               continue;
+                           } 
+                           writer.WriteLine(line);
+                       }
+                   }
+               }
+
+               File.Copy(interFile, FilePath, true);
+               File.Delete(interFile);
+           }
+
+
+           public static void EditEmpFiles(string editLine, int rowIndex) {
+               string[] fileRows = File.ReadAllLines(FilePath);
+               fileRows[rowIndex] = fileRows[rowIndex].Replace(GetValueByIndex(fileRows[rowIndex]), editLine); //замена старого названия на новое
+               File.WriteAllLines(FilePath, fileRows);
+           }
+
+           public static string CheckEmploymentFormat(string formatChecking){
+               string[] empArr = File.ReadAllLines(FilePath);
+
+               if(formatChecking.Contains("!") | formatChecking.Contains(";")) MessageBox.Show("Системные знаки были удалены", "Упс");
+
+               while (true)
+               {
+                   if (formatChecking.Contains("!")) formatChecking = formatChecking.Remove(formatChecking.IndexOf("!"), 1);
+                   else if (formatChecking.Contains(";")) formatChecking = formatChecking.Remove(formatChecking.IndexOf(";"), 1);                
+                   else break;
+               }
+
+
+
+               for (int i = 0; i<empArr.Length; i++) {
+                   if (GetValueByIndex(empArr[i]) == formatChecking) {
+                       formatChecking += " новый";
+                       i = -1; //в случае, если уже существует деятельность с окончанием " новый", такое окончание добавляется еще раз 
+                   }
+               }
+
+               return formatChecking;
+           }
+   /*
+           public static void TurnEmpIntoConst(int empCode) {
+               string[] goalsArray = File.ReadAllLines(FilePath);
+
+               for (int i = 0; i<goalsArray.Length; i++) {
+                   if (Convert.ToInt32(GetValueByIndex(goalsArray[i]), 1) == empCode) {
+                       goalsArray[i] = $"{GetValueByIndex(goalsArray[i])}!{GetValueByIndex(goalsArray[i], 1)}!0!{GetValueByIndex(goalsArray[i], 3)}!";
+                       break;
+                   }
+               }
+           }
+           */
+
+        public static void WriteLineToFile(string line, string fileName)    //запись в файл
         {
-            EmpType = empType;
-            string readLine;
+            string filePath = Management.GetPath(fileName);
 
-            DataGridView dataGridBusiness = new DataGridView();
-
-            varCells = new BindingList<DataManagement>();
-            try    
+            using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                using (StreamReader sr = new StreamReader(FilePath))
-                {
-                    while ((readLine = sr.ReadLine()) != null) varCells.Add(new DataManagement { Business = GetValueByIndex(readLine) });
-                }
-            }
-            catch { }
-
-            if(timeSpentForm == true) varCells.Add(new DataManagement { Business = "Другое" });
-            else if (varCells.Count == 0) varCells.Add(new DataManagement { Business = Texts.emptyEmpFile });
-
-
-            dataGridBusiness.DataSource = varCells;
-            return dataGridBusiness;
-        }
-
-
-
-        public static void WriteToFile(string name, string fileName)    //запись в файл
-        {
-            EmpType = fileName;
-
-            using (StreamWriter sw = new StreamWriter(FilePath, true))
-            {
-                sw.WriteLine(name);
+                writer.WriteLine(line);
             }
         }
 
-        public static void DeleteLineFromFile(string delLine, string filePath)
+        public static void DeleteLineFromFile(string lineToDel, string fileName)
         {
-            EmpType = $"{filePath}";
             string line;
-            string interFile = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Intermediate.txt"); //промежуточный для удаления файл
-            string archive = ($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Employments\\Archive\\{Employments.empType}.txt"); //промежуточный для удаления файл
-
-                     
-            using (StreamReader reader = new StreamReader(FilePath))
+            string filePath = Management.GetPath(fileName);
+            using (StreamReader reader = new StreamReader(filePath))
             {
-                using (StreamWriter writer = new StreamWriter(interFile))
+                using (StreamWriter writer = new StreamWriter(intermediateFile))
                 {
                     while ((line = reader.ReadLine()) != null)
                     {
-                        if (String.Compare(GetValueByIndex(line), delLine) == 0)
-                        {
-                            using (StreamWriter archiveWriter = File.AppendText(archive)) archiveWriter.WriteLine(line);
-                            continue;
-                        } 
-                        writer.WriteLine(line);
+                        // if (Management.GetValueByIndex(line) == lineToDel) WriteLineToFile(employmentToDel, true);
+                        if (line != lineToDel) writer.WriteLine(line);
                     }
                 }
             }
 
-            File.Copy(interFile, FilePath, true);
-            File.Delete(interFile);
+            File.Copy(intermediateFile, filePath, true);
+            File.Delete(intermediateFile);
         }
-
-
-        public static void EditEmpFiles(string editLine, int rowIndex) {
-            string[] fileRows = File.ReadAllLines(FilePath);
-            fileRows[rowIndex] = fileRows[rowIndex].Replace(GetValueByIndex(fileRows[rowIndex]), editLine); //замена старого названия на новое
-            File.WriteAllLines(FilePath, fileRows);
-        }
-
-        public static string CheckEmploymentFormat(string formatChecking){
-            string[] empArr = File.ReadAllLines(FilePath);
-
-            if(formatChecking.Contains("!") | formatChecking.Contains(";")) MessageBox.Show("Системные знаки были удалены", "Упс");
-
-            while (true)
-            {
-                if (formatChecking.Contains("!")) formatChecking = formatChecking.Remove(formatChecking.IndexOf("!"), 1);
-                else if (formatChecking.Contains(";")) formatChecking = formatChecking.Remove(formatChecking.IndexOf(";"), 1);                
-                else break;
-            }
-
-
-
-            for (int i = 0; i<empArr.Length; i++) {
-                if (GetValueByIndex(empArr[i]) == formatChecking) {
-                    formatChecking += " новый";
-                    i = -1; //в случае, если уже существует деятельность с окончанием " новый", такое окончание добавляется еще раз 
-                }
-            }
-
-            return formatChecking;
-        }
-/*
-        public static void TurnEmpIntoConst(int empCode) {
-            string[] goalsArray = File.ReadAllLines(FilePath);
-
-            for (int i = 0; i<goalsArray.Length; i++) {
-                if (Convert.ToInt32(GetValueByIndex(goalsArray[i]), 1) == empCode) {
-                    goalsArray[i] = $"{GetValueByIndex(goalsArray[i])}!{GetValueByIndex(goalsArray[i], 1)}!0!{GetValueByIndex(goalsArray[i], 3)}!";
-                    break;
-                }
-            }
-        }
-        */
-
+        /*
         public static bool IsLineInFile(string line, string fileName = null, bool onlyFirstNameCheck = false) {
             if (fileName != null) SetPath(fileName);
             string readLine;
@@ -172,6 +206,6 @@ namespace PathPointer
             }
             return false;
         }
-
+        */
     }
 }

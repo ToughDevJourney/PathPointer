@@ -13,14 +13,10 @@ namespace PathPointer
 {
     public partial class Settings : Form
     {
-        FileManagement fileManagement = new FileManagement();
-
         public Settings()
         {
             InitializeComponent();
         }
-
-
 
         private void Settings_Load(object sender, EventArgs e)
         {
@@ -34,7 +30,7 @@ namespace PathPointer
 
         private void BtnAddGame_Click(object sender, EventArgs e)
         {
-            UserSettings.AddGame(CBGamesList.Text);
+            UserSettings.AddGame(CBGamesList, CBGamesList.Text);
             UserSettings.ShowGames(CBGamesList);
         }
 
@@ -46,15 +42,14 @@ namespace PathPointer
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-            string sleepHrBegin = LinesFormat.ShortFormatTime(MTBSleepBegin.Text);
-            string sleepHrEnd = LinesFormat.ShortFormatTime(MTBSleepEnd.Text);
+            string sleepHrBegin = FormatLines.ShortFormatTime(MTBSleepBegin.Text);
+            string sleepHrEnd = FormatLines.ShortFormatTime(MTBSleepEnd.Text);
             string softMotiv = ChBSoftMotiv.Checked == true ? "1" : "0";
             string hardMotiv = ChBHardMotiv.Checked == true ? "1" : "0";
             string closeGames = ChBCloseGames.Checked == true ? "1" : "0";
             string hrsToCloseGame = TBHrsToStopGms.Text;
 
-
-            fileManagement.FillCommonFileArray(TBGetStatsHrs.Text, TBFunHrsPerWeek.Text, sleepHrBegin, sleepHrEnd, TBHrsToRest.Text, //обновление настроек
+                FileManagement.FillCommonFileArray(TBGetStatsHrs.Text, TBFunHrsPerWeek.Text, sleepHrBegin, sleepHrEnd, TBHrsToRest.Text, //обновление настроек
                 TBHrsToWork.Text, softMotiv, hardMotiv, closeGames, hrsToCloseGame);
 
             BtnBack_Click(null, null);
@@ -62,7 +57,7 @@ namespace PathPointer
 
         private void CheckFormat(object sender, EventArgs e) {
             MaskedTextBox time = (MaskedTextBox)sender;
-            time.Text = LinesFormat.TimeFormat(time.Text);
+            time.Text = FormatLines.TimeFormat(time.Text);
         }
 
         private void BtnDefault_Click(object sender, EventArgs e)
@@ -71,7 +66,7 @@ namespace PathPointer
             
             if (result == DialogResult.Yes)
             {
-                fileManagement.ResetProgram();
+                FileManagement.ResetProgram();
             }
         }
 

@@ -12,26 +12,18 @@ namespace PathPointer
 {
     public partial class TimeSpent : Form
     {
-        private static string empType;
+        Employments employments = new EmploymentsGoals();
+        Tray tray = new Tray();
         public static BindingList<DataManagement> varCells;
         private static TimeSpent _timeSpent;
-        private static int currentRange = UserSettings.EmploymentCheckRange;
-
-        public string EmpType {
-            get {
-                return empType;
-            }
-            set {
-                empType = value;
-                FillGrid();
-            }
-        }
+        private static int currentRange;
 
 
         private TimeSpent() {
             InitializeComponent();
             TopMost = true;
         }
+
         public static TimeSpent CreateInstance()
         {
             if (_timeSpent == null)
@@ -44,7 +36,9 @@ namespace PathPointer
         private void TimeSpent_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
+
             currentRange = UserSettings.EmploymentCheckRange;
+
             for (int i = 1; i <= UserSettings.EmploymentCheckRange; i++)    //нахождение ближайшего часа, для которого у пользователя можно запросить деятельность
             {
                 if (StatsManagement.CheckIsHourAvailable(i)) currentRange = i;
@@ -64,80 +58,79 @@ namespace PathPointer
 
         private void BtnBusiness_Click(object sender, EventArgs e)
         {
-            EmpType = "Business";
+            employments = new EmploymentsBusiness();
+            FillGrid();
         }
 
         public void BtnGoals_Click(object sender, EventArgs e)
         {
-            EmpType = "Goals";
+            employments = new EmploymentsGoals();
+            FillGrid();
         }
 
         private void BtnRest_Click(object sender, EventArgs e)
         {
-            EmpType = "Rest";
+            employments = new EmploymentsRest();
+            FillGrid();
         }
 
         private void BtnFun_Click(object sender, EventArgs e)
         {
-            EmpType = "Fun";
+            employments = new EmploymentsFun();
+            FillGrid();
         }
 
         public void FillGrid()
         {
-            dataGridBusiness.DataSource = DataManagement.FillGrid($"Employments\\{EmpType}", ref varCells, true).DataSource;
+            dataGridBusiness.DataSource = employments.FillGrid(ref varCells, true).DataSource;
             dataGridBusiness.Focus();
         }
         
         private void BtnReady_Click(object sender, EventArgs e)
-        {            
+        {
             string employmentName = dataGridBusiness.CurrentCell.Value.ToString();
-            string employment;
-            string message;
-            DateTime goalDate;
-            int doneHours;
-            int hoursGoal;
-            int code;
 
-            if (employmentName == "Другое") StatsManagement.WriteStats($"{EmpType}!0", currentRange);
+            if (employmentName == "Другое") StatsManagement.WriteStats($"{employments.EmpType}!{Codes.anotherEmpCode}", currentRange);
             else {
-                employment = StatsManagement.FindEmploymentByName(employmentName, EmpType);
-                code = Convert.ToInt32(Management.GetValueByIndex(employment, 1));
-
-                StatsManagement.WriteStats($"{EmpType}!{code}", currentRange);
-
-                if (empType == "Goals") {
-                    hoursGoal = Convert.ToInt32(Management.GetValueByIndex(employment, 2));
-                    doneHours = StatsManagement.CountReadyHours($"Goals!{code}", 2);
-                    goalDate = Convert.ToDateTime(StatsManagement.GetValueByIndex(employment, 3));
-                    if ((hoursGoal <= doneHours || goalDate < DateTime.Now) && hoursGoal != 0)
-                    {
-                        message = goalDate.Day < DateTime.Now.Day ? "просрочена" : "достигнута";
-
-                        var result = MessageBox.Show($"Ваша цель \"{employmentName}\" {message}" +
-                            $"\nСделать из нее постоянную цель?", $"Цель {message}!", MessageBoxButtons.YesNo);
-
-                        if (result == DialogResult.Yes) DataManagement.WriteToFile($"{employmentName} DN!{DataManagement.Code}!0!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-
-                        DataManagement.DeleteLineFromFile(employmentName, $"Employments\\{empType}");
-                        FillGrid();
-                    }
-
-                }
+                employments.SetEmploymentValuesByName(employmentName);
+                StatsManagement.WriteStats($"{employments.EmpType}!{employments.Code}", currentRange);
+                if (employments.EmpType == "Goals") CheckIsGoalDone();
             }
-            MenuManagement.questCheck = false;
+            MenuManagement.questCheck = false;  //ИСПРАВИТЬ
+            UpdateMainMenuDGV();
 
             currentRange--;
             SetLabelValue();
 
+            if (currentRange <= 0) {
+                FileManagement.firstLaunch = false;
+                tray.CheckNotifyNeed();
+                this.Hide();
+            }
+        }
+
+        private void CheckIsGoalDone() {
+            string goalStatus;
+
+            if ((employments.HoursGoal <= employments.HoursDone || employments.DateGoal < DateTime.Now) && employments.HoursGoal != 0)
+            {
+                goalStatus = employments.DateGoal.Day < DateTime.Now.Day ? "просрочена" : "достигнута";
+
+                var result = MessageBox.Show($"Ваша цель \"{employments.Name}\" {goalStatus}" +
+                    $"\nСделать из нее постоянную цель?", $"Цель {goalStatus}!", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes) employments.WriteEmploymentToFile($"{employments.Name} (постоянный)!{employments.GetLastCode}!0!{DateTime.Now.ToShortDateString()}");
+
+                employments.DeleteEmpFromFile(employments.Name);
+                FillGrid();
+            }
+        }
+
+        private void UpdateMainMenuDGV() {
             MainMenu mainManu = MainMenu.CreateInstance(null);
             mainManu.DataGridDayOfWeek_CellClick(null, null);
             mainManu.DataGridBusiness.CurrentCell = mainManu.DataGridBusiness[DateTime.Now.Hour - (currentRange + 1), 0];
             mainManu.DataGridBusiness_CellClick(null, null);
-
-            if (currentRange <= 0) {
-                Tray.CheckNotifyNeed();
-                this.Hide();
-            }
         }
 
         private void TimeSpent_FormClosing(object sender, FormClosingEventArgs e)

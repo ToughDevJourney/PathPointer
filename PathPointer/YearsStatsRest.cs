@@ -13,16 +13,24 @@ namespace PathPointer
         public override string EmpType { get { return "Rest"; } }
 
         public YearsStatsRest() {
-            int maxRest = allRestEmps.Max(s => s.Value);
-            MainEmployment = allRestEmps.FirstOrDefault(s => s.Value == maxRest).Key;
+            if (allRestEmps.Values.Any())
+            {
+                int maxRest = allRestEmps.Max(s => s.Value);
+                MainEmployment = allRestEmps.FirstOrDefault(s => s.Value == maxRest).Key;
+            }
+            else
+            {
+                MainEmployment = "отсутствует";
+                MainEmploymentHrs = 0;
+            }
         }
 
         protected override void CountHours(string currentEmp)
         {
-            if (currentEmp != "Rest!@") //пропуск варианта "другое"
+            if (currentEmp != $"Rest!{Codes.sleep}") //пропуск сна
             {
                 MainEmploymentHrs++;
-                if (currentEmp != "Rest!0") //пропуск сна
+                if (currentEmp != $"Rest!{Codes.anotherEmp}") //пропуск варианта "другое"
                 {
                     if (allRestEmps.ContainsKey(currentEmp)) allRestEmps[currentEmp] += 1;
                     else allRestEmps[currentEmp] = 1;

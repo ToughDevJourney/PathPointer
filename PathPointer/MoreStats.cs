@@ -11,14 +11,16 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public partial class MoreStat : Form
+    public partial class MoreStats : Form
     {
+        StatsManagement stats = new StatsManagement();
+        Employments employments;
         YearsStatsBusiness business = new YearsStatsBusiness();
         YearsStatsGoals goals = new YearsStatsGoals();
         YearsStatsRest rest = new YearsStatsRest();
         YearsStatsFun fun = new YearsStatsFun();
 
-        public MoreStat()
+        public MoreStats()
         {
             InitializeComponent();
             FillChart();
@@ -71,24 +73,26 @@ namespace PathPointer
             lblYearGoalsHrs.Text = $"Потрачено на цели: {goals.spentHours} часов";
 
             SetProductiveText();
-            lblBusinessHrsSpent.Text = $"Потрачено часов на неотложные дела: {business.MainEmploymentHrs}";
+            lblBusinessHrsSpent.Text = $"Потрачено часов на неотложные дела: {business.MainEmploymentHrs}";           
+            
+            lblFavRest.Text = GetFavoriteRestName(new EmploymentsRest(), rest);
+            lblRestTimeSpent.Text = GetRestTimeSpent(rest);
 
-            lblFavRest.Text = $"Любимый вид отдыха \"{ReturnFavouriteRestName(rest)}\"";
-            lblRestTimeSpent.Text = $"Потрачено часов на отдых: {rest.MainEmploymentHrs.ToString()}";
-
-            lblFavFun.Text = $"Любимое развлечение \"{ReturnFavouriteRestName(fun)}\"";
-            lblFunTimeSpent.Text = $"Потрачено часов на развелечения: {fun.MainEmploymentHrs.ToString()}";
+            lblFavFun.Text = GetFavoriteRestName(new EmploymentsFun(), fun);
+            lblFunTimeSpent.Text = GetRestTimeSpent(fun);
 
             SetGoalPercentText();
             SetReachedGoals();
         }
+
+
 
         private void SetCloseToDreamText() {
             string goalName = Management.GetValueByIndex(goals.MainEmployment);
             string goalHrs = goals.MainEmploymentHrs.ToString();
 
             if (Management.GetValueByIndex(goals.MainEmployment, 2) == "0") lblCloseToDream.Text = $"На цель \"{goalName}\" вы потратили уже {goalHrs} часов";
-            else lblCloseToDream.Text = $"Вы ближе к своей цели \"{goalName}\" уже на {goalHrs}";
+            else lblCloseToDream.Text = $"Вы ближе к своей цели \"{goalName}\" уже на {goalHrs} часов";
         }
 
         private void SetProductiveText() {
@@ -108,20 +112,30 @@ namespace PathPointer
             else lblProductive.Text = $"Ваша продуктивность такая же, как и вчера";
         }
 
-        private string ReturnFavouriteRestName(YearStats restKind) {
-            string restName = "";
-            string restCode = Management.GetValueByIndex(restKind.MainEmployment, 1);
-            string restType = restKind.EmpType;
+        private string GetFavoriteRestName(Employments RestType, YearStats statsType)
+        {
+            string restName;
+            if (rest.MainEmployment == "отсутствует") restName = "отсутствует";
+            else
+            {
+                string restCode = Management.GetValueByIndex(statsType.MainEmployment, 1);
+                employments = RestType;
+                employments.SetEmploymentValuesByCode(restCode);
+                restName = employments.Name;
+            }
 
-            restName = StatsManagement.FindEmploymentByCode(restCode, restType);
-            if (restName == "") restName = StatsManagement.FindEmploymentByCode(restCode, restType, true);
-            if (restName != "") restName = Management.GetValueByIndex(restName);
             return restName;
         }
 
+        private string GetRestTimeSpent(YearStats statsType)
+        {
+            string restHours = statsType.MainEmploymentHrs.ToString();            
+            return restHours;
+        }
+
         private void SetReachedGoals() {
-            Management.SetPath("Employments\\Archive\\Goals");
-            string[] allGoals = File.ReadAllLines(Management.FilePath);
+
+            string[] allGoals = File.ReadAllLines(Management.GetPath("Employments\\Archive\\Goals"));
 
             if (allGoals.Length == 0) lblReachedGoals.Text = "Вы еще не достигли ни одной цели";
             else lblReachedGoals.Text = $"Вы достигли уже {allGoals.Length.ToString()} целей";

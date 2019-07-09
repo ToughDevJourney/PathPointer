@@ -15,11 +15,11 @@ namespace PathPointer
 {
     public partial class MainMenu : Form
     {
+        StatsManagement stats = new StatsManagement();
         private static MainMenu _mainMenu;
         private static Tray tray;
         public static int pickedDayOfWeek;
         public static BindingList<StatsManagement> statCells;
-        FileManagement fileManagement = new FileManagement();
 
         public MainMenu()
         {
@@ -44,13 +44,13 @@ namespace PathPointer
             const int minutes = 60;
             int interval;
 
-            fileManagement.CheckAllFiles();
+            FileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             StatsManagement.WriteHoursFromSchedule();
             MenuManagement.AreAllFormsClosed = false;
             tray = new Tray(this.TrayIcon);
 
-            Tray.ProductiveMessage();
+            tray.ProductiveMessage();
             _mainMenu = this;
 
             FillDaysOfWeek();
@@ -69,7 +69,7 @@ namespace PathPointer
 
         private void EmployButton_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new Employments());
+            MenuManagement.ShowForm(this, new AddEmployments());
         }
         private void BtnSettings_Click(object sender, EventArgs e)
         {
@@ -78,12 +78,12 @@ namespace PathPointer
 
         private void BtnMoreStats_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new MoreStat());
+            MenuManagement.ShowForm(this, new MoreStats());
         }
 
         private void BtnGoals_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new Goals());
+            MenuManagement.ShowForm(this, new ShowGoals());
         }
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace PathPointer
             TimerHour.Interval = interval60Mins;
             tray.ScheduleBeginMessage();
 
-            fileManagement.CheckAllFiles();
+            FileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
             if(UserSettings.StopGames == true) UserSettings.CloseGame();
@@ -137,7 +137,7 @@ namespace PathPointer
         public void DataGridDayOfWeek_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             pickedDayOfWeek = Convert.ToInt32(DateTime.Now.AddDays(-(6 - DataGridDayOfWeek.CurrentCell.ColumnIndex)).DayOfWeek);
-            StatsManagement.FillGrid(ref DataGridBusiness);  //вывод деятельности за 24 часа выбранного дня недели
+            stats.FillWeekEfficiencyGrid(ref DataGridBusiness);  //вывод деятельности за 24 часа выбранного дня недели
             DataGridBusiness_CellClick(null, null);
             PointToDayOfWeek(DataGridDayOfWeek.CurrentCell.ColumnIndex);
             DataGridDayOfWeek.ClearSelection();

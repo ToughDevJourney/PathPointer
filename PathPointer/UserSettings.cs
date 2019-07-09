@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    class UserSettings : Management
+    static class UserSettings
     {
-
-
+        private static string GamesListFileName { get { return "GamesList"; } }
+        private static string SettingsFileName { get { return "Common"; } }
         public static int EmploymentCheckRange { get; set; }
         public static int WeekFunTime { get; set; }
         public static int SleepTimeBegin { get; set; }
@@ -26,58 +26,58 @@ namespace PathPointer
         private static int AlreadyPlayedHrs { get; set; }
 
         static UserSettings() {
-            UpdateAllSettings();
-
-
-            if (!File.Exists(FilePath)) using (File.Create(FilePath)) { };
-
+            UpdateAllSettings();        
         }
 
         public static void UpdateAllSettings() {
-            EmploymentCheckRange = GetFileValue("Employment Check Range");
-            WeekFunTime = GetFileValue("Week Fun Time");
-            SleepTimeBegin = GetFileValue("Sleep Time Begin");
-            SleepTimeEnd = GetFileValue("Sleep Time End");
-            HoursToWorkNotify = GetFileValue("Hours To Rest Notify");
-            HoursToRestNotify = GetFileValue("Hours To Work Notify");
-            SoftMotiv = GetFileValue("Soft Motivation") == 1 ? true : false;
-            HardMotiv = GetFileValue("Hard Motivation") == 1 ? true : false;
-            StopGames = GetFileValue("Stop Games") == 1 ? true : false;
-            HrsToStopGame = GetFileValue("Hours To Stop Game");
+            if (FileManagement.firstLaunch) {
+                EmploymentCheckRange = 1;
 
+            }
+            else EmploymentCheckRange = GetSettingValue("Employment Check Range");
+            WeekFunTime = GetSettingValue("Week Fun Time");
+            SleepTimeBegin = GetSettingValue("Sleep Time Begin");
+            SleepTimeEnd = GetSettingValue("Sleep Time End");
+            HoursToWorkNotify = GetSettingValue("Hours To Rest Notify");
+            HoursToRestNotify = GetSettingValue("Hours To Work Notify");
+            SoftMotiv = GetSettingValue("Soft Motivation") == 1 ? true : false;
+            HardMotiv = GetSettingValue("Hard Motivation") == 1 ? true : false;
+            StopGames = GetSettingValue("Stop Games") == 1 ? true : false;
+            HrsToStopGame = GetSettingValue("Hours To Stop Game");
         }
 
-        private static int GetFileValue(string settingName) {
-            SetPath("Common");
+        private static int GetSettingValue(string settingName) {
             int value = 1;
-            if (File.Exists(FilePath))
+
+            string[] commonFileArr = File.ReadAllLines(Management.GetPath(SettingsFileName));
+            for (int i = 0; i < commonFileArr.Length; i++)
             {
-                string[] commonFileArr = File.ReadAllLines(FilePath);
-                for (int i = 0; i < commonFileArr.Length; i++)
+                if (Management.GetValueByIndex(commonFileArr[i]) == settingName)
                 {
-                    if (GetValueByIndex(commonFileArr[i], 0) == settingName)
-                    {
-                        value = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 1));
-                        break;
-                    }
+                    value = Convert.ToInt32(Management.GetValueByIndex(commonFileArr[i], 1));
+                    break;
                 }
             }
+            
             return value;
         }
 
 
         public static void ShowGames(ComboBox GamesComboBox) {
-            SetPath("GamesList");
-            if (!File.Exists(FilePath)) using (File.Create(FilePath)) { }
             GamesComboBox.Items.Clear();
-            string[] gamesArr = File.ReadAllLines(FilePath);
+            string[] gamesArr = File.ReadAllLines(Management.GetPath(GamesListFileName));
             foreach (var line in gamesArr) GamesComboBox.Items.Add(line);
             GamesComboBox.Text = "";
         }
 
-        public static void AddGame(string gameName) {
-            if (!DataManagement.IsLineInFile(gameName, "GamesList")) DataManagement.WriteToFile(gameName, "GamesList");
-            else MessageBox.Show("Игра с таким именем уже добавлена!", "Уже готово!");
+        public static void AddGame(ComboBox GamesComboBox, string gameName) {
+            bool gameAlreadyAdded = false;
+            foreach (string line in GamesComboBox.Items) {
+                if (line == gameName) gameAlreadyAdded = true;
+            }
+
+            if (gameAlreadyAdded) MessageBox.Show("Игра с таким именем уже добавлена!", "Уже готово!");
+            else DataManagement.WriteLineToFile(gameName, GamesListFileName);
         }
 
         public static void DelGame(string gameName)
@@ -86,8 +86,7 @@ namespace PathPointer
         }
 
         public static void CloseGame(){
-            SetPath("GamesList");
-            string[] gamesArr = File.ReadAllLines(FilePath);
+            string[] gamesArr = File.ReadAllLines(Management.GetPath(GamesListFileName));
             bool processWasFound = false;
 
             foreach (string gameName in gamesArr) {

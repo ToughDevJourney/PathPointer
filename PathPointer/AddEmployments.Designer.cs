@@ -1,6 +1,6 @@
 ﻿namespace PathPointer
 {
-    partial class Employments
+    partial class AddEmployments
     {
         /// <summary>
         /// Required designer variable.

@@ -13,6 +13,7 @@ namespace PathPointer
     public partial class AddBusy : Form
     {
         public static string BusyName { get; set; }
+        Employments business = new EmploymentsBusiness();
 
         public AddBusy()
         {
@@ -31,7 +32,7 @@ namespace PathPointer
         private void BtnAddSchedule_Click(object sender, EventArgs e)
         {
             BusyName = textName.Text;
-            textName.Text = DataManagement.CheckEmploymentFormat(textName.Text);
+            textName.Text = business.CheckEmploymentFormat(textName.Text);
             AddSchedule empForm = new AddSchedule();
             empForm.Show();
             this.Hide();
@@ -40,19 +41,19 @@ namespace PathPointer
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             string businessName = textName.Text;
-            businessName = DataManagement.CheckEmploymentFormat(businessName);
+            businessName = business.CheckEmploymentFormat(businessName);
 
             if (businessName == "") MessageBox.Show("Будьте так любезны, введите название", "Телепатия временно недоступна");
             else {              
-                if (AddSchedule.Schedule == null) DataManagement.WriteToFile($"{businessName}!{DataManagement.Code}!N!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
-                else DataManagement.WriteToFile($"{businessName}!{DataManagement.Code}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}", DataManagement.EmpType);
+                if (AddSchedule.Schedule == null) business.WriteEmploymentToFile($"{businessName}!{business.GetLastCode}!N!{DateTime.Now.ToShortDateString()}");
+                else business.WriteEmploymentToFile($"{businessName}!{business.GetLastCode}!{AddSchedule.Schedule}!{DateTime.Now.ToShortDateString()}");
             }
             BtnCancel_Click(null, null);
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new Employments());
+            MenuManagement.ShowForm(this, new AddEmployments());
         }
 
         private void AddBusy_FormClosing(object sender, FormClosingEventArgs e)

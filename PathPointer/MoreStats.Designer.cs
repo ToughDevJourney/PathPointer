@@ -1,6 +1,6 @@
 ﻿namespace PathPointer
 {
-    partial class MoreStat
+    partial class MoreStats
     {
         /// <summary>
         /// Required designer variable.

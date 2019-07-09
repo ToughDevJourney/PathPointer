@@ -9,7 +9,7 @@ namespace PathPointer
 {
     abstract class YearStats
     {
-
+        StatsManagement stats = new StatsManagement();
         public abstract string EmpType { get; }
         public string MainEmployment { get; set; }
         public int MainEmploymentHrs { get; set; }
@@ -20,22 +20,21 @@ namespace PathPointer
         {
             int getWeek = 0;
 
-            string currentEmp;
+            DayEfficiency[] dayEfficiency;
 
             for (int yw = 51; yw >= 0; yw--)
             {
                 getWeek++;
                 for (int dow = 0; dow < 7; dow++)
                 {
-                    string[] weekEmp = StatsManagement.FillStatsArray(getWeek);
-                    if (weekEmp != null)
+                    dayEfficiency = stats.FillStatsArray(yw, dow);              
+                    if (dayEfficiency != null)
                     {
                         for (int hr = 0; hr < 24; hr++)
                         {
-                            currentEmp = Management.GetValueByIndex(weekEmp[hr], dow + 1, ";");
-                            if (Management.GetValueByIndex(currentEmp) == EmpType)
+                            if (dayEfficiency[hr].EmpType == EmpType)
                             {
-                                CountHours(currentEmp);
+                                CountHours(dayEfficiency[hr].EmpType);
                                 yearEmpNum[dow, yw]++;
                             }
                         }

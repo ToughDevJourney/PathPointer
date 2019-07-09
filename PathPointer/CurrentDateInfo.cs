@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PathPointer
 {
-    class CurrentDateInfo : Management
+    class CurrentDateInfo
     {
         private static int weekNumber;
         private static int dayOfWeek;
@@ -36,20 +36,20 @@ namespace PathPointer
 
         public static void CheckWeekRelevance()
         {
-            SetPath("Common");
-
+            StatsManagement stats = new StatsManagement();
+            string commonFile = Management.GetPath("Common");
             int fileWeekNumber;
             int fileYear;
             int numberOfWeeks = 0;
 
-            string[] commonFileArr = File.ReadAllLines(FilePath);
+            string[] commonFileArr = File.ReadAllLines(commonFile);
 
             for (int i = 0; i < commonFileArr.Length; i++)
             {
-                if (GetValueByIndex(commonFileArr[i], 0) == "Week Number")
+                if (Management.GetValueByIndex(commonFileArr[i], 0) == "Week Number")
                 {
-                    fileYear = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 2));
-                    fileWeekNumber = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 1));
+                    fileYear = Convert.ToInt32(Management.GetValueByIndex(commonFileArr[i], 2));
+                    fileWeekNumber = Convert.ToInt32(Management.GetValueByIndex(commonFileArr[i], 1));
 
                     if (fileWeekNumber != WeekNumber || fileYear != DateTime.Now.Year)
                     {
@@ -60,11 +60,10 @@ namespace PathPointer
                             numberOfWeeks += 52 - fileWeekNumber; //пропущенные недели года последнего использования
                             numberOfWeeks += weekNumber;    //недели этого года                          
                         }
-                          
-                        AddNewWeekIntoEfficiency(numberOfWeeks);
+
+                        StatsManagement.AddNewWeekIntoEfficiency(numberOfWeeks);
                         commonFileArr[i] = $"Week Number!{WeekNumber}!{DateTime.Now.Year}";
-                        SetPath("Common");
-                        File.WriteAllLines(FilePath, commonFileArr);
+                        File.WriteAllLines(commonFile, commonFileArr);
                         break;
                     }
                 }
@@ -72,56 +71,7 @@ namespace PathPointer
         }
 
 
-        public static void AddNewWeekIntoEfficiency(int weeksNumber = 1)
-        {
-            string fileContainer = "";
-            string intermediateFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Eff Intermediate.txt";
-            const int hoursADay = 24;
 
-            for (int i = 0; i < weeksNumber; i++)
-            {
-                SetPath("Efficiency");
-
-                if (new FileInfo(FilePath).Length != 0)
-                {
-                    StatsManagement.WriteHoursFromSchedule(true);
-                    SetPath("Efficiency");
-                    File.Copy(FilePath, intermediateFile);
-                    File.Delete(FilePath);
-                }
-
-
-
-                using (StreamWriter writer = new StreamWriter(FilePath))
-                {
-                    for (int j = 0; j < hoursADay; j++)
-                    {
-                        writer.WriteLine($"{j}:00;");
-                    }
-
-                    if (File.Exists(intermediateFile))
-                    {
-                        using (StreamReader reader = new StreamReader(intermediateFile))
-                        {
-                            while ((fileContainer = reader.ReadLine()) != null)
-                            {
-                                writer.WriteLine(fileContainer);
-                            }
-                        }
-                    }
-                }
-
-
-
-                if(i == weeksNumber - 1) StatsManagement.WriteHoursFromSchedule();  //расписание не будет устанавливаться для часов после текущего часа
-             //   else if (weeksNumber == 2) continue;
-            //    else if (weeksNumber != 2) StatsManagement.WriteHoursFromSchedule(true); // if (weeksNumber > 2) расписание заполнит всю неделю
-
-
-                File.Delete(intermediateFile);
-            }
-            StatsManagement.UpdateAllSchedulesDates();
-        }
 
 
 

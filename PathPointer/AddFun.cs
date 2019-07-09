@@ -12,6 +12,7 @@ namespace PathPointer
 {
     public partial class AddFun : Form
     {
+        EmploymentsFun fun = new EmploymentsFun();
         public AddFun()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace PathPointer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            string funName = DataManagement.CheckEmploymentFormat(textName.Text);
+            string funName = fun.CheckEmploymentFormat(textName.Text);
 
 
             if (funName == "")
@@ -28,14 +29,14 @@ namespace PathPointer
             }
             else
             {
-                DataManagement.WriteToFile($"{funName}!{DataManagement.Code}", DataManagement.EmpType);
+                fun.WriteEmploymentToFile($"{funName}!{fun.GetLastCode}");
                 CancelButton_Click(null, null);
             }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new Employments());
+            MenuManagement.ShowForm(this, new AddEmployments());
         }
 
         private void AddFun_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,6 +47,11 @@ namespace PathPointer
         private void textTime_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8)) e.Handled = true;
+        }
+
+        private void AddFun_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -21,7 +21,7 @@ namespace PathPointer
         private bool beginChanged = false;
         private bool endChanged = false;
         private Label pickedLabelDayOfWeek;
-
+        StatsManagement stats = new StatsManagement();
 
         public AddSchedule()
         {
@@ -85,14 +85,14 @@ namespace PathPointer
         }
         private void TextBegin_Leave(object sender, EventArgs e)
         {
-            TextBegin.Text = LinesFormat.TimeFormat(TextBegin.Text);
+            TextBegin.Text = FormatLines.TimeFormat(TextBegin.Text);
             BeginTimeIsLessThenEndTimeCheck();
             if (firstBeginChange == true && beginChanged == true) ChangeAllDays(ref firstBeginChange);  //при первом изменении, изменяется расписание всех дней
             else FromTimePickToSchedule();
         }
         private void TextEnd_Leave(object sender, EventArgs e)
         {
-            TextEnd.Text = LinesFormat.TimeFormat(TextEnd.Text);
+            TextEnd.Text = FormatLines.TimeFormat(TextEnd.Text);
             BeginTimeIsLessThenEndTimeCheck();
             if (firstEndChange == true && endChanged == true) ChangeAllDays(ref firstEndChange);
             else FromTimePickToSchedule();
@@ -151,8 +151,8 @@ namespace PathPointer
                 beginHour = scheduleArray[i].Remove(scheduleArray[i].IndexOf(" "));
                 endHour = scheduleArray[i].Substring(scheduleArray[i].IndexOf(" ") + 1);
 
-                beginHour = LinesFormat.ShortFormatTime(beginHour);
-                endHour = LinesFormat.ShortFormatTime(endHour);
+                beginHour = FormatLines.ShortFormatTime(beginHour);
+                endHour = FormatLines.ShortFormatTime(endHour);
 
                 scheduleArray[i] = $"{beginHour} {endHour}";
 

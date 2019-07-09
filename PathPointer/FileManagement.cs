@@ -11,41 +11,57 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public class FileManagement : Management
+    public static class FileManagement
     {
-        public static string[] CommonFileArray{ get; set; }
-        public delegate void CheckFiles();
-        public CheckFiles CheckAllFiles;
-
-        public FileManagement() {           
-            CheckAllFiles += CheckForDirectory;
-            CheckAllFiles += CheckForCommon;
-            CheckAllFiles += CheckForCodes;
-            CheckAllFiles += CheckForBusiness;
-            CheckAllFiles += CheckForFun;
-            CheckAllFiles += CheckForGoals;
-            CheckAllFiles += CheckForRest;
-            CheckAllFiles += CheckForEfficiency;
+        public static string EfficiencyFile = Management.GetPath("Efficiency");
+        public static string BusinessFile = Management.GetPath("Employments\\Business");
+        public static string[] CommonFileArray { get; set; }
+        public static bool firstLaunch = false;
+        public static bool FirstLaunch {
+            get { return firstLaunch; }
+            set { firstLaunch = value; }
         }
 
-        private void CheckForDirectory() {
-            SetPath();
-            if (!Directory.Exists(FilePath)) Directory.CreateDirectory(FilePath);
-            if (!Directory.Exists(FilePath + "\\Employments")) Directory.CreateDirectory(FilePath + "\\Employments");
-            if (!Directory.Exists(FilePath + "\\Employments\\Archive")) Directory.CreateDirectory(FilePath + "\\Employments\\Archive");
+        static FileManagement() {
+            CheckAllFiles();
+            if (firstLaunch == true) {
+                EmploymentsGoals goals = new EmploymentsGoals();
+                goals.WriteEmploymentToFile($"Установка PathPointer!{goals.GetLastCode}!1!{DateTime.Now.ToShortDateString()}");
+            }
+        }
+
+        public static void CheckAllFiles() {
+            CheckForDirectory();
+            CheckForCommon();
+            CheckForGamesList();
+            CheckForCodes();
+            CheckForEmployments("Business");
+            CheckForEmployments("Goals");
+            CheckForEmployments("Rest");
+            CheckForEmployments("Fun");
+            CheckForEfficiency();
+        }
+
+        private static void CheckForDirectory() {
+            if (!Directory.Exists(Management.GetPath())) {
+                Directory.CreateDirectory(Management.GetPath());
+                FirstLaunch = true;
+            }
+            if (!Directory.Exists(Management.GetPath("Employments", true))) Directory.CreateDirectory(Management.GetPath("Employments", true));
+            if (!Directory.Exists(Management.GetPath("Employments\\Archive", true))) Directory.CreateDirectory(Management.GetPath("Employments\\Archive", true));
 
         }
 
-        private void CheckForCommon(){
-            if (!CheckFileExistance("Common")) FillCommonFileArray(); 
+        private static void CheckForCommon() {
+            if (!File.Exists(Management.GetPath("Common"))) FillCommonFileArray();
         }
 
+        private static void CheckForGamesList(){
+            if (!File.Exists(Management.GetPath("GamesList"))) using (File.Create(Management.GetPath("GamesList"))) { }        
+        }
 
-
-        public void FillCommonFileArray(string statsCheckRange = "3", string weekFunHrs = "14", string sleepHrBegin = "0", 
+        public static void FillCommonFileArray(string statsCheckRange = "3", string weekFunHrs = "14", string sleepHrBegin = "0", 
             string sleepHrEnd = "9", string hrsToRest = "4", string hrsToWork = "1", string SoftMotiv = "1", string HadrMotiv = "0", string stopGames = "0", string HrsToStopGames = "0") {
-
-            SetPath("Common");
 
             CommonFileArray = new string[13];
             CommonFileArray[0] = "Common info:";
@@ -62,63 +78,36 @@ namespace PathPointer
             CommonFileArray[11] = $"Stop Games!{stopGames}";
             CommonFileArray[12] = $"Hours To Stop Game!{HrsToStopGames}";
 
-            File.WriteAllLines(FilePath, CommonFileArray);
+            File.WriteAllLines(Management.GetPath("Common"), CommonFileArray);
         }
 
-        private void CheckForEfficiency() {
-            if (!CheckFileExistance("Efficiency"))
+        private static void CheckForEfficiency() {
+            if (!File.Exists(Management.GetPath("Efficiency")))
             {
-                using (File.Create(FilePath)) { }
-                CurrentDateInfo.AddNewWeekIntoEfficiency(2);
+                using (File.Create(Management.GetPath("Efficiency"))) { }
+                StatsManagement.AddNewWeekIntoEfficiency(2);
             }
         }
 
-        private void CheckForCodes() {
-            if (!CheckFileExistance("Employments\\Codes"))
+        private static void CheckForCodes() {
+            if (!File.Exists(Management.GetPath("Employments\\Codes")))
             {
-                string[] fileArray = new string[4];
-                fileArray[0] = "Business!0";
-                fileArray[1] = "Goals!0";
-                fileArray[2] = "Rest!0";
-                fileArray[3] = "Fun!0";
-                File.WriteAllLines(FilePath, fileArray);
+                string[] codesArray = new string[4];
+                codesArray[0] = "Business!0";
+                codesArray[1] = "Goals!0";
+                codesArray[2] = "Rest!0";
+                codesArray[3] = "Fun!0";
+                File.WriteAllLines(Management.GetPath("Employments\\Codes"), codesArray);
             }
         }
 
-        private void CheckForBusiness() {
-            if (!CheckFileExistance("Employments\\Business")) using (File.Create(FilePath)) { }
+        private static void CheckForEmployments(string filePath) {
+            if (!File.Exists(Management.GetPath($"Employments\\{filePath}")))  using (File.Create(Management.GetPath($"Employments\\{filePath}"))) { } 
+            if (!File.Exists(Management.GetPath($"Employments\\Archive\\{filePath}")))  using (File.Create(Management.GetPath($"Employments\\Archive\\{filePath}"))) { } 
         }
 
-        private void CheckForGoals()
-        {
-            if (!CheckFileExistance("Employments\\Goals"))
-            {
-                using (File.Create(FilePath)) { }
-                DataManagement.WriteToFile($"Установка PathPointer!{DataManagement.Code}!1!{DateTime.Today.ToShortDateString()}", "Employments\\Goals");
-            }
-        }
-
-        private void CheckForRest() {
-            if (!CheckFileExistance("Employments\\Rest")) using (File.Create(FilePath)) { }
-
-        }
-
-        private void CheckForFun()
-        {
-            if (!CheckFileExistance("Employments\\Fun")) using (File.Create(FilePath)) { }
-        }
-
-        private bool CheckFileExistance(string fileStr) {
-            SetPath(fileStr);
-            if (File.Exists(FilePath)) return true;
-            else return false;
-        }
-
-
-        public void ResetProgram() {
-            SetPath();
-
-            Directory.Delete(FilePath, true);
+        public static void ResetProgram() {
+            Directory.Delete(Management.GetPath(), true);
             CheckAllFiles();
             StatsManagement.WriteHoursFromSchedule();
         }

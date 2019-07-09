@@ -15,10 +15,9 @@ namespace PathPointer
 
         public void SetMainEmployment() {
             string readGoal = "";
-           string goal = "";
+            string goal = "";
 
-            Management.SetPath("Employments\\Goals");
-            using (StreamReader reader = new StreamReader(Management.FilePath)) {
+            using (StreamReader reader = new StreamReader(Management.GetPath($"Employments\\{EmpType}"))) {
                 while ((readGoal = reader.ReadLine()) != null) {
                     goal = readGoal;
                     if (Management.GetValueByIndex(goal, 2) != "0") break;
@@ -40,5 +39,9 @@ namespace PathPointer
         {
             return Color.FromArgb(255, colorCode, 255, colorCode);
         }
+
+
+
+
     }
 }

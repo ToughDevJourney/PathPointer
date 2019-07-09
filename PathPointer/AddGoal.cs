@@ -12,7 +12,7 @@ namespace PathPointer
 {
     public partial class AddGoal : Form
     {
-        DataManagement addGoal = new DataManagement();
+        EmploymentsGoals goals = new EmploymentsGoals();
 
         public AddGoal()
         {
@@ -21,18 +21,18 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            string goaltName = DataManagement.CheckEmploymentFormat(textName.Text);
+            string goalName = goals.CheckEmploymentFormat(textName.Text);
             string goalTime = textTime.Text;
 
-            if (goaltName == "")
-            {
+            if (goalName == "")
+            { 
                 MessageBox.Show("Пожалуйста, введите название", "Вы упустили пунктик");
             }
             else
             {
                 if (goalTime == "") goalTime = "0";
 
-                DataManagement.WriteToFile($"{goaltName}!{DataManagement.Code}!{Convert.ToInt32(goalTime)}!{datePicker.Text}", DataManagement.EmpType);        //запись цели в файл
+                goals.WriteEmploymentToFile($"{goalName}!{goals.GetLastCode}!{Convert.ToInt32(goalTime)}!{datePicker.Text}");        //запись цели в файл
 
                 BtnCancel_Click(null, null);
             }
@@ -40,7 +40,7 @@ namespace PathPointer
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new Employments());
+            MenuManagement.ShowForm(this, new AddEmployments());
         }
 
         private void AddGoal_FormClosing(object sender, FormClosingEventArgs e)
@@ -56,6 +56,11 @@ namespace PathPointer
         private void datePicker_ValueChanged(object sender, EventArgs e)
         {
             if (datePicker.Value < DateTime.Now) datePicker.Value = DateTime.Now;
+        }
+
+        private void AddGoal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

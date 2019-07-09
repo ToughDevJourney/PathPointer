@@ -12,6 +12,7 @@ namespace PathPointer
 {
     public partial class AddRest : Form
     {
+        EmploymentsRest rest = new EmploymentsRest();
         public AddRest()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace PathPointer
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            string restName = DataManagement.CheckEmploymentFormat(textName.Text);
+            string restName = rest.CheckEmploymentFormat(textName.Text);
 
 
             if (restName == "")
@@ -28,14 +29,14 @@ namespace PathPointer
             }
             else
             {
-                DataManagement.WriteToFile($"{restName}!{DataManagement.Code}", DataManagement.EmpType);
+                rest.WriteEmploymentToFile($"{restName}!{rest.GetLastCode}");
                 BtnCancel_Click(null, null);
             }
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            MenuManagement.ShowForm(this, new Employments());
+            MenuManagement.ShowForm(this, new AddEmployments());
         }
 
         private void AddRest_FormClosing(object sender, FormClosingEventArgs e)

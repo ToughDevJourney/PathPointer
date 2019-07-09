@@ -89,25 +89,40 @@
     <Compile Include="BiggerCheckBox.Designer.cs">
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="LinesFormat.cs" />
+    <Compile Include="Codes.cs" />
+    <Compile Include="DayEfficiency.cs" />
+    <Compile Include="Employments.cs" />
+    <Compile Include="EmploymentsBusiness.cs" />
+    <Compile Include="EmploymentsFun.cs" />
+    <Compile Include="EmploymentsGoals.cs" />
+    <Compile Include="EmploymentsSkip.cs" />
+    <Compile Include="EmploymentsTypeOther.cs" />
+    <Compile Include="EmploymentsRest.cs" />
+    <Compile Include="FormatLines.cs" />
+    <Compile Include="IEmploymentsOtherTypes.cs" />
+    <Compile Include="DayEfficiencyFuture.cs" />
+    <Compile Include="IEmploymentsSkip.cs" />
+    <Compile Include="DayEfficiencyNow.cs" />
+    <Compile Include="DayEfficiencySkip.cs" />
+    <Compile Include="EmploymentsTypeSleep.cs" />
     <Compile Include="Texts.cs" />
     <Compile Include="Tray.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="CurrentDateInfo.cs" />
     <Compile Include="DataManagement.cs" />
-    <Compile Include="Employments.cs">
+    <Compile Include="AddEmployments.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Employments.Designer.cs">
-      <DependentUpon>Employments.cs</DependentUpon>
+    <Compile Include="AddEmployments.Designer.cs">
+      <DependentUpon>AddEmployments.cs</DependentUpon>
     </Compile>
     <Compile Include="FileManagement.cs" />
     <Compile Include="Management.cs" />
-    <Compile Include="Goals.cs">
+    <Compile Include="ShowGoals.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Goals.Designer.cs">
-      <DependentUpon>Goals.cs</DependentUpon>
+    <Compile Include="ShowGoals.Designer.cs">
+      <DependentUpon>ShowGoals.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
@@ -116,11 +131,11 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="StatsManagement.cs" />
-    <Compile Include="MoreStat.cs">
+    <Compile Include="MoreStats.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MoreStat.Designer.cs">
-      <DependentUpon>MoreStat.cs</DependentUpon>
+    <Compile Include="MoreStats.Designer.cs">
+      <DependentUpon>MoreStats.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuManagement.cs" />
     <Compile Include="Program.cs" />
@@ -163,17 +178,17 @@
     <EmbeddedResource Include="BiggerCheckBox.resx">
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employments.resx">
-      <DependentUpon>Employments.cs</DependentUpon>
+    <EmbeddedResource Include="AddEmployments.resx">
+      <DependentUpon>AddEmployments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Goals.resx">
-      <DependentUpon>Goals.cs</DependentUpon>
+    <EmbeddedResource Include="ShowGoals.resx">
+      <DependentUpon>ShowGoals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MoreStat.resx">
-      <DependentUpon>MoreStat.cs</DependentUpon>
+    <EmbeddedResource Include="MoreStats.resx">
+      <DependentUpon>MoreStats.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -14,8 +14,15 @@ namespace PathPointer
 
         public YearsStatsFun()
         {
-            int maxFun = allFunEmps.Max(s => s.Value);
-            MainEmployment = allFunEmps.FirstOrDefault(s => s.Value == maxFun).Key;
+            if (allFunEmps.Values.Any())
+            {
+                int maxFun = allFunEmps.Max(s => s.Value);
+                MainEmployment = allFunEmps.FirstOrDefault(s => s.Value == maxFun).Key;
+            }
+            else {
+                MainEmployment = "отсутствует";
+                MainEmploymentHrs = 0;
+            }
         }
 
         protected override void CountHours(string currentEmp) {

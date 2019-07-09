@@ -10,9 +10,12 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public partial class Goals : Form
+    public partial class ShowGoals : Form
     {
-        public Goals()
+        EmploymentsGoals goals = new EmploymentsGoals();
+        public static BindingList<DataManagement> varCells;
+
+        public ShowGoals()
         {
             InitializeComponent();
         }
@@ -24,11 +27,20 @@ namespace PathPointer
 
         private void Goals_Load(object sender, EventArgs e)
         {
+            DGVGoals.DataSource = goals.FillGrid(ref varCells, true).DataSource;
+            DGVGoals.Focus();
         }
 
         private void BtnBack_Click(object sender, EventArgs e)
         {
             MainMenu mainMenu = MainMenu.CreateInstance(this);
         }
+
+        private void dataGridBusiness_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            goals.FindEmploymentByName(DGVGoals.CurrentCell.Value.ToString());
+        }
+
+
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace PathPointer
 {
-    public abstract class Management
+    public static class Management
     {
-        public static string FilePath { get; set; }        //путь к документу
-
-        public static void SetPath(string empType = "")
+        public static string GetPath(string empType = "", bool folderPath = false)
         {
-            if (empType != "") FilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\{empType}.txt";  //путь к папке в "Документах"
-            else FilePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer";
+            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer";
+            if (empType != "" && folderPath == false) filePath += $"\\{empType}.txt";
+            else if (empType != "" && folderPath == true) filePath += $"\\{empType}";
+            return filePath;
         }
 
 

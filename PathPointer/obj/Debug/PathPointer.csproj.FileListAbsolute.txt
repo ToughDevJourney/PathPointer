@@ -8,9 +8,6 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.exe
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.pdb
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MainMenu.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Achivements.resources
-C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Employments.resources
-C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Goals.resources
-C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MoreStat.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.Settings.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddBusy.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddRest.resources
@@ -20,3 +17,6 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddFun.resou
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.TimeSpent.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.BiggerCheckBox.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddEmployments.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.ShowGoals.resources
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MoreStats.resources
