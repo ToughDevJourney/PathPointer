@@ -47,147 +47,147 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Achivements.cs">
+    <Compile Include="Forms\Achivements.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Achivements.Designer.cs">
+    <Compile Include="Forms\Achivements.Designer.cs">
       <DependentUpon>Achivements.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddBusy.cs">
+    <Compile Include="Forms\EmploymentsForms\AddBusy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddBusy.Designer.cs">
+    <Compile Include="Forms\EmploymentsForms\AddBusy.Designer.cs">
       <DependentUpon>AddBusy.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddFun.cs">
+    <Compile Include="Forms\EmploymentsForms\AddFun.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddFun.Designer.cs">
+    <Compile Include="Forms\EmploymentsForms\AddFun.Designer.cs">
       <DependentUpon>AddFun.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddRest.cs">
+    <Compile Include="Forms\EmploymentsForms\AddRest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddRest.Designer.cs">
+    <Compile Include="Forms\EmploymentsForms\AddRest.Designer.cs">
       <DependentUpon>AddRest.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddGoal.cs">
+    <Compile Include="Forms\EmploymentsForms\AddGoal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddGoal.Designer.cs">
+    <Compile Include="Forms\EmploymentsForms\AddGoal.Designer.cs">
       <DependentUpon>AddGoal.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddSchedule.cs">
+    <Compile Include="Forms\EmploymentsForms\AddSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddSchedule.Designer.cs">
+    <Compile Include="Forms\EmploymentsForms\AddSchedule.Designer.cs">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="BiggerCheckBox.cs">
+    <Compile Include="Forms\BiggerCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BiggerCheckBox.Designer.cs">
+    <Compile Include="Forms\BiggerCheckBox.Designer.cs">
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Codes.cs" />
-    <Compile Include="DayEfficiency.cs" />
-    <Compile Include="Employments.cs" />
-    <Compile Include="EmploymentsBusiness.cs" />
-    <Compile Include="EmploymentsFun.cs" />
-    <Compile Include="EmploymentsGoals.cs" />
-    <Compile Include="EmploymentsSkip.cs" />
-    <Compile Include="EmploymentsTypeOther.cs" />
-    <Compile Include="EmploymentsRest.cs" />
-    <Compile Include="FormatLines.cs" />
-    <Compile Include="IEmploymentsOtherTypes.cs" />
-    <Compile Include="DayEfficiencyFuture.cs" />
-    <Compile Include="IEmploymentsSkip.cs" />
-    <Compile Include="DayEfficiencyNow.cs" />
-    <Compile Include="DayEfficiencySkip.cs" />
-    <Compile Include="EmploymentsTypeSleep.cs" />
-    <Compile Include="Texts.cs" />
-    <Compile Include="Tray.cs" />
-    <Compile Include="UserSettings.cs" />
-    <Compile Include="CurrentDateInfo.cs" />
-    <Compile Include="DataManagement.cs" />
-    <Compile Include="AddEmployments.cs">
+    <Compile Include="Common\Codes.cs" />
+    <Compile Include="Efficiency\DayEfficiency.cs" />
+    <Compile Include="Efficiency\EmploymentTypes\Employments.cs" />
+    <Compile Include="Efficiency\EmploymentTypes\EmploymentsBusiness.cs" />
+    <Compile Include="Efficiency\EmploymentTypes\EmploymentsFun.cs" />
+    <Compile Include="Efficiency\EmploymentTypes\EmploymentsGoals.cs" />
+    <Compile Include="Efficiency\EmploymentTypes\EmploymentsSkip.cs" />
+    <Compile Include="Efficiency\Subspecies\EmploymentsTypeOther.cs" />
+    <Compile Include="Efficiency\EmploymentTypes\EmploymentsRest.cs" />
+    <Compile Include="Management\FormatLines.cs" />
+    <Compile Include="Efficiency\Subspecies\IEmploymentsOtherTypes.cs" />
+    <Compile Include="Efficiency\OtherTypes\DayEfficiencyFuture.cs" />
+    <Compile Include="Efficiency\OtherTypes\IDayEfficiencyType.cs" />
+    <Compile Include="Efficiency\OtherTypes\DayEfficiencyNow.cs" />
+    <Compile Include="Efficiency\OtherTypes\DayEfficiencySkip.cs" />
+    <Compile Include="Efficiency\Subspecies\EmploymentsTypeSleep.cs" />
+    <Compile Include="Common\Texts.cs" />
+    <Compile Include="Management\Tray.cs" />
+    <Compile Include="Common\UserSettings.cs" />
+    <Compile Include="Common\CurrentDateInfo.cs" />
+    <Compile Include="Management\DataManagement.cs" />
+    <Compile Include="Forms\EmploymentsForms\AddEmployments.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEmployments.Designer.cs">
+    <Compile Include="Forms\EmploymentsForms\AddEmployments.Designer.cs">
       <DependentUpon>AddEmployments.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileManagement.cs" />
-    <Compile Include="Management.cs" />
-    <Compile Include="ShowGoals.cs">
+    <Compile Include="Common\FileManagement.cs" />
+    <Compile Include="Management\Management.cs" />
+    <Compile Include="Forms\ShowGoals.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowGoals.Designer.cs">
+    <Compile Include="Forms\ShowGoals.Designer.cs">
       <DependentUpon>ShowGoals.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
+    <Compile Include="Forms\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatsManagement.cs" />
-    <Compile Include="MoreStats.cs">
+    <Compile Include="Management\StatsManagement.cs" />
+    <Compile Include="Forms\MoreStats.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MoreStats.Designer.cs">
+    <Compile Include="Forms\MoreStats.Designer.cs">
       <DependentUpon>MoreStats.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuManagement.cs" />
+    <Compile Include="Management\MenuManagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs">
+    <Compile Include="Forms\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
+    <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="TimeSpent.cs">
+    <Compile Include="Forms\TimeSpent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TimeSpent.Designer.cs">
+    <Compile Include="Forms\TimeSpent.Designer.cs">
       <DependentUpon>TimeSpent.cs</DependentUpon>
     </Compile>
-    <Compile Include="YearsStatsBusiness.cs" />
-    <Compile Include="YearsStatsFun.cs" />
-    <Compile Include="YearsStatsGoals.cs" />
-    <Compile Include="YearsStatsRest.cs" />
-    <Compile Include="YearStats.cs" />
-    <EmbeddedResource Include="Achivements.resx">
+    <Compile Include="YearStatistics\YearsStatsBusiness.cs" />
+    <Compile Include="YearStatistics\YearsStatsFun.cs" />
+    <Compile Include="YearStatistics\YearsStatsGoals.cs" />
+    <Compile Include="YearStatistics\YearsStatsRest.cs" />
+    <Compile Include="YearStatistics\YearStats.cs" />
+    <EmbeddedResource Include="Forms\Achivements.resx">
       <DependentUpon>Achivements.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddBusy.resx">
+    <EmbeddedResource Include="Forms\EmploymentsForms\AddBusy.resx">
       <DependentUpon>AddBusy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddFun.resx">
+    <EmbeddedResource Include="Forms\EmploymentsForms\AddFun.resx">
       <DependentUpon>AddFun.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddRest.resx">
+    <EmbeddedResource Include="Forms\EmploymentsForms\AddRest.resx">
       <DependentUpon>AddRest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddGoal.resx">
+    <EmbeddedResource Include="Forms\EmploymentsForms\AddGoal.resx">
       <DependentUpon>AddGoal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddSchedule.resx">
+    <EmbeddedResource Include="Forms\EmploymentsForms\AddSchedule.resx">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BiggerCheckBox.resx">
+    <EmbeddedResource Include="Forms\BiggerCheckBox.resx">
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEmployments.resx">
+    <EmbeddedResource Include="Forms\EmploymentsForms\AddEmployments.resx">
       <DependentUpon>AddEmployments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowGoals.resx">
+    <EmbeddedResource Include="Forms\ShowGoals.resx">
       <DependentUpon>ShowGoals.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu.resx">
+    <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MoreStats.resx">
+    <EmbeddedResource Include="Forms\MoreStats.resx">
       <DependentUpon>MoreStats.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -199,10 +199,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Settings.resx">
+    <EmbeddedResource Include="Forms\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TimeSpent.resx">
+    <EmbeddedResource Include="Forms\TimeSpent.resx">
       <DependentUpon>TimeSpent.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -218,5 +218,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
