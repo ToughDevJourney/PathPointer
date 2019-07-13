@@ -13,6 +13,7 @@ namespace PathPointer
     public partial class AddFun : Form
     {
         EmploymentsFun fun = new EmploymentsFun();
+        AchiveAddFun achivement = new AchiveAddFun();
         public AddFun()
         {
             InitializeComponent();
@@ -23,13 +24,11 @@ namespace PathPointer
             string funName = fun.CheckEmploymentFormat(textName.Text);
 
 
-            if (funName == "")
-            {
-                MessageBox.Show("Не сочтите за труд, введите название развлечения", "Телепатия появится в следующих обновлениях");
-            }
+            if (funName == "") MessageBox.Show("Не сочтите за труд, введите название развлечения", "Телепатия появится в следующих обновлениях");
             else
             {
                 fun.WriteEmploymentToFile($"{funName}!{fun.GetLastCode}");
+                achivement.CheckCondition();
                 CancelButton_Click(null, null);
             }
         }

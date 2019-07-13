@@ -13,5 +13,7 @@ namespace PathPointer
         public const string sleep = "@";
         public const string anotherEmpCode = "0";
 
+        public const string fileTrue = "1";
+        public const string fileFalse = "1";
     }
 }

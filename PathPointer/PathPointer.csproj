@@ -47,6 +47,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achivements\AchiveAddFun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\AchiveAddGoal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\AchiveCompleteGoal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\AchiveAddRest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\Achivement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\AchiveNoFunAllDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\AchiveNoRestAllDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Achivements\AchiveOneHourToGoal.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Achivements.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,21 +114,21 @@
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Codes.cs" />
-    <Compile Include="Efficiency\DayEfficiency.cs" />
-    <Compile Include="Efficiency\EmploymentTypes\Employments.cs" />
-    <Compile Include="Efficiency\EmploymentTypes\EmploymentsBusiness.cs" />
-    <Compile Include="Efficiency\EmploymentTypes\EmploymentsFun.cs" />
-    <Compile Include="Efficiency\EmploymentTypes\EmploymentsGoals.cs" />
-    <Compile Include="Efficiency\EmploymentTypes\EmploymentsSkip.cs" />
-    <Compile Include="Efficiency\Subspecies\EmploymentsTypeOther.cs" />
-    <Compile Include="Efficiency\EmploymentTypes\EmploymentsRest.cs" />
+    <Compile Include="Employments\DayEfficiency.cs" />
+    <Compile Include="Employments\EmploymentTypes\Employments.cs" />
+    <Compile Include="Employments\EmploymentTypes\EmploymentsBusiness.cs" />
+    <Compile Include="Employments\EmploymentTypes\EmploymentsFun.cs" />
+    <Compile Include="Employments\EmploymentTypes\EmploymentsGoals.cs" />
+    <Compile Include="Employments\EmploymentTypes\EmploymentsSkip.cs" />
+    <Compile Include="Employments\Subspecies\EmploymentsTypeOther.cs" />
+    <Compile Include="Employments\EmploymentTypes\EmploymentsRest.cs" />
     <Compile Include="Management\FormatLines.cs" />
-    <Compile Include="Efficiency\Subspecies\IEmploymentsOtherTypes.cs" />
-    <Compile Include="Efficiency\OtherTypes\DayEfficiencyFuture.cs" />
-    <Compile Include="Efficiency\OtherTypes\IDayEfficiencyType.cs" />
-    <Compile Include="Efficiency\OtherTypes\DayEfficiencyNow.cs" />
-    <Compile Include="Efficiency\OtherTypes\DayEfficiencySkip.cs" />
-    <Compile Include="Efficiency\Subspecies\EmploymentsTypeSleep.cs" />
+    <Compile Include="Employments\Subspecies\IEmploymentsOtherTypes.cs" />
+    <Compile Include="Employments\OtherTypes\DayEfficiencyFuture.cs" />
+    <Compile Include="Employments\OtherTypes\IDayEfficiencyType.cs" />
+    <Compile Include="Employments\OtherTypes\DayEfficiencyNow.cs" />
+    <Compile Include="Employments\OtherTypes\DayEfficiencySkip.cs" />
+    <Compile Include="Employments\Subspecies\EmploymentsTypeSleep.cs" />
     <Compile Include="Common\Texts.cs" />
     <Compile Include="Management\Tray.cs" />
     <Compile Include="Common\UserSettings.cs" />

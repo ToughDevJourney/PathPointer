@@ -16,6 +16,8 @@ namespace PathPointer
     public partial class MainMenu : Form
     {
         StatsManagement stats = new StatsManagement();
+        AchiveNoFunAllDay achiveNoFunAllDay = new AchiveNoFunAllDay();
+        AchiveNoRestWholeDay achiveNoRestWholeDay = new AchiveNoRestWholeDay();
         private static MainMenu _mainMenu;
         private static Tray tray;
         public static int pickedDayOfWeek;
@@ -64,7 +66,10 @@ namespace PathPointer
             interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
-            if (StatsManagement.CheckIsHourAvailable()) ShowQuest();           
+            if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
+
+            achiveNoFunAllDay.CheckCondition();
+            achiveNoRestWholeDay.CheckCondition();
         }
 
         private void EmployButton_Click(object sender, EventArgs e)
@@ -75,15 +80,17 @@ namespace PathPointer
         {
             MenuManagement.ShowForm(this, new Settings());
         }
-
         private void BtnMoreStats_Click(object sender, EventArgs e)
         {
             MenuManagement.ShowForm(this, new MoreStats());
         }
-
         private void BtnGoals_Click(object sender, EventArgs e)
         {
             MenuManagement.ShowForm(this, new ShowGoals());
+        }
+        private void BtnAchivements_Click(object sender, EventArgs e)
+        {
+            MenuManagement.ShowForm(this, new Achivements());
         }
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -111,6 +118,10 @@ namespace PathPointer
             CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
             if(UserSettings.StopGames == true) UserSettings.CloseGame();
+            if (DateTime.Now.Hour <= 1) {
+                achiveNoFunAllDay.CheckCondition();
+                achiveNoRestWholeDay.CheckCondition();
+            }
         }
 
         public static void ShowQuest()

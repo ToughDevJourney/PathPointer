@@ -102,6 +102,7 @@
             this.BtnAchivements.TabIndex = 4;
             this.BtnAchivements.Text = "Достижения";
             this.BtnAchivements.UseVisualStyleBackColor = true;
+            this.BtnAchivements.Click += new System.EventHandler(this.BtnAchivements_Click);
             // 
             // BtnSettings
             // 

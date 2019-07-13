@@ -20,3 +20,4 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddEmploymen
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.ShowGoals.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.MoreStats.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache
+C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AchivementsFrm.resources

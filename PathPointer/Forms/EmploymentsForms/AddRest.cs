@@ -13,6 +13,7 @@ namespace PathPointer
     public partial class AddRest : Form
     {
         EmploymentsRest rest = new EmploymentsRest();
+        AchiveAddRest achivement = new AchiveAddRest();
         public AddRest()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace PathPointer
             else
             {
                 rest.WriteEmploymentToFile($"{restName}!{rest.GetLastCode}");
+                achivement.CheckCondition();
                 BtnCancel_Click(null, null);
             }
         }

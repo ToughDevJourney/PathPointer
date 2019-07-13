@@ -49,7 +49,7 @@ namespace PathPointer
             string closeGames = ChBCloseGames.Checked == true ? "1" : "0";
             string hrsToCloseGame = TBHrsToStopGms.Text;
 
-                FileManagement.FillCommonFileArray(TBGetStatsHrs.Text, TBFunHrsPerWeek.Text, sleepHrBegin, sleepHrEnd, TBHrsToRest.Text, //обновление настроек
+                FileManagement.FillCommonFile(TBGetStatsHrs.Text, TBFunHrsPerWeek.Text, sleepHrBegin, sleepHrEnd, TBHrsToRest.Text, //обновление настроек
                 TBHrsToWork.Text, softMotiv, hardMotiv, closeGames, hrsToCloseGame);
 
             BtnBack_Click(null, null);

@@ -13,6 +13,8 @@ namespace PathPointer
     public partial class TimeSpent : Form
     {
         Employments employments = new EmploymentsGoals();
+        AchiveOneHourToGoal achiveOneHourToGoal = new AchiveOneHourToGoal();
+        AchiveCompleteGoal achiveCompleteGoal = new AchiveCompleteGoal();
         Tray tray = new Tray();
         public static BindingList<DataManagement> varCells;
         private static TimeSpent _timeSpent;
@@ -96,6 +98,7 @@ namespace PathPointer
                 StatsManagement.WriteStats($"{employments.EmpType}!{employments.Code}", currentRange);
                 if (employments.EmpType == "Goals") CheckIsGoalDone();
             }
+
             MenuManagement.questCheck = false;  //ИСПРАВИТЬ
             UpdateMainMenuDGV();
 
@@ -111,9 +114,11 @@ namespace PathPointer
 
         private void CheckIsGoalDone() {
             string goalStatus;
+            achiveOneHourToGoal.CheckCondition();
 
             if ((employments.HoursGoal <= employments.HoursDone || employments.DateGoal < DateTime.Now) && employments.HoursGoal != 0)
             {
+                achiveCompleteGoal.CheckCondition();
                 goalStatus = employments.DateGoal.Day < DateTime.Now.Day ? "просрочена" : "достигнута";
 
                 var result = MessageBox.Show($"Ваша цель \"{employments.Name}\" {goalStatus}" +

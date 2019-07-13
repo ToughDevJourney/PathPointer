@@ -14,6 +14,8 @@ namespace PathPointer
     public static class FileManagement
     {
         public static readonly string EfficiencyFile = Management.GetPath("Efficiency");
+        public static readonly string AchivementsFile = Management.GetPath("Achivements");
+        public static readonly string GamesList = Management.GetPath("GamesList");
         public static readonly string BusinessFile = Management.GetPath($"Employments\\{Texts.empBusiness}");
         public static readonly string GoalsFile = Management.GetPath($"Employments\\{Texts.empGoals}");
         public static readonly string RestFile = Management.GetPath($"Employments\\{Texts.empRest}");
@@ -38,7 +40,8 @@ namespace PathPointer
         public static void CheckAllFiles() {
             CheckForDirectory();
             CheckForCommon();
-            CheckForGamesList();
+            CheckForFile(AchivementsFile);
+            CheckForFile(GamesList);
             CheckForCodes();
             CheckForEmployments("Business");
             CheckForEmployments("Goals");
@@ -58,14 +61,14 @@ namespace PathPointer
         }
 
         private static void CheckForCommon() {
-            if (!File.Exists(Management.GetPath("Common"))) FillCommonFileArray();
+            if (!File.Exists(Management.GetPath("Common"))) FillCommonFile();
         }
 
-        private static void CheckForGamesList(){
-            if (!File.Exists(Management.GetPath("GamesList"))) using (File.Create(Management.GetPath("GamesList"))) { }        
+        private static void CheckForFile(string filePath){
+            if (!File.Exists(filePath)) using (File.Create(filePath)) { }        
         }
 
-        public static void FillCommonFileArray(string statsCheckRange = "3", string weekFunHrs = "14", string sleepHrBegin = "0", 
+        public static void FillCommonFile(string statsCheckRange = "3", string weekFunHrs = "14", string sleepHrBegin = "0", 
             string sleepHrEnd = "9", string hrsToRest = "4", string hrsToWork = "1", string SoftMotiv = "1", string HadrMotiv = "0", string stopGames = "0", string HrsToStopGames = "0") {
 
             CommonFileArray = new string[13];

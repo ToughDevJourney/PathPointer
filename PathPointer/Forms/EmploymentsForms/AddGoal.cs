@@ -13,6 +13,7 @@ namespace PathPointer
     public partial class AddGoal : Form
     {
         EmploymentsGoals goals = new EmploymentsGoals();
+        AchiveAddGoal achivement = new AchiveAddGoal();
 
         public AddGoal()
         {
@@ -24,16 +25,13 @@ namespace PathPointer
             string goalName = goals.CheckEmploymentFormat(textName.Text);
             string goalTime = textTime.Text;
 
-            if (goalName == "")
-            { 
-                MessageBox.Show("Пожалуйста, введите название", "Вы упустили пунктик");
-            }
+            if (goalName == "") MessageBox.Show("Пожалуйста, введите название", "Вы упустили пунктик");
             else
             {
                 if (goalTime == "") goalTime = "0";
 
                 goals.WriteEmploymentToFile($"{goalName}!{goals.GetLastCode}!{Convert.ToInt32(goalTime)}!{datePicker.Text}");        //запись цели в файл
-
+                achivement.CheckCondition();
                 BtnCancel_Click(null, null);
             }
         }
