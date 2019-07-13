@@ -9,14 +9,15 @@ using System.Windows.Forms;
 
 namespace PathPointer
 {
-    public abstract class Achivement : Achivements
+    public abstract class Achivement
     {
         public abstract string AchivementName { get; }
         public abstract string AchivementFileName { get; }
         public bool IsAchived { get; set; }
         public abstract string Description { get; }
 
-        public abstract Button ArrowToNextAchivement { get; }
+        public Button AchivementButton { get; set; }
+        public Button ArrowToNextAchivement { get; set; }
         public abstract Achivement PreviousAchivement { get; }
 
         protected StatsManagement stats = new StatsManagement();
@@ -26,7 +27,7 @@ namespace PathPointer
 
         protected Achivement() {
             CheckIsAchivementDone();
-            if (IsAchived) ArrowToNextAchivement.BackColor = Color.LightBlue;
+            if (IsAchived && ArrowToNextAchivement != null) ArrowToNextAchivement.BackColor = Color.LightBlue;
         }
 
         public void CheckIsAchivementDone(){

@@ -47,30 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Achivements\AchiveAddFun.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\AchiveAddGoal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\AchiveCompleteGoal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\AchiveAddRest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\Achivement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\AchiveNoFunAllDay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\AchiveNoRestAllDay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Achivements\AchiveOneHourToGoal.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Achivements\AchiveAddFun.cs" />
+    <Compile Include="Achivements\AchiveAddGoal.cs" />
+    <Compile Include="Achivements\AchiveCompleteGoal.cs" />
+    <Compile Include="Achivements\AchiveAddRest.cs" />
+    <Compile Include="Achivements\Achivement.cs" />
+    <Compile Include="Achivements\AchiveNoFunAllDay.cs" />
+    <Compile Include="Achivements\AchiveNoRestAllDay.cs" />
+    <Compile Include="Achivements\AchiveOneHourToGoal.cs" />
     <Compile Include="Forms\Achivements.cs">
       <SubType>Form</SubType>
     </Compile>

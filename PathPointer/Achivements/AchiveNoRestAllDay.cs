@@ -18,8 +18,6 @@ namespace PathPointer
                     "\nпроопусков быть не должно, а сон не учитывается";
             } }
 
-        public override Button ArrowToNextAchivement { get { return BtnAddRest; } }
-
         public override Achivement PreviousAchivement { get { return new AchiveAddRest(); } }
 
         public override void CheckCondition()

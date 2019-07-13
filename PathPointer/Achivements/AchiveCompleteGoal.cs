@@ -14,8 +14,6 @@ namespace PathPointer
 
         public override string Description { get { return "Вы уже чувствуете, как становитесь лучше?"; } }
 
-        public override Button ArrowToNextAchivement { get { return null; } }
-
         public override Achivement PreviousAchivement { get { return new AchiveOneHourToGoal(); } }
 
         public override void CheckCondition()

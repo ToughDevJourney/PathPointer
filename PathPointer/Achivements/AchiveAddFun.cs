@@ -15,8 +15,6 @@ namespace PathPointer
 
         public override string Description { get { return "Сомнительно достижение, но ладно"; } }
 
-        public override Button ArrowToNextAchivement { get { return BtnAddFunToNoFunAllDay; } }
-
         public override Achivement PreviousAchivement { get { return null; } }
 
         public override void CheckCondition() {

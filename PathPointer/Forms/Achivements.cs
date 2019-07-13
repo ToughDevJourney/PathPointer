@@ -21,7 +21,8 @@ namespace PathPointer
 
         private void Achivements_Load(object sender, EventArgs e)
         {
-
+            ColorButton();
+            PlaceAchivementInfo(BtnAddGoal, null);
         }
 
 
@@ -60,6 +61,41 @@ namespace PathPointer
             lblAchivementName.Text = achivement.AchivementName;
             lblAchivementDescription.Text = achivement.Description;
             lblAchivementStatus.Text = achivement.IsAchived == true ? "Достижение получено" : "Достижение не получено";
+        }
+
+
+        private void ColorButton() {
+            List<Achivement> achivements = new List<Achivement>();
+            achivements.Add(new AchiveAddFun() { AchivementButton = BtnAddFun, ArrowToNextAchivement = BtnAddFunToNoFunAllDay});
+            achivements.Add(new AchiveNoFunAllDay() { AchivementButton = BtnNoFunAllDay });
+
+            achivements.Add(new AchiveAddGoal() { AchivementButton = BtnAddGoal, ArrowToNextAchivement = BtnAddGoalToGoalHour });
+            achivements.Add(new AchiveOneHourToGoal() { AchivementButton = BtnSpendHourOnGoal, ArrowToNextAchivement = BtnHourGoalToCompleteGoal });
+            achivements.Add(new AchiveCompleteGoal() { AchivementButton = BtnDoneGoal });
+
+            achivements.Add(new AchiveAddRest() { AchivementButton = BtnAddRest, ArrowToNextAchivement = BtnAddGoalToGoalHour });
+            achivements.Add(new AchiveNoRestWholeDay() { AchivementButton = BtnNoRestAllDay });
+
+
+            Color red = Color.Red;
+
+            foreach (Achivement achivement in achivements) {
+                if (achivement.IsAchived)
+                {
+                    achivement.AchivementButton.BackColor = red;
+                    if (achivement.ArrowToNextAchivement != null) achivement.ArrowToNextAchivement.BackColor = red;
+                }
+            }
+        }
+
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            MainMenu mainMenu = MainMenu.CreateInstance(this);
+        }
+
+        private void Achivements_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuManagement.HideForm(this, e);
         }
     }
 }

@@ -16,8 +16,6 @@ namespace PathPointer
                     "\nПодсказка:" +
                     "\nУказывайте вашу деятельность на протяжении всего дня, проопусков быть не должно"; } }
 
-        public override Button ArrowToNextAchivement { get { return null; } }
-
         public override Achivement PreviousAchivement { get { return new AchiveAddFun(); } }
 
         public override void CheckCondition()

@@ -29,19 +29,12 @@
         private void InitializeComponent()
         {
             this.BtnAddRest = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.BtnNoRestAllDay = new System.Windows.Forms.Button();
             this.BtnNoFunAllDay = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.BtnAddFun = new System.Windows.Forms.Button();
             this.BtnSpendHourOnGoal = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.BtnAddGoal = new System.Windows.Forms.Button();
             this.BtnDoneGoal = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.BtnBack = new System.Windows.Forms.Button();
             this.lblAchivementName = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
@@ -66,24 +59,6 @@
             this.BtnAddRest.UseVisualStyleBackColor = true;
             this.BtnAddRest.Click += new System.EventHandler(this.PlaceAchivementInfo);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(131, 111);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Добавьте отдых";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(405, 111);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Не отдохните ни разу за день";
-            // 
             // BtnNoRestAllDay
             // 
             this.BtnNoRestAllDay.Location = new System.Drawing.Point(347, 46);
@@ -101,24 +76,6 @@
             this.BtnNoFunAllDay.TabIndex = 8;
             this.BtnNoFunAllDay.UseVisualStyleBackColor = true;
             this.BtnNoFunAllDay.Click += new System.EventHandler(this.PlaceAchivementInfo);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(405, 565);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(251, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Полностью откажитесь от развлечений на день";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(131, 565);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(125, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Добавьте развлечение";
             // 
             // BtnAddFun
             // 
@@ -138,24 +95,6 @@
             this.BtnSpendHourOnGoal.UseVisualStyleBackColor = true;
             this.BtnSpendHourOnGoal.Click += new System.EventHandler(this.PlaceAchivementInfo);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(405, 327);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(151, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Продвиньтесь на час к цели";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(131, 327);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Добавьте цель";
-            // 
             // BtnAddGoal
             // 
             this.BtnAddGoal.Location = new System.Drawing.Point(82, 262);
@@ -174,15 +113,6 @@
             this.BtnDoneGoal.UseVisualStyleBackColor = true;
             this.BtnDoneGoal.Click += new System.EventHandler(this.PlaceAchivementInfo);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(670, 327);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Выполните цель";
-            // 
             // BtnBack
             // 
             this.BtnBack.Location = new System.Drawing.Point(896, 559);
@@ -191,15 +121,16 @@
             this.BtnBack.TabIndex = 19;
             this.BtnBack.Text = "Вернуться";
             this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // lblAchivementName
             // 
-            this.lblAchivementName.AutoSize = true;
-            this.lblAchivementName.Location = new System.Drawing.Point(1002, 240);
+            this.lblAchivementName.Location = new System.Drawing.Point(880, 240);
             this.lblAchivementName.Name = "lblAchivementName";
-            this.lblAchivementName.Size = new System.Drawing.Size(38, 13);
+            this.lblAchivementName.Size = new System.Drawing.Size(273, 13);
             this.lblAchivementName.TabIndex = 20;
             this.lblAchivementName.Text = "NAME";
+            this.lblAchivementName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button8
             // 
@@ -213,12 +144,12 @@
             // 
             // lblAchivementDescription
             // 
-            this.lblAchivementDescription.AutoSize = true;
-            this.lblAchivementDescription.Location = new System.Drawing.Point(990, 327);
+            this.lblAchivementDescription.Location = new System.Drawing.Point(877, 327);
             this.lblAchivementDescription.Name = "lblAchivementDescription";
-            this.lblAchivementDescription.Size = new System.Drawing.Size(60, 13);
+            this.lblAchivementDescription.Size = new System.Drawing.Size(294, 201);
             this.lblAchivementDescription.TabIndex = 23;
             this.lblAchivementDescription.Text = "Description";
+            this.lblAchivementDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button9
             // 
@@ -242,12 +173,12 @@
             // 
             // lblAchivementStatus
             // 
-            this.lblAchivementStatus.AutoSize = true;
-            this.lblAchivementStatus.Location = new System.Drawing.Point(999, 299);
+            this.lblAchivementStatus.Location = new System.Drawing.Point(880, 299);
             this.lblAchivementStatus.Name = "lblAchivementStatus";
-            this.lblAchivementStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblAchivementStatus.Size = new System.Drawing.Size(273, 13);
             this.lblAchivementStatus.TabIndex = 26;
             this.lblAchivementStatus.Text = "Status";
+            this.lblAchivementStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PBachivementImage
             // 
@@ -265,6 +196,7 @@
             this.BtnAddRestToNoRestAllDay.Name = "BtnAddRestToNoRestAllDay";
             this.BtnAddRestToNoRestAllDay.Size = new System.Drawing.Size(207, 5);
             this.BtnAddRestToNoRestAllDay.TabIndex = 28;
+            this.BtnAddRestToNoRestAllDay.Text = "ХЕХЕХЕХЕ";
             this.BtnAddRestToNoRestAllDay.UseVisualStyleBackColor = true;
             // 
             // BtnAddGoalToGoalHour
@@ -315,36 +247,22 @@
             this.Controls.Add(this.lblAchivementName);
             this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.BtnDoneGoal);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.BtnSpendHourOnGoal);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.BtnAddGoal);
             this.Controls.Add(this.BtnNoFunAllDay);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.BtnAddFun);
             this.Controls.Add(this.BtnNoRestAllDay);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnAddRest);
             this.Name = "Achivements";
             this.Text = "Достижения";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Achivements_FormClosing);
             this.Load += new System.EventHandler(this.Achivements_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PBachivementImage)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.Label lblAchivementName;
         private System.Windows.Forms.Button button8;
