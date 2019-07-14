@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace PathPointer
     public class EmploymentsBusiness : Employments
     {
         public override string EmpType { get { return Texts.empBusiness; } }
+        public override Color CellColor { get { return Color.FromArgb(255, 184, 138, 174); } }
         public override int HoursGoal { get { return 0; } set { } }
         public override int HoursDone { get { return 0; } set { } }
         public string Schedule { get; set; }

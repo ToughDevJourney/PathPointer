@@ -53,40 +53,48 @@
             // 
             // lblBusinessName
             // 
-            this.lblBusinessName.AutoSize = true;
             this.lblBusinessName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblBusinessName.Location = new System.Drawing.Point(21, 18);
+            this.lblBusinessName.ForeColor = System.Drawing.Color.White;
+            this.lblBusinessName.Location = new System.Drawing.Point(20, 19);
             this.lblBusinessName.Name = "lblBusinessName";
-            this.lblBusinessName.Size = new System.Drawing.Size(175, 25);
+            this.lblBusinessName.Size = new System.Drawing.Size(829, 46);
             this.lblBusinessName.TabIndex = 0;
             this.lblBusinessName.Text = "[Название дела]";
             // 
             // BtnDone
             // 
-            this.BtnDone.Location = new System.Drawing.Point(222, 249);
+            this.BtnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
+            this.BtnDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnDone.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
+            this.BtnDone.Location = new System.Drawing.Point(302, 258);
             this.BtnDone.Name = "BtnDone";
-            this.BtnDone.Size = new System.Drawing.Size(272, 51);
+            this.BtnDone.Size = new System.Drawing.Size(376, 51);
             this.BtnDone.TabIndex = 1;
             this.BtnDone.Text = "Готово";
-            this.BtnDone.UseVisualStyleBackColor = true;
+            this.BtnDone.UseVisualStyleBackColor = false;
             this.BtnDone.Click += new System.EventHandler(this.BtnDone_Click);
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(498, 249);
+            this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnCancel.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
+            this.BtnCancel.Location = new System.Drawing.Point(684, 258);
             this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(272, 51);
+            this.BtnCancel.Size = new System.Drawing.Size(166, 51);
             this.BtnCancel.TabIndex = 2;
             this.BtnCancel.Text = "Отмена";
-            this.BtnCancel.UseVisualStyleBackColor = true;
+            this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // lblMon
             // 
             this.lblMon.AutoSize = true;
+            this.lblMon.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblMon.ForeColor = System.Drawing.Color.White;
             this.lblMon.Location = new System.Drawing.Point(21, 76);
             this.lblMon.Name = "lblMon";
-            this.lblMon.Size = new System.Drawing.Size(75, 13);
+            this.lblMon.Size = new System.Drawing.Size(121, 23);
             this.lblMon.TabIndex = 3;
             this.lblMon.Tag = "0";
             this.lblMon.Text = "Понедельник";
@@ -97,9 +105,11 @@
             // lblTue
             // 
             this.lblTue.AutoSize = true;
+            this.lblTue.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTue.ForeColor = System.Drawing.Color.White;
             this.lblTue.Location = new System.Drawing.Point(21, 112);
             this.lblTue.Name = "lblTue";
-            this.lblTue.Size = new System.Drawing.Size(49, 13);
+            this.lblTue.Size = new System.Drawing.Size(80, 23);
             this.lblTue.TabIndex = 4;
             this.lblTue.Tag = "1";
             this.lblTue.Text = "Вторник";
@@ -110,9 +120,11 @@
             // lblWed
             // 
             this.lblWed.AutoSize = true;
+            this.lblWed.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblWed.ForeColor = System.Drawing.Color.White;
             this.lblWed.Location = new System.Drawing.Point(20, 147);
             this.lblWed.Name = "lblWed";
-            this.lblWed.Size = new System.Drawing.Size(38, 13);
+            this.lblWed.Size = new System.Drawing.Size(61, 23);
             this.lblWed.TabIndex = 5;
             this.lblWed.Tag = "2";
             this.lblWed.Text = "Среда";
@@ -123,9 +135,11 @@
             // lblThu
             // 
             this.lblThu.AutoSize = true;
+            this.lblThu.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblThu.ForeColor = System.Drawing.Color.White;
             this.lblThu.Location = new System.Drawing.Point(20, 180);
             this.lblThu.Name = "lblThu";
-            this.lblThu.Size = new System.Drawing.Size(49, 13);
+            this.lblThu.Size = new System.Drawing.Size(77, 23);
             this.lblThu.TabIndex = 6;
             this.lblThu.Tag = "3";
             this.lblThu.Text = "Четверг";
@@ -136,9 +150,11 @@
             // lblFri
             // 
             this.lblFri.AutoSize = true;
+            this.lblFri.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblFri.ForeColor = System.Drawing.Color.White;
             this.lblFri.Location = new System.Drawing.Point(21, 215);
             this.lblFri.Name = "lblFri";
-            this.lblFri.Size = new System.Drawing.Size(50, 13);
+            this.lblFri.Size = new System.Drawing.Size(79, 23);
             this.lblFri.TabIndex = 7;
             this.lblFri.Tag = "4";
             this.lblFri.Text = "Пятница";
@@ -149,9 +165,11 @@
             // lblSat
             // 
             this.lblSat.AutoSize = true;
+            this.lblSat.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblSat.ForeColor = System.Drawing.Color.White;
             this.lblSat.Location = new System.Drawing.Point(21, 250);
             this.lblSat.Name = "lblSat";
-            this.lblSat.Size = new System.Drawing.Size(48, 13);
+            this.lblSat.Size = new System.Drawing.Size(79, 23);
             this.lblSat.TabIndex = 8;
             this.lblSat.Tag = "5";
             this.lblSat.Text = "Суббота";
@@ -162,9 +180,11 @@
             // lblSun
             // 
             this.lblSun.AutoSize = true;
+            this.lblSun.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblSun.ForeColor = System.Drawing.Color.White;
             this.lblSun.Location = new System.Drawing.Point(22, 287);
             this.lblSun.Name = "lblSun";
-            this.lblSun.Size = new System.Drawing.Size(74, 13);
+            this.lblSun.Size = new System.Drawing.Size(119, 23);
             this.lblSun.TabIndex = 9;
             this.lblSun.Tag = "6";
             this.lblSun.Text = "Воскресенье";
@@ -175,9 +195,11 @@
             // lblTimeMon
             // 
             this.lblTimeMon.AutoSize = true;
-            this.lblTimeMon.Location = new System.Drawing.Point(109, 76);
+            this.lblTimeMon.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeMon.ForeColor = System.Drawing.Color.White;
+            this.lblTimeMon.Location = new System.Drawing.Point(161, 76);
             this.lblTimeMon.Name = "lblTimeMon";
-            this.lblTimeMon.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeMon.Size = new System.Drawing.Size(109, 23);
             this.lblTimeMon.TabIndex = 11;
             this.lblTimeMon.Text = "08:00 - 17:00";
             this.lblTimeMon.Click += new System.EventHandler(this.TimeClick);
@@ -187,9 +209,11 @@
             // lblTimeTue
             // 
             this.lblTimeTue.AutoSize = true;
-            this.lblTimeTue.Location = new System.Drawing.Point(109, 112);
+            this.lblTimeTue.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeTue.ForeColor = System.Drawing.Color.White;
+            this.lblTimeTue.Location = new System.Drawing.Point(161, 112);
             this.lblTimeTue.Name = "lblTimeTue";
-            this.lblTimeTue.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeTue.Size = new System.Drawing.Size(109, 23);
             this.lblTimeTue.TabIndex = 12;
             this.lblTimeTue.Text = "08:00 - 17:00";
             this.lblTimeTue.Click += new System.EventHandler(this.TimeClick);
@@ -199,9 +223,11 @@
             // lblTimeWed
             // 
             this.lblTimeWed.AutoSize = true;
-            this.lblTimeWed.Location = new System.Drawing.Point(108, 147);
+            this.lblTimeWed.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeWed.ForeColor = System.Drawing.Color.White;
+            this.lblTimeWed.Location = new System.Drawing.Point(160, 147);
             this.lblTimeWed.Name = "lblTimeWed";
-            this.lblTimeWed.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeWed.Size = new System.Drawing.Size(109, 23);
             this.lblTimeWed.TabIndex = 13;
             this.lblTimeWed.Text = "08:00 - 17:00";
             this.lblTimeWed.Click += new System.EventHandler(this.TimeClick);
@@ -211,9 +237,11 @@
             // lblTimeThu
             // 
             this.lblTimeThu.AutoSize = true;
-            this.lblTimeThu.Location = new System.Drawing.Point(108, 180);
+            this.lblTimeThu.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeThu.ForeColor = System.Drawing.Color.White;
+            this.lblTimeThu.Location = new System.Drawing.Point(160, 180);
             this.lblTimeThu.Name = "lblTimeThu";
-            this.lblTimeThu.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeThu.Size = new System.Drawing.Size(109, 23);
             this.lblTimeThu.TabIndex = 14;
             this.lblTimeThu.Text = "08:00 - 17:00";
             this.lblTimeThu.Click += new System.EventHandler(this.TimeClick);
@@ -223,9 +251,11 @@
             // lblTimeFri
             // 
             this.lblTimeFri.AutoSize = true;
-            this.lblTimeFri.Location = new System.Drawing.Point(109, 215);
+            this.lblTimeFri.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeFri.ForeColor = System.Drawing.Color.White;
+            this.lblTimeFri.Location = new System.Drawing.Point(161, 215);
             this.lblTimeFri.Name = "lblTimeFri";
-            this.lblTimeFri.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeFri.Size = new System.Drawing.Size(109, 23);
             this.lblTimeFri.TabIndex = 15;
             this.lblTimeFri.Text = "08:00 - 17:00";
             this.lblTimeFri.Click += new System.EventHandler(this.TimeClick);
@@ -235,9 +265,11 @@
             // lblTimeSat
             // 
             this.lblTimeSat.AutoSize = true;
-            this.lblTimeSat.Location = new System.Drawing.Point(109, 250);
+            this.lblTimeSat.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeSat.ForeColor = System.Drawing.Color.White;
+            this.lblTimeSat.Location = new System.Drawing.Point(161, 250);
             this.lblTimeSat.Name = "lblTimeSat";
-            this.lblTimeSat.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeSat.Size = new System.Drawing.Size(109, 23);
             this.lblTimeSat.TabIndex = 16;
             this.lblTimeSat.Text = "08:00 - 17:00";
             this.lblTimeSat.Click += new System.EventHandler(this.TimeClick);
@@ -247,9 +279,11 @@
             // lblTimeSun
             // 
             this.lblTimeSun.AutoSize = true;
-            this.lblTimeSun.Location = new System.Drawing.Point(107, 287);
+            this.lblTimeSun.Font = new System.Drawing.Font("Candara", 14.25F);
+            this.lblTimeSun.ForeColor = System.Drawing.Color.White;
+            this.lblTimeSun.Location = new System.Drawing.Point(159, 287);
             this.lblTimeSun.Name = "lblTimeSun";
-            this.lblTimeSun.Size = new System.Drawing.Size(70, 13);
+            this.lblTimeSun.Size = new System.Drawing.Size(109, 23);
             this.lblTimeSun.TabIndex = 17;
             this.lblTimeSun.Text = "08:00 - 17:00";
             this.lblTimeSun.Click += new System.EventHandler(this.TimeClick);
@@ -260,7 +294,8 @@
             // 
             this.beginLbl.AutoSize = true;
             this.beginLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.beginLbl.Location = new System.Drawing.Point(211, 74);
+            this.beginLbl.ForeColor = System.Drawing.Color.White;
+            this.beginLbl.Location = new System.Drawing.Point(291, 81);
             this.beginLbl.Name = "beginLbl";
             this.beginLbl.Size = new System.Drawing.Size(249, 61);
             this.beginLbl.TabIndex = 20;
@@ -270,7 +305,8 @@
             // 
             this.endBtn.AutoSize = true;
             this.endBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.endBtn.Location = new System.Drawing.Point(211, 166);
+            this.endBtn.ForeColor = System.Drawing.Color.White;
+            this.endBtn.Location = new System.Drawing.Point(291, 173);
             this.endBtn.Name = "endBtn";
             this.endBtn.Size = new System.Drawing.Size(216, 61);
             this.endBtn.TabIndex = 21;
@@ -278,8 +314,10 @@
             // 
             // TextBegin
             // 
+            this.TextBegin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.TextBegin.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F);
-            this.TextBegin.Location = new System.Drawing.Point(466, 76);
+            this.TextBegin.ForeColor = System.Drawing.Color.White;
+            this.TextBegin.Location = new System.Drawing.Point(546, 83);
             this.TextBegin.Mask = "00:00";
             this.TextBegin.Name = "TextBegin";
             this.TextBegin.Size = new System.Drawing.Size(304, 67);
@@ -293,8 +331,10 @@
             // 
             // TextEnd
             // 
+            this.TextEnd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.TextEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F);
-            this.TextEnd.Location = new System.Drawing.Point(466, 149);
+            this.TextEnd.ForeColor = System.Drawing.Color.White;
+            this.TextEnd.Location = new System.Drawing.Point(546, 156);
             this.TextEnd.Mask = "00:00";
             this.TextEnd.Name = "TextEnd";
             this.TextEnd.Size = new System.Drawing.Size(304, 67);
@@ -310,7 +350,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 320);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
+            this.ClientSize = new System.Drawing.Size(870, 330);
             this.Controls.Add(this.TextEnd);
             this.Controls.Add(this.TextBegin);
             this.Controls.Add(this.endBtn);
@@ -332,6 +373,7 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnDone);
             this.Controls.Add(this.lblBusinessName);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "AddSchedule";
             this.Text = "Раписание";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddSchedule_FormClosing);

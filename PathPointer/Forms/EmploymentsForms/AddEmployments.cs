@@ -25,6 +25,7 @@ namespace PathPointer
         private void Employments_Load(object sender, EventArgs e)
         {
             BtnGoals_Click(null, null);
+            SetDisign();
         }
 
         private void BtnBusiness_Click(object sender, EventArgs e)
@@ -129,6 +130,24 @@ namespace PathPointer
         {           
             MenuManagement.HideForm(this, e);
         }
+
+
+
+        private void SetDisign() {
+
+            EmploymentsBusiness business = new EmploymentsBusiness();
+            EmploymentsGoals goals = new EmploymentsGoals();
+            EmploymentsRest rest = new EmploymentsRest();
+            EmploymentsFun fun = new EmploymentsFun();
+
+            BtnBusiness.BackColor = business.CellColor;
+            BtnGoals.BackColor = goals.CellColor;
+            BtnRest.BackColor = rest.CellColor;
+            BtnFun.BackColor = fun.CellColor;
+
+        }
+
+
 
     }
 }

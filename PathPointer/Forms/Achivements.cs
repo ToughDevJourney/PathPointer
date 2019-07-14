@@ -22,7 +22,7 @@ namespace PathPointer
         private void Achivements_Load(object sender, EventArgs e)
         {
             ColorButton();
-            PlaceAchivementInfo(BtnAddGoal, null);
+          
         }
 
 
@@ -56,7 +56,7 @@ namespace PathPointer
                     break;
             }
 
-            PBachivementImage.Image = button.Image;
+            PBachivementImage.BackgroundImage = button.BackgroundImage;
 
             lblAchivementName.Text = achivement.AchivementName;
             lblAchivementDescription.Text = achivement.Description;
@@ -73,17 +73,18 @@ namespace PathPointer
             achivements.Add(new AchiveOneHourToGoal() { AchivementButton = BtnSpendHourOnGoal, ArrowToNextAchivement = BtnHourGoalToCompleteGoal });
             achivements.Add(new AchiveCompleteGoal() { AchivementButton = BtnDoneGoal });
 
-            achivements.Add(new AchiveAddRest() { AchivementButton = BtnAddRest, ArrowToNextAchivement = BtnAddGoalToGoalHour });
+            achivements.Add(new AchiveAddRest() { AchivementButton = BtnAddRest, ArrowToNextAchivement = BtnAddRestToNoRestAllDay });
             achivements.Add(new AchiveNoRestWholeDay() { AchivementButton = BtnNoRestAllDay });
 
 
-            Color red = Color.Red;
+            Color doneAchivementColor = Color.FromArgb(255, 120, 120, 140);
+            Color arrowToNexAchivementsColor = Color.FromArgb(255, 170, 170, 210);
 
             foreach (Achivement achivement in achivements) {
                 if (achivement.IsAchived)
                 {
-                    achivement.AchivementButton.BackColor = red;
-                    if (achivement.ArrowToNextAchivement != null) achivement.ArrowToNextAchivement.BackColor = red;
+                    achivement.AchivementButton.BackColor = doneAchivementColor;
+                    if (achivement.ArrowToNextAchivement != null) achivement.ArrowToNextAchivement.BackColor = arrowToNexAchivementsColor;
                 }
             }
         }

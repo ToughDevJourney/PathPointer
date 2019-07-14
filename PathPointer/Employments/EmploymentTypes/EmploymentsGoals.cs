@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace PathPointer
     public class EmploymentsGoals : Employments
     {
         public override string EmpType { get { return Texts.empGoals; } }
+        public override Color CellColor { get { return Color.FromArgb(255, 143, 219, 172); } }
         public override int HoursGoal { get; set; }
         public override int HoursDone { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace PathPointer
 
         public MainMenu()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         public static MainMenu CreateInstance(Form sender)
@@ -70,6 +71,7 @@ namespace PathPointer
 
             achiveNoFunAllDay.CheckCondition();
             achiveNoRestWholeDay.CheckCondition();
+            SetFormDesign();
         }
 
         private void EmployButton_Click(object sender, EventArgs e)
@@ -95,7 +97,7 @@ namespace PathPointer
 
         private void pathPointerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TrayIcon_MouseDoubleClick(null,null);
+            TrayIcon_MouseDoubleClick(null, null);
         }
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -117,7 +119,7 @@ namespace PathPointer
             FileManagement.CheckAllFiles();
             CurrentDateInfo.CheckWeekRelevance();
             if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
-            if(UserSettings.StopGames == true) UserSettings.CloseGame();
+            if (UserSettings.StopGames == true) UserSettings.CloseGame();
             if (DateTime.Now.Hour <= 1) {
                 achiveNoFunAllDay.CheckCondition();
                 achiveNoRestWholeDay.CheckCondition();
@@ -131,6 +133,8 @@ namespace PathPointer
         }
 
         private void FillDaysOfWeek() {     //заполнение таблицы дней недели с учетом сдвига
+            
+
             DataGridDayOfWeek.RowCount = 1;
             DataGridDayOfWeek.ColumnCount = 7;
             int dayOfWeek = 7;
@@ -140,7 +144,7 @@ namespace PathPointer
                 dayOfWeek--;
                 DataGridDayOfWeek.Rows[0].Cells[i].Value = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.AddDays(-dayOfWeek).DayOfWeek);
             }
-            DataGridDayOfWeek.CurrentCell = DataGridDayOfWeek[6,0];
+            DataGridDayOfWeek.CurrentCell = DataGridDayOfWeek[6, 0];
 
 
         }
@@ -163,17 +167,18 @@ namespace PathPointer
             DataGridBusiness.ClearSelection();
         }
 
-        private void PointToDayOfWeek(int index) {           
+        private void PointToDayOfWeek(int index) {
             dayOfWeekPointer.Rows.Clear();
             dayOfWeekPointer.ColumnCount = 7;
             dayOfWeekPointer.RowCount = 1;
-            dayOfWeekPointer.Rows[0].Cells[index].Value = "↓";
+
+           dayOfWeekPointer.Rows[0].Cells[index].Value = "˅";
         }
         private void PointToBusiness(int index) {
             businessPointer.Rows.Clear();
             businessPointer.ColumnCount = 24;
             businessPointer.RowCount = 1;
-            businessPointer.Rows[0].Cells[index].Value = "↑";
+            businessPointer.Rows[0].Cells[index].Value = "˄";
         }
 
 
@@ -186,6 +191,23 @@ namespace PathPointer
             }
             MenuManagement.AreAllFormsClosed = true;
         }
+
+
+        private void SetFormDesign() {
+            Color mainColor = Color.FromArgb(255, 41, 48, 58);
+
+            BackColor = mainColor;
+            businessPointer.GridColor = mainColor;
+            businessPointer.DefaultCellStyle.SelectionBackColor = mainColor;
+            businessPointer.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            dayOfWeekPointer.GridColor = mainColor;
+            dayOfWeekPointer.DefaultCellStyle.SelectionBackColor = mainColor;
+            dayOfWeekPointer.DefaultCellStyle.SelectionForeColor = Color.White;
+
+        }
+
+
 
 
     }

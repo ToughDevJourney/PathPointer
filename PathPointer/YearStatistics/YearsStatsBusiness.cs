@@ -18,7 +18,13 @@ namespace PathPointer
         }
 
         public override Color GetCellColor(int colorCode) {
-            return Color.FromArgb(255, colorCode, colorCode, 255);
+            int red;
+            int green;
+            int blue;
+
+            CheckColorCode(out red, out green, out blue, colorCode, business.CellColor);
+
+            return Color.FromArgb(255, red, green, blue);
         }
     }
 }

@@ -29,7 +29,8 @@ namespace PathPointer
             else StatsFileArr = FillStatsArray(1, dayOfWeek, pickedCurrentDay);                                      //заполнить массив данными текущей недели
 
             for (int i = 0; i < 24; i++) {
-                GetCellColor(i, dataGridView);
+              //  GetCellColor(i, dataGridView);
+                dataGridView.Rows[0].Cells[i].Style.BackColor = StatsFileArr[i].CellColor;
             }
 
         }
@@ -96,10 +97,15 @@ namespace PathPointer
 
 
         public static void DisplayMainStats(ref Label lblName, ref Label lblType, ref Label lblDoneHours, ref Label lblMustSpend, int currentEmployment) {
+
+            lblName.Text = "";
+
             lblName.Text = StatsFileArr[currentEmployment].Name;
             lblType.Text = StatsFileArr[currentEmployment].TypeDescription;
             lblDoneHours.Text = StatsFileArr[currentEmployment].HoursDescription;
             lblMustSpend.Text = StatsFileArr[currentEmployment].HoursToSpendDescription;
+
+
         }
 
 

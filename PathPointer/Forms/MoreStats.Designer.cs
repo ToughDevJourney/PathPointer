@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblProductive = new System.Windows.Forms.Label();
             this.lblBusinessHrsSpent = new System.Windows.Forms.Label();
             this.lblFavRest = new System.Windows.Forms.Label();
@@ -59,6 +59,7 @@
             // 
             this.lblProductive.AutoSize = true;
             this.lblProductive.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblProductive.ForeColor = System.Drawing.Color.White;
             this.lblProductive.Location = new System.Drawing.Point(13, 113);
             this.lblProductive.Name = "lblProductive";
             this.lblProductive.Size = new System.Drawing.Size(345, 18);
@@ -68,6 +69,7 @@
             // lblBusinessHrsSpent
             // 
             this.lblBusinessHrsSpent.AutoSize = true;
+            this.lblBusinessHrsSpent.ForeColor = System.Drawing.Color.White;
             this.lblBusinessHrsSpent.Location = new System.Drawing.Point(13, 100);
             this.lblBusinessHrsSpent.Name = "lblBusinessHrsSpent";
             this.lblBusinessHrsSpent.Size = new System.Drawing.Size(172, 13);
@@ -77,6 +79,7 @@
             // lblFavRest
             // 
             this.lblFavRest.AutoSize = true;
+            this.lblFavRest.ForeColor = System.Drawing.Color.White;
             this.lblFavRest.Location = new System.Drawing.Point(9, 310);
             this.lblFavRest.Name = "lblFavRest";
             this.lblFavRest.Size = new System.Drawing.Size(120, 13);
@@ -86,6 +89,7 @@
             // lblFunTimeSpent
             // 
             this.lblFunTimeSpent.AutoSize = true;
+            this.lblFunTimeSpent.ForeColor = System.Drawing.Color.White;
             this.lblFunTimeSpent.Location = new System.Drawing.Point(328, 332);
             this.lblFunTimeSpent.Name = "lblFunTimeSpent";
             this.lblFunTimeSpent.Size = new System.Drawing.Size(194, 13);
@@ -95,6 +99,7 @@
             // lblFavFun
             // 
             this.lblFavFun.AutoSize = true;
+            this.lblFavFun.ForeColor = System.Drawing.Color.White;
             this.lblFavFun.Location = new System.Drawing.Point(328, 310);
             this.lblFavFun.Name = "lblFavFun";
             this.lblFavFun.Size = new System.Drawing.Size(126, 13);
@@ -104,6 +109,7 @@
             // lblRestTimeSpent
             // 
             this.lblRestTimeSpent.AutoSize = true;
+            this.lblRestTimeSpent.ForeColor = System.Drawing.Color.White;
             this.lblRestTimeSpent.Location = new System.Drawing.Point(9, 332);
             this.lblRestTimeSpent.Name = "lblRestTimeSpent";
             this.lblRestTimeSpent.Size = new System.Drawing.Size(159, 13);
@@ -124,6 +130,7 @@
             // 
             this.lblCloseToDream.AutoSize = true;
             this.lblCloseToDream.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblCloseToDream.ForeColor = System.Drawing.Color.White;
             this.lblCloseToDream.Location = new System.Drawing.Point(10, 12);
             this.lblCloseToDream.Name = "lblCloseToDream";
             this.lblCloseToDream.Size = new System.Drawing.Size(465, 25);
@@ -142,6 +149,7 @@
             // lblGoalPercent
             // 
             this.lblGoalPercent.AutoSize = true;
+            this.lblGoalPercent.ForeColor = System.Drawing.Color.White;
             this.lblGoalPercent.Location = new System.Drawing.Point(9, 384);
             this.lblGoalPercent.Name = "lblGoalPercent";
             this.lblGoalPercent.Size = new System.Drawing.Size(274, 13);
@@ -151,6 +159,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(9, 401);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(670, 13);
@@ -161,6 +170,7 @@
             // lblReachedGoals
             // 
             this.lblReachedGoals.AutoSize = true;
+            this.lblReachedGoals.ForeColor = System.Drawing.Color.White;
             this.lblReachedGoals.Location = new System.Drawing.Point(9, 368);
             this.lblReachedGoals.Name = "lblReachedGoals";
             this.lblReachedGoals.Size = new System.Drawing.Size(141, 13);
@@ -177,14 +187,14 @@
             this.DGVMoreStats.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.DGVMoreStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVMoreStats.ColumnHeadersVisible = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGVMoreStats.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGVMoreStats.DefaultCellStyle = dataGridViewCellStyle1;
             this.DGVMoreStats.EnableHeadersVisualStyles = false;
             this.DGVMoreStats.GridColor = System.Drawing.Color.Black;
             this.DGVMoreStats.Location = new System.Drawing.Point(13, 143);
@@ -193,8 +203,8 @@
             this.DGVMoreStats.ReadOnly = true;
             this.DGVMoreStats.RowHeadersVisible = false;
             this.DGVMoreStats.RowHeadersWidth = 10;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGVMoreStats.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVMoreStats.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGVMoreStats.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DGVMoreStats.Size = new System.Drawing.Size(937, 142);
             this.DGVMoreStats.TabIndex = 18;
@@ -202,15 +212,15 @@
             // ChartEmpRatio
             // 
             this.ChartEmpRatio.BackColor = System.Drawing.SystemColors.Control;
-            chartArea4.Name = "ChartArea1";
-            this.ChartEmpRatio.ChartAreas.Add(chartArea4);
+            chartArea1.Name = "ChartArea1";
+            this.ChartEmpRatio.ChartAreas.Add(chartArea1);
             this.ChartEmpRatio.Location = new System.Drawing.Point(722, 10);
             this.ChartEmpRatio.Name = "ChartEmpRatio";
             this.ChartEmpRatio.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series4.Name = "Series1";
-            this.ChartEmpRatio.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Name = "Series1";
+            this.ChartEmpRatio.Series.Add(series1);
             this.ChartEmpRatio.Size = new System.Drawing.Size(203, 121);
             this.ChartEmpRatio.TabIndex = 19;
             this.ChartEmpRatio.Text = "chart1";
@@ -219,6 +229,7 @@
             // 
             this.lblYearGoalsHrs.AutoSize = true;
             this.lblYearGoalsHrs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblYearGoalsHrs.ForeColor = System.Drawing.Color.White;
             this.lblYearGoalsHrs.Location = new System.Drawing.Point(12, 41);
             this.lblYearGoalsHrs.Name = "lblYearGoalsHrs";
             this.lblYearGoalsHrs.Size = new System.Drawing.Size(249, 24);
@@ -269,10 +280,11 @@
             this.BtnShowFun.UseVisualStyleBackColor = true;
             this.BtnShowFun.Click += new System.EventHandler(this.ShowYearStats);
             // 
-            // MoreStat
+            // MoreStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(958, 423);
             this.Controls.Add(this.BtnShowRest);
             this.Controls.Add(this.BtnShowFun);
@@ -293,7 +305,8 @@
             this.Controls.Add(this.lblFavRest);
             this.Controls.Add(this.lblBusinessHrsSpent);
             this.Controls.Add(this.lblProductive);
-            this.Name = "MoreStat";
+            this.ForeColor = System.Drawing.Color.White;
+            this.Name = "MoreStats";
             this.Text = "Расширенная статистика";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MoreStat_FormClosing);
             this.Load += new System.EventHandler(this.MoreStat_Load);

@@ -45,8 +45,8 @@ namespace PathPointer
         }
 
         private void ColorDataGridView(YearStats yearStats) {
-            int contrast = 30;
-
+            int contrast = 10;
+            int colorCode;
             int rowsCount = DGVMoreStats.Rows.Count;
             DGVMoreStats.Rows.Clear();
             DGVMoreStats.Rows.Add(rowsCount);
@@ -57,8 +57,7 @@ namespace PathPointer
                 {
                     if (yearStats.yearEmpNum[dow, yw] > 0)
                     {
-                        int colorCode = 200 - 30 * contrast;
-                        colorCode = colorCode < 0 ? 0 : colorCode;
+                        colorCode = 3 * contrast;
                         DGVMoreStats.Rows[dow].Cells[yw].Style.BackColor = yearStats.GetCellColor(colorCode);
                     }
                 }
@@ -159,16 +158,16 @@ namespace PathPointer
 
         private void FillChart() {
             int index = ChartEmpRatio.Series[0].Points.AddXY("", goals.spentHours);
-            ChartEmpRatio.Series[0].Points[index].Color = Color.LightGreen;
+            ChartEmpRatio.Series[0].Points[index].Color = goals.GetCellColor(0);
 
             index = ChartEmpRatio.Series[0].Points.AddXY("", business.MainEmploymentHrs);
-            ChartEmpRatio.Series[0].Points[index].Color = Color.Blue;
+            ChartEmpRatio.Series[0].Points[index].Color = business.GetCellColor(0);
 
             index = ChartEmpRatio.Series[0].Points.AddXY("", fun.MainEmploymentHrs);
-            ChartEmpRatio.Series[0].Points[index].Color = Color.Red;
+            ChartEmpRatio.Series[0].Points[index].Color = rest.GetCellColor(0);
 
             index = ChartEmpRatio.Series[0].Points.AddXY("", rest.MainEmploymentHrs);
-            ChartEmpRatio.Series[0].Points[index].Color = Color.Orange;
+            ChartEmpRatio.Series[0].Points[index].Color = fun.GetCellColor(0);
         }
 
         private void ShowYearStats(object sender, EventArgs e) {

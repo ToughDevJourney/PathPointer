@@ -91,10 +91,10 @@
     <Compile Include="Forms\EmploymentsForms\AddSchedule.Designer.cs">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\BiggerCheckBox.cs">
+    <Compile Include="CustomControls\BiggerCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\BiggerCheckBox.Designer.cs">
+    <Compile Include="CustomControls\BiggerCheckBox.Designer.cs">
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Codes.cs" />
@@ -106,6 +106,12 @@
     <Compile Include="Employments\EmploymentTypes\EmploymentsSkip.cs" />
     <Compile Include="Employments\Subspecies\EmploymentsTypeOther.cs" />
     <Compile Include="Employments\EmploymentTypes\EmploymentsRest.cs" />
+    <Compile Include="CustomControls\BackColorGradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\BackColorGradientPanel.Designer.cs">
+      <DependentUpon>BackColorGradientPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Management\FormatLines.cs" />
     <Compile Include="Employments\Subspecies\IEmploymentsOtherTypes.cs" />
     <Compile Include="Employments\OtherTypes\DayEfficiencyFuture.cs" />
@@ -183,7 +189,7 @@
     <EmbeddedResource Include="Forms\EmploymentsForms\AddSchedule.resx">
       <DependentUpon>AddSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BiggerCheckBox.resx">
+    <EmbeddedResource Include="CustomControls\BiggerCheckBox.resx">
       <DependentUpon>BiggerCheckBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmploymentsForms\AddEmployments.resx">
@@ -206,6 +212,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Forms\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -226,6 +233,29 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\88d84b259ac4be03a4ae1a3658343d3c--dashboard-ui-ui-ux.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Employments\Business.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Employments\Fun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Employments\Goal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Employments\Rest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Goal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Relax-02-512.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
