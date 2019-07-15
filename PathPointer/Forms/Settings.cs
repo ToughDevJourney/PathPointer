@@ -21,11 +21,26 @@ namespace PathPointer
         private void Settings_Load(object sender, EventArgs e)
         {
             UserSettings.ShowGames(CBGamesList);
+            GetSettingsValues();
         }
 
-        private void ChBCloseGames_CheckedChanged(object sender, EventArgs e)
-        {
+        private void GetSettingsValues() {
+            string sleepHrBegin = UserSettings.SleepTimeBegin < 10 ? $"0{UserSettings.SleepTimeBegin}:" : $"{UserSettings.SleepTimeBegin}:";
+            string sleepHrEnd = UserSettings.SleepTimeBegin < 10 ? $"0{UserSettings.SleepTimeEnd}:" : $"{UserSettings.SleepTimeEnd}:";
 
+            MTBSleepBegin.Text = FormatLines.TimeFormat(sleepHrBegin);
+            MTBSleepEnd.Text = FormatLines.TimeFormat(sleepHrEnd);
+
+            TBHrsToRest.Text = UserSettings.HoursToRestNotify.ToString();
+            TBHrsToWork.Text = UserSettings.HoursToWorkNotify.ToString();
+
+            TBGetStatsHrs.Text = UserSettings.EmploymentCheckRange.ToString();
+            TBFunHrsPerWeek.Text = UserSettings.WeekFunTime.ToString();
+
+            ChBMotivHints.Checked = UserSettings.MotivationalHints.ToString() == Codes.fileTrue ? true : false;
+            ChBCloseGames.Checked = UserSettings.StopGames.ToString() == Codes.fileTrue ? true : false;
+
+            TBHrsToStopGms.Text = UserSettings.HrsToStopGame.ToString();
         }
 
         private void BtnAddGame_Click(object sender, EventArgs e)
@@ -44,11 +59,12 @@ namespace PathPointer
         {
             string sleepHrBegin = FormatLines.ShortFormatTime(MTBSleepBegin.Text);
             string sleepHrEnd = FormatLines.ShortFormatTime(MTBSleepEnd.Text);
+            string motivHints = ChBMotivHints.Checked == true ? "1" : "0";
             string closeGames = ChBCloseGames.Checked == true ? "1" : "0";
             string hrsToCloseGame = TBHrsToStopGms.Text;
 
                 FileManagement.FillCommonFile(TBGetStatsHrs.Text, TBFunHrsPerWeek.Text, sleepHrBegin, sleepHrEnd, TBHrsToRest.Text, //обновление настроек
-                TBHrsToWork.Text, closeGames, hrsToCloseGame);
+                TBHrsToWork.Text, motivHints, closeGames, hrsToCloseGame);
 
             BtnBack_Click(null, null);
         }

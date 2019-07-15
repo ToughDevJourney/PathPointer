@@ -60,6 +60,7 @@ namespace PathPointer
             return time;
         }
 
+
         public static string ShortTimeFormatToLong(string time)   //форматирование времени из вида "5 15" в  вид "05:00 - 15:00"
         {
                 string beginTime = time.Remove(time.IndexOf(" "));

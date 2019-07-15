@@ -69,7 +69,7 @@ namespace PathPointer
         }
 
         public static void FillCommonFile(string statsCheckRange = "3", string weekFunHrs = "14", string sleepHrBegin = "0", 
-            string sleepHrEnd = "9", string hrsToRest = "4", string hrsToWork = "1", string stopGames = "0", string HrsToStopGames = "0") {
+            string sleepHrEnd = "9", string hrsToRest = "4", string hrsToWork = "1", string motivHints = "1", string stopGames = "0", string HrsToStopGames = "0") {
 
             CommonFileArray = new string[13];
             CommonFileArray[0] = "Common info:";
@@ -81,6 +81,7 @@ namespace PathPointer
             CommonFileArray[6] = $"Sleep Time End!{sleepHrEnd}";
             CommonFileArray[7] = $"Hours To Rest Notify!{hrsToRest}";
             CommonFileArray[8] = $"Hours To Work Notify!{hrsToWork}";
+            CommonFileArray[9] = $"Motivational Hints!{motivHints}";
             CommonFileArray[11] = $"Stop Games!{stopGames}";
             CommonFileArray[12] = $"Hours To Stop Game!{HrsToStopGames}";
 

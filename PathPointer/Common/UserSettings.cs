@@ -19,8 +19,7 @@ namespace PathPointer
         public static int SleepTimeEnd { get; set; }
         public static int HoursToWorkNotify { get; set; }
         public static int HoursToRestNotify { get; set; }
-        public static bool SoftMotiv { get; set; }
-        public static bool HardMotiv { get; set; }
+        public static int MotivationalHints { get; set; }
         public static bool StopGames { get; set; }
         public static int HrsToStopGame { get; set; }
         private static int AlreadyPlayedHrs { get; set; }
@@ -30,14 +29,11 @@ namespace PathPointer
         }
 
         public static void UpdateAllSettings() {
-            if (FileManagement.firstLaunch) {
-                EmploymentCheckRange = 1;
-
-            }
-            else EmploymentCheckRange = GetSettingValue("Employment Check Range");
+            EmploymentCheckRange = FileManagement.firstLaunch ? 1 : GetSettingValue("Employment Check Range");
             WeekFunTime = GetSettingValue("Week Fun Time");
             SleepTimeBegin = GetSettingValue("Sleep Time Begin");
             SleepTimeEnd = GetSettingValue("Sleep Time End");
+            MotivationalHints = GetSettingValue("Motivational Hints");
             HoursToWorkNotify = GetSettingValue("Hours To Rest Notify");
             HoursToRestNotify = GetSettingValue("Hours To Work Notify");
             StopGames = GetSettingValue("Stop Games") == 1 ? true : false;

@@ -133,6 +133,7 @@
             this.TBHrsToStopGms.Size = new System.Drawing.Size(18, 31);
             this.TBHrsToStopGms.TabIndex = 13;
             this.TBHrsToStopGms.Text = "2";
+            this.TBHrsToStopGms.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TBHrsToStopGms.Leave += new System.EventHandler(this.CheckTextBoxForEmptiness);
             // 
             // BtnBack
