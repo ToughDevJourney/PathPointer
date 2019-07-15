@@ -374,6 +374,8 @@
             this.Controls.Add(this.BtnDone);
             this.Controls.Add(this.lblBusinessName);
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AddSchedule";
             this.Text = "Раписание";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddSchedule_FormClosing);

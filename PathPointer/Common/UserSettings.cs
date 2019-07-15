@@ -40,8 +40,6 @@ namespace PathPointer
             SleepTimeEnd = GetSettingValue("Sleep Time End");
             HoursToWorkNotify = GetSettingValue("Hours To Rest Notify");
             HoursToRestNotify = GetSettingValue("Hours To Work Notify");
-            SoftMotiv = GetSettingValue("Soft Motivation") == 1 ? true : false;
-            HardMotiv = GetSettingValue("Hard Motivation") == 1 ? true : false;
             StopGames = GetSettingValue("Stop Games") == 1 ? true : false;
             HrsToStopGame = GetSettingValue("Hours To Stop Game");
         }

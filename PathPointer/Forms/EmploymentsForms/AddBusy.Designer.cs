@@ -122,6 +122,8 @@
             this.Controls.Add(this.BtnAddSchedule);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.textName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AddBusy";
             this.Text = "Добавить дело";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddBusy_FormClosing);

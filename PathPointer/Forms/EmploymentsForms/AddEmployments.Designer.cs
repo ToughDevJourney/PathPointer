@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEmployments));
             this.dataGridBusiness = new System.Windows.Forms.DataGridView();
             this.BtnGoals = new System.Windows.Forms.Button();
             this.BtnFun = new System.Windows.Forms.Button();
@@ -74,6 +75,8 @@
             // BtnGoals
             // 
             this.BtnGoals.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
+            this.BtnGoals.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnGoals.BackgroundImage")));
+            this.BtnGoals.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnGoals.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnGoals.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
             this.BtnGoals.ForeColor = System.Drawing.Color.White;
@@ -89,6 +92,8 @@
             // BtnFun
             // 
             this.BtnFun.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
+            this.BtnFun.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnFun.BackgroundImage")));
+            this.BtnFun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnFun.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnFun.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
             this.BtnFun.ForeColor = System.Drawing.Color.White;
@@ -104,6 +109,8 @@
             // BtnBusiness
             // 
             this.BtnBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
+            this.BtnBusiness.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBusiness.BackgroundImage")));
+            this.BtnBusiness.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnBusiness.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
             this.BtnBusiness.ForeColor = System.Drawing.Color.White;
@@ -147,6 +154,7 @@
             // BtnRest
             // 
             this.BtnRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
+            this.BtnRest.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnRest.BackgroundImage")));
             this.BtnRest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BtnRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnRest.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);

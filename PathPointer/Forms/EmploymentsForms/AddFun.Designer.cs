@@ -95,6 +95,8 @@
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.textName);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AddFun";
             this.Text = "Добавить развлечение";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddFun_FormClosing);

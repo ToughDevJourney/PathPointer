@@ -303,6 +303,8 @@
             this.Controls.Add(this.BtnAddFun);
             this.Controls.Add(this.BtnNoRestAllDay);
             this.Controls.Add(this.BtnAddRest);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Achivements";
             this.Text = "Достижения";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Achivements_FormClosing);

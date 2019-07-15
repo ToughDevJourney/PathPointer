@@ -165,6 +165,8 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.textName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "AddGoal";
             this.Text = "Добавить цель";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddGoal_FormClosing);

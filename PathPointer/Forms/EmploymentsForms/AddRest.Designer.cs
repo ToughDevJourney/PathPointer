@@ -93,6 +93,8 @@
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.textName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AddRest";
             this.Text = "Добавить отдых";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddRest_FormClosing);

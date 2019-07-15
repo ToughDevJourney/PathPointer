@@ -44,13 +44,11 @@ namespace PathPointer
         {
             string sleepHrBegin = FormatLines.ShortFormatTime(MTBSleepBegin.Text);
             string sleepHrEnd = FormatLines.ShortFormatTime(MTBSleepEnd.Text);
-            string softMotiv = ChBSoftMotiv.Checked == true ? "1" : "0";
-            string hardMotiv = ChBHardMotiv.Checked == true ? "1" : "0";
             string closeGames = ChBCloseGames.Checked == true ? "1" : "0";
             string hrsToCloseGame = TBHrsToStopGms.Text;
 
                 FileManagement.FillCommonFile(TBGetStatsHrs.Text, TBFunHrsPerWeek.Text, sleepHrBegin, sleepHrEnd, TBHrsToRest.Text, //обновление настроек
-                TBHrsToWork.Text, softMotiv, hardMotiv, closeGames, hrsToCloseGame);
+                TBHrsToWork.Text, closeGames, hrsToCloseGame);
 
             BtnBack_Click(null, null);
         }
@@ -82,24 +80,6 @@ namespace PathPointer
 
         private void CheckNumberLine(object sender, KeyPressEventArgs e) {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8)) e.Handled = true;
-        }
-
-        private void ChBMotivHints_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ChBMotivHints.Checked == true)
-            {
-                ChBHardMotiv.Checked = true;
-                ChBSoftMotiv.Checked = true;
-            }
-            else {
-                ChBHardMotiv.Checked = false;
-                ChBSoftMotiv.Checked = false;
-            }
-        }
-
-        private void AreAllMotivCheckBoxesEnabled(object sender, EventArgs e) {
-            if (ChBHardMotiv.Checked == true && ChBSoftMotiv.Checked == true) ChBMotivHints.Checked = true;
-            else if (ChBHardMotiv.Checked == false && ChBSoftMotiv.Checked == false) ChBMotivHints.Checked = false;
         }
 
         private void CheckTextBoxForEmptiness(object sender, EventArgs e) {

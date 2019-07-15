@@ -29,9 +29,9 @@ namespace PathPointer
         {
             base.OnPaint(e);
 
-            this.Height = 40;
-            this.Width = 40;
-            int squareSide = 40;
+            this.Height = 30;
+            this.Width = 30;
+            int squareSide = 30;
 
             Rectangle rect = new Rectangle(new Point(0, 1), new Size(squareSide, squareSide));
 
