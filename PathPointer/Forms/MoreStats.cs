@@ -45,7 +45,7 @@ namespace PathPointer
         }
 
         private void ColorDataGridView(YearStats yearStats) {
-            int contrast = 10;
+            int contrast = 20;
             int colorCode;
             int rowsCount = DGVMoreStats.Rows.Count;
             DGVMoreStats.Rows.Clear();
@@ -57,7 +57,7 @@ namespace PathPointer
                 {
                     if (yearStats.yearEmpNum[dow, yw] > 0)
                     {
-                        colorCode = 3 * contrast;
+                        colorCode = yearStats.yearEmpNum[dow, yw] * contrast;
                         DGVMoreStats.Rows[dow].Cells[yw].Style.BackColor = yearStats.GetCellColor(colorCode);
                     }
                 }
@@ -186,6 +186,11 @@ namespace PathPointer
                     ColorDataGridView(fun);
                     break;
             }
+        }
+
+        private void DGVMoreStats_SelectionChanged(object sender, EventArgs e)
+        {
+            DGVMoreStats.ClearSelection();
         }
     }
 

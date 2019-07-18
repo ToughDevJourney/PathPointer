@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lblProductive = new System.Windows.Forms.Label();
             this.lblBusinessHrsSpent = new System.Windows.Forms.Label();
             this.lblFavRest = new System.Windows.Forms.Label();
@@ -122,7 +122,7 @@
             this.BtnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
             this.BtnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnBack.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
-            this.BtnBack.Location = new System.Drawing.Point(952, 347);
+            this.BtnBack.Location = new System.Drawing.Point(952, 348);
             this.BtnBack.Name = "BtnBack";
             this.BtnBack.Size = new System.Drawing.Size(178, 84);
             this.BtnBack.TabIndex = 10;
@@ -173,14 +173,14 @@
             this.DGVMoreStats.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
             this.DGVMoreStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVMoreStats.ColumnHeadersVisible = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGVMoreStats.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGVMoreStats.DefaultCellStyle = dataGridViewCellStyle3;
             this.DGVMoreStats.Enabled = false;
             this.DGVMoreStats.EnableHeadersVisualStyles = false;
             this.DGVMoreStats.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(38)))), ((int)(((byte)(48)))));
@@ -190,27 +190,28 @@
             this.DGVMoreStats.ReadOnly = true;
             this.DGVMoreStats.RowHeadersVisible = false;
             this.DGVMoreStats.RowHeadersWidth = 10;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGVMoreStats.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVMoreStats.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGVMoreStats.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.DGVMoreStats.Size = new System.Drawing.Size(937, 142);
             this.DGVMoreStats.TabIndex = 18;
+            this.DGVMoreStats.SelectionChanged += new System.EventHandler(this.DGVMoreStats_SelectionChanged);
             // 
             // ChartEmpRatio
             // 
             this.ChartEmpRatio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
             this.ChartEmpRatio.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
             this.ChartEmpRatio.BorderSkin.PageColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
-            chartArea4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
-            chartArea4.Name = "ChartArea1";
-            this.ChartEmpRatio.ChartAreas.Add(chartArea4);
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
+            chartArea2.Name = "ChartArea1";
+            this.ChartEmpRatio.ChartAreas.Add(chartArea2);
             this.ChartEmpRatio.Location = new System.Drawing.Point(796, 9);
             this.ChartEmpRatio.Name = "ChartEmpRatio";
             this.ChartEmpRatio.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series4.Name = "Series1";
-            this.ChartEmpRatio.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Name = "Series1";
+            this.ChartEmpRatio.Series.Add(series2);
             this.ChartEmpRatio.Size = new System.Drawing.Size(138, 121);
             this.ChartEmpRatio.TabIndex = 19;
             this.ChartEmpRatio.Text = "chart1";
@@ -273,7 +274,7 @@
             this.BtnShowFun.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(117)))), ((int)(((byte)(140)))));
             this.BtnShowFun.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnShowFun.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
-            this.BtnShowFun.Location = new System.Drawing.Point(952, 260);
+            this.BtnShowFun.Location = new System.Drawing.Point(952, 261);
             this.BtnShowFun.Name = "BtnShowFun";
             this.BtnShowFun.Size = new System.Drawing.Size(178, 84);
             this.BtnShowFun.TabIndex = 23;
@@ -287,7 +288,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(1130, 428);
+            this.ClientSize = new System.Drawing.Size(1130, 430);
             this.Controls.Add(this.BtnShowRest);
             this.Controls.Add(this.BtnShowFun);
             this.Controls.Add(this.BtnShowGoals);

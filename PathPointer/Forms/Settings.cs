@@ -78,10 +78,7 @@ namespace PathPointer
         {
             var result = MessageBox.Show($"Вы уверены, что хотите сбросить программу?\nВся ваша статистика будет утеряна!", "Вы уверены?", MessageBoxButtons.YesNo);
             
-            if (result == DialogResult.Yes)
-            {
-                FileManagement.ResetProgram();
-            }
+            if (result == DialogResult.Yes) FileManagement.ResetProgram();
         }
 
         private void BtnBack_Click(object sender, EventArgs e)
