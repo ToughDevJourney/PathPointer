@@ -19,4 +19,3 @@ C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddSchedule.
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.AddFun.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.TimeSpent.resources
 C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.BiggerCheckBox.resources
-C:\Users\zrkz\Desktop\PathPointer\PathPointer\obj\Debug\PathPointer.csprojAssemblyReference.cache

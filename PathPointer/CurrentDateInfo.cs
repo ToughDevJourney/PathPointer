@@ -38,10 +38,9 @@ namespace PathPointer
         {
             SetPath("Common");
 
-
-
             int fileWeekNumber;
-
+            int fileYear;
+            int numberOfWeeks = 0;
 
             string[] commonFileArr = File.ReadAllLines(FilePath);
 
@@ -49,14 +48,28 @@ namespace PathPointer
             {
                 if (GetValueByIndex(commonFileArr[i], 0) == "Week Number")
                 {
+                    fileYear = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 2));
                     fileWeekNumber = Convert.ToInt32(GetValueByIndex(commonFileArr[i], 1));
-                    if (fileWeekNumber != CurrentDateInfo.WeekNumber)
+
+                    if (fileWeekNumber != WeekNumber || fileYear != DateTime.Now.Year)
                     {
-                        commonFileArr[i] = $"Week Number!{CurrentDateInfo.WeekNumber}";
+                        commonFileArr[i] = $"Week Number!{WeekNumber}!{DateTime.Now.Year}";
 
                         File.WriteAllLines(FilePath, commonFileArr);
 
-                        AddNewWeekIntoEfficiency();
+
+
+                        if (DateTime.Now.Year - fileYear == 1 && weekNumber == 52 || DateTime.Now.Year == fileYear) numberOfWeeks = weekNumber - fileWeekNumber; 
+                        else
+                        {
+                            numberOfWeeks = (DateTime.Now.Year - fileYear - 1) * 54;    //разница между годами
+                            numberOfWeeks += 52 - fileWeekNumber; //пропущенные недели года последнего использования
+                            numberOfWeeks += weekNumber;    //недели этого года                          
+                        }
+                          
+
+
+                        AddNewWeekIntoEfficiency(numberOfWeeks);
                         break;
                     }
                 }
@@ -64,7 +77,7 @@ namespace PathPointer
         }
 
 
-        public static void AddNewWeekIntoEfficiency()
+        public static void AddNewWeekIntoEfficiency(int weeksNumber = 1)
         {
             SetPath("Efficiency");
             string fileContainer = "";
@@ -76,9 +89,11 @@ namespace PathPointer
 
             using (StreamWriter writer = new StreamWriter(FilePath))
             {
-                for (int j = 0; j < hoursADay; j++)
-                {
-                    writer.WriteLine($"{j}:00;");
+                for (int i = 0; i < weeksNumber; i++) {
+                    for (int j = 0; j < hoursADay; j++)
+                    {
+                        writer.WriteLine($"{j}:00;");
+                    }
                 }
 
                 using (StreamReader reader = new StreamReader(intermediateFile))

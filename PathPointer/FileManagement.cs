@@ -49,7 +49,7 @@ namespace PathPointer
 
             CommonFileArray = new string[13];
             CommonFileArray[0] = "Common info:";
-            CommonFileArray[1] = $"Week Number!{CurrentDateInfo.WeekNumber}";
+            CommonFileArray[1] = $"Week Number!{CurrentDateInfo.WeekNumber}!{DateTime.Now.Year}";
             CommonFileArray[2] = "User settings:";
             CommonFileArray[3] = $"Employment Check Range!{statsCheckRange}";
             CommonFileArray[4] = $"Week Fun Time!{weekFunHrs}";
