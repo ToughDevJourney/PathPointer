@@ -53,12 +53,6 @@ namespace PathPointer
 
                     if (fileWeekNumber != WeekNumber || fileYear != DateTime.Now.Year)
                     {
-                        commonFileArr[i] = $"Week Number!{WeekNumber}!{DateTime.Now.Year}";
-
-                        File.WriteAllLines(FilePath, commonFileArr);
-
-
-
                         if (DateTime.Now.Year - fileYear == 1 && weekNumber == 52 || DateTime.Now.Year == fileYear) numberOfWeeks = weekNumber - fileWeekNumber; 
                         else
                         {
@@ -67,9 +61,10 @@ namespace PathPointer
                             numberOfWeeks += weekNumber;    //недели этого года                          
                         }
                           
-
-
                         AddNewWeekIntoEfficiency(numberOfWeeks);
+                        commonFileArr[i] = $"Week Number!{WeekNumber}!{DateTime.Now.Year}";
+                        SetPath("Common");
+                        File.WriteAllLines(FilePath, commonFileArr);
                         break;
                     }
                 }
@@ -79,34 +74,56 @@ namespace PathPointer
 
         public static void AddNewWeekIntoEfficiency(int weeksNumber = 1)
         {
-            SetPath("Efficiency");
             string fileContainer = "";
             string intermediateFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Eff Intermediate.txt";
             const int hoursADay = 24;
 
-            File.Copy(FilePath, intermediateFile);
-            File.Delete(FilePath);
-
-            using (StreamWriter writer = new StreamWriter(FilePath))
+            for (int i = 0; i < weeksNumber; i++)
             {
-                for (int i = 0; i < weeksNumber; i++) {
+                SetPath("Efficiency");
+
+                if (new FileInfo(FilePath).Length != 0)
+                {
+                    StatsManagement.WriteHoursFromSchedule(true);
+                    SetPath("Efficiency");
+                    File.Copy(FilePath, intermediateFile);
+                    File.Delete(FilePath);
+                }
+
+
+
+                using (StreamWriter writer = new StreamWriter(FilePath))
+                {
                     for (int j = 0; j < hoursADay; j++)
                     {
                         writer.WriteLine($"{j}:00;");
                     }
-                }
 
-                using (StreamReader reader = new StreamReader(intermediateFile))
-                {
-                    while ((fileContainer = reader.ReadLine()) != null)
+                    if (File.Exists(intermediateFile))
                     {
-                        writer.WriteLine(fileContainer);
+                        using (StreamReader reader = new StreamReader(intermediateFile))
+                        {
+                            while ((fileContainer = reader.ReadLine()) != null)
+                            {
+                                writer.WriteLine(fileContainer);
+                            }
+                        }
                     }
                 }
-            }
 
-            File.Delete(intermediateFile);
+
+
+                if(i == weeksNumber - 1) StatsManagement.WriteHoursFromSchedule();  //расписание не будет устанавливаться для часов после текущего часа
+             //   else if (weeksNumber == 2) continue;
+            //    else if (weeksNumber != 2) StatsManagement.WriteHoursFromSchedule(true); // if (weeksNumber > 2) расписание заполнит всю неделю
+
+
+                File.Delete(intermediateFile);
+            }
+            StatsManagement.UpdateAllSchedulesDates();
         }
+
+
 
     }
 }

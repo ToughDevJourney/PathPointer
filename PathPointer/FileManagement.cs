@@ -20,12 +20,12 @@ namespace PathPointer
         public FileManagement() {           
             CheckAllFiles += CheckForDirectory;
             CheckAllFiles += CheckForCommon;
-            CheckAllFiles += CheckForEfficiency;
             CheckAllFiles += CheckForCodes;
             CheckAllFiles += CheckForBusiness;
             CheckAllFiles += CheckForFun;
             CheckAllFiles += CheckForGoals;
             CheckAllFiles += CheckForRest;
+            CheckAllFiles += CheckForEfficiency;
         }
 
         private void CheckForDirectory() {
@@ -69,7 +69,7 @@ namespace PathPointer
             if (!CheckFileExistance("Efficiency"))
             {
                 using (File.Create(FilePath)) { }
-                for (int j = 1; j <= 2; j++) CurrentDateInfo.AddNewWeekIntoEfficiency();
+                CurrentDateInfo.AddNewWeekIntoEfficiency(2);
             }
         }
 

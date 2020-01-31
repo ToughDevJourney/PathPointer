@@ -344,12 +344,12 @@ namespace PathPointer
         }
 
         public static string IsHourInSchedule(int checkingHour, int checkingDayOfWeek) {
-            SetPath("Employments\\Business");
             int beginHour;
             int endHour;
             string schedule;
             string hourSchedule = null;
 
+            SetPath("Employments\\Business");
             string[] scheduleFileArray = File.ReadAllLines(FilePath);
             for (int i = 0; i < scheduleFileArray.Length; i++) //указан ли текущий час в расписании
             {
@@ -374,46 +374,50 @@ namespace PathPointer
             return hourSchedule;
         }
 
-        public static void WriteHoursFromSchedule (){   //расписание не позже текущего часа и время добавления
+        public static void WriteHoursFromSchedule (bool fillWholeWeek = false){   //расписание не позже текущего часа и время добавления
 
             SetPath("Efficiency");
             DateTime lastSchUpdate;
-            string intermediateFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Eff Intermediate.txt";
-            string[] effArr = new string[48];
-            string effLine;
+            string intermediateFile = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PathPointer\\Intermediate.txt";
+            string[] effHrs = new string[24];
+         //   string effLine;
             string fileLine;
             string schedule;
-            int checkingHour;
+          //  int checkingHour;
             int dayOfWeek;
             int lineCount = 0;
-            int lastWeek = 0;
+         //   int lastWeek = 0;
 
 
             using (StreamReader reader = new StreamReader(FilePath)) {
-                for (int eff = 0; eff < 48; eff++) effArr[eff] = reader.ReadLine();
+                for (int eff = 0; eff < effHrs.Length; eff++) effHrs[eff] = reader.ReadLine();  //занесение в массив последней недели
             }
 
-            for (int eff = 0; eff < 48; eff++)
+            for (int checkingHour = 0; checkingHour < effHrs.Length; checkingHour++)
             {
-                lastWeek = eff >= 24 ? 7 : 0;
-                effLine = effArr[eff];
+           //     if (eff >= 24 && fillWholeWeek == true) break;
+          //      else if (eff >= 24) lastWeek = 7;
 
-                dayOfWeek = effLine.ToCharArray().Count(c => c == ';');
+
+
+            //    lastWeek = eff >= 24 ? 7 : 0;
+             //   effLine = effArr[checkingHour];
+
+                dayOfWeek = effHrs[checkingHour].ToCharArray().Count(c => c == ';'); //определение последнего заполненного дня недели
 
                 for (int dow = dayOfWeek; dow <= 7; dow++)
                 {
-                    if(lastWeek == 0 && ((dow == CurrentDateInfo.DayOfWeek && eff >= DateTime.Now.Hour - 1) || dow > CurrentDateInfo.DayOfWeek))   //если достигнут текущих час, происходит переход на следующую неделю
+                    if(((dow == CurrentDateInfo.DayOfWeek && checkingHour >= DateTime.Now.Hour - 1) || dow > CurrentDateInfo.DayOfWeek) && fillWholeWeek == false)   //если достигнут текущий час, происходит переход на следующую неделю
                     {
+                    //    checkingHour++;
                         break;
                     }
-                    checkingHour = eff >= 24 ? eff - 24 : eff;
+                 //   checkingHour = eff >= 24 ? eff - 24 : eff;
 
-                    if (UserSettings.SleepTimeBegin <= checkingHour && checkingHour < UserSettings.SleepTimeEnd && UserSettings.SleepTimeBegin <= UserSettings.SleepTimeEnd)    //если начало сна позже 00:00
+                    if ((UserSettings.SleepTimeBegin <= checkingHour && checkingHour < UserSettings.SleepTimeEnd && UserSettings.SleepTimeBegin <= UserSettings.SleepTimeEnd) ||    //если начало сна позже 00:00
+                        ((UserSettings.SleepTimeBegin <= checkingHour || checkingHour < UserSettings.SleepTimeEnd) && UserSettings.SleepTimeBegin > UserSettings.SleepTimeEnd))    //если начало сна раньше 00:00
                     {
-                        effArr[eff] += $"Rest!@;";
-                    }
-                    else if ((UserSettings.SleepTimeBegin <= checkingHour || checkingHour < UserSettings.SleepTimeEnd) && UserSettings.SleepTimeBegin > UserSettings.SleepTimeEnd) {  //если начало сна раньше 00:00
-                        effArr[eff] += $"Rest!@;";
+                        effHrs[checkingHour] += $"Rest!@;";
                     }
                     else
                     {
@@ -422,16 +426,17 @@ namespace PathPointer
                         if (schedule != null)
                         {
                             lastSchUpdate = Convert.ToDateTime(GetValueByIndex(schedule, 3));
-                            if (DateTime.Now.Day - lastSchUpdate.Day >= (CurrentDateInfo.DayOfWeek + lastWeek) - dow) //если в последний раз расписание изменялось не раньше проверяемого дня
+
+                            if ((DateTime.Now.Day - lastSchUpdate.Day >= (CurrentDateInfo.DayOfWeek) - dow) || fillWholeWeek == true) //если в последний раз расписание изменялось не раньше проверяемого дня
                             {
-                                schedule = GetValueByIndex(schedule, 1);        //вывод индекса
-                                effArr[eff] += $"Business!{schedule};";
+                                schedule = GetValueByIndex(schedule, 1);        //вывод индекса для деятельности в расписании
+                                effHrs[checkingHour] += $"Business!{schedule};";
                             }
-                            else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
-                            else effArr[eff] += " ;";
+                        //    else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange ) break;   
+                         //   else effArr[eff] += " ;";
                         }
-                        else if (eff >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) break;
-                        else effArr[eff] += " ;";
+                        else if ((checkingHour >= DateTime.Now.Hour - UserSettings.EmploymentCheckRange) && CurrentDateInfo.DayOfWeek == dow && fillWholeWeek == false) break; //если проверяемый час находится в радиусе сбора статистики у пользователя
+                        else effHrs[checkingHour] += " ;";
                     }
                 }
 
@@ -439,24 +444,24 @@ namespace PathPointer
             SetPath("Efficiency");
 
             File.Copy(FilePath, intermediateFile);
-            File.WriteAllLines(FilePath, effArr);
+            File.WriteAllLines(FilePath, effHrs);
 
             using (StreamReader interFile = new StreamReader(intermediateFile))
             {
                 using (StreamWriter effFile = File.AppendText(FilePath))
                 {
                     while ((fileLine = interFile.ReadLine()) != null) {
-                        if (lineCount >= 48) effFile.WriteLine(fileLine);
+                        if (lineCount >= effHrs.Length) effFile.WriteLine(fileLine);
                         else lineCount++;
                     }
                 }
             }
 
-            UpdateAllSchedulesDates();
+            if(fillWholeWeek == false) UpdateAllSchedulesDates();
             File.Delete(intermediateFile);
         }
 
-        private static void UpdateAllSchedulesDates() {
+        public static void UpdateAllSchedulesDates() {
             SetPath("Employments/Business");
             string[] scheduleArr = File.ReadAllLines(FilePath);
             string oldLastUpdate;

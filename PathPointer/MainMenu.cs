@@ -64,16 +64,8 @@ namespace PathPointer
             interval = dateTime1.Subtract(DateTime.Now).Minutes * minutes * miliseconds;
 
             TimerHour.Interval = interval == 0 ? 1 : interval;
-            if (StatsManagement.CheckIsHourAvailable()) ShowQuest();
-
-            
+            if (StatsManagement.CheckIsHourAvailable()) ShowQuest();           
         }
-
-
-        private void MainMenu_Shown(object sender, EventArgs e)
-        {
-        }
-
 
         private void EmployButton_Click(object sender, EventArgs e)
         {

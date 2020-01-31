@@ -354,7 +354,6 @@
             this.Text = "Главное меню";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainMenu_FormClosing);
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            this.Shown += new System.EventHandler(this.MainMenu_Shown);
             this.TrayContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridBusiness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridDayOfWeek)).EndInit();
