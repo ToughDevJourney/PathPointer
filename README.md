@@ -1,3 +1,6 @@
+17.10.2022 UPD. This is one of my oldest projects. I dont really use it and dont think that someone else would. This is not the most interesting project that i have ever made. But the most massive. So it was a good experience anyway.
+
+
 PathPointer - программа, нацеленная на помощь в достижении целей.
 
 Работа с программой:
